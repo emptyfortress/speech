@@ -15,7 +15,7 @@ const $q = useQuasar()
 const count = ref(0)
 const num = 1
 const show = () => {
-	$q.notify('laskjdla')
+	$q.notify('Great!')
 }
 </script>
 
@@ -26,7 +26,7 @@ button(type="button" @click="count++") count is: {{ count }}
 p Edit
 q-btn(color="primary" icon="close" @click="show") test
 br
-SvgIcon(name="expand" color="var(--q-primary)")
+SvgIcon(name="expand" color="var(--q-primary)" spin)
 </template>
 
 <style scoped>

@@ -23,7 +23,6 @@ export default defineConfig({
 
 			// custom insert position
 			// @default: body-last
-
 			// inject?: 'body-last' | 'body-first',
 
 			// custom dom id
