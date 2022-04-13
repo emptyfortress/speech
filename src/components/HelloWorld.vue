@@ -2,14 +2,21 @@
 import { ref } from 'vue'
 
 // defineProps<{ msg: string }>()
+const props = defineProps({
+	msg: {
+		type: String,
+		default: 'fooo',
+	},
+})
 
 const count = ref(0)
+const num = 1
 </script>
 
 <template lang="pug">
 h1 {{ msg }}
 
-<button type="button" @click="count++">count is: {{ count }}</button>
+button(type="button" @click="count++") count is: {{ count }}
 p Edit
 </template>
 

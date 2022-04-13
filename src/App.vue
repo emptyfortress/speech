@@ -1,12 +1,12 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from '@/components/HelloWorld.vue'
+const fuck: Number = 4
 </script>
 
-<template lang="pug">
-img(src="./assets/logo.png")
-HelloWorld(msg="Hello Vue 3 + TypeScript + Vite")
+<template>
+	<img src="@/assets/logo.png" />
+
+	<HelloWorld :msg="fuck" />
 </template>
 
 <style>
