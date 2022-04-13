@@ -69,7 +69,7 @@ cat > tsconfig.json <<EOF
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "/@/*": [ // / to begin with.
+      "@/*": [ // / to begin with.
         "src/*"
       ]
     },

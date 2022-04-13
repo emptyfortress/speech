@@ -7,6 +7,11 @@ const fuck: Number = 4
 	<img src="@/assets/logo.png" />
 
 	<HelloWorld :msg="fuck" />
+	<router-view v-slot="{ Component, route }">
+		<transition :name="route.meta.transition || 'fade'">
+			<component :is="Component"></component>
+		</transition>
+	</router-view>
 </template>
 
 <style>
@@ -17,5 +22,7 @@ const fuck: Number = 4
 	text-align: center;
 	color: #2c3e50;
 	margin-top: 60px;
+}
+.one {
 }
 </style>
