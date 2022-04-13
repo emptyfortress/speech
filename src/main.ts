@@ -4,6 +4,7 @@ import '@quasar/extras/roboto-font/roboto-font.css'
 import '@quasar/extras/material-icons/material-icons.css'
 import 'quasar/src/css/index.sass'
 import { router } from '@/router/router'
+import 'virtual:svg-icons-register'
 
 import App from './App.vue'
 

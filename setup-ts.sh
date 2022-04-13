@@ -67,6 +67,7 @@ cat > tsconfig.json <<EOF
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "allowJs": true,
     "baseUrl": ".",
     "paths": {
       "@/*": [ // / to begin with.
