@@ -27,3 +27,10 @@ body {
 .q-drawer {
 	background: transparent;
 }
+.date {
+	margin-top: 35px;
+	background: transparent;
+	.q-date__header {
+		display: none;
+	}
+}

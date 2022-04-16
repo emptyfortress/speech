@@ -22,8 +22,9 @@ q-layout(view="hHh LpR fFf")
 				span SD platform
 			q-space
 			q-btn(dense flat round icon="mdi-bell-outline")
-			q-btn(dense round unelevated color="light-blue-2").q-mx-md
-				q-avatar(color="blue")
+				q-badge
+			q-btn(dense round unelevated).q-mx-md
+				q-avatar(color="blue" size="30px")
 					img(src="@/assets/img/user0.svg")
 
 	Drawer(:show="mystore.leftDrawer")
