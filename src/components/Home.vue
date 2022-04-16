@@ -6,17 +6,13 @@ q-page(padding)
 			div
 				myChip
 				q-btn(flat round icon="mdi-calendar" @click="toggle")
-		.grid
-			div
-			div
-			div
-			div
-			div
+		Trends
 </template>
 
 <script setup lang="ts">
 import { useStore } from '@/stores/store'
 import myChip from '@/components/myChip.vue'
+import Trends from '@/components/Trends.vue'
 
 const props = defineProps({
 	foo: {
@@ -34,14 +30,4 @@ const toggle = () => {
 <style scoped lang="scss">
 // @import '@/assets/styles/main.scss';
 //@import '@/assets/css/colors.scss';
-.grid {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 1rem;
-	div {
-		width: 100%;
-		height: 100px;
-		background: white;
-	}
-}
 </style>
