@@ -9,6 +9,7 @@ import 'virtual:svg-icons-register'
 import VueClickAway from 'vue3-click-away'
 // import '@/quasar.config.ts'
 import { createRippleDirective } from 'vue-create-ripple'
+import { createPinia } from 'pinia'
 
 import App from './App.vue'
 
@@ -33,6 +34,7 @@ app.use(Quasar, {
 })
 app.use(router)
 app.use(VueClickAway)
+app.use(createPinia())
 const opts = { class: 'my-ripple-class' }
 app.directive('AppRipple', createRippleDirective(opts))
 

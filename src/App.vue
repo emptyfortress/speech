@@ -1,22 +1,12 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import { useStore } from '@/stores/store'
 import SvgIcon from './components/SvgIcon.vue'
 import Drawer from '@/components/Drawer.vue'
-// import RDrawer from '@/components/RDrawer.vue'
+import RDrawer from '@/components/RDrawer.vue'
 
-const leftDrawer = ref(true)
-const mini = ref(false)
-const rightDrawer = ref(false)
-const toggleLeftDrawer = () => {
-	leftDrawer.value = !leftDrawer.value
-}
-const toggleRightDrawer = () => (rightDrawer.value = !rightDrawer.value)
-
-const toggleDr = () => {
-	if (rightDrawer.value === true) {
-		rightDrawer.value = false
-	}
-}
+const mystore = useStore()
+const toggleLeftDrawer = mystore.toggleLeftDrawer
 </script>
 
 <template lang="pug">
@@ -32,19 +22,12 @@ q-layout(view="hHh LpR fFf")
 				span SD platform
 			q-space
 			q-btn(dense flat round icon="mdi-bell-outline")
-			q-btn(dense round unelevated color="light-blue-2" @click="toggleRightDrawer").q-mx-md
+			q-btn(dense round unelevated color="light-blue-2").q-mx-md
 				q-avatar(color="blue")
 					img(src="@/assets/img/user0.svg")
 
-	Drawer(:show="leftDrawer" @toggle="toggleLeftDrawer")
-
-	q-drawer(v-model="rightDrawer" side="right" @toggle="toggleRightDrawer")
-		p fuck
-		p fuck
-		p fuck
-		p fuck
-		p fuck
-	//- RDrawer(:show="rightDrawer")
+	Drawer(:show="mystore.leftDrawer")
+	RDrawer(:show="mystore.rightDrawer")
 
 	q-page-container
 		router-view(v-slot="{ Component, route }")

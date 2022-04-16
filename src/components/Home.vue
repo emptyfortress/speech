@@ -5,7 +5,7 @@ q-page(padding)
 			.zag Тренды
 			div
 				q-chip(label="Прошлая неделя" outline color="grey").cursor-pointer
-				q-btn(flat round icon="mdi-calendar")
+				q-btn(flat round icon="mdi-calendar" @click="toggle")
 		.grid
 			div
 			div
@@ -15,12 +15,19 @@ q-page(padding)
 </template>
 
 <script setup lang="ts">
+import { useStore } from '@/stores/store'
+
 const props = defineProps({
 	foo: {
 		type: String,
 		default: 'test',
 	},
 })
+const mystore = useStore()
+const toggle = () => {
+	mystore.toggleMini()
+	mystore.toggleRightDrawer()
+}
 </script>
 
 <style scoped lang="scss">

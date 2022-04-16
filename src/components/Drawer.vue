@@ -1,5 +1,5 @@
 <template lang="pug">
-q-drawer(:model-value="show" side="left" :mini="mini" :width="200" @update:model-value="$emit('toggle')")
+q-drawer(v-model="show" side="left" :mini="mystore.mini" :width="200")
 	q-list.q-mt-lg
 		q-item(clickable v-app-ripple v-for="page in pages" :to="page.url")
 			q-item-section(avatar)
@@ -7,14 +7,14 @@ q-drawer(:model-value="show" side="left" :mini="mini" :width="200" @update:model
 			q-item-section()
 				q-item-label {{ page.title }}
 
-	q-btn(round flat dense  @click="mini = !mini").mini.gt-sm
-		q-icon(name="mdi-backburger" v-if="!mini")
+	q-btn(round flat dense  @click="mystore.toggleMini").mini.gt-sm
+		q-icon(name="mdi-backburger" v-if="!mystore.mini")
 		q-icon(name="mdi-forwardburger" v-else)
 
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useStore } from '@/stores/store'
 
 const props = defineProps({
 	show: {
@@ -22,7 +22,8 @@ const props = defineProps({
 		default: true,
 	},
 })
-const emit = defineEmits(['toggle'])
+
+const mystore = useStore()
 
 const pages = [
 	{
@@ -63,13 +64,6 @@ const pages = [
 	},
 ]
 // export default {
-
-const mini = ref(false)
-const icon = ref('mdi-backburger')
-
-const toggle = () => {
-	emit('toggle')
-}
 </script>
 
 <style scoped lang="scss">
