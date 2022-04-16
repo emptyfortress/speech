@@ -7,7 +7,9 @@ import Drawer from '@/components/Drawer.vue'
 const leftDrawer = ref(true)
 const mini = ref(false)
 const rightDrawer = ref(false)
-const toggleLeftDrawer = () => (mini.value = !mini.value)
+const toggleLeftDrawer = () => {
+	leftDrawer.value = !leftDrawer.value
+}
 const toggleRightDrawer = () => (rightDrawer.value = !rightDrawer.value)
 
 const toggleDr = () => {
@@ -34,9 +36,9 @@ q-layout(view="hHh LpR fFf")
 				q-avatar(color="blue")
 					img(src="@/assets/img/user0.svg")
 
-	Drawer(:show="leftDrawer" :mini="mini" @toggle="toggleLeftDrawer")
+	Drawer(:show="leftDrawer" @toggle="toggleLeftDrawer")
 
-	q-drawer(v-model="rightDrawer" side="right" overlay bordered @toggle="toggleRightDrawer")
+	q-drawer(v-model="rightDrawer" side="right" @toggle="toggleRightDrawer")
 		p fuck
 		p fuck
 		p fuck

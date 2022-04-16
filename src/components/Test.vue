@@ -1,5 +1,7 @@
 <template lang="pug">
-h2 Hello!
+q-page(padding)
+	.container
+		.zag Hello!
 </template>
 
 <script setup lang="ts"></script>

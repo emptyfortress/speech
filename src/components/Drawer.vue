@@ -7,24 +7,22 @@ q-drawer(:model-value="show" side="left" :mini="mini" :width="200" @update:model
 			q-item-section()
 				q-item-label {{ page.title }}
 
-	//- q-btn(round flat dense :icon="minitoogle" @click="colors.mini = !colors.mini").mini.gt-sm
+	q-btn(round flat dense  @click="mini = !mini").mini.gt-sm
+		q-icon(name="mdi-backburger" v-if="!mini")
+		q-icon(name="mdi-forwardburger" v-else)
 
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import SvgIcon from '@/components/SvgIcon.vue'
+import { ref } from 'vue'
 
 const props = defineProps({
 	show: {
 		type: Boolean,
 		default: true,
 	},
-	mini: {
-		type: Boolean,
-		default: false,
-	},
 })
+const emit = defineEmits(['toggle'])
 
 const pages = [
 	{
@@ -67,39 +65,11 @@ const pages = [
 // export default {
 
 const mini = ref(false)
+const icon = ref('mdi-backburger')
 
-// 	props: ['show'],
-// 	components: { SvgIcon },
-// 	setup() {
-// 		const colors = useColor()
-// 		const pages = [
-// 			{
-// 				id: 4,
-// 				title: 'Dashboard',
-// 				icon: 'mdi-home-roof',
-// 				url: '/dashboard',
-// 			},
-// 			{
-// 				id: 5,
-// 				title: 'Dashboard 1',
-// 				icon: 'mdi-home-roof',
-// 				url: '/dashboard1',
-// 			},
-// 		]
-// 		const width = 256
-
-// 		const minitoogle = computed(() => {
-// 			return colors.mini ? 'mdi-forwardburger' : 'mdi-backburger'
-// 		})
-
-// 		return {
-// 			colors,
-// 			width,
-// 			pages,
-// 			minitoogle,
-// 		}
-// 	},
-// }
+const toggle = () => {
+	emit('toggle')
+}
 </script>
 
 <style scoped lang="scss">

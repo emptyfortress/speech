@@ -19,13 +19,13 @@ export const router = createRouter({
 		{
 			path: '/',
 			component: Home,
-			meta: { transition: 'fade', title: 'Hove', requiresAuth: false },
+			meta: { transition: 'slide-left', title: 'Hove', requiresAuth: false },
 		},
 		{
 			path: '/test',
 			component: Test,
 			props: { variant: 'success' },
-			meta: { transition: 'fade', title: 'Docsvision', requiresAuth: false },
+			meta: { transition: 'slide-left', title: 'Docsvision', requiresAuth: false },
 		},
 	],
 })
