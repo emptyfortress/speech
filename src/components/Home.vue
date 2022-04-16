@@ -4,7 +4,7 @@ q-page(padding)
 		.row.justify-between
 			.zag Тренды
 			div
-				q-chip(label="Прошлая неделя" outline color="grey").cursor-pointer
+				myChip
 				q-btn(flat round icon="mdi-calendar" @click="toggle")
 		.grid
 			div
@@ -16,6 +16,7 @@ q-page(padding)
 
 <script setup lang="ts">
 import { useStore } from '@/stores/store'
+import myChip from '@/components/myChip.vue'
 
 const props = defineProps({
 	foo: {

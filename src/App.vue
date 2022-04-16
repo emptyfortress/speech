@@ -22,7 +22,7 @@ q-layout(view="hHh LpR fFf")
 				span SD platform
 			q-space
 			q-btn(dense flat round icon="mdi-bell-outline")
-				q-badge
+				q-badge(floating rounded) 3
 			q-btn(dense round unelevated).q-mx-md
 				q-avatar(color="blue" size="30px")
 					img(src="@/assets/img/user0.svg")
