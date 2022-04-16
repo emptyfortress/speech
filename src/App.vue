@@ -1,28 +1,58 @@
 <script setup lang="ts">
-import HelloWorld from '@/components/HelloWorld.vue'
-const fuck: Number = 4
+import { ref, reactive } from 'vue'
+import SvgIcon from './components/SvgIcon.vue'
+import Drawer from '@/components/Drawer.vue'
+// import RDrawer from '@/components/RDrawer.vue'
+
+const leftDrawer = ref(true)
+const rightDrawer = ref(false)
+const toggleLeftDrawer = () => (leftDrawer.value = !leftDrawer.value)
+const toggleRightDrawer = () => (rightDrawer.value = !rightDrawer.value)
+
+const toggleDr = () => {
+	if (rightDrawer.value === true) {
+		rightDrawer.value = false
+	}
+}
 </script>
 
-<template>
-	<img src="@/assets/logo.png" />
+<template lang="pug">
+q-layout(view="hHh LpR fFf")
+	q-header(reveal ).head
+		q-toolbar(shrink)
+			q-btn(dense flat round  @click="toggleLeftDrawer")
+				SvgIcon(name="sound" color="red")
+			//- img(src="@/assets/img/logo.svg" width="32")
 
-	<HelloWorld :msg="fuck" />
-	<router-view v-slot="{ Component, route }">
-		<transition :name="route.meta.transition || 'fade'">
-			<component :is="Component"></component>
-		</transition>
-	</router-view>
+			q-toolbar-title.gt-sm
+				span SD platform
+			q-space
+			q-btn(dense flat round icon="mdi-bell-outline")
+			q-btn(dense round unelevated color="light-blue-2" @click="toggleRightDrawer").q-mx-md
+				q-avatar(color="blue")
+					img(src="@/assets/img/user0.svg")
+
+	Drawer(:show="true")
+
+	q-drawer(v-model="rightDrawer" side="right" overlay bordered @toggle="toggleRightDrawer")
+		p fuck
+		p fuck
+		p fuck
+		p fuck
+		p fuck
+	//- RDrawer(:show="rightDrawer")
+
+	q-page-container
+		router-view(v-slot="{ Component, route }")
+			transition(:name="route.meta.transition || 'fade'")
+				component(:is="Component")
 </template>
 
-<style>
-#app {
-	font-family: Avenir, Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
-	margin-top: 60px;
-}
-.one {
+<style scoped lang="scss">
+@import '@/assets/styles/myvariables.scss';
+
+.head {
+	color: $text-bright;
+	background: transparent;
 }
 </style>

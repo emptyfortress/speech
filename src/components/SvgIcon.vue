@@ -40,7 +40,7 @@ svg.icon {
 	height: 1.5em;
 	vertical-align: middle;
 	margin-bottom: 0.125em;
-	margin-right: 0.5em;
+	// margin-right: 0.5em;
 	fill: #666;
 }
 body.body--dark svg.icon {
