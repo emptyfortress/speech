@@ -7,12 +7,19 @@ q-page(padding)
 				myChip
 				q-btn(flat round icon="mdi-calendar" @click="toggle")
 		Trends
+		.row.justify-between.q-mt-lg
+			.zag Обзор
+			div
+				myChip
+				q-btn(flat round icon="mdi-calendar" @click="toggle")
+		Events
 </template>
 
 <script setup lang="ts">
 import { useStore } from '@/stores/store'
 import myChip from '@/components/myChip.vue'
 import Trends from '@/components/Trends.vue'
+import Events from '@/components/Events.vue'
 
 const props = defineProps({
 	foo: {
@@ -29,5 +36,4 @@ const toggle = () => {
 
 <style scoped lang="scss">
 // @import '@/assets/styles/main.scss';
-//@import '@/assets/css/colors.scss';
 </style>

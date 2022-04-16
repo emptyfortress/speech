@@ -1,15 +1,14 @@
 <template lang="pug">
 .grid
 	q-card(flat v-for="trend in trends" @click="showDialog(trend.id)")
-		#chart
-			div(v-if="trend.id === 1" )
-				vue-apex-charts(type="area" :options="chartOptions1" :series="series1")
-			div(v-if="trend.id === 2" )
-				vue-apex-charts(type="area" :options="chartOptions2" :series="series2")
-			div(v-if="trend.id === 3" )
-				vue-apex-charts(type="area" :options="chartOptions3" :series="series3")
-			div(v-if="trend.id === 4" )
-				vue-apex-charts(type="area" :options="chartOptions4" :series="series4")
+		div(v-if="trend.id === 1" )
+			vue-apex-charts(type="area" :options="chartOptions1" :series="series1")
+		div(v-if="trend.id === 2" )
+			vue-apex-charts(type="area" :options="chartOptions2" :series="series2")
+		div(v-if="trend.id === 3" )
+			vue-apex-charts(type="area" :options="chartOptions3" :series="series3")
+		div(v-if="trend.id === 4" )
+			vue-apex-charts(type="area" :options="chartOptions4" :series="series4")
 
 q-dialog(v-model="dialog")
 	q-card(style="width: 900px; max-width: 80vw;")

@@ -1,11 +1,13 @@
 <template lang="pug">
 
-q-drawer(v-model="show" side="right" :width="300" )
+q-drawer(v-model="show" side="right" :width="300" ).rdrawer
+	q-btn(flat @click="toggle") Закрыть
 	q-date(v-model="model" range flat ).date
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
+import { useStore } from '@/stores/store'
 
 const props = defineProps({
 	show: {
@@ -14,8 +16,16 @@ const props = defineProps({
 	},
 })
 const model = ref(null)
+const mystore = useStore()
+const toggle = () => {
+	mystore.toggleMini()
+	mystore.toggleRightDrawer()
+}
 </script>
 
 <style scoped lang="scss">
 //@import '@/assets/css/colors.scss';
+.date {
+	margin-top: 0;
+}
 </style>

@@ -11,7 +11,7 @@ body {
 .container {
 	padding-left: 1rem;
 	padding-right: 1rem;
-	@media screen and (max-width: 1800px) {
+	@media screen and (max-width: 1850px) {
 		max-width: 1200px;
 		margin: 0 auto;
 	}
@@ -33,4 +33,8 @@ body {
 	.q-date__header {
 		display: none;
 	}
+}
+
+.rdrawer {
+	padding-top: 1.5rem;
 }
