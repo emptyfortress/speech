@@ -20,6 +20,10 @@ const props = defineProps({
 		type: Boolean,
 		default: true,
 	},
+	mini: {
+		type: Boolean,
+		default: false,
+	},
 })
 
 const pages = [

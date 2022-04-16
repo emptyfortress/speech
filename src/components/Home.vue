@@ -1,11 +1,17 @@
 <template lang="pug">
 q-page(padding)
 	.container
-		h2 Home! {{ foo }}
-		q-btn(color="deep-orange") test
-		br
-		br
-		.rip(v-app-ripple)
+		.row.justify-between
+			.zag Тренды
+			div
+				q-chip(label="Прошлая неделя" outline color="grey").cursor-pointer
+				q-btn(flat round icon="mdi-calendar")
+		.grid
+			div
+			div
+			div
+			div
+			div
 </template>
 
 <script setup lang="ts">
@@ -20,15 +26,14 @@ const props = defineProps({
 <style scoped lang="scss">
 // @import '@/assets/styles/main.scss';
 //@import '@/assets/css/colors.scss';
-.q-page {
-}
-.rip {
-	width: 100px;
-	height: 100px;
-	background: #999;
-}
-.red--ripple {
-	background: red;
-	opacity: 0.2;
+.grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 1rem;
+	div {
+		width: 100%;
+		height: 100px;
+		background: white;
+	}
 }
 </style>

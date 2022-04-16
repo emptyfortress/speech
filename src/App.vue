@@ -5,8 +5,9 @@ import Drawer from '@/components/Drawer.vue'
 // import RDrawer from '@/components/RDrawer.vue'
 
 const leftDrawer = ref(true)
+const mini = ref(false)
 const rightDrawer = ref(false)
-const toggleLeftDrawer = () => (leftDrawer.value = !leftDrawer.value)
+const toggleLeftDrawer = () => (mini.value = !mini.value)
 const toggleRightDrawer = () => (rightDrawer.value = !rightDrawer.value)
 
 const toggleDr = () => {
@@ -20,11 +21,12 @@ const toggleDr = () => {
 q-layout(view="hHh LpR fFf")
 	q-header(reveal ).head
 		q-toolbar(shrink)
+			//- q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer")
 			q-btn(dense flat round  @click="toggleLeftDrawer")
 				SvgIcon(name="sound" color="red")
 			//- img(src="@/assets/img/logo.svg" width="32")
 
-			q-toolbar-title.gt-sm
+			q-toolbar-title(@click="toggleLeftDrawer").gt-sm.cursor-pointer
 				span SD platform
 			q-space
 			q-btn(dense flat round icon="mdi-bell-outline")
@@ -32,7 +34,7 @@ q-layout(view="hHh LpR fFf")
 				q-avatar(color="blue")
 					img(src="@/assets/img/user0.svg")
 
-	Drawer(:show="true")
+	Drawer(:show="leftDrawer" :mini="mini" @toggle="toggleLeftDrawer")
 
 	q-drawer(v-model="rightDrawer" side="right" overlay bordered @toggle="toggleRightDrawer")
 		p fuck
