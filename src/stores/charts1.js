@@ -18,7 +18,7 @@ const chartOptions1 = {
 		},
 	},
 	dataLabels: {
-		enabled: false,
+		enabled: true,
 	},
 	stroke: {
 		curve: 'straight',
@@ -52,7 +52,7 @@ const chartOptions2 = {
 		},
 	},
 	dataLabels: {
-		enabled: false,
+		enabled: true,
 	},
 	stroke: {
 		curve: 'straight',
@@ -86,7 +86,7 @@ const chartOptions3 = {
 		},
 	},
 	dataLabels: {
-		enabled: false,
+		enabled: true,
 	},
 	stroke: {
 		curve: 'straight',
@@ -120,7 +120,7 @@ const chartOptions4 = {
 		},
 	},
 	dataLabels: {
-		enabled: false,
+		enabled: true,
 	},
 	stroke: {
 		curve: 'straight',
@@ -132,6 +132,7 @@ const chartOptions4 = {
 	yaxis: {
 		opposite: true,
 	},
+	colors: ['#21BA45'],
 }
 
 const chartOptionsSpark1 = {
@@ -287,6 +288,64 @@ const chartOptionsSpark4 = {
 	},
 }
 
+const seriesTable1 = [
+	{
+		data: [25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54],
+	},
+]
+
+const chartTable1 = {
+	chart: {
+		type: 'line',
+		width: 100,
+		height: 35,
+		sparkline: {
+			enabled: true,
+		},
+	},
+	stroke: {
+		width: 3,
+	},
+	tooltip: {
+		fixed: {
+			enabled: false,
+		},
+		x: {
+			show: false,
+		},
+		y: {
+			title: {
+				formatter: function (seriesName) {
+					return ''
+				},
+			},
+		},
+		marker: {
+			show: false,
+		},
+	},
+}
+
+const seriesTable4 = [43, 32, 12, 9]
+const chartTable4 = {
+	chart: {
+		type: 'donut',
+		width: 35,
+		height: 35,
+		sparkline: {
+			enabled: true,
+		},
+	},
+	stroke: {
+		width: 1,
+	},
+	tooltip: {
+		fixed: {
+			enabled: false,
+		},
+	},
+}
+
 export {
 	chartOptions1,
 	chartOptions2,
@@ -296,4 +355,8 @@ export {
 	chartOptionsSpark2,
 	chartOptionsSpark3,
 	chartOptionsSpark4,
+	chartTable1,
+	seriesTable1,
+	seriesTable4,
+	chartTable4,
 }
