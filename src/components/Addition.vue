@@ -31,7 +31,7 @@ onMounted(() => {
 	const chart = new WordCloudChart(canvas.getContext('2d'), {
 		data: data,
 		options: {
-			padding: 0,
+			padding: '0px',
 		},
 	})
 })

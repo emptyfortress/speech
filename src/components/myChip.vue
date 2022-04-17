@@ -1,5 +1,5 @@
 <template lang="pug">
-q-chip(:label="date" color="blue-grey-2").cursor-pointer
+q-chip(:label="date" color="pink-2").cursor-pointer
 	q-menu(transition-show="jump-down" transition-hide="jump-up")
 		q-list
 			q-item(clickable v-close-popup v-for="item in list" @click="setDateOptions(item)")
@@ -8,6 +8,13 @@ q-chip(:label="date" color="blue-grey-2").cursor-pointer
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+
+const props = defineProps({
+	label: {
+		type: String,
+		default: 'Прошлая неделя',
+	},
+})
 
 const list = [
 	'Прошлая неделя',
@@ -18,7 +25,7 @@ const list = [
 	'Текущий квартал',
 ]
 
-const date = ref('Прошлая неделя')
+const date = ref(props.label)
 
 const setDateOptions = (e: string) => {
 	date.value = e

@@ -10,14 +10,14 @@ q-page(padding)
 		.row.justify-between.items-center.q-mt-lg
 			.zag Категории
 			div
-				myChip
+				myChip(label="Текущий месяц")
 				q-btn(flat round icon="mdi-calendar" @click="toggle")
 		Events
 
 		.row.justify-between.items-center.q-mt-lg
 			.zag Дополнительно
 			div
-				myChip
+				myChip(label="Прошлый месяц")
 				q-btn(flat round icon="mdi-calendar" @click="toggle")
 		Addition
 </template>

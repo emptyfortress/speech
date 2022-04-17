@@ -3,7 +3,6 @@ VueApexCharts(type="heatmap" height="270" :options="chartOptions" :series="heatS
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 import { heatSeries } from '@/stores/cloud'
 
@@ -25,6 +24,4 @@ const chartOptions = {
 }
 </script>
 
-<style scoped lang="scss">
-//@import '@/assets/css/colors.scss';
-</style>
+<style scoped lang="scss"></style>

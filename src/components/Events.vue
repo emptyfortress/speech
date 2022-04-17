@@ -11,7 +11,7 @@
 				th.text-center Димамика за период
 				th.text-center Объем
 		tbody
-			tr
+			tr(@click="test")
 				td.text-left Продажи
 				td.text-right 11.382<span class="up">&uarr;</span>
 				td.text-right 3:05 мин<span class="down">&darr;</span>
@@ -21,7 +21,7 @@
 					VueApexCharts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable1")
 				td.text-center
 					VueApexCharts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable4")
-			tr
+			tr(@click="test")
 				td.text-left Сервис
 				td.text-right 7.319<span class="up">&uarr;</span>
 				td.text-right 4:15 мин<span class="down">&darr;</span>
@@ -31,7 +31,7 @@
 					VueApexCharts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable2")
 				td.text-center
 					VueApexCharts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable5")
-			tr
+			tr(@click="test")
 				td.text-left Оплата
 				td.text-right 15.3<span class="up">&uarr;</span>
 				td.text-right 1:07 мин<span class="down">&darr;</span>
@@ -62,6 +62,15 @@ import {
 
 const dialog = ref(false)
 const id = ref(0)
+
+const test = (e: any) => {
+	const rows = document.querySelectorAll('tr')
+	rows.forEach((row) => row.classList.remove('sel'))
+	// console.log(rows)
+	e.target.parentNode.classList.add('sel')
+	console.log(e.target.parentNode)
+}
+
 const showDialog = (e: number) => {
 	dialog.value = true
 	id.value = e
@@ -102,7 +111,7 @@ const chartOptions1 = {
 .grid {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	gap: 0.5rem;
+	gap: 1rem;
 	.cat {
 		grid-column: 1/4;
 		overflow: inherit;
@@ -112,6 +121,9 @@ const chartOptions1 = {
 	font-weight: 300;
 }
 .q-table tr {
+	&.sel {
+		background: #daeffe;
+	}
 	td {
 		font-weight: 600;
 		font-size: 16px;
