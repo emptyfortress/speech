@@ -36,31 +36,31 @@ const pages = [
 		id: 1,
 		title: 'Отчеты',
 		icon: 'mdi-finance',
-		url: '/test',
+		url: '/reports',
 	},
 	{
 		id: 2,
 		title: 'Сравнение',
 		icon: 'mdi-scale-balance',
-		url: '',
+		url: '/compare',
 	},
 	{
 		id: 4,
 		title: 'Чек-листы',
 		icon: 'mdi-check-all',
-		url: '',
+		url: '/checklists',
 	},
 	{
 		id: 5,
 		title: 'Диалоги',
 		icon: 'mdi-forum',
-		url: '',
+		url: '/conversation',
 	},
 	{
 		id: 6,
 		title: 'Запросы',
 		icon: 'mdi-toy-brick-search-outline',
-		url: '',
+		url: '/requests',
 	},
 ]
 // export default {

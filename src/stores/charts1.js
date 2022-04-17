@@ -134,4 +134,166 @@ const chartOptions4 = {
 	},
 }
 
-export { chartOptions1, chartOptions2, chartOptions3, chartOptions4 }
+const chartOptionsSpark1 = {
+	chart: {
+		type: 'area',
+		height: 130,
+		sparkline: {
+			enabled: true,
+		},
+	},
+	stroke: {
+		curve: 'straight',
+	},
+	fill: {
+		opacity: 0.3,
+	},
+	xaxis: {
+		crosshairs: {
+			width: 1,
+		},
+	},
+	yaxis: {
+		min: 0,
+	},
+	title: {
+		text: '234',
+		offsetX: 0,
+		style: {
+			fontSize: '24px',
+		},
+	},
+	subtitle: {
+		text: 'Вызовы',
+		offsetX: 0,
+		style: {
+			fontSize: '14px',
+		},
+	},
+}
+
+const chartOptionsSpark2 = {
+	chart: {
+		type: 'area',
+		height: 130,
+		sparkline: {
+			enabled: true,
+		},
+	},
+	stroke: {
+		curve: 'straight',
+	},
+	fill: {
+		opacity: 0.3,
+	},
+	xaxis: {
+		crosshairs: {
+			width: 1,
+		},
+	},
+	yaxis: {
+		min: 0,
+	},
+	title: {
+		text: '3:15',
+		offsetX: 0,
+		style: {
+			fontSize: '24px',
+		},
+	},
+	subtitle: {
+		text: 'АНТ',
+		offsetX: 0,
+		style: {
+			fontSize: '14px',
+		},
+	},
+}
+
+const chartOptionsSpark3 = {
+	chart: {
+		type: 'area',
+		height: 130,
+		sparkline: {
+			enabled: true,
+		},
+	},
+	stroke: {
+		curve: 'straight',
+	},
+	fill: {
+		opacity: 0.3,
+	},
+	xaxis: {
+		crosshairs: {
+			width: 1,
+		},
+	},
+	yaxis: {
+		min: 0,
+	},
+	title: {
+		text: '2:07',
+		offsetX: 0,
+		style: {
+			fontSize: '24px',
+		},
+	},
+	subtitle: {
+		text: 'Тишина',
+		offsetX: 0,
+		style: {
+			fontSize: '14px',
+		},
+	},
+}
+
+const chartOptionsSpark4 = {
+	chart: {
+		type: 'area',
+		height: 130,
+		sparkline: {
+			enabled: true,
+		},
+	},
+	stroke: {
+		curve: 'straight',
+	},
+	fill: {
+		opacity: 0.3,
+	},
+	xaxis: {
+		crosshairs: {
+			width: 1,
+		},
+	},
+	yaxis: {
+		min: 0,
+	},
+	colors: ['#21BA45'],
+	title: {
+		text: '21',
+		offsetX: 0,
+		style: {
+			fontSize: '24px',
+		},
+	},
+	subtitle: {
+		text: 'Перебивания',
+		offsetX: 0,
+		style: {
+			fontSize: '14px',
+		},
+	},
+}
+
+export {
+	chartOptions1,
+	chartOptions2,
+	chartOptions3,
+	chartOptions4,
+	chartOptionsSpark1,
+	chartOptionsSpark2,
+	chartOptionsSpark3,
+	chartOptionsSpark4,
+}

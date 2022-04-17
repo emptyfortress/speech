@@ -6,7 +6,7 @@ q-page(padding)
 			div
 				myChip
 				q-btn(flat round icon="mdi-calendar" @click="toggle")
-		Trends
+		Trends1
 		.row.justify-between.q-mt-lg
 			.zag Обзор
 			div
@@ -18,7 +18,7 @@ q-page(padding)
 <script setup lang="ts">
 import { useStore } from '@/stores/store'
 import myChip from '@/components/myChip.vue'
-import Trends from '@/components/Trends.vue'
+import Trends1 from '@/components/Trends1.vue'
 import Events from '@/components/Events.vue'
 
 const props = defineProps({

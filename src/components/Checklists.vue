@@ -1,7 +1,7 @@
 <template lang="pug">
 q-page(padding)
 	.container
-		.zag Hello!
+		.zag Checklists!
 </template>
 
 <script setup lang="ts"></script>

@@ -2,13 +2,13 @@
 .grid
 	q-card(flat v-for="trend in trends" @click="showDialog(trend.id)")
 		div(v-if="trend.id === 1" )
-			vue-apex-charts(type="area" :options="chartOptions1" :series="series1")
+			vue-apex-charts(type="area" height="130px" :options="chartOptionsSpark1" :series="series1")
 		div(v-if="trend.id === 2" )
-			vue-apex-charts(type="area" :options="chartOptions2" :series="series2")
+			vue-apex-charts(type="area" height="130px" :options="chartOptionsSpark2" :series="series2")
 		div(v-if="trend.id === 3" )
-			vue-apex-charts(type="area" :options="chartOptions3" :series="series3")
+			vue-apex-charts(type="area" height="130px" :options="chartOptionsSpark3" :series="series3")
 		div(v-if="trend.id === 4" )
-			vue-apex-charts(type="area" :options="chartOptions4" :series="series4")
+			vue-apex-charts(type="area" height="130px" :options="chartOptionsSpark4" :series="series4")
 
 q-dialog(v-model="dialog")
 	q-card(style="width: 900px; max-width: 80vw;")
@@ -19,7 +19,16 @@ q-dialog(v-model="dialog")
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
-import { chartOptions1, chartOptions2, chartOptions3, chartOptions4 } from '@/stores/charts1'
+import {
+	chartOptions1,
+	chartOptions2,
+	chartOptions3,
+	chartOptions4,
+	chartOptionsSpark1,
+	chartOptionsSpark2,
+	chartOptionsSpark3,
+	chartOptionsSpark4,
+} from '@/stores/charts1'
 
 const trends = [
 	{ id: 1, label: 'Вызовы' },
@@ -31,6 +40,7 @@ const series1 = [{ name: 'Вызовы', data: [55, 57, 65, 70, 77, 80, 67] }]
 const series2 = [{ name: 'АНТ', data: [60, 57, 65, 67, 72, 42, 68] }]
 const series3 = [{ name: 'Тишина', data: [20, 22, 18, 21, 23, 20, 24] }]
 const series4 = [{ name: 'Перебивания', data: [15, 22, 18, 14, 13, 7, 3] }]
+// const seriesSpark1 = [{ data: randomizeArray(sparklineData) }]
 
 const dialog = ref(false)
 const id = ref(0)
@@ -75,10 +85,9 @@ const computeSeries = computed(() => {
 .grid {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	gap: 0.5rem;
+	gap: 1rem;
 	.q-card {
-		padding: 0.5rem;
-		padding-bottom: 0;
+		padding: 0.5rem 0 0 0;
 	}
 }
 </style>

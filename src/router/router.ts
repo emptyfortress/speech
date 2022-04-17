@@ -1,5 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Test from '@/components/Test.vue'
+import Reports from '@/components/Reports.vue'
+import Compare from '@/components/Compare.vue'
+import Conversation from '@/components/Conversation.vue'
+import Requests from '@/components/Requests.vue'
+import Checklists from '@/components/Checklists.vue'
 import Home from '@/components/Home.vue'
 
 declare module 'vue-router' {
@@ -19,13 +23,37 @@ export const router = createRouter({
 		{
 			path: '/',
 			component: Home,
-			meta: { transition: 'slide-left', title: 'Hove', requiresAuth: false },
+			meta: { transition: 'slide-left', title: 'Speech Drive', requiresAuth: false },
 		},
 		{
-			path: '/test',
-			component: Test,
+			path: '/reports',
+			component: Reports,
 			props: { variant: 'success' },
-			meta: { transition: 'slide-left', title: 'Docsvision', requiresAuth: false },
+			meta: { transition: 'slide-left', title: 'Something here', requiresAuth: false },
+		},
+		{
+			path: '/compare',
+			component: Compare,
+			props: { variant: 'success' },
+			meta: { transition: 'slide-left', title: 'Something here', requiresAuth: false },
+		},
+		{
+			path: '/checklists',
+			component: Checklists,
+			props: { variant: 'success' },
+			meta: { transition: 'slide-left', title: 'Something here', requiresAuth: false },
+		},
+		{
+			path: '/conversation',
+			component: Conversation,
+			props: { variant: 'success' },
+			meta: { transition: 'slide-left', title: 'Something here', requiresAuth: false },
+		},
+		{
+			path: '/requests',
+			component: Requests,
+			props: { variant: 'success' },
+			meta: { transition: 'slide-left', title: 'Something here', requiresAuth: false },
 		},
 	],
 })
