@@ -1,14 +1,14 @@
 <template lang="pug">
 q-page(padding)
 	.container
-		.row.justify-between
+		.row.justify-between.items-center
 			.zag Тренды
 			div
 				myChip
 				q-btn(flat round icon="mdi-calendar" @click="toggle")
 		Trends1
-		.row.justify-between.q-mt-lg
-			.zag Обзор
+		.row.justify-between.items-center.q-mt-lg
+			.zag Категории
 			div
 				myChip
 				q-btn(flat round icon="mdi-calendar" @click="toggle")
