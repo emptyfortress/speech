@@ -2,48 +2,35 @@
 .grid
 	q-card.tags
 		canvas#canvas
-	q-card
+	q-card.q-pa-sm
+		Heat
 </template>
 
 <script setup lang="ts">
 import { Chart, registerables } from 'chart.js'
 import { WordCloudChart } from 'chartjs-chart-wordcloud'
-import { ref, onMounted } from 'vue'
-Chart.register(...registerables)
+import { onMounted } from 'vue'
+import { words } from '@/stores/cloud'
+import Heat from '@/components/Heat.vue'
 
-const words = [
-	{ key: 'word', value: 10 },
-	{ key: 'words', value: 8 },
-	{ key: 'sprite', value: 7 },
-	{ key: 'placed', value: 5 },
-	{ key: 'layout', value: 4 },
-	{ key: 'algorithm', value: 4 },
-	{ key: 'area', value: 4 },
-	{ key: 'without', value: 3 },
-	{ key: 'step', value: 3 },
-]
+Chart.register(...registerables)
 
 const data = {
 	labels: words.map((d) => d.key),
 	datasets: [
 		{
 			label: '',
-			data: words.map((d) => 6 + d.value * 5),
+			data: words.map((d) => 0 + d.value * 2),
 		},
 	],
 }
 
 onMounted(() => {
-	console.log('fuck')
-
-	const canvas = <HTMLCanvasElement>document.getElementById('canvas')
+	const canvas = document.getElementById('canvas')
 	const chart = new WordCloudChart(canvas.getContext('2d'), {
 		data: data,
 		options: {
-			title: {
-				display: true,
-				text: 'Chart.js Word Cloud',
-			},
+			padding: 0,
 		},
 	})
 })
@@ -62,5 +49,9 @@ onMounted(() => {
 .tags {
 	width: 100%;
 	height: 300px;
+	padding: 1rem;
+	padding-top: 0;
+}
+#canvas {
 }
 </style>

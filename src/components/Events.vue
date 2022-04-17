@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 import {
 	chartTable1,

@@ -1,0 +1,31 @@
+<template lang="pug">
+div
+	vue-apex-charts(type="heatmap" height="270" :options="chartOptions" :series="heatSeries")
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import VueApexCharts from 'vue3-apexcharts'
+import { heatSeries } from '@/stores/cloud'
+
+const chartOptions = {
+	chart: {
+		height: 270,
+		type: 'heatmap',
+		toolbar: {
+			show: false,
+		},
+	},
+	dataLabels: {
+		enabled: false,
+	},
+	colors: ['#008FFB'],
+	title: {
+		text: 'Плотность звонков',
+	},
+}
+</script>
+
+<style scoped lang="scss">
+//@import '@/assets/css/colors.scss';
+</style>
