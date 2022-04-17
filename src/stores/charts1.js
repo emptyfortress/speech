@@ -288,11 +288,18 @@ const chartOptionsSpark4 = {
 	},
 }
 
-const seriesTable1 = [
-	{
-		data: [25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54],
-	},
-]
+const randomArray = (length, min, max) => {
+	let result = []
+	while (result.length < length) {
+		let random = Math.floor(Math.random() * (max - min + 1) + min)
+		result.push(random)
+	}
+	return result
+}
+
+const seriesTable1 = [{ data: randomArray(9, 100, 70) }]
+const seriesTable2 = [{ data: randomArray(9, 10, 50) }]
+const seriesTable3 = [{ data: randomArray(9, 40, 100) }]
 
 const chartTable1 = {
 	chart: {
@@ -326,7 +333,11 @@ const chartTable1 = {
 	},
 }
 
-const seriesTable4 = [43, 32, 12, 9]
+const seriesTable4 = randomArray(4, 20, 5)
+const seriesTable5 = randomArray(4, 20, 5)
+const seriesTable6 = randomArray(4, 100, 30)
+
+
 const chartTable4 = {
 	chart: {
 		type: 'donut',
@@ -357,6 +368,10 @@ export {
 	chartOptionsSpark4,
 	chartTable1,
 	seriesTable1,
-	seriesTable4,
+	seriesTable2,
+	seriesTable3,
 	chartTable4,
+	seriesTable4,
+	seriesTable5,
+	seriesTable6,
 }

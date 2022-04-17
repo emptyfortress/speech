@@ -1,6 +1,5 @@
 <template lang="pug">
 .grid
-	//- q-card(flat).cat
 	q-markup-table.cat
 		thead
 			tr
@@ -24,24 +23,25 @@
 					vue-apex-charts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable4")
 			tr
 				td.text-left Сервис
-				td.text-right 11.382<span class="up">&uarr;</span>
-				td.text-right 3:05 мин<span class="down">&darr;</span>
-				td.text-right 1.15%<span class="down">&uarr;</span>
-				td.text-right 2.05%<span class="down">&uarr;</span>
+				td.text-right 7.319<span class="up">&uarr;</span>
+				td.text-right 4:15 мин<span class="down">&darr;</span>
+				td.text-right 0.15%<span class="down">&uarr;</span>
+				td.text-right 3.02%<span class="down">&uarr;</span>
 				td.text-center
-					vue-apex-charts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable1")
+					vue-apex-charts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable2")
 				td.text-center
-					vue-apex-charts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable4")
+					vue-apex-charts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable5")
 			tr
 				td.text-left Оплата
-				td.text-right 11.382<span class="up">&uarr;</span>
-				td.text-right 3:05 мин<span class="down">&darr;</span>
-				td.text-right 1.15%<span class="down">&uarr;</span>
-				td.text-right 2.05%<span class="down">&uarr;</span>
+				td.text-right 15.3<span class="up">&uarr;</span>
+				td.text-right 1:07 мин<span class="down">&darr;</span>
+				td.text-right 3.25%<span class="down">&uarr;</span>
+				td.text-right 0.35%<span class="down">&uarr;</span>
 				td.text-center
-					vue-apex-charts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable1")
+					vue-apex-charts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable3")
 				td.text-center
-					vue-apex-charts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable4")
+					vue-apex-charts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable6")
+
 	q-card()
 		div
 			vue-apex-charts(type="radialBar" height="220" :options="chartOptions1" :series="series")
@@ -50,12 +50,16 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
-import { chartTable1, seriesTable1, chartTable4, seriesTable4 } from '@/stores/charts1'
-
-const events = [
-	{ id: 1, label: 'Категории' },
-	{ id: 2, label: 'События' },
-]
+import {
+	chartTable1,
+	seriesTable1,
+	seriesTable2,
+	seriesTable3,
+	chartTable4,
+	seriesTable4,
+	seriesTable5,
+	seriesTable6,
+} from '@/stores/charts1'
 
 const dialog = ref(false)
 const id = ref(0)
@@ -63,11 +67,11 @@ const showDialog = (e: number) => {
 	dialog.value = true
 	id.value = e
 }
+
 const series = [76, 67, 61]
 
 const chartOptions1 = {
 	chart: {
-		// height: 350,
 		type: 'radialBar',
 	},
 	plotOptions: {
@@ -96,8 +100,6 @@ const chartOptions1 = {
 </script>
 
 <style scoped lang="scss">
-//@import '@/assets/css/colors.scss';
-
 .grid {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
