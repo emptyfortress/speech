@@ -122,7 +122,7 @@ const randomArray = (length, { min, max }) => {
 	for (let i = 0; i < length; i++) {
 		let random = Math.floor(Math.random() * (max - min + 1) + min)
 		let obj = {
-			x: i + 10 + ':00',
+			x: i + 8 + ':00',
 			y: random,
 		}
 		result.push(obj)
@@ -133,49 +133,49 @@ const randomArray = (length, { min, max }) => {
 const heatSeries = [
 	{
 		name: 'Воскресенье',
-		data: randomArray(12, {
+		data: randomArray(14, {
 			min: 0,
 			max: 90,
 		}),
 	},
 	{
 		name: 'Суббота',
-		data: randomArray(12, {
+		data: randomArray(14, {
 			min: 0,
 			max: 90,
 		}),
 	},
 	{
 		name: 'Пятница',
-		data: randomArray(12, {
+		data: randomArray(14, {
 			min: 0,
 			max: 90,
 		}),
 	},
 	{
 		name: 'Четверг',
-		data: randomArray(12, {
+		data: randomArray(14, {
 			min: 0,
 			max: 90,
 		}),
 	},
 	{
 		name: 'Среда',
-		data: randomArray(12, {
+		data: randomArray(14, {
 			min: 0,
 			max: 90,
 		}),
 	},
 	{
 		name: 'Вторник',
-		data: randomArray(12, {
+		data: randomArray(14, {
 			min: 0,
 			max: 90,
 		}),
 	},
 	{
 		name: 'Понедельник',
-		data: randomArray(12, {
+		data: randomArray(14, {
 			min: 0,
 			max: 90,
 		}),

@@ -1,7 +1,8 @@
 <template lang="pug">
 
 q-drawer(v-model="show" side="right" :width="300" ).rdrawer
-	q-btn(flat @click="toggle") Закрыть
+	q-btn(flat @click="toggle") Отмена
+	q-btn(flat @click="toggle" color="primary") Применить
 	q-date(v-model="model" range flat ).date
 </template>
 

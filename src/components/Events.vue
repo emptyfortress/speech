@@ -18,9 +18,9 @@
 				td.text-right 1.15%<span class="down">&uarr;</span>
 				td.text-right 2.05%<span class="down">&uarr;</span>
 				td.text-center
-					vue-apex-charts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable1")
+					VueApexCharts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable1")
 				td.text-center
-					vue-apex-charts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable4")
+					VueApexCharts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable4")
 			tr
 				td.text-left Сервис
 				td.text-right 7.319<span class="up">&uarr;</span>
@@ -28,9 +28,9 @@
 				td.text-right 0.15%<span class="down">&uarr;</span>
 				td.text-right 3.02%<span class="down">&uarr;</span>
 				td.text-center
-					vue-apex-charts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable2")
+					VueApexCharts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable2")
 				td.text-center
-					vue-apex-charts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable5")
+					VueApexCharts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable5")
 			tr
 				td.text-left Оплата
 				td.text-right 15.3<span class="up">&uarr;</span>
@@ -38,13 +38,12 @@
 				td.text-right 3.25%<span class="down">&uarr;</span>
 				td.text-right 0.35%<span class="down">&uarr;</span>
 				td.text-center
-					vue-apex-charts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable3")
+					VueApexCharts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable3")
 				td.text-center
-					vue-apex-charts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable6")
+					VueApexCharts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable6")
 
 	q-card()
-		div
-			vue-apex-charts(type="radialBar" height="220" :options="chartOptions1" :series="series")
+		VueApexCharts(type="radialBar" height="220" :options="chartOptions1" :series="series")
 </template>
 
 <script setup lang="ts">

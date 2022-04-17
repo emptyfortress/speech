@@ -1,6 +1,5 @@
 <template lang="pug">
-div
-	vue-apex-charts(type="heatmap" height="270" :options="chartOptions" :series="heatSeries")
+VueApexCharts(type="heatmap" height="270" :options="chartOptions" :series="heatSeries")
 </template>
 
 <script setup lang="ts">

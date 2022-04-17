@@ -2,6 +2,7 @@
 .grid
 	q-card.tags
 		canvas#canvas
+		.zg Словарь
 	q-card.q-pa-sm
 		Heat
 </template>
@@ -51,7 +52,13 @@ onMounted(() => {
 	height: 300px;
 	padding: 1rem;
 	padding-top: 0;
+	position: relative;
 }
-#canvas {
+.zg {
+	position: absolute;
+	top: 8px;
+	left: 12px;
+	font-size: 15px;
+	font-weight: 600;
 }
 </style>

@@ -2,18 +2,18 @@
 .grid
 	q-card( v-for="trend in trends" @click="showDialog(trend.id)")
 		div(v-if="trend.id === 1" )
-			vue-apex-charts(type="area" height="130px" :options="chartOptionsSpark1" :series="series1")
+			VueApexCharts(type="area" height="130px" :options="chartOptionsSpark1" :series="series1")
 		div(v-if="trend.id === 2" )
-			vue-apex-charts(type="area" height="130px" :options="chartOptionsSpark2" :series="series2")
+			VueApexCharts(type="area" height="130px" :options="chartOptionsSpark2" :series="series2")
 		div(v-if="trend.id === 3" )
-			vue-apex-charts(type="area" height="130px" :options="chartOptionsSpark3" :series="series3")
+			VueApexCharts(type="area" height="130px" :options="chartOptionsSpark3" :series="series3")
 		div(v-if="trend.id === 4" )
-			vue-apex-charts(type="area" height="130px" :options="chartOptionsSpark4" :series="series4")
+			VueApexCharts(type="area" height="130px" :options="chartOptionsSpark4" :series="series4")
 
 q-dialog(v-model="dialog")
 	q-card(style="width: 900px; max-width: 80vw;")
 		q-card-section
-			vue-apex-charts(type="area" :options="computeOptions" :series="computeSeries")
+			VueApexCharts(type="area" :options="computeOptions" :series="computeSeries")
 </template>
 
 <script setup lang="ts">

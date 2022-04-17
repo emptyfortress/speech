@@ -8,7 +8,9 @@ import path from 'path'
 export default defineConfig({
 	plugins: [
 		vue({
-			template: { transformAssetUrls },
+			template: {
+				transformAssetUrls,
+			},
 		}),
 
 		quasar({
