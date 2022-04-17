@@ -13,6 +13,13 @@ q-page(padding)
 				myChip
 				q-btn(flat round icon="mdi-calendar" @click="toggle")
 		Events
+
+		.row.justify-between.items-center.q-mt-lg
+			.zag Дополнительно
+			div
+				myChip
+				q-btn(flat round icon="mdi-calendar" @click="toggle")
+		Addition
 </template>
 
 <script setup lang="ts">
@@ -20,6 +27,7 @@ import { useStore } from '@/stores/store'
 import myChip from '@/components/myChip.vue'
 import Trends1 from '@/components/Trends1.vue'
 import Events from '@/components/Events.vue'
+import Addition from '@/components/Addition.vue'
 
 const props = defineProps({
 	foo: {
@@ -34,6 +42,4 @@ const toggle = () => {
 }
 </script>
 
-<style scoped lang="scss">
-// @import '@/assets/styles/main.scss';
-</style>
+<style scoped lang="scss"></style>
