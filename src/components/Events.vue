@@ -40,7 +40,7 @@ q-dialog(v-model="dialog2")
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 import { chartOptions1 as chartTableAreaBig } from '@/stores/charts1'
 import {
@@ -56,7 +56,6 @@ const seriesTableBig1 = [{ name: 'Parameter', data: [55, 57, 65, 70, 77, 80, 67]
 
 const dialog1 = ref(false)
 const dialog2 = ref(false)
-const id = ref(0)
 
 const selection = ref(0)
 
@@ -134,7 +133,7 @@ const chartOptions1 = {
 					show: true,
 					label: 'Всего',
 					fontSize: '20px',
-					formatter: function (w: number) {
+					formatter: function () {
 						// By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
 						return 249
 					},
@@ -196,7 +195,7 @@ const barOptions = {
 	},
 	tooltip: {
 		y: {
-			formatter: function (val) {
+			formatter: function (val: string) {
 				return '$ ' + val + ' thousands'
 			},
 		},
