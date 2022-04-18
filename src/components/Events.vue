@@ -12,55 +12,36 @@
 				th.text-center Димамика за период
 				th.text-center Объем
 		tbody
-			tr(@click="select")
+			tr(v-for="row in rows" :key="row.id" @click="select(row.id)" :class="{ 'sel' : selection === row.id}")
 				td
-					.legend.blue
-				td.text-left Продажи
-				td.text-right 11.382<span class="up">&uarr;</span>
-				td.text-right 3:05 мин<span class="down">&darr;</span>
-				td.text-right 1.15%<span class="down">&uarr;</span>
-				td.text-right 2.05%<span class="down">&uarr;</span>
+					.legend(:class="row.classname")
+				td.text-left {{ row.title }}
+				td.text-right {{ row.call }}<span class="up">&uarr;</span>
+				td.text-right {{ row.ant }}<span class="down">&darr;</span>
+				td.text-right {{ row.sound }}<span class="down">&uarr;</span>
+				td.text-right {{ row.interrupt }}<span class="down">&uarr;</span>
 				td.text-center.graph
-					VueApexCharts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable1" @click="showDialog")
+					VueApexCharts(type="line" height="35" width="150" :options="row.options1" :series="row.series1" @click="showDialog1")
 				td.text-center.graph
-					VueApexCharts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable4")
-			tr(@click="select")
-				td
-					.legend.green
-				td.text-left Сервис
-				td.text-right 7.319<span class="up">&uarr;</span>
-				td.text-right 4:15 мин<span class="down">&darr;</span>
-				td.text-right 0.15%<span class="down">&uarr;</span>
-				td.text-right 3.02%<span class="down">&uarr;</span>
-				td.text-center.graph
-					VueApexCharts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable2")
-				td.text-center.graph
-					VueApexCharts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable5")
-			tr(@click="select")
-				td
-					.legend.orange
-				td.text-left Оплата
-				td.text-right 15.3<span class="up">&uarr;</span>
-				td.text-right 1:07 мин<span class="down">&darr;</span>
-				td.text-right 3.25%<span class="down">&uarr;</span>
-				td.text-right 0.35%<span class="down">&uarr;</span>
-				td.text-center.graph
-					VueApexCharts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable3")
-				td.text-center.graph
-					VueApexCharts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable6")
+					VueApexCharts(type="donut" height="35" width="35" :options="row.options2" :series="row.series2" @click="showDialog2")
 
 	q-card()
 		VueApexCharts(type="radialBar" height="220" :options="chartOptions1" :series="series")
 
-q-dialog(v-model="dialog")
+q-dialog(v-model="dialog1")
 	q-card(style="width: 900px; max-width: 80vw;")
 		q-card-section
-			VueApexCharts(type="area" :options="computeOptions" :series="computeSeries")
+			VueApexCharts(type="area" :options="chartTableAreaBig" :series="seriesTableBig1")
+q-dialog(v-model="dialog2")
+	q-card(style="width: 600px; max-width: 80vw;")
+		q-card-section
+			VueApexCharts(type="donut" :options="chartTableDonutBig" :series="seriesTable4")
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
+import { chartOptions1 as chartTableAreaBig } from '@/stores/charts1'
 import {
 	chartTable1,
 	seriesTable1,
@@ -68,39 +49,68 @@ import {
 	seriesTable3,
 	chartTable4,
 	seriesTable4,
-	seriesTable5,
-	seriesTable6,
 } from '@/stores/charts1'
 
-const dialog = ref(false)
+const seriesTableBig1 = [{ name: 'Parameter', data: [55, 57, 65, 70, 77, 80, 67] }]
+
+const dialog1 = ref(false)
+const dialog2 = ref(false)
 const id = ref(0)
-// const selection = ref(false)
+
+const selection = ref(0)
 
 const select = (e: any) => {
-	const rows = document.querySelectorAll('tr')
-	rows.forEach((row) => row.classList.remove('sel'))
-	e.target.parentNode.classList.add('sel')
+	selection.value = e
 }
 
-const showDialog = (e: number) => {
-	dialog.value = true
-	id.value = e
+const showDialog1 = () => {
+	dialog1.value = true
+}
+const showDialog2 = () => {
+	dialog2.value = true
 }
 
-const computeOptions = computed(() => {
-	switch (id.value) {
-		case 1:
-			return chartTable1
-		case 2:
-			return chartTable2
-		case 3:
-			return chartTable3
-		case 4:
-			return chartTable4
-		default:
-			return chartTable1
-	}
-})
+const rows = [
+	{
+		id: 1,
+		classname: 'blue',
+		title: 'Продажи',
+		call: '4.32',
+		ant: '4:15 мин',
+		sound: '1.89%',
+		interrupt: '2.43%',
+		options1: chartTable1,
+		series1: seriesTable1,
+		options2: chartTable4,
+		series2: seriesTable4,
+	},
+	{
+		id: 2,
+		classname: 'green',
+		title: 'Сервис',
+		call: '7.32',
+		ant: '3:05 мин',
+		sound: '3',
+		interrupt: '456',
+		options1: chartTable1,
+		series1: seriesTable2,
+		options2: chartTable4,
+		series2: seriesTable4,
+	},
+	{
+		id: 3,
+		classname: 'orange',
+		title: 'Оплата',
+		call: '15.3',
+		ant: '1:07 мин',
+		sound: '3.25%',
+		interrupt: '0.35 %',
+		options1: chartTable1,
+		series1: seriesTable3,
+		options2: chartTable4,
+		series2: seriesTable4,
+	},
+]
 
 const computeSeries = computed(() => {
 	switch (id.value) {
@@ -145,6 +155,24 @@ const chartOptions1 = {
 		},
 	},
 	labels: ['Продажи', 'Сервис', 'Оплата'],
+}
+
+const chartTableDonutBig = {
+	chartOptions: {
+		chart: {
+			type: 'donut',
+		},
+		responsive: [
+			{
+				breakpoint: 480,
+				options: {
+					legend: {
+						position: 'right',
+					},
+				},
+			},
+		],
+	},
 }
 </script>
 
