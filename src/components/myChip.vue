@@ -1,5 +1,5 @@
 <template lang="pug">
-q-chip(:label="date" color="pink-2").cursor-pointer
+q-chip(:label="date" color="primary").cursor-pointer
 	q-menu(transition-show="jump-down" transition-hide="jump-up")
 		q-list
 			q-item(clickable v-close-popup v-for="item in list" @click="setDateOptions(item)")

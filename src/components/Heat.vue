@@ -11,7 +11,10 @@ const chartOptions = {
 		height: 270,
 		type: 'heatmap',
 		toolbar: {
-			show: false,
+			show: true,
+		},
+		zoom: {
+			enabled: true,
 		},
 	},
 	dataLabels: {

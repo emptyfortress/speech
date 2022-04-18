@@ -15,14 +15,15 @@ q-layout(view="hHh LpR fFf")
 		q-toolbar(shrink)
 			//- q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer")
 			q-btn(dense flat round  @click="toggleLeftDrawer")
-				SvgIcon(name="sound" color="red")
+				SvgIcon(name="sound" color="var(--q-accent)")
 			//- img(src="@/assets/img/logo.svg" width="32")
 
 			q-toolbar-title(@click="toggleLeftDrawer").gt-sm.cursor-pointer
 				span SD platform
 			q-space
 			q-btn(dense flat round icon="mdi-bell-outline")
-				q-badge(floating rounded) 3
+				q-badge(floating rounded color="red") 3
+			q-btn(dense flat round icon="mdi-refresh")
 			q-btn(dense round unelevated).q-mx-md
 				q-avatar(color="blue" size="30px")
 					img(src="@/assets/img/user0.svg")

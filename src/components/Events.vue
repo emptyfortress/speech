@@ -27,7 +27,7 @@
 
 	q-card()
 		VueApexCharts(type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="selection === 0")
-		VueApexCharts(type="bar" height="220" :options="barOptions" :series="barSeries" v-else)
+		VueApexCharts(type="bar" height="183" :options="barOptions" :series="barSeries" v-else)
 
 q-dialog(v-model="dialog1")
 	q-card(style="width: 900px; max-width: 80vw;")
@@ -166,7 +166,7 @@ const chartTableDonutBig = {
 const barOptions = {
 	chart: {
 		type: 'bar',
-		height: 220,
+		height: 183,
 	},
 	plotOptions: {
 		bar: {
@@ -184,7 +184,7 @@ const barOptions = {
 		colors: ['transparent'],
 	},
 	xaxis: {
-		categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+		categories: ['Янв', 'Фев', 'Мар', 'Апр'],
 	},
 	yaxis: {
 		title: {
@@ -205,16 +205,16 @@ const barOptions = {
 
 const barSeries = [
 	{
-		name: 'Net Profit',
-		data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
+		name: 'Продажи',
+		data: [44, 55, 57, 56],
 	},
 	{
-		name: 'Revenue',
-		data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
+		name: 'Сервис',
+		data: [76, 85, 101, 98],
 	},
 	{
-		name: 'Free Cash Flow',
-		data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
+		name: 'Оплата',
+		data: [35, 41, 36, 26],
 	},
 ]
 </script>

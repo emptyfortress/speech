@@ -76,7 +76,7 @@ const pages = [
 }
 .q-item--active,
 .q-item.q-router-link--active {
-	background: pink;
+	background: $primary;
 	color: black;
 }
 </style>
