@@ -36,5 +36,6 @@ const setDateOptions = (e: string) => {
 //@import '@/assets/css/colors.scss';
 .q-chip {
 	background: $accent1;
+	color: $blue-9;
 }
 </style>
