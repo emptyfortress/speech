@@ -3,6 +3,7 @@
 	q-markup-table.cat
 		thead
 			tr
+				th.text-left
 				th.text-left Название
 				th.text-right Звонки
 				th.text-right АНТ
@@ -11,39 +12,50 @@
 				th.text-center Димамика за период
 				th.text-center Объем
 		tbody
-			tr(@click="test")
+			tr(@click="select")
+				td
+					.legend.blue
 				td.text-left Продажи
 				td.text-right 11.382<span class="up">&uarr;</span>
 				td.text-right 3:05 мин<span class="down">&darr;</span>
 				td.text-right 1.15%<span class="down">&uarr;</span>
 				td.text-right 2.05%<span class="down">&uarr;</span>
-				td.text-center
-					VueApexCharts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable1")
-				td.text-center
+				td.text-center.graph
+					VueApexCharts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable1" @click="showDialog")
+				td.text-center.graph
 					VueApexCharts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable4")
-			tr(@click="test")
+			tr(@click="select")
+				td
+					.legend.green
 				td.text-left Сервис
 				td.text-right 7.319<span class="up">&uarr;</span>
 				td.text-right 4:15 мин<span class="down">&darr;</span>
 				td.text-right 0.15%<span class="down">&uarr;</span>
 				td.text-right 3.02%<span class="down">&uarr;</span>
-				td.text-center
+				td.text-center.graph
 					VueApexCharts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable2")
-				td.text-center
+				td.text-center.graph
 					VueApexCharts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable5")
-			tr(@click="test")
+			tr(@click="select")
+				td
+					.legend.orange
 				td.text-left Оплата
 				td.text-right 15.3<span class="up">&uarr;</span>
 				td.text-right 1:07 мин<span class="down">&darr;</span>
 				td.text-right 3.25%<span class="down">&uarr;</span>
 				td.text-right 0.35%<span class="down">&uarr;</span>
-				td.text-center
+				td.text-center.graph
 					VueApexCharts(type="line" height="35" width="150" :options="chartTable1" :series="seriesTable3")
-				td.text-center
+				td.text-center.graph
 					VueApexCharts(type="donut" height="35" width="35" :options="chartTable4" :series="seriesTable6")
 
 	q-card()
 		VueApexCharts(type="radialBar" height="220" :options="chartOptions1" :series="series")
+
+q-dialog(v-model="dialog")
+	q-card(style="width: 900px; max-width: 80vw;")
+		q-card-section
+			VueApexCharts(type="area" :options="computeOptions" :series="computeSeries")
 </template>
 
 <script setup lang="ts">
@@ -62,19 +74,48 @@ import {
 
 const dialog = ref(false)
 const id = ref(0)
+// const selection = ref(false)
 
-const test = (e: any) => {
+const select = (e: any) => {
 	const rows = document.querySelectorAll('tr')
 	rows.forEach((row) => row.classList.remove('sel'))
-	// console.log(rows)
 	e.target.parentNode.classList.add('sel')
-	console.log(e.target.parentNode)
 }
 
 const showDialog = (e: number) => {
 	dialog.value = true
 	id.value = e
 }
+
+const computeOptions = computed(() => {
+	switch (id.value) {
+		case 1:
+			return chartTable1
+		case 2:
+			return chartTable2
+		case 3:
+			return chartTable3
+		case 4:
+			return chartTable4
+		default:
+			return chartTable1
+	}
+})
+
+const computeSeries = computed(() => {
+	switch (id.value) {
+		case 1:
+			return seriesTable1
+		case 2:
+			return seriesTable2
+		case 3:
+			return seriesTable3
+		case 4:
+			return seriesTable4
+		default:
+			return seriesTable1
+	}
+})
 
 const series = [76, 67, 61]
 
@@ -121,8 +162,9 @@ const chartOptions1 = {
 	font-weight: 300;
 }
 .q-table tr {
+	cursor: pointer;
 	&.sel {
-		background: #daeffe;
+		background: #def0fd;
 	}
 	td {
 		font-weight: 600;
@@ -135,8 +177,24 @@ const chartOptions1 = {
 			margin-left: 0.5rem;
 			color: darkred;
 		}
+		.legend {
+			width: 10px;
+			height: 10px;
+			&.blue {
+				background: #249efa;
+			}
+			&.green {
+				background: #24e6a4;
+			}
+			&.orange {
+				background: #fdba3a;
+			}
+		}
+		&.graph:hover {
+			outline: 1px solid #249efa;
+		}
 	}
-	td:first-child {
+	td:nth-child(2) {
 		font-weight: 400;
 		font-size: 13px;
 	}
