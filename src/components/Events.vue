@@ -60,7 +60,9 @@ const id = ref(0)
 const selection = ref(0)
 
 const select = (e: any) => {
-	selection.value = e
+	if (selection.value === e) {
+		selection.value = 0
+	} else selection.value = e
 }
 
 const showDialog1 = () => {
@@ -90,8 +92,8 @@ const rows = [
 		title: 'Сервис',
 		call: '7.32',
 		ant: '3:05 мин',
-		sound: '3',
-		interrupt: '456',
+		sound: '3.62%',
+		interrupt: '4.56%',
 		options1: chartTable1,
 		series1: seriesTable2,
 		options2: chartTable4,
@@ -111,21 +113,6 @@ const rows = [
 		series2: seriesTable4,
 	},
 ]
-
-const computeSeries = computed(() => {
-	switch (id.value) {
-		case 1:
-			return seriesTable1
-		case 2:
-			return seriesTable2
-		case 3:
-			return seriesTable3
-		case 4:
-			return seriesTable4
-		default:
-			return seriesTable1
-	}
-})
 
 const series = [76, 67, 61]
 
