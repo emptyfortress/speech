@@ -1,19 +1,24 @@
-# Base ts project
+# Speech-drive
 
-Это рыба проекта с использованием:
+Это прототипы speech-drive. При создании использовались следующие технологии:
 
 - vite + ts
+- vue 3
 - quasar
 - mdi-icon
 - custom SvgIcon
 - pug, scss
-- lsp-mode
 
-### Иконки
+![This is an image](/assets/img/image.png)
 
-использование custom icons - SvgIcon(name="name" color="color" spin)
+### Установка и использование
 
-- положить иконку в папку
-- запустить gulp
-- напрямую назначить атрибут color="var(--q-primary)", color="red" или
-- унаследовать цвет родителя из css: color: red; fill: red;
+```
+npm install
+npm run dev
+npm run build
+```
+
+### Ветки
+
+Различные варианты будут лежать в соответствующих ветках.
