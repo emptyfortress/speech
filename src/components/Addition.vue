@@ -7,7 +7,7 @@
 		Heat
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { Chart, registerables } from 'chart.js'
 import { WordCloudChart } from 'chartjs-chart-wordcloud'
 import { onMounted } from 'vue'
