@@ -1,33 +1,53 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useStore } from '@/stores/store'
 import SvgIcon from './components/SvgIcon.vue'
 import Drawer from '@/components/Drawer.vue'
 import RDrawer from '@/components/RDrawer.vue'
+import SiriWave from 'siriwave'
 
 const mystore = useStore()
 const toggleLeftDrawer = mystore.toggleLeftDrawer
+
+onMounted(() => {
+	var siriWave1 = new SiriWave({
+		container: document.getElementById('siri')!,
+		// width: 200,
+		// height: 50,
+		style: 'ios',
+		cover: true,
+		color: '#E45BCE',
+	})
+})
+
+const isLoading = ref(false)
+const refresh = () => {
+	isLoading.value = true
+	setTimeout(() => {
+		isLoading.value = false
+	}, 3000)
+}
 </script>
 
 <template lang="pug">
 q-layout(view="hHh LpR fFf")
 	q-header(reveal ).head
 		q-toolbar(shrink)
-			//- q-btn(dense flat round icon="mdi-menu" @click="toggleLeftDrawer")
 			q-btn(dense flat round  @click="toggleLeftDrawer")
 				SvgIcon(name="sound" color="var(--q-accent)")
-			//- img(src="@/assets/img/logo.svg" width="32")
 
 			q-toolbar-title(@click="toggleLeftDrawer").gt-sm.cursor-pointer
 				span SD platform
 			q-space
 			q-btn(dense flat round icon="mdi-bell-outline")
 				q-badge(floating rounded color="red") 3
-			q-btn(dense flat round icon="mdi-refresh")
+			q-btn(dense flat round @click="refresh")
+				SvgIcon(name="refresh" :spin="isLoading" )
 			q-btn(dense round unelevated).q-mx-md
 				q-avatar(color="blue" size="30px")
 					img(src="@/assets/img/user0.svg")
 
+	q-linear-progress(indeterminate color="accent" size="2px" v-show="isLoading")
 	Drawer(:show="mystore.leftDrawer")
 	RDrawer(:show="mystore.rightDrawer")
 
@@ -35,6 +55,8 @@ q-layout(view="hHh LpR fFf")
 		router-view(v-slot="{ Component, route }")
 			transition(:name="route.meta.transition || 'fade'")
 				component(:is="Component")
+	transition(name="fade")
+		#siri(v-show="isLoading")
 </template>
 
 <style scoped lang="scss">
@@ -43,5 +65,18 @@ q-layout(view="hHh LpR fFf")
 .head {
 	color: $text-bright;
 	background: transparent;
+}
+#siri {
+	width: 800px;
+	height: 400px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.q-linear-progress {
+	position: fixed;
+	top: 0;
+	left: 0;
 }
 </style>

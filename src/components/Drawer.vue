@@ -76,7 +76,7 @@ const pages = [
 }
 .q-item--active,
 .q-item.q-router-link--active {
-	background: $primary;
+	background: $accent1;
 	color: black;
 }
 </style>

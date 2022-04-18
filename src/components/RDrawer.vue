@@ -2,8 +2,8 @@
 
 q-drawer(v-model="show" side="right" :width="300" ).rdrawer
 	q-btn(flat @click="toggle") Отмена
-	q-btn(flat @click="toggle" color="primary") Применить
-	q-date(v-model="model" range flat ).date
+	q-btn(flat @click="toggle" color="accent") Применить
+	q-date(v-model="model" range flat color="accent").date
 </template>
 
 <script setup lang="ts">
