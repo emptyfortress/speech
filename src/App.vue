@@ -39,15 +39,15 @@ q-layout(view="hHh LpR fFf")
 			q-toolbar-title(@click="toggleLeftDrawer").gt-sm.cursor-pointer
 				span SD platform
 			q-space
-			q-btn(dense flat round icon="mdi-bell-outline")
-				q-badge(floating rounded color="red") 3
 			q-btn(dense flat round @click="refresh")
 				SvgIcon(name="refresh" :spin="isLoading" )
+			q-btn(dense flat round icon="mdi-bell-outline")
+				q-badge(floating rounded color="red") 3
 			q-btn(dense round unelevated).q-mx-md
 				q-avatar(color="blue" size="30px")
 					img(src="@/assets/img/user0.svg")
 
-	q-linear-progress(indeterminate color="accent" size="2px" v-show="isLoading")
+	q-linear-progress(indeterminate color="accent" size="3px" v-show="isLoading")
 	Drawer(:show="mystore.leftDrawer")
 	RDrawer(:show="mystore.rightDrawer")
 

@@ -1,8 +1,9 @@
 <template lang="pug">
 
 q-drawer(v-model="show" side="right" :width="300" ).rdrawer
-	q-btn(flat @click="toggle") Отмена
-	q-btn(flat @click="toggle" color="accent") Применить
+	q-btn(flat round icon="mdi-close" @click="toggle")
+	q-btn(flat round icon="mdi-check" color="accent")
+	q-btn(flat round icon="mdi-check-circle" color="accent" @click="toggle" )
 	q-date(v-model="model" range flat color="accent").date
 </template>
 
@@ -19,7 +20,7 @@ const props = defineProps({
 const model = ref(null)
 const mystore = useStore()
 const toggle = () => {
-	mystore.toggleMini()
+	mystore.closeMenu()
 	mystore.toggleRightDrawer()
 }
 </script>

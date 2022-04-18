@@ -23,5 +23,8 @@ export const useStore = defineStore({
 		toggleMini() {
 			this.mini = !this.mini
 		},
+		closeMenu() {
+			this.mini = true
+		},
 	},
 })

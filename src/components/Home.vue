@@ -37,7 +37,7 @@ const props = defineProps({
 })
 const mystore = useStore()
 const toggle = () => {
-	mystore.toggleMini()
+	mystore.closeMenu()
 	mystore.toggleRightDrawer()
 }
 </script>

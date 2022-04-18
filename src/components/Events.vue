@@ -20,10 +20,10 @@
 				td.text-right {{ row.ant }}<span class="down">&darr;</span>
 				td.text-right {{ row.sound }}<span class="down">&uarr;</span>
 				td.text-right {{ row.interrupt }}<span class="down">&uarr;</span>
-				td.text-center.graph
-					VueApexCharts(type="line" height="35" width="150" :options="row.options1" :series="row.series1" @click="showDialog1")
-				td.text-center.graph
-					VueApexCharts(type="donut" height="35" width="35" :options="row.options2" :series="row.series2" @click="showDialog2")
+				td.text-center.graph(@click.stop="showDialog1")
+					VueApexCharts(type="line" height="35" width="150" :options="row.options1" :series="row.series1" )
+				td.text-center.graph(@click.stop="showDialog2")
+					VueApexCharts(type="donut" height="35" width="35" :options="row.options2" :series="row.series2" )
 
 	q-card()
 		VueApexCharts(type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="selection === 0")
