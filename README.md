@@ -9,7 +9,7 @@
 - custom SvgIcon
 - pug, scss
 
-![This is an image](/assets/img/image.png)
+![This is an image](/src/assets/img/image.png)
 
 ### Установка и использование
 
