@@ -12,10 +12,12 @@ body {
 .container {
 	padding-left: 1rem;
 	padding-right: 1rem;
-	@media screen and (max-width: 1850px) {
 		max-width: 1200px;
 		margin: 0 auto;
-	}
+	// @media screen and (max-width: 1850px) {
+	// 	max-width: 1200px;
+	// 	margin: 0 auto;
+	// }
 	.zag {
 		font-size: 1.2rem;
 	}
