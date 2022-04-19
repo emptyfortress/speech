@@ -7,7 +7,7 @@ q-chip(:label="date").cursor-pointer
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps({
 	label: {

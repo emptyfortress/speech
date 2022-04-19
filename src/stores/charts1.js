@@ -315,7 +315,7 @@ const chartTable1 = {
 		curve: 'smooth',
 	},
 	tooltip: {
-			enabled: false,
+		enabled: false,
 		x: {
 			show: false,
 		},
@@ -349,8 +349,8 @@ const chartTable4 = {
 		width: 1,
 	},
 	tooltip: {
-			enabled: false,
-		},
+		enabled: false,
+	},
 }
 
 export {

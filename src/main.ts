@@ -14,6 +14,7 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 
+const pinia = createPinia()
 const app = createApp(App)
 // app.use(Quasar)
 app.use(Quasar, {
@@ -35,7 +36,7 @@ app.use(Quasar, {
 })
 app.use(router)
 app.use(VueClickAway)
-app.use(createPinia())
+app.use(pinia)
 const opts = { class: 'my-ripple-class' }
 app.directive('AppRipple', createRippleDirective(opts))
 
