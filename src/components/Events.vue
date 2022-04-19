@@ -219,6 +219,8 @@ const barSeries = [
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/styles/myvariables.scss';
+
 .grid {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
@@ -226,6 +228,8 @@ const barSeries = [
 	.cat {
 		grid-column: 1/4;
 		overflow: inherit;
+		border-radius: $radius-md;
+		box-shadow: $card-shadow;
 	}
 }
 .q-table th {

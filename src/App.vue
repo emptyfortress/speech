@@ -37,7 +37,7 @@ q-layout(view="hHh LpR fFf")
 				SvgIcon(name="sound" color="var(--q-accent)")
 
 			q-toolbar-title(@click="toggleLeftDrawer").gt-sm.cursor-pointer
-				span SD platform
+				span Речевая платформа Speech Drive
 			q-space
 			q-btn(dense flat round @click="refresh")
 				SvgIcon(name="refresh" :spin="isLoading" )

@@ -1,6 +1,6 @@
 <template lang="pug">
 .grid
-	q-card( v-for="trend in trends" @click="showDialog(trend.id)")
+	q-card( v-for="trend in trends" :key="trend.id" @click="showDialog(trend.id)")
 		div(v-if="trend.id === 1" )
 			VueApexCharts(type="area" height="130px" :options="chartOptionsSpark1" :series="series1")
 		div(v-if="trend.id === 2" )

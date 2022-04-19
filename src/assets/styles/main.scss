@@ -5,6 +5,7 @@ body {
 	font-size: $font-size;
 	color: $text-color;
 	background-color: #0000001a;
+	background-color: #ececec;
 	// background: #ccc;
 }
 
@@ -37,4 +38,9 @@ body {
 
 .rdrawer {
 	padding-top: 1.5rem;
+}
+.q-card {
+	border-radius: $radius-md;
+	box-shadow: $card-shadow;
+	cursor: pointer;
 }
