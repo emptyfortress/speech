@@ -21,7 +21,7 @@ const chartOptions1 = {
 		enabled: true,
 	},
 	stroke: {
-		curve: 'straight',
+		curve: 'smooth',
 	},
 	title: {
 		text: 'Вызовы',
@@ -55,7 +55,7 @@ const chartOptions2 = {
 		enabled: true,
 	},
 	stroke: {
-		curve: 'straight',
+		curve: 'smooth',
 	},
 	title: {
 		text: 'АНТ',
@@ -89,7 +89,7 @@ const chartOptions3 = {
 		enabled: true,
 	},
 	stroke: {
-		curve: 'straight',
+		curve: 'smooth',
 	},
 	title: {
 		text: 'Тишина',
@@ -123,7 +123,7 @@ const chartOptions4 = {
 		enabled: true,
 	},
 	stroke: {
-		curve: 'straight',
+		curve: 'smooth',
 	},
 	title: {
 		text: 'Перебивания',
@@ -144,7 +144,7 @@ const chartOptionsSpark1 = {
 		},
 	},
 	stroke: {
-		curve: 'straight',
+		curve: 'smooth',
 	},
 	fill: {
 		opacity: 0.3,
@@ -182,7 +182,7 @@ const chartOptionsSpark2 = {
 		},
 	},
 	stroke: {
-		curve: 'straight',
+		curve: 'smooth',
 	},
 	fill: {
 		opacity: 0.3,
@@ -220,7 +220,7 @@ const chartOptionsSpark3 = {
 		},
 	},
 	stroke: {
-		curve: 'straight',
+		curve: 'smooth',
 	},
 	fill: {
 		opacity: 0.3,
@@ -258,7 +258,7 @@ const chartOptionsSpark4 = {
 		},
 	},
 	stroke: {
-		curve: 'straight',
+		curve: 'smooth',
 	},
 	fill: {
 		opacity: 0.3,
@@ -312,11 +312,10 @@ const chartTable1 = {
 	},
 	stroke: {
 		width: 3,
+		curve: 'smooth',
 	},
 	tooltip: {
-		fixed: {
 			enabled: false,
-		},
 		x: {
 			show: false,
 		},
@@ -337,7 +336,6 @@ const seriesTable4 = randomArray(4, 20, 5)
 const seriesTable5 = randomArray(4, 20, 5)
 const seriesTable6 = randomArray(4, 100, 30)
 
-
 const chartTable4 = {
 	chart: {
 		type: 'donut',
@@ -351,10 +349,8 @@ const chartTable4 = {
 		width: 1,
 	},
 	tooltip: {
-		fixed: {
 			enabled: false,
 		},
-	},
 }
 
 export {
