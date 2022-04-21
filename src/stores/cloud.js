@@ -85,7 +85,7 @@ const lib = [
 	{ key: 'изменить', selected: false, value: 0 },
 	{ key: 'как говорится', selected: false, value: 0 },
 	{ key: 'как его', selected: false, value: 0 },
-	{ key: 'ак же так', selected: false, value: 0 },
+	{ key: 'как же так', selected: false, value: 0 },
 	{ key: 'как сказать', selected: false, value: 0 },
 	{ key: 'как-то так', selected: false, value: 0 },
 	{ key: 'капец', selected: false, value: 0 },

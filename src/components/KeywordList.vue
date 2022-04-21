@@ -3,7 +3,7 @@
 	q-input(ref="input" dense v-model="filter" autofocus clearable hide-bottom-space @clear="filter = ''")
 		template(v-slot:prepend)
 			q-icon(name="mdi-magnify")
-	q-icon(name="mdi-plus-circle" size="md" color="primary" v-show="filter.length > 2").plus
+	q-icon(name="mdi-plus-circle" size="md" color="primary" v-show="filter.length > 2" @click="add").plus
 
 q-list(dense)
 	q-item(v-for="item in filteredItems" clickable :key="item.key")
@@ -16,29 +16,54 @@ q-list(dense)
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useQuasar } from 'quasar'
-import { lib } from '@/stores/cloud'
+import { words } from '@/stores/list'
 
 interface keyword {
 	key: string
 	selected: boolean
 	value: number
+	part: string
 }
 
 const selection = ref([])
 const input = ref(null)
 const filter = ref('')
 
-const items = ref(lib)
+const items = ref(words)
 const filteredItems = computed(() => {
 	if (filter.value) {
 		return items.value.filter((item) => item.key.includes(filter.value))
 	}
 	return items.value
 })
+
 const remove = (e: keyword) => {
 	let index = items.value.findIndex((item) => item.key === e.key)
 	items.value.splice(index, 1)
 	show(e)
+}
+const compare = (a: keyword, b: keyword) => {
+	if (a.value > b.value) return -1
+	if (a.value < b.value) return 1
+	return 0
+}
+
+const add = () => {
+	if (filter.value) {
+		let temp = {
+			key: filter.value,
+			selected: false,
+			value: 0,
+			part: '',
+		}
+		items.value.push(temp)
+		items.value.sort(compare)
+	}
+}
+
+const undo = (e: keyword) => {
+	items.value.push(e)
+	items.value.sort(compare)
 }
 
 const $q = useQuasar()
@@ -50,7 +75,7 @@ const show = (e: keyword) => {
 			{
 				label: 'Вернуть',
 				color: 'white',
-				handler: () => items.value.push(e),
+				handler: () => undo(e),
 			},
 		],
 	})
