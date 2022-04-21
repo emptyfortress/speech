@@ -53,7 +53,7 @@ const add = () => {
 		let temp = {
 			key: filter.value,
 			selected: false,
-			value: 0,
+			value: 4000,
 			part: '',
 		}
 		items.value.push(temp)

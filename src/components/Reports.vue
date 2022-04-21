@@ -24,18 +24,19 @@ q-page(padding)
 							q-icon(name="mdi-key").q-mr-sm
 							|Ключевые слова
 					q-btn(flat round icon="mdi-book-open-page-variant-outline" size="sm" @click="toggle")
-					//- div
-					//- 	q-btn(round unelevated icon="mdi-minus" size="sm")
-					//- 	q-btn(round unelevated icon="mdi-plus" size="sm")
-				q-card-section.q-py-none
-					q-input(dense v-model="key" outlined clearable hide-bottom-space autogrow)
+				q-card-section
+					q-input(outlined v-model="key" clearable autogrow)
+				q-separator
+				q-card-actions
+					q-btn(flat) Cancel
+					q-btn(flat) Cancel
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useStore } from '@/stores/store'
 
-import ChipCalendar from '@/components/ChipCalendar.vue'
+// import ChipCalendar from '@/components/ChipCalendar.vue'
 import { starredReports } from '@/stores/data'
 
 const filter = ref('')
