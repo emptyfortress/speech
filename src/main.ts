@@ -21,6 +21,16 @@ app.use(Quasar, {
 	plugins: {
 		Notify,
 	}, // import Quasar plugins and add here
+	config: {
+		notify: {
+			// type: 'warning',
+			position: 'bottom-right',
+			timeout: 3000,
+			icon: 'mdi-alert',
+			color: 'primary',
+			classes: 'notific',
+		},
+	},
 	/*
   config: {
     brand: {

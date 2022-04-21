@@ -20,7 +20,6 @@ const lib = [
 	{ key: 'болван', selected: false, value: 0 },
 	{ key: 'буквально', selected: false, value: 0 },
 	{ key: 'быдло', selected: false, value: 0 },
-	{ key: 'быдло', selected: false, value: 0 },
 	{ key: 'в натуре', selected: false, value: 0 },
 	{ key: 'в некотором роде', selected: false, value: 0 },
 	{ key: 'в общем', selected: false, value: 0 },
