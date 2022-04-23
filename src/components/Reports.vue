@@ -5,7 +5,6 @@ q-page(padding)
 			q-icon(name="mdi-finance" size="sm").q-mr-sm
 			.zag Отчеты
 		Starred(@select="addToKeys")
-		p keys: {{ keys }}
 		Options
 		q-card
 			p lorem

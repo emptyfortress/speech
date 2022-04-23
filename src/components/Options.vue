@@ -29,7 +29,6 @@
 	div
 		.label Канал
 		q-select(v-model="channelmodel"  :options="channel" filled dense bg-color="white")
-p keys: {{ mystore.keys }}
 </template>
 
 <script setup lang="ts">

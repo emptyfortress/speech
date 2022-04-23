@@ -40,7 +40,7 @@ const chipClass = computed(() => {
 })
 
 const removeChip = (e: number) => {
-	chips.splice(e, 1)
+	mystore.chips.splice(e, 1)
 }
 const click = (e: any) => {
 	if (e.selected === true) {
