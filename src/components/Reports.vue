@@ -16,7 +16,7 @@ q-page(padding)
 						template(v-slot:prepend)
 							q-icon(name="mdi-magnify")
 			q-card-section
-				q-chip(v-for="(item,index) in filteredReports" v-model:selected="item.selected" :key="item.id" clickable :removable="editMode" :class="chipClass" @remove="removeChip(index)")
+				q-chip(v-for="(item,index) in filteredReports" v-model:selected="item.selected" :key="item.id" clickable :removable="editMode" :class="chipClass" @remove="removeChip(index)" @click="selectChip(item.label)")
 					.ellipsis
 						|{{ item.label}}
 						q-tooltip(anchor="top middle" self="bottom middle" :delay="800") {{ item.label}}

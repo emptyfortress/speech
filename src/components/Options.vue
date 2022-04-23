@@ -1,10 +1,18 @@
 <template lang="pug">
 .grid
-	q-select(filled v-model="model"  use-input use-chips multiple clearable input-debounce="0" new-value-mode="add-unique" @new-value="createValue" :options="filterOptions" @filter="filterFn" label="Ключевые слова")
-	//- q-select(filled v-model="model" use-input use-chips multiple)
-	q-select(v-model="typmodel"  :options="typ" label="Тип искомых слов" filled)
-	q-select(v-model="placemodel"  :options="place" label="Положение слова в записи" filled)
-	q-select(v-model="channelmodel"  :options="channel" label="Канал" filled)
+	div
+		.label Ключевые слова
+		q-select(filled dense v-model="model" use-input use-chips multiple clearable input-debounce="0" new-value-mode="add-unique" :options="filterOptions" @filter="filterFn" bg-color="white")
+	div
+		.label Тип искомых слов
+		q-select(v-model="typmodel"  :options="typ" filled dense bg-color="white")
+
+	div
+		.label Положение слова в записи
+		q-select(v-model="placemodel"  :options="place" filled dense bg-color="white")
+	div
+		.label Канал
+		q-select(v-model="channelmodel"  :options="channel" filled dense bg-color="white")
 </template>
 
 <script setup lang="ts">
@@ -21,30 +29,7 @@ const filterOptions = ref(stringOptions)
 
 const model = ref(null)
 
-function createValue(val, done) {
-	// Calling done(var) when new-value-mode is not set or "add", or done(var, "add") adds "var" content to the model
-	// and it resets the input textbox to empty string
-	// ----
-	// Calling done(var) when new-value-mode is "add-unique", or done(var, "add-unique") adds "var" content to the model
-	// only if is not already set
-	// and it resets the input textbox to empty string
-	// ----
-	// Calling done(var) when new-value-mode is "toggle", or done(var, "toggle") toggles the model with "var" content
-	// (adds to model if not already in the model, removes from model if already has it)
-	// and it resets the input textbox to empty string
-	// ----
-	// If "var" content is undefined/null, then it doesn't tampers with the model
-	// and only resets the input textbox to empty string
-
-	if (val.length > 0) {
-		if (!stringOptions.includes(val)) {
-			stringOptions.push(val)
-		}
-		done(val, 'add-unique')
-	}
-}
-
-const filterFn = (val, update) => {
+const filterFn = (val: string, update: Function) => {
 	update(() => {
 		if (val === '') {
 			filterOptions.value = stringOptions
@@ -54,15 +39,6 @@ const filterFn = (val, update) => {
 		}
 	})
 }
-
-// const createValue = () => {
-// 	console.log(1)
-
-// const filterOptions = () => {
-// 	console.log(2)
-// }
-// const filter = () => {
-// 	console.log(3)
 </script>
 
 <style scoped lang="scss">
@@ -72,5 +48,9 @@ const filterFn = (val, update) => {
 	display: grid;
 	grid-template-columns: 1fr 210px 230px 130px;
 	gap: 1rem;
+}
+.label {
+	font-size: 0.8rem;
+	font-weight: 600;
 }
 </style>
