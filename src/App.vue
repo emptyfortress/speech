@@ -8,6 +8,7 @@ import SiriWave from 'siriwave'
 
 const mystore = useStore()
 const toggleLeftDrawer = mystore.toggleLeftDrawer
+const toggle = mystore.toggleRightDrawer
 
 onMounted(() => {
 	var siriWave1 = new SiriWave({
@@ -39,8 +40,9 @@ q-layout(view="hHh LpR fFf")
 			q-toolbar-title(@click="toggleLeftDrawer").gt-sm.cursor-pointer
 				span Речевая платформа Speech Drive
 			q-space
-			q-btn(dense flat round @click="refresh")
+			q-btn(dense flat round @click="refresh").q-mr-sm
 				SvgIcon(name="refresh" :spin="isLoading" )
+			q-btn(dense flat round icon="mdi-book-open-page-variant-outline" @click="toggle").q-mr-sm
 			q-btn(dense flat round icon="mdi-bell-outline")
 				q-badge(floating rounded color="red") 3
 			q-btn(dense round unelevated).q-mx-md

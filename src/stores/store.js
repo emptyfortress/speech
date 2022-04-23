@@ -3,9 +3,9 @@ import { defineStore } from 'pinia'
 export const useStore = defineStore({
 	id: 'store',
 	state: () => ({
-		rightDrawer: true,
+		rightDrawer: false,
 		leftDrawer: true,
-		mini: true,
+		mini: false,
 	}),
 	getters: {},
 

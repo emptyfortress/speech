@@ -1,4 +1,5 @@
 <template lang="pug">
+.zg Библиотека (302 леммы)
 .rel
 	q-input(ref="input" dense v-model="filter" autofocus clearable hide-bottom-space @clear="filter = ''")
 		template(v-slot:prepend)
@@ -117,5 +118,9 @@ const show = (e: keyword) => {
 }
 .q-notification-message {
 	background: red;
+}
+.zg {
+	margin-bottom: 0.5rem;
+	font-size: 0.9rem;
 }
 </style>
