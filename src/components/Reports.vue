@@ -6,7 +6,7 @@ q-page(padding)
 			.zag Отчеты
 		Starred(@select="addToKeys")
 		p keys: {{ keys }}
-		Options(:keyProp="keys" @clear="clear")
+		Options
 		q-card
 			p lorem
 </template>

@@ -17,6 +17,7 @@
 			:removable="editMode"
 			:class="chipClass"
 			@remove="removeChip(index)"
+			@click="click(item)"
 			)
 			.ellipsis
 				|{{ item.label}}
@@ -24,20 +25,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, watchEffect } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useStore } from '@/stores/store'
 
-// import { starredReports } from '@/stores/data'
 const mystore = useStore()
-
 const filter = ref('')
-
-const chips = mystore.chips
+// const chips = mystore.chips
 
 const editMode = ref(false)
-const toggleEdit = () => {
-	editMode.value = !editMode.value
-}
+const toggleEdit = () => (editMode.value = !editMode.value)
 const chipClass = computed(() => {
 	if (editMode.value) return 'shake'
 	else return ''
@@ -46,16 +42,17 @@ const chipClass = computed(() => {
 const removeChip = (e: number) => {
 	chips.splice(e, 1)
 }
+const click = (e: any) => {
+	if (e.selected === true) {
+		mystore.addKey(e.label)
+	} else {
+		mystore.removeKey(e.label)
+	}
+}
 
-const filteredReports = computed(() => {
-	return chips.filter((item) => item.label.includes(filter.value))
-})
-
-const chipSelected = computed(() => {
-	let keys = chips.filter((item) => item.selected).map((e) => e.label)
-	return keys
-})
-watchEffect(() => mystore.setKeys(chipSelected.value))
+const filteredReports = computed(() =>
+	mystore.chips.filter((item) => item.label.includes(filter.value))
+)
 </script>
 
 <style scoped lang="scss">

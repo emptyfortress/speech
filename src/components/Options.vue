@@ -2,8 +2,7 @@
 .grid
 	div
 		.label Ключевые слова
-		q-select(
-			dense
+		q-select(dense
 			v-model="mystore.keys"
 			use-input
 			use-chips
@@ -49,6 +48,7 @@ const stringOptions = words.map((item) => item.key)
 const filterOptions = ref(stringOptions)
 
 const mystore = useStore()
+
 const clearKeys = () => {
 	mystore.setKeys([])
 	mystore.clearSelected()
