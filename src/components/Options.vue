@@ -2,16 +2,17 @@
 .grid
 	div
 		.label Ключевые слова
+
 	div
 		.label Тип искомых слов
-		//- q-select(v-model="typmodel"  :options="typ" filled dense bg-color="white")
+		q-select(v-model="typmodel"  :options="typ" filled dense bg-color="white")
 
 	div
 		.label Положение слова в записи
-		//- q-select(v-model="placemodel"  :options="place" filled dense bg-color="white")
+		q-select(v-model="placemodel"  :options="place" filled dense bg-color="white")
 	div
 		.label Канал
-		//- q-select(v-model="channelmodel"  :options="channel" filled dense bg-color="white")
+		q-select(v-model="channelmodel"  :options="channel" filled dense bg-color="white")
 </template>
 
 <script setup></script>

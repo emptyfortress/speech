@@ -15,7 +15,7 @@
     "pinia": "^2.0.13",
     "quasar": "^2.6.6",
     "siriwave": "^2.3.0",
-    "vue": "^3.2.25",
+    "vue": "^3.2.31",
     "vue-create-ripple": "^0.3.1",
     "vue-router": "^4.0.14",
     "vue3-apexcharts": "^1.4.1",
