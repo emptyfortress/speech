@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Reports from '@/components/Reports.vue'
+import Report from '@/components/Report.vue'
 import Compare from '@/components/Compare.vue'
 import Conversation from '@/components/Conversation.vue'
 import Requests from '@/components/Requests.vue'
@@ -26,8 +26,8 @@ export const router = createRouter({
 			meta: { transition: 'slide-left', title: 'Speech Drive', requiresAuth: false },
 		},
 		{
-			path: '/reports',
-			component: Reports,
+			path: '/report',
+			component: Report,
 			props: { variant: 'success' },
 			meta: { transition: 'slide-left', title: 'Отчеты', requiresAuth: false },
 		},

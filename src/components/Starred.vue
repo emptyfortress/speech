@@ -41,12 +41,13 @@ const chipClass = computed(() => {
 
 const removeChip = (e: number) => {
 	mystore.chips.splice(e, 1)
+	mystore.removeKeyByIndex(e)
 }
 const click = (e: any) => {
 	if (e.selected === true) {
-		mystore.addKey(e.label)
+		mystore.addKey(e)
 	} else {
-		mystore.removeKey(e.label)
+		mystore.removeKey(e)
 	}
 }
 

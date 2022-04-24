@@ -36,7 +36,7 @@ const pages = [
 		id: 1,
 		title: 'Отчеты',
 		icon: 'mdi-finance',
-		url: '/reports',
+		url: '/report',
 	},
 	{
 		id: 2,

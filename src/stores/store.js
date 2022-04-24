@@ -36,6 +36,9 @@ export const useStore = defineStore({
 			let index = this.keys.findIndex((item) => item === e)
 			this.keys.splice(index, 1)
 		},
+		removeKeyByIndex(e) {
+			this.keys.splice(e, 1)
+		},
 		setKeys(e) {
 			this.keys = e
 		},
