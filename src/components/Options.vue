@@ -2,65 +2,19 @@
 .grid
 	div
 		.label Ключевые слова
-		q-select(dense
-			v-model="mystore.keys"
-			use-input
-			use-chips
-			multiple
-			clearable
-			input-debounce="0"
-			new-value-mode="add-unique"
-			:options="options"
-			@filter="filterFn"
-			@clear="clearKeys"
-			bg-color="white").keys
 	div
 		.label Тип искомых слов
-		q-select(v-model="typmodel"  :options="typ" filled dense bg-color="white")
+		//- q-select(v-model="typmodel"  :options="typ" filled dense bg-color="white")
 
 	div
 		.label Положение слова в записи
-		q-select(v-model="placemodel"  :options="place" filled dense bg-color="white")
+		//- q-select(v-model="placemodel"  :options="place" filled dense bg-color="white")
 	div
 		.label Канал
-		q-select(v-model="channelmodel"  :options="channel" filled dense bg-color="white")
+		//- q-select(v-model="channelmodel"  :options="channel" filled dense bg-color="white")
 </template>
 
-<script setup lang="ts">
-import { ref, reactive } from 'vue'
-import { useStore } from '@/stores/store'
-import { words } from '@/stores/list'
-
-const typ = ['Рекомендованные', 'Запрещенные']
-const place = ['Весь файл', 'Первые', 'Последние']
-const channel = ['Все', 'Оператор', 'Клиент']
-const typmodel = ref('Рекомендованные')
-const placemodel = ref('Весь файл')
-const channelmodel = ref('Все')
-
-const stringOptions = words.map((item) => item.key)
-const options = ref(stringOptions)
-
-const mystore = useStore()
-
-const clearKeys = () => {
-	mystore.setKeys([])
-	mystore.clearSelected()
-}
-
-const filterFn = (val: string, update: Function) => {
-	if (val === '') {
-		update(() => {
-			options.value = stringOptions
-		})
-		return
-	}
-	update(() => {
-		const needle = val.toLowerCase()
-		options.value = stringOptions.filter((v) => v.toLowerCase().indexOf(needle) > -1)
-	})
-}
-</script>
+<script setup></script>
 
 <style scoped lang="scss">
 //@import '@/assets/css/colors.scss';

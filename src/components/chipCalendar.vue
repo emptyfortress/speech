@@ -1,12 +1,12 @@
 <template lang="pug">
 div
-	myChip(:label="label")
+	MyChip(:label="label")
 	q-btn(flat round icon="mdi-calendar" @click="toggle")
 </template>
 
 <script setup lang="ts">
 import { useStore } from '@/stores/store'
-import myChip from '@/components/myChip.vue'
+import MyChip from '@/components/MyChip.vue'
 
 const props = defineProps({
 	label: {

@@ -4,17 +4,17 @@ q-page(padding)
 		.row.justify-start.items-center
 			q-icon(name="mdi-finance" size="sm").q-mr-sm
 			.zag Отчеты
-		Starred(@select="addToKeys")
+		//- Starred(@select="addToKeys")
 		//- Options
 		Test
 		q-card
 			p lorem
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, reactive } from 'vue'
 // import { useStore } from '@/stores/store'
-import Starred from '@/components/Starred.vue'
+// import Starred from '@/components/Starred.vue'
 import Options from '@/components/Options.vue'
 import Test from '@/components/Test.vue'
 
@@ -29,12 +29,12 @@ import Test from '@/components/Test.vue'
 
 const keys = ref([])
 
-const addToKeys = (e) => {
-	if (e.selected === true) {
-		keys.value.push(e.label)
-	}
-	console.log(keys)
-}
+// const addToKeys = (e) => {
+// 	if (e.selected === true) {
+// 		keys.value.push(e.label)
+// 	}
+// 	console.log(keys)
+// }
 const clear = () => {
 	keys.value = []
 }

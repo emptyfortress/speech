@@ -4,13 +4,13 @@ q-page(padding)
 		.row.justify-start.items-center
 			q-icon(name="mdi-finance" size="sm").q-mr-sm
 			.zag Отчеты
-		Starred
-		Options
+		Star
+		//- Options
 </template>
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import Starred from '@/components/Starred.vue'
+import Star from '@/components/Star.vue'
 import Options from '@/components/Options.vue'
 </script>
 
