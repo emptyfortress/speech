@@ -9,9 +9,8 @@
 			q-input(dense v-model="filter" clearable hide-bottom-space @clear="filter = ''")
 				template(v-slot:prepend)
 					q-icon(name="mdi-magnify")
-
 	q-card-section
-		q-chip(v-for="(item,index) in filteredReports"
+		q-chip(v-for="(item,index) in chips"
 			v-model:selected="item.selected"
 			:key="item.id"
 			:removable="editMode"
@@ -30,6 +29,7 @@ import { useStore } from '@/stores/store'
 import { starredReports } from '@/stores/data'
 
 const mystore = useStore()
+const init = mystore.setChips(starredReports)
 const chips = reactive(starredReports)
 
 const filter = ref('')
@@ -52,8 +52,6 @@ const click = (e: any) => {
 		mystore.removeKey(e)
 	}
 }
-
-const filteredReports = computed(() => chips.filter((item) => item.label.includes(filter.value)))
 </script>
 
 <style scoped lang="scss">
