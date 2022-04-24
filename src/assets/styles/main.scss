@@ -63,3 +63,6 @@ body {
 .keys .q-chip__icon--remove {
 	display: none;
 }
+.q-item--active {
+	background: $selectionBg;
+}

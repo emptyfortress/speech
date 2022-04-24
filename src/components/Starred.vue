@@ -13,12 +13,11 @@
 		q-chip(v-for="(item,index) in filteredReports"
 			v-model:selected="item.selected"
 			:key="item.id"
-			clickable
 			:removable="editMode"
 			:class="chipClass"
+			clickable
 			@remove="removeChip(index)"
-			@click="click(item)"
-			)
+			@click="click(item)")
 			.ellipsis
 				|{{ item.label}}
 			q-tooltip(anchor="top middle" self="bottom middle" :delay="800") {{ item.label}}
@@ -54,7 +53,7 @@ const removeChip = (e: number) => {
 }
 const click = (e: any) => {
 	if (e.selected === true) {
-		mystore.addKey(e)
+		mystore.addKey(e.value)
 	} else {
 		mystore.removeKey(e)
 	}
