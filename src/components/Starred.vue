@@ -25,12 +25,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { useStore } from '@/stores/store'
+import { starredReports } from '@/stores/data'
 
 const mystore = useStore()
+const init = mystore.setChips(starredReports)
+
+interface Chip {
+	id: number
+	value: string
+	selected: boolean
+	label: string
+}
+
 const filter = ref('')
-// const chips = mystore.chips
 
 const editMode = ref(false)
 const toggleEdit = () => (editMode.value = !editMode.value)
@@ -51,8 +60,8 @@ const click = (e: any) => {
 	}
 }
 
-const filteredReports = computed(() =>
-	mystore.chips.filter((item) => item.label.includes(filter.value))
+const filteredReports = computed<Chip[]>(() =>
+	mystore.chips.filter((item: Chip) => item.label.includes(filter.value))
 )
 </script>
 

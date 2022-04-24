@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import { starredReports } from '@/stores/data'
 
 export const useStore = defineStore({
 	id: 'store',
@@ -8,7 +7,7 @@ export const useStore = defineStore({
 		leftDrawer: true,
 		mini: false,
 		keys: [],
-		chips: starredReports,
+		chips: [],
 	}),
 	getters: {},
 
@@ -38,6 +37,9 @@ export const useStore = defineStore({
 		},
 		removeKeyByIndex(e) {
 			this.keys.splice(e, 1)
+		},
+		setChips(e) {
+			this.chips = e
 		},
 		setKeys(e) {
 			this.keys = e
