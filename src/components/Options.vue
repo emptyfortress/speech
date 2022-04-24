@@ -2,23 +2,11 @@
 .grid
 	div
 		.label Ключевые слова
-		q-select(dense
-			v-model="mystore.keys"
-			use-input
-			use-chips
-			multiple
-			clearable
-			input-debounce="0"
-			new-value-mode="add-unique"
-			:options="filterOptions"
-			@filter="filterFn"
-			@clear="clearKeys"
-			bg-color="white").keys
+		q-select(filled v-model="model" use-input input-debounce="0" label="Simple filter" :options="options" @filter="filterFn")
 			template(v-slot:no-option)
-				q-item.nores
-					q-item-section Добавить в словарь -
-					q-item-section(side)
-						span.enter enter
+				q-item
+					q-item-section.text-grey No results
+
 	div
 		.label Тип искомых слов
 		q-select(v-model="typmodel"  :options="typ" filled dense bg-color="white")
@@ -43,8 +31,10 @@ const typmodel = ref('Рекомендованные')
 const placemodel = ref('Весь файл')
 const channelmodel = ref('Все')
 
-const stringOptions = words.map((item) => item.key)
-const filterOptions = ref(stringOptions)
+// const stringOptions = words.map((item) => item.key)
+const stringOptions = ['Google', 'Facebook', 'Twitter', 'Apple', 'Oracle']
+const options = ref(stringOptions)
+// const filterOptions = ref(stringOptions)
 
 const mystore = useStore()
 
@@ -53,16 +43,30 @@ const clearKeys = () => {
 	mystore.clearSelected()
 }
 
+const model = ref(null)
 const filterFn = (val: string, update: Function) => {
+	if (val === '') {
+		update(() => {
+			options.value = stringOptions
+		})
+		return
+	}
 	update(() => {
-		if (val === '') {
-			filterOptions.value = stringOptions
-		} else {
-			const needle = val.toLowerCase()
-			filterOptions.value = stringOptions.filter((v) => v.toLowerCase().indexOf(needle) > -1)
-		}
+		const needle = val.toLowerCase()
+		options.value = stringOptions.filter((v) => v.toLowerCase().indexOf(needle) > -1)
 	})
 }
+
+// const filterFn = (val: string, update: Function) => {
+// 	update(() => {
+// 		if (val === '') {
+// 			filterOptions.value = stringOptions
+// 		} else {
+// 			const needle = val.toLowerCase()
+// 			filterOptions.value = stringOptions.filter((v) => v.toLowerCase().indexOf(needle) > -1)
+// 		}
+// 	})
+// }
 </script>
 
 <style scoped lang="scss">
