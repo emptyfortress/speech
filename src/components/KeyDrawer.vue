@@ -1,5 +1,5 @@
 <template lang="pug">
-q-drawer(v-model="mystore.keyDrawer" side="right" :width="300" ).q-pt-lg
+q-drawer(v-model="mystore.keyDrawer" overlay side="right" :width="300" )
 	KeywordList
 </template>
 

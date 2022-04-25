@@ -4,9 +4,8 @@
 body {
 	font-size: $font-size;
 	color: $text-color;
-	background-color: #0000001a;
-	background-color: #ececec;
-	// background: #ccc;
+	// background-color: #0000001a;
+	background-color: $mainBg;
 }
 
 .container {
@@ -28,7 +27,9 @@ body {
 }
 
 .q-drawer {
-	background: transparent;
+	background: $mainBg;
+	padding: 1rem;
+	box-shadow: -1px 0 3px rgba(0, 0, 0, 0.3);
 }
 .date {
 	margin-top: 35px;
