@@ -15,10 +15,7 @@ const props = defineProps({
 })
 
 const mystore = useStore()
-const toggle = () => {
-	mystore.closeMenu()
-	mystore.toggleRightDrawer()
-}
+const toggle = () => mystore.toggleRightDrawer(1)
 </script>
 
 <style scoped lang="scss"></style>

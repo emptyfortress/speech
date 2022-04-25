@@ -1,5 +1,7 @@
 <template lang="pug">
-.zg Библиотека (302 леммы)
+.zg
+	q-badge {{ items.length }}
+	div Библиотека
 .rel
 	q-input(ref="input" dense v-model="filter" autofocus clearable hide-bottom-space @clear="filter = ''")
 		template(v-slot:prepend)
@@ -120,7 +122,10 @@ const show = (e: keyword) => {
 	background: red;
 }
 .zg {
-	margin-bottom: 0.5rem;
+	margin-bottom: 1rem;
 	font-size: 0.9rem;
+	display: flex;
+	justify-content: flex-start;
+	gap: 1rem;
 }
 </style>

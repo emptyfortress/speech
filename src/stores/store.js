@@ -8,11 +8,14 @@ export const useStore = defineStore({
 		mini: false,
 		keys: [],
 		chips: [],
+		drawerContent: null,
 	}),
 	getters: {},
 
 	actions: {
-		toggleRightDrawer() {
+		toggleRightDrawer(e) {
+			this.drawerContent = e
+			this.mini = true
 			this.rightDrawer = !this.rightDrawer
 		},
 		toggleLeftDrawer() {

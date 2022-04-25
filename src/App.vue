@@ -8,7 +8,7 @@ import SiriWave from 'siriwave'
 
 const mystore = useStore()
 const toggleLeftDrawer = mystore.toggleLeftDrawer
-const toggle = mystore.toggleRightDrawer
+const toggle = mystore.toggleRightDrawer(2)
 
 onMounted(() => {
 	var siriWave1 = new SiriWave({
@@ -42,7 +42,7 @@ q-layout(view="hHh LpR fFf")
 			q-space
 			q-btn(dense flat round @click="refresh").q-mr-sm
 				SvgIcon(name="refresh" :spin="isLoading" )
-			q-btn(dense flat round icon="mdi-book-open-page-variant-outline" @click="toggle").q-mr-sm
+			q-btn(dense flat round icon="mdi-book-open-page-variant-outline" @click="mystore.toggleRightDrawer(2)").q-mr-sm
 			q-btn(dense flat round icon="mdi-bell-outline")
 				q-badge(floating rounded color="red") 3
 			q-btn(dense round unelevated).q-mx-md
@@ -51,7 +51,7 @@ q-layout(view="hHh LpR fFf")
 
 	q-linear-progress(indeterminate color="accent" size="3px" v-show="isLoading")
 	Drawer(:show="mystore.leftDrawer")
-	RDrawer(:show="mystore.rightDrawer")
+	RDrawer
 
 	q-page-container
 		router-view(v-slot="{ Component, route }")
