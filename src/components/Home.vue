@@ -3,7 +3,7 @@ q-page(padding)
 	.container
 		.row.justify-between.items-center
 			.zag Тренды
-			ChipCalendar
+			ChipCalendar(label="Прошлая неделя")
 		Trends1
 		.row.justify-between.items-center.q-mt-lg
 			.zag Категории
