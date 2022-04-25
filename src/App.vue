@@ -4,6 +4,7 @@ import { useStore } from '@/stores/store'
 import SvgIcon from './components/SvgIcon.vue'
 import Drawer from '@/components/Drawer.vue'
 import DateDrawer from '@/components/DateDrawer.vue'
+import KeyDrawer from '@/components/KeyDrawer.vue'
 import SiriWave from 'siriwave'
 
 const mystore = useStore()
@@ -42,7 +43,7 @@ q-layout(view="hHh LpR fFf")
 			q-space
 			q-btn(dense flat round @click="refresh").q-mr-sm
 				SvgIcon(name="refresh" :spin="isLoading" )
-			q-btn(dense flat round icon="mdi-book-open-page-variant-outline" @click="mystore.toggleRightDrawer(2)").q-mr-sm
+			q-btn(dense flat round icon="mdi-book-open-page-variant-outline" @click="mystore.toggleKeyDrawer").q-mr-sm
 			q-btn(dense flat round icon="mdi-bell-outline")
 				q-badge(floating rounded color="red") 3
 			q-btn(dense round unelevated).q-mx-md
@@ -52,7 +53,7 @@ q-layout(view="hHh LpR fFf")
 	q-linear-progress(indeterminate color="accent" size="3px" v-show="isLoading")
 	Drawer(:show="mystore.leftDrawer")
 	DateDrawer
-	//- RDrawer
+	KeyDrawer
 
 	q-page-container
 		router-view(v-slot="{ Component, route }")
