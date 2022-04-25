@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import VueApexCharts from 'vue3-apexcharts'
-import Zoomchart from '@/components/Zoomchart.vue'
+import Zoomchart from '@/components/Zoomchart1.vue'
 
 const series = [80, 55, 23]
 const options = {
