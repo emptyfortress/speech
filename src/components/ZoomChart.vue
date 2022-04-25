@@ -5,8 +5,7 @@
 	q-btn(outline size="sm" label="1Y" @click="setYear")
 	q-btn(outline size="sm" label="YTD" @click="setY")
 	q-btn(outline size="sm" label="ALL" @click="setAll")
-div
-	VueApexCharts(ref="chart" type="area" height="330px" :options="options" :series="series" )
+VueApexCharts(ref="chart" type="area" height="330px" :options="options" :series="series" )
 </template>
 
 <script setup>

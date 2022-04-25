@@ -3,24 +3,46 @@
 	div
 		.zag Интегральная оценка
 		q-card
-			VueApexCharts(type="donut" height="402px" :options="options" :series="series")
+			VueApexCharts(type="donut" height="302px" :options="options" :series="series")
+			q-markup-table.tab
+				tr
+					td.desc Всего разговоров
+					td 98
+					td 34%
+				tr
+					td.desc
+						span.blue Соответствует сценарию
+					td 45
+					td 6%
+				tr
+					td.desc
+						span.green Частично соответствуют
+					td 12
+					td 4%
+				tr
+					td.desc
+						span.orange Не соответствуют
+					td 5
+					td 7%
 	div
 		.zag Динамика за период
 		q-card
-			ZoomChart
+			div
+				Zoomchart
 </template>
 
 <script setup lang="ts">
 import VueApexCharts from 'vue3-apexcharts'
-import ZoomChart from '@/components/ZoomChart.vue'
+import Zoomchart from '@/components/Zoomchart.vue'
 
-const series = [80, 55]
+const series = [80, 55, 23]
 const options = {
 	chart: {
 		type: 'donut',
 	},
 	labels: ['Не соответствует сценарию', 'Соответствует сценарию'],
 	legend: {
+		show: false,
 		position: 'bottom',
 	},
 	responsive: [
@@ -54,5 +76,35 @@ const options = {
 .zag {
 	font-size: 1rem;
 	padding-left: 0.5rem;
+}
+.tab {
+	font-size: 0.8rem;
+	color: #666;
+	margin: 3px auto;
+	width: 80%;
+}
+td {
+	padding: 1px 0;
+	text-align: right;
+	&.desc {
+		text-align: left;
+	}
+	span:before {
+		content: '';
+		width: 8px;
+		height: 8px;
+		display: inline-block;
+		margin-right: 0.5rem;
+		border-radius: 8px;
+	}
+	span.blue:before {
+		background: $primary;
+	}
+	span.green:before {
+		background: green;
+	}
+	span.orange:before {
+		background: orange;
+	}
 }
 </style>
