@@ -15,7 +15,7 @@ const props = defineProps({
 })
 
 const mystore = useStore()
-const toggle = () => mystore.toggleRightDrawer(1)
+const toggle = () => mystore.toggleDateDrawer()
 </script>
 
 <style scoped lang="scss"></style>

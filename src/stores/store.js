@@ -5,6 +5,7 @@ export const useStore = defineStore({
 	state: () => ({
 		rightDrawer: false,
 		leftDrawer: true,
+		dateDrawer: false,
 		mini: false,
 		keys: [],
 		chips: [],
@@ -13,6 +14,10 @@ export const useStore = defineStore({
 	getters: {},
 
 	actions: {
+		toggleDateDrawer() {
+			this.mini = true
+			this.dateDrawer = !this.dateDrawer
+		},
 		toggleRightDrawer(e) {
 			this.drawerContent = e
 			this.mini = true

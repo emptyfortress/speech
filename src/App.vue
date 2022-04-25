@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import { useStore } from '@/stores/store'
 import SvgIcon from './components/SvgIcon.vue'
 import Drawer from '@/components/Drawer.vue'
-import RDrawer from '@/components/RDrawer.vue'
+import DateDrawer from '@/components/DateDrawer.vue'
 import SiriWave from 'siriwave'
 
 const mystore = useStore()
@@ -51,7 +51,8 @@ q-layout(view="hHh LpR fFf")
 
 	q-linear-progress(indeterminate color="accent" size="3px" v-show="isLoading")
 	Drawer(:show="mystore.leftDrawer")
-	RDrawer
+	DateDrawer
+	//- RDrawer
 
 	q-page-container
 		router-view(v-slot="{ Component, route }")
