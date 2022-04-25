@@ -3,16 +3,16 @@ q-page(padding)
 	.container
 		.row.justify-between.items-center
 			.zag Тренды
-			ChipCalendar(label="Прошлая неделя")
+			ChipCalendar1
 		Trends1
 		.row.justify-between.items-center.q-mt-lg
 			.zag Категории
-			ChipCalendar(label="Текущий месяц")
+			ChipCalendar1(label="Текущий месяц")
 		Events
 
 		.row.justify-between.items-center.q-mt-lg
 			.zag Дополнительно
-			ChipCalendar(label="Прошлый месяц")
+			ChipCalendar1(label="Прошлый месяц")
 		Addition
 </template>
 
@@ -20,7 +20,7 @@ q-page(padding)
 import Trends1 from '@/components/Trends1.vue'
 import Events from '@/components/Events.vue'
 import Addition from '@/components/Addition.vue'
-import ChipCalendar from '@/components/ChipCalendar.vue'
+import ChipCalendar1 from '@/components/ChipCalendar1.vue'
 </script>
 
 <style scoped lang="scss"></style>
