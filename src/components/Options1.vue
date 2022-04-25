@@ -71,7 +71,6 @@ const date = ref('2019/03/01')
 	gap: 1rem;
 }
 .bt {
-	// border-top: 1px solid $primary;
 	grid-column: 1 / -1;
 	justify-self: center;
 	display: flex;
