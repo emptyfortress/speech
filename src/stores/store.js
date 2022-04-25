@@ -10,11 +10,15 @@ export const useStore = defineStore({
 		mini: false,
 		keys: [],
 		chips: [],
-		drawerContent: null,
+		sett: true,
 	}),
 	getters: {},
 
 	actions: {
+		toggleSetup() {
+			this.sett = !this.sett
+			console.log(444)
+		},
 		toggleDateDrawer() {
 			this.mini = true
 			this.dateDrawer = !this.dateDrawer
@@ -22,11 +26,6 @@ export const useStore = defineStore({
 		toggleKeyDrawer() {
 			this.mini = true
 			this.keyDrawer = !this.keyDrawer
-		},
-		toggleRightDrawer(e) {
-			this.drawerContent = e
-			this.mini = true
-			this.rightDrawer = !this.rightDrawer
 		},
 		toggleLeftDrawer() {
 			this.leftDrawer = !this.leftDrawer

@@ -57,7 +57,6 @@ const click = (e: any) => {
 <style scoped lang="scss">
 //@import '@/assets/css/colors.scss';
 .starred {
-	grid-column: 1 / -1;
 	padding: 0;
 	.q-card__section {
 		padding: 1rem 0 0 0;

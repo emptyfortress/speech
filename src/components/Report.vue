@@ -1,19 +1,28 @@
 <template lang="pug">
 q-page(padding)
 	.container
-		.row.justify-start.items-center
-			q-icon(name="mdi-finance" size="sm").q-mr-sm
-			.zag Отчеты
-		Starred
-		Options
-		Options1
+		q-expansion-item(v-model="mystore.sett")
+			template(v-slot:header)
+				q-item-section(avatar)
+					q-avatar(icon="mdi-finance" flat)
+				q-item-section
+					.zag Отчеты
+				q-item-section(side)
+					q-icon(name="mdi-tune-variant")
+			q-card-section.q-px-md
+				Starred
+				Options
+				Options1
+		q-separator(v-show="!mystore.sett")
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { useStore } from '@/stores/store'
 import Starred from '@/components/Starred.vue'
 import Options from '@/components/Options.vue'
 import Options1 from '@/components/Options1.vue'
+
+const mystore = useStore()
 </script>
 
 <style scoped lang="scss">

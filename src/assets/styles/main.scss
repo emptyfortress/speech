@@ -28,8 +28,10 @@ body {
 
 .q-drawer {
 	background: $mainBg;
-	padding: 1rem;
-	box-shadow: -1px 0 3px rgba(0, 0, 0, 0.3);
+	.rd {
+		padding: 1rem;
+		box-shadow: -1px 0 3px rgba(0, 0, 0, 0.3);
+	}
 }
 .date {
 	margin-top: 35px;
@@ -39,9 +41,6 @@ body {
 	}
 }
 
-.rdrawer {
-	padding: 1.5rem 1rem 0 0;
-}
 .q-card {
 	border-radius: $radius-md;
 	box-shadow: $card-shadow;

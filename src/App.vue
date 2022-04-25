@@ -9,7 +9,6 @@ import SiriWave from 'siriwave'
 
 const mystore = useStore()
 const toggleLeftDrawer = mystore.toggleLeftDrawer
-const toggle = mystore.toggleRightDrawer(2)
 
 onMounted(() => {
 	var siriWave1 = new SiriWave({

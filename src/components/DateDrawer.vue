@@ -1,5 +1,5 @@
 <template lang="pug">
-q-drawer(v-model="mystore.dateDrawer" overlay side="right" :width="300" )
+q-drawer(v-model="mystore.dateDrawer" overlay side="right" :width="300" ).rd
 	q-btn(flat round icon="mdi-close" @click="toggle")
 	q-btn(flat round icon="mdi-check" color="accent")
 	q-btn(flat round icon="mdi-check-circle" color="accent" @click="toggle" )
