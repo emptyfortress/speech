@@ -27,8 +27,7 @@
 	div
 		.zag Динамика за период
 		q-card
-			div
-				Zoomchart
+			Zoomchart
 </template>
 
 <script setup lang="ts">

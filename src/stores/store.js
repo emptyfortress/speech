@@ -10,7 +10,7 @@ export const useStore = defineStore({
 		mini: false,
 		keys: [],
 		chips: [],
-		sett: true,
+		sett: false,
 	}),
 	getters: {},
 
