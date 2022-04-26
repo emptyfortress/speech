@@ -9,12 +9,13 @@ q-expansion-item(v-model="stat").q-mt-md
 		.toolbar
 			q-select(label="Сортировка" v-model="sort" :options="sortModel" dense)
 			q-select(label="Часть речи" v-model="part" :options="partModel" dense)
-			q-input(v-model="filter" dense clearable)
+			q-input(v-model="filter" dense clearable @clear="filter = ''")
 				template(v-slot:prepend)
 					q-icon(name="mdi-magnify")
 			q-range(v-model="label" :min="20" :max="400" :step="4" label color="primary" label-always)
-		.text-center
-			component(:is="Wordchip" v-for="chip in mychips" :key="chip.key" :label="chip.key" :count="chip.value" :part="chip.part")
+		.text-left
+			transition-group(name="fade")
+				component(:is="Wordchip" v-for="chip in mychips2" :key="chip.key" :label="chip.key" :count="chip.value" :part="chip.part")
 </template>
 
 <script setup lang="ts">
@@ -25,11 +26,11 @@ import { chips } from '@/stores/chips'
 const stat = ref(true)
 const filter = ref('')
 const sort = ref('Вес 9 -> 0')
-const part = ref('Существительные')
+const part = ref('Все')
 const label = ref({ min: 50, max: 300 })
 
 const sortModel = ['Вес 9 -> 0', 'Вес 0 -> 9', 'Алфавит А -> Я', 'Алфавит Я -> А']
-const partModel = ['Существительные', 'Прилагательные', 'Глаголы', 'Наречия']
+const partModel = ['Все', 'Существительные', 'Прилагательные', 'Глаголы', 'Наречия']
 
 const mychips = computed(() => {
 	switch (sort.value) {
@@ -66,6 +67,25 @@ const mychips = computed(() => {
 		default:
 			return chips
 	}
+})
+
+const mychips1 = computed(() => {
+	switch (part.value) {
+		case 'Существительные':
+			return mychips.value.filter((e) => e.part === 's')
+		case 'Прилагательные':
+			return mychips.value.filter((e) => e.part === 'a')
+		case 'Глаголы':
+			return mychips.value.filter((e) => e.part === 'v')
+		case 'Наречия':
+			return mychips.value.filter((e) => e.part === 'adv')
+		default:
+			return mychips.value
+	}
+})
+
+const mychips2 = computed(() => {
+	return mychips1.value.filter((e) => e.key.includes(filter.value))
 })
 </script>
 
