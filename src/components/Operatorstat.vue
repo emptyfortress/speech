@@ -15,9 +15,11 @@ q-expansion-item(v-model="oper").q-mt-md
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { QTableProps } from 'quasar'
+
 const oper = ref(true)
 
-const columns = [
+const columns: QTableProps['columns'] = [
 	{
 		name: 'name',
 		required: true,
