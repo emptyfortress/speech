@@ -8,18 +8,54 @@ q-expansion-item(v-model="oper").q-mt-md
 			.zag Статистика по операторам
 	q-card-section.q-px-md.q-pt-md
 		.grid
-			q-table(:rows="rows" :columns='columns' row-key="name")
+			q-table(:rows="rows"
+				:columns='columns'
+				row-key="name"
+				selection="single"
+				v-model:selected="selected"
+				:selected-rows-label="getSelectedString"
+				@row-click="(evt, row, index) => select(row)").table
+				template(v-slot:body-selection)
 			q-card
+				q-card-section(v-if="!selected.length") test
+				q-card-section(v-else) {{ selected[0].name}}
+				q-card-section(v-if="!selected.length") here graph
+				q-card-section(v-else)
+					component(:is="VueApexCharts" type="donut" :options="options" :series="getSeries")
+
 
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { QTableProps } from 'quasar'
+import { ref, computed } from 'vue'
+import type { Ref } from 'vue'
+import { operators } from '@/stores/operators'
+import VueApexCharts from 'vue3-apexcharts'
 
-const oper = ref(true)
+interface MyColumns {
+	name: string
+	label: string
+	field: string | ((row: any) => any)
+	required?: boolean
+	align?: 'left' | 'right' | 'center'
+	sortable?: boolean
+	sort?: (a: any, b: any, rowA: any, rowB: any) => number
+	sortOrder?: 'ad' | 'da'
+	format?: (val: any, row: any) => any
+	style?: string | ((row: any) => string)
+	classes?: string | ((row: any) => string)
+	headerStyle?: string
+	headerClasses?: string
+}
 
-const columns: QTableProps['columns'] = [
+interface Row {
+	name: string
+	good: number
+	notgood: number
+	bad: number
+}
+
+const columns: MyColumns[] = [
 	{
 		name: 'name',
 		required: true,
@@ -54,12 +90,48 @@ const columns: QTableProps['columns'] = [
 	},
 ]
 
-const rows = [
-	{ name: 'Vasya', good: 54, notgood: 21, bad: 12 },
-	{ name: 'laks', good: 54, notgood: 21, bad: 12 },
-	{ name: 'petya', good: 54, notgood: 21, bad: 12 },
-	{ name: 'dima', good: 54, notgood: 21, bad: 12 },
-]
+const rows = operators
+
+const oper = ref(true)
+const selected: Ref<Row[]> = ref([])
+const select = (e: Row) => {
+	if (selected.value.length === 0) {
+		selected.value.push(e)
+	} else if (selected.value[0].name === e.name) {
+		selected.value = []
+	} else {
+		selected.value = []
+		selected.value.push(e)
+	}
+}
+const getSelectedString = (e: number) => {
+	return `Выбран ${e} оператор`
+}
+
+const getSeries = computed(() => {
+	let item = selected.value[0]
+	let data = []
+	data.push(item.good)
+	data.push(item.notgood)
+	data.push(item.bad)
+	return data
+})
+const options = {
+	chart: {
+		type: 'donut',
+	},
+	labels: ['Соответствует', 'Частично', 'Не соответствует'],
+	legend: {
+		show: true,
+		position: 'bottom',
+	},
+	dataLabels: {
+		enabled: true,
+		formatter: function (val: number) {
+			return Math.round(val) + '%'
+		},
+	},
+}
 </script>
 
 <style scoped lang="scss">

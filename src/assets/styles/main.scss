@@ -64,5 +64,15 @@ body {
 	display: none;
 }
 .q-item--active {
-	background: $selectionBg;
+	background: $bgSelection;
+}
+
+.table {
+	box-shadow: $card-shadow;
+	tr.selected td::after {
+		background: transparent;
+	}
+	tr.selected {
+		background: $bgSelection;
+	}
 }

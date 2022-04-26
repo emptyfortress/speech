@@ -1,4 +1,4 @@
-export interface MyColumns {
+interface MyColumns {
 	name: string
 	label: string
 	field: string | ((row: any) => any)
@@ -13,3 +13,4 @@ export interface MyColumns {
 	headerStyle?: string
 	headerClasses?: string
 }
+export { MyColumns }
