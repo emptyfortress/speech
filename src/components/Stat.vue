@@ -5,17 +5,18 @@ q-expansion-item(v-model="stat").q-mt-md
 			q-avatar(icon="mdi-percent-circle-outline" flat)
 		q-item-section
 			.zag Статистика по ключевым словам
-	q-card-section.q-px-md.q-pt-none
+	q-card-section.q-px-md.q-pt-md
 		.toolbar
 			q-select(label="Сортировка" v-model="sort" :options="sortModel" dense)
 			q-select(label="Часть речи" v-model="part" :options="partModel" dense)
 			q-input(v-model="filter" dense clearable @clear="filter = ''")
 				template(v-slot:prepend)
 					q-icon(name="mdi-magnify")
-			q-range(v-model="label" :min="20" :max="400" :step="4" label color="primary" label-always)
+			q-range(v-model="label" :min="270" :max="410" :step="4" label color="primary" label-always)
+			q-btn(round color="primary" outline  icon="mdi-undo" size="12px" @click="reset")
 		.text-left
 			transition-group(name="fade")
-				component(:is="Wordchip" v-for="chip in mychips2" :key="chip.key" :label="chip.key" :count="chip.value" :part="chip.part")
+				component(:is="Wordchip" v-for="chip in mychips3" :key="chip.key" :label="chip.key" :count="chip.value" :part="chip.part")
 </template>
 
 <script setup lang="ts">
@@ -27,7 +28,7 @@ const stat = ref(true)
 const filter = ref('')
 const sort = ref('Вес 9 -> 0')
 const part = ref('Все')
-const label = ref({ min: 50, max: 300 })
+const label = ref({ min: 270, max: 410 })
 
 const sortModel = ['Вес 9 -> 0', 'Вес 0 -> 9', 'Алфавит А -> Я', 'Алфавит Я -> А']
 const partModel = ['Все', 'Существительные', 'Прилагательные', 'Глаголы', 'Наречия']
@@ -87,6 +88,17 @@ const mychips1 = computed(() => {
 const mychips2 = computed(() => {
 	return mychips1.value.filter((e) => e.key.includes(filter.value))
 })
+
+const mychips3 = computed(() => {
+	return mychips2.value.filter((e) => e.value > label.value.min && e.value < label.value.max)
+})
+
+const reset = () => {
+	filter.value = ''
+	sort.value = 'Вес 9 -> 0'
+	part.value = 'Все'
+	label.value = { min: 270, max: 410 }
+}
 </script>
 
 <style scoped lang="scss">
@@ -95,7 +107,7 @@ const mychips2 = computed(() => {
 	margin-bottom: 1.5rem;
 	font-size: 0.9rem;
 	display: grid;
-	grid-template-columns: 1fr 1fr 2fr 3fr;
+	grid-template-columns: 1fr 1fr 2fr 3fr auto;
 	align-items: baseline;
 	gap: 2rem;
 }

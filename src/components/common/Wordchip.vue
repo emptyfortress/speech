@@ -2,12 +2,12 @@
 .chip(v-close-popup)
 	.key {{ label }}
 	.count {{ Math.round(count) }}
-	q-menu(anchor="top middle" self="bottom middle")
+	q-menu(anchor="top middle" self="bottom middle").bg-primary.text-white
 		.row.no-wrap.q-pa-md
 			.column
 				.text-h6.q-mb-none {{ label }}
 				.calc {{ calc }}
-			q-separator(vertical inset).q-mx-lg
+			q-separator(vertical inset color="white").q-mx-lg
 			.column.items-center
 				.text-h6.q-mb-md {{ count}}
 </template>
