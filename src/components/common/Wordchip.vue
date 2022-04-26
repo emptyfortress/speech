@@ -54,15 +54,17 @@ const calc = computed(() => {
 	margin-right: 8px;
 	margin-bottom: 8px;
 	cursor: pointer;
-	background: #ccc;
+	background: #d9d9d9;
 	border-radius: 16px;
 	position: relative;
+	font-size: 0.9rem;
 	.count {
 		font-size: 0.8rem;
-		background: #777;
+		background: #7f8f96;
 		color: #fff;
 		padding: 0 4px;
 		border-radius: 8px;
+		// text-shadow: 0 0 4px black;
 	}
 }
 .q-menu {

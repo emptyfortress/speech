@@ -2,7 +2,7 @@
 q-expansion-item(v-model="stat").q-mt-md
 	template(v-slot:header)
 		q-item-section(avatar)
-			q-avatar(icon="mdi-percent-circle-outline" flat)
+			q-avatar(icon="mdi-key" flat)
 		q-item-section
 			.zag Статистика по ключевым словам
 	q-card-section.q-px-md.q-pt-md
@@ -24,7 +24,7 @@ import { ref, computed } from 'vue'
 import Wordchip from '@/components/common/Wordchip.vue'
 import { chips } from '@/stores/chips'
 
-const stat = ref(true)
+const stat = ref(false)
 const filter = ref('')
 const sort = ref('Вес 9 -> 0')
 const part = ref('Все')
