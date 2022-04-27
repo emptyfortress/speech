@@ -1,5 +1,5 @@
 <template lang="pug">
-q-expansion-item(v-model="rec").q-mt-md
+q-expansion-item(v-model="rec")
 	template(v-slot:header)
 		q-item-section(avatar)
 			q-avatar(icon="mdi-record-circle-outline" flat)
@@ -18,6 +18,7 @@ q-expansion-item(v-model="rec").q-mt-md
 
 q-dialog(v-model="player" no-backdrop-dismiss no-shake seamless position="bottom").player
 	q-card(style="width: 650px")
+		q-btn(color="red" round icon="mdi-close" size="sm").close
 		q-linear-progress(:value="0.6" color="red")
 		q-card-section.row.items-center.no-wrap
 			div
@@ -27,6 +28,8 @@ q-dialog(v-model="player" no-backdrop-dismiss no-shake seamless position="bottom
 			q-btn(flat round icon="mdi-rewind")
 			q-btn(flat round icon="mdi-pause")
 			q-btn(flat round icon="mdi-fast-forward")
+			q-space
+			.time 02:31
 
 Teleport(to="#speech")
 	.recdate(v-if="selected.length") {{ selected[0].date}}
@@ -64,7 +67,7 @@ interface Row {
 }
 
 const mystore = useStore()
-const rec = ref(true)
+const rec = ref(false)
 const selected: Ref<Row[]> = ref([])
 const player = computed(() => {
 	if (selected.value.length) {
@@ -102,12 +105,22 @@ const columns: RecordColumn[] = [
 <style scoped lang="scss">
 //@import '@/assets/css/colors.scss';
 .player .q-card {
-	// background: $light-blue-10;
-	background: #394b54;
 	background: $blue-grey-9;
 	color: white;
+	position: relative;
+	overflow: visible;
+	.close {
+		position: absolute;
+		top: -13px;
+		right: -13px;
+	}
 	.oper {
 		color: #6d8e9e;
+	}
+	.time {
+		font-size: 2rem;
+		font-weight: lighter;
+		letter-spacing: 1px;
 	}
 }
 .recdate {

@@ -1,8 +1,8 @@
 <template lang="pug">
-q-expansion-item(v-model="stat").q-mt-md
+q-expansion-item(v-model="stat")
 	template(v-slot:header)
 		q-item-section(avatar)
-			q-avatar(icon="mdi-key" flat)
+			q-avatar(icon="mdi-key-variant" flat)
 		q-item-section
 			.zag Статистика по ключевым словам
 	q-card-section.q-px-md.q-pt-md

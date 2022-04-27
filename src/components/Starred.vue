@@ -1,14 +1,13 @@
 <template lang="pug">
 .starred
-	q-card-section
-		.row.justify-between.items-center
-			.subtitle-1(@click="toggleEdit")
-				q-icon(name="mdi-star-outline").q-mr-sm
-				|Избранное
-				q-icon(name="mdi-pencil-outline" ).editicon
-			q-input(dense v-model="filter" clearable hide-bottom-space @clear="filter = ''")
-				template(v-slot:prepend)
-					q-icon(name="mdi-magnify")
+	.row.justify-between.items-center
+		.subtitle-1(@click="toggleEdit")
+			q-icon(name="mdi-star-outline").q-mr-sm
+			|Избранное
+			q-icon(name="mdi-pencil-outline" ).editicon
+		q-input(dense v-model="filter" clearable hide-bottom-space @clear="filter = ''")
+			template(v-slot:prepend)
+				q-icon(name="mdi-magnify")
 	q-card-section
 		q-chip(v-for="(item,index) in chips"
 			v-model:selected="item.selected"

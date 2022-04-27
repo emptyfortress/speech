@@ -1,5 +1,5 @@
 <template lang="pug">
-q-expansion-item(v-model="oper").q-mt-md
+q-expansion-item(v-model="oper")
 	template(v-slot:header)
 		q-item-section(avatar)
 			q-avatar(icon="mdi-headset" flat)
@@ -93,7 +93,7 @@ const columns: MyColumns[] = [
 
 const rows = operators
 
-const oper = ref(true)
+const oper = ref(false)
 const selected: Ref<Row[]> = ref([])
 const select = (e: Row) => {
 	if (selected.value.length === 0) {
@@ -136,7 +136,7 @@ const options = {
 	plotOptions: {
 		pie: {
 			donut: {
-				size: '40%',
+				size: '50%',
 			},
 		},
 	},

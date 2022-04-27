@@ -11,7 +11,7 @@ export const useStore = defineStore({
 		mini: false,
 		keys: [],
 		chips: [],
-		sett: false,
+		sett: true,
 		record: 'группа 1',
 	}),
 	getters: {},

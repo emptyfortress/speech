@@ -92,3 +92,7 @@ body {
 .q-message-text:last-child {
 	min-height: 24px;
 }
+
+.q-expansion-item--collapsed:not(:last-child) {
+	border-bottom: 1px dotted #999;
+}

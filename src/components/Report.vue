@@ -13,8 +13,7 @@ q-page(padding)
 				Starred
 				Options
 				Options1
-		q-separator(v-show="!mystore.sett")
-		//- Graph
+		Graph
 		Stat
 		Operatorstat
 		Records
