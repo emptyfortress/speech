@@ -1,13 +1,14 @@
 <template lang="pug">
 #speech
-//- div(class="q-pa-md row justify-center")
 .talk
-	div(style="width: 100%;")
+	.flex
+		.time 00:01
 		q-chat-message(name="оператор"
-			avatar="@/assets/img/headset.svg"
 			:text="['doing fine, how r you?']"
 			bg-color="blue-2"
 			)
+	.flexend
+		.time 00:01
 		q-chat-message(name="клиент"
 			:text="['hey, how are you?']"
 			bg-color="white"
@@ -24,5 +25,16 @@
 .talk {
 	padding: 1rem 0;
 	font-size: 0.9rem;
+}
+.flex {
+	display: flex;
+	justify-content: flex-start;
+	gap: 1rem;
+	align-items: center;
+}
+.flexend {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 </style>
