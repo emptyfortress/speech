@@ -14,15 +14,16 @@ q-expansion-item(v-model="oper").q-mt-md
 				selection="single"
 				v-model:selected="selected"
 				:selected-rows-label="getSelectedString"
+				rows-per-page-label="Записей на странице"
 				@row-click="(evt, row, index) => select(row)").table
 				template(v-slot:body-selection)
 			q-card
-				q-card-section(v-if="!selected.length") test
+				q-card-section(v-if="!selected.length") Соответствие сценарию
 				q-card-section(v-else) {{ selected[0].name}}
-				q-card-section(v-if="!selected.length") here graph
-				q-card-section(v-else)
-					component(:is="VueApexCharts" type="donut" :options="options" :series="getSeries")
-
+				div(v-if="!selected.length")
+					component(:is="VueApexCharts" height="265px" type="bar" :options="options1" :series="series1")
+				div(v-else)
+					component(:is="VueApexCharts" height="300px" type="donut" :options="options" :series="getSeries")
 
 </template>
 
@@ -116,6 +117,7 @@ const getSeries = computed(() => {
 	data.push(item.bad)
 	return data
 })
+
 const options = {
 	chart: {
 		type: 'donut',
@@ -130,6 +132,30 @@ const options = {
 		formatter: function (val: number) {
 			return Math.round(val) + '%'
 		},
+	},
+	plotOptions: {
+		pie: {
+			donut: {
+				size: '40%',
+			},
+		},
+	},
+}
+
+const series1 = [
+	{
+		data: [
+			{ x: 'Екатерина', y: 15 },
+			{ x: 'Елена', y: 93 },
+			{ x: 'Ксения', y: 87 },
+			{ x: 'Ирина', y: 59 },
+			{ x: 'Ева', y: 19 },
+		],
+	},
+]
+const options1 = {
+	chart: {
+		type: 'bar',
 	},
 }
 </script>

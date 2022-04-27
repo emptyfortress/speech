@@ -14,9 +14,10 @@ q-page(padding)
 				Options
 				Options1
 		q-separator(v-show="!mystore.sett")
-		Graph
+		//- Graph
 		Stat
 		Operatorstat
+		Records
 </template>
 
 <script setup lang="ts">
@@ -27,6 +28,7 @@ import Options1 from '@/components/Options1.vue'
 import Graph from '@/components/Graph.vue'
 import Stat from '@/components/Stat.vue'
 import Operatorstat from '@/components/Operatorstat.vue'
+import Records from '@/components/Records.vue'
 
 const mystore = useStore()
 </script>

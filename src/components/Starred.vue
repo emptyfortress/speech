@@ -26,6 +26,7 @@
 <script setup lang="ts">
 import { ref, computed, reactive } from 'vue'
 import { useStore } from '@/stores/store'
+import { useQuasar } from 'quasar'
 import { starredReports } from '@/stores/data'
 
 const mystore = useStore()
@@ -42,9 +43,30 @@ const chipClass = computed(() => {
 })
 
 const removeChip = (e: number) => {
+	let item = chips[e]
 	chips.splice(e, 1)
 	mystore.removeKeyByIndex(e)
+	show(item)
 }
+
+const $q = useQuasar()
+const show = (e: any) => {
+	let message = e.label + ' - удалено.'
+	$q.notify({
+		message: message,
+		actions: [
+			{
+				label: 'Вернуть',
+				color: 'white',
+				handler: () => undo(e),
+			},
+		],
+	})
+}
+const undo = (e: any) => {
+	chips.push(e)
+}
+
 const click = (e: any) => {
 	if (e.selected === true) {
 		mystore.addKey(e.value)

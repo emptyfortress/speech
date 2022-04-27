@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useStore } from '@/stores/store'
-import SvgIcon from './components/SvgIcon.vue'
+import SvgIcon from '@/components/SvgIcon.vue'
 import Drawer from '@/components/Drawer.vue'
 import DateDrawer from '@/components/DateDrawer.vue'
 import KeyDrawer from '@/components/KeyDrawer.vue'
@@ -67,7 +67,10 @@ q-layout(view="hHh LpR fFf")
 
 .head {
 	color: $text-bright;
-	background: transparent;
+	// background: $mainBg;
+	background: rgba(0, 0, 0, 0.07);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
 }
 #siri {
 	width: 800px;
