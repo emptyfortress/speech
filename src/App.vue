@@ -5,6 +5,7 @@ import SvgIcon from '@/components/SvgIcon.vue'
 import Drawer from '@/components/Drawer.vue'
 import DateDrawer from '@/components/DateDrawer.vue'
 import KeyDrawer from '@/components/KeyDrawer.vue'
+import SpeechDrawer from '@/components/SpeechDrawer.vue'
 import SiriWave from 'siriwave'
 
 const mystore = useStore()
@@ -53,6 +54,7 @@ q-layout(view="hHh LpR fFf")
 	Drawer(:show="mystore.leftDrawer")
 	DateDrawer
 	KeyDrawer
+	SpeechDrawer
 
 	q-page-container
 		router-view(v-slot="{ Component, route }")

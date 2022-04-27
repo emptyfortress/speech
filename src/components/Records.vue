@@ -27,6 +27,9 @@ q-dialog(v-model="player" no-backdrop-dismiss no-shake seamless position="bottom
 			q-btn(flat round icon="mdi-rewind")
 			q-btn(flat round icon="mdi-pause")
 			q-btn(flat round icon="mdi-fast-forward")
+
+Teleport(to="#speech")
+	.recdate(v-if="selected.length") {{ selected[0].date}}
 </template>
 
 <script setup lang="ts">
@@ -64,8 +67,13 @@ const mystore = useStore()
 const rec = ref(true)
 const selected: Ref<Row[]> = ref([])
 const player = computed(() => {
-	if (selected.value.length) return true
-	return false
+	if (selected.value.length) {
+		mystore.openSpeechDrawer()
+		return true
+	} else {
+		mystore.closeSpeechDrawer()
+		return false
+	}
 })
 const select = (e: Row) => {
 	if (selected.value.length === 0) {
@@ -100,5 +108,8 @@ const columns: RecordColumn[] = [
 	.oper {
 		color: #6d8e9e;
 	}
+}
+.recdate {
+	font-weight: 600;
 }
 </style>

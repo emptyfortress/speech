@@ -76,3 +76,15 @@ body {
 		background: $bgSelection;
 	}
 }
+.talk {
+	.q-message-avatar {
+		width: 22px;
+		height: 22px;
+		svg {
+			fill: red;
+		}
+	}
+	.q-message-name {
+		font-size: x-small;
+	}
+}

@@ -7,6 +7,7 @@ export const useStore = defineStore({
 		leftDrawer: true,
 		dateDrawer: false,
 		keyDrawer: false,
+		speechDrawer: false,
 		mini: false,
 		keys: [],
 		chips: [],
@@ -26,6 +27,17 @@ export const useStore = defineStore({
 		toggleKeyDrawer() {
 			this.mini = true
 			this.keyDrawer = !this.keyDrawer
+		},
+		openSpeechDrawer() {
+			this.mini = true
+			this.speechDrawer = true
+		},
+		closeSpeechDrawer() {
+			this.speechDrawer = false
+		},
+		toggleSpeechDrawer() {
+			this.mini = true
+			this.speechDrawer = !this.speechDrawer
 		},
 		toggleLeftDrawer() {
 			this.leftDrawer = !this.leftDrawer
