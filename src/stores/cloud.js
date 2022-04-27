@@ -403,8 +403,9 @@ const randomArray = (length, { min, max }) => {
 	let result = []
 	for (let i = 0; i < length; i++) {
 		let random = Math.floor(Math.random() * (max - min + 1) + min)
+		let dat = ['Вызовы', 'АНТ', 'Тишина', 'Перебивания']
 		let obj = {
-			x: i + 8 + ':00',
+			x: dat[i],
 			y: random,
 		}
 		result.push(obj)
@@ -414,50 +415,50 @@ const randomArray = (length, { min, max }) => {
 
 const heatSeries = [
 	{
-		name: 'Воскресенье',
-		data: randomArray(14, {
+		name: 'Орлов П.',
+		data: randomArray(4, {
 			min: 0,
 			max: 90,
 		}),
 	},
 	{
-		name: 'Суббота',
-		data: randomArray(14, {
+		name: 'Воробьева К.',
+		data: randomArray(4, {
+			min: 0,
+			max: 95,
+		}),
+	},
+	{
+		name: 'Синичкина Т.',
+		data: randomArray(4, {
 			min: 0,
 			max: 90,
 		}),
 	},
 	{
-		name: 'Пятница',
-		data: randomArray(14, {
+		name: 'Гусев И.',
+		data: randomArray(4, {
 			min: 0,
 			max: 90,
 		}),
 	},
 	{
-		name: 'Четверг',
-		data: randomArray(14, {
+		name: 'Соколова П.',
+		data: randomArray(4, {
 			min: 0,
 			max: 90,
 		}),
 	},
 	{
-		name: 'Среда',
-		data: randomArray(14, {
+		name: 'Воронов А.',
+		data: randomArray(4, {
 			min: 0,
 			max: 90,
 		}),
 	},
 	{
-		name: 'Вторник',
-		data: randomArray(14, {
-			min: 0,
-			max: 90,
-		}),
-	},
-	{
-		name: 'Понедельник',
-		data: randomArray(14, {
+		name: 'Сорокина М.',
+		data: randomArray(4, {
 			min: 0,
 			max: 90,
 		}),

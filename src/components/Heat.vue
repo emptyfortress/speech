@@ -22,7 +22,7 @@ const chartOptions = {
 	},
 	colors: ['#008FFB'],
 	title: {
-		text: 'Плотность звонков',
+		text: 'Операторы',
 	},
 }
 </script>
