@@ -40,7 +40,7 @@ const records = [
 	{
 		id: 0,
 		date: '2022-04-25 18:11',
-		group: 'группа 2',
+		group: 'группа 1',
 		record: '11x55x20_Кристина_AVG_501_project_M_79216325352.wav',
 		operator: 'Екатерина',
 		client: 'Григорий',
@@ -56,7 +56,7 @@ const records = [
 	{
 		id: 2,
 		date: '2022-04-24 18:09',
-		group: 'группа 2',
+		group: 'группа 3',
 		record: '04x03x08_Юлия_MTI_360_project_M_79504637382_comp2531.wav',
 		operator: 'Ксения',
 		client: 'Андрей',
@@ -72,7 +72,7 @@ const records = [
 	{
 		id: 4,
 		date: '2022-04-24 18:08',
-		group: 'группа 3',
+		group: 'группа 2',
 		record: '00x44x13_Юлия_MTI_360_project_M_79525898807_comp2531.wav',
 		operator: 'Ева',
 		client: 'Арсений',
@@ -80,7 +80,7 @@ const records = [
 	{
 		id: 5,
 		date: '2022-04-24 16:44',
-		group: 'группа 2',
+		group: 'группа 3',
 		record: '07x20x02_Юлия_MTI_360_project_M_79676111378_comp2531.wav',
 		operator: 'Дарья',
 		client: 'Степан',
@@ -88,7 +88,7 @@ const records = [
 	{
 		id: 6,
 		date: '2022-04-24 16:43',
-		group: 'группа 3',
+		group: 'группа 1',
 		record: '11x34x14_Кристина_AVG_501_project_M_79917233844.wav',
 		operator: 'Кира',
 		client: 'Владислав',
@@ -96,7 +96,7 @@ const records = [
 	{
 		id: 7,
 		date: '2022-04-24 16:08',
-		group: 'группа 3',
+		group: 'группа 2',
 		record: '11x06x02_Кристина_AVG_501_project_M_79633458830.wav',
 		operator: 'Елизавета',
 		client: 'Никита',
@@ -104,7 +104,7 @@ const records = [
 	{
 		id: 8,
 		date: '2022-04-24 16:07',
-		group: 'группа 2',
+		group: 'группа 3',
 		record: '11x54x20_Кристина_AVG-501_project_M_79110686720.comp2531.wav',
 		operator: 'Ульяна',
 		client: 'Глеб',
@@ -120,7 +120,7 @@ const records = [
 	{
 		id: 10,
 		date: '2022-04-23 16:05',
-		group: 'группа 1',
+		group: 'группа 2',
 		record: '09x05x00_Светлана_MTI-343_project_M_79774287388.comp2531.wav',
 		operator: 'Юлия',
 		client: 'Давид',
@@ -128,7 +128,7 @@ const records = [
 	{
 		id: 11,
 		date: '2022-04-15 20:49',
-		group: 'группа 2',
+		group: 'группа 3',
 		record: '09x10x58_Светлана_MTI-343_project_M_79000968856.comp2531.wav',
 		operator: 'Софья',
 		client: 'Ярослав',
@@ -152,7 +152,7 @@ const records = [
 	{
 		id: 14,
 		date: '2022-04-15 20:46',
-		group: 'группа 1',
+		group: 'группа 2',
 		record: '09x32x34_Кристина_AVG-501_project_M_79957579824.comp2531.wav',
 		operator: 'Милана',
 		client: 'Фёдор',
@@ -160,7 +160,7 @@ const records = [
 	{
 		id: 15,
 		date: '2022-04-15 20:45',
-		group: 'группа 2',
+		group: 'группа 3',
 		record: '12x52x20_Кристина_AVG-501_project_M_79053146130.comp2531.wav',
 		operator: 'Ольга',
 		client: 'Николай',
@@ -176,7 +176,7 @@ const records = [
 	{
 		id: 17,
 		date: '2022-04-11 17:55',
-		group: 'группа 2',
+		group: 'группа 1',
 		record: '10x12x26_Кристина_AVG-501_project_M_79204309153.comp2531.wav',
 		operator: 'Ярослава',
 		client: 'Андрей',
@@ -184,7 +184,7 @@ const records = [
 	{
 		id: 18,
 		date: '2022-04-11 17:54',
-		group: 'группа 3',
+		group: 'группа 1',
 		record: '10x52x54_Светлана_MTI_343_project_M_79374542266.wav',
 		operator: 'Яна',
 		client: 'Артемий',
@@ -192,7 +192,7 @@ const records = [
 	{
 		id: 19,
 		date: '2022-04-11 17:53',
-		group: 'группа 3',
+		group: 'группа 1',
 		record: '10x02x51_Алина_AVG_506_project_M_79654481992.wav',
 		operator: 'Кристина',
 		client: 'Виктор',
@@ -200,7 +200,7 @@ const records = [
 	{
 		id: 20,
 		date: '2022-04-10 17:53',
-		group: 'группа 2',
+		group: 'группа 1',
 		record: '12x45x19_Светлана_MTI_343_project_M_79855708070.wav',
 		operator: 'Алиса',
 		client: 'Никита',
@@ -224,7 +224,7 @@ const records = [
 	{
 		id: 23,
 		date: '2022-03-24 18:09',
-		group: 'группа 2',
+		group: 'группа 1',
 		record: '13x09x47_Светлана_MTI_343_project_M_79510737024.wav',
 		operator: 'Тамара',
 		client: 'Егор',
@@ -240,7 +240,7 @@ const records = [
 	{
 		id: 25,
 		date: '2022-03-24 18:08',
-		group: 'группа 3',
+		group: 'группа 1',
 		record: '16x40x53_Кристина_AVG-501_project_M_79879828517.comp2531.wav',
 		operator: 'Диана',
 		client: 'Лев',
@@ -248,7 +248,7 @@ const records = [
 	{
 		id: 26,
 		date: '2022-03-24 16:44',
-		group: 'группа 3',
+		group: 'группа 1',
 		record: '14x49x50_Елена_MTI-340_project_M_79170931574.comp2531.wav',
 		operator: 'Анфиса',
 		client: 'Леонид',
@@ -256,7 +256,7 @@ const records = [
 	{
 		id: 27,
 		date: '2022-03-24 16:43',
-		group: 'группа 2',
+		group: 'группа 1',
 		record: '16x35x35_Кристина_AVG-501_project_M_79952888926.comp2531.wav',
 		operator: 'Аделина',
 		client: 'Павел',
@@ -264,7 +264,7 @@ const records = [
 	{
 		id: 28,
 		date: '2022-03-24 16:08',
-		group: 'группа 3',
+		group: 'группа 1',
 		record: '09x03x27_Данил_MTI-357_project_M_79043724224.comp2531.wav',
 		operator: 'Евдокия',
 		client: 'Петр',
@@ -288,7 +288,7 @@ const records = [
 	{
 		id: 31,
 		date: '2022-03-23 16:05',
-		group: 'группа 2',
+		group: 'группа 1',
 		record: '11x37x02_Светлана_MTI-343_project_M_79779087065.comp2531.wav',
 		operator: 'Наталья',
 		client: 'Сергей',
@@ -296,7 +296,7 @@ const records = [
 	{
 		id: 32,
 		date: '2022-03-15 20:49',
-		group: 'группа 2',
+		group: 'группа 1',
 		record: '09x13x36_Светлана_MTI-343_project_M_79603568970.comp2531.wav',
 		operator: 'Пелагея',
 		client: 'Семён',
@@ -304,7 +304,7 @@ const records = [
 	{
 		id: 33,
 		date: '2022-03-15 20:48',
-		group: 'группа 2',
+		group: 'группа 1',
 		record: '16x56x26_Кристина_AVG-501_project_M_79523076962.comp2531.wav',
 		operator: 'Сабина',
 		client: 'Тимофей',
@@ -312,7 +312,7 @@ const records = [
 	{
 		id: 34,
 		date: '2022-03-15 20:47',
-		group: 'группа 3',
+		group: 'группа 1',
 		record: '14x22x34_Кристина_AVG-501_project_M_79273217264.comp2531.wav',
 		operator: 'Антонина',
 		client: 'Степан',
@@ -320,7 +320,7 @@ const records = [
 	{
 		id: 35,
 		date: '2022-03-15 20:46',
-		group: 'группа 3',
+		group: 'группа 1',
 		record: '09x23x25_Светлана_MTI-343_project_M_79773771116.comp2531.wav',
 		operator: 'Екатерина',
 		client: 'Владимир',
@@ -336,7 +336,7 @@ const records = [
 	{
 		id: 37,
 		date: '2022-03-14 20:44',
-		group: 'группа 3',
+		group: 'группа 1',
 		record: '09x36x36_Данил_MTI-357_project_M_79247650875.comp2531.wav',
 		operator: 'Ксения',
 		client: 'Ярослав',
@@ -344,7 +344,7 @@ const records = [
 	{
 		id: 38,
 		date: '2022-03-11 17:55',
-		group: 'группа 3',
+		group: 'группа 1',
 		record: '15x23x58_Елена_MTI-340_project_M_79787156374.comp2531.wav',
 		operator: 'Ирина',
 		client: 'Павел',
@@ -352,7 +352,7 @@ const records = [
 	{
 		id: 39,
 		date: '2022-03-11 17:54',
-		group: 'группа 2',
+		group: 'группа 1',
 		record: '11x04x17_Данил_MTI-357_project_M_79613006523.comp2531.wav',
 		operator: 'Ева',
 		client: 'Егор',
@@ -368,7 +368,7 @@ const records = [
 	{
 		id: 41,
 		date: '2022-03-10 17:53',
-		group: 'группа 3',
+		group: 'группа 1',
 		record: '15x51x00_Елена_MTI-340_project_M_79113590074.comp2531.wav',
 		operator: 'Кира',
 		client: 'Владислав',
@@ -376,7 +376,7 @@ const records = [
 	{
 		id: 42,
 		date: '2022-02-24 18:11',
-		group: 'группа 3',
+		group: 'группа 1',
 		record: '15x41x44_Елена_MTI-340_project_M_79998144972.comp2531.wav',
 		operator: 'Елизавета',
 		client: 'Федор',
@@ -392,7 +392,7 @@ const records = [
 	{
 		id: 44,
 		date: '2022-02-24 18:09',
-		group: 'группа 3',
+		group: 'группа 1',
 		record: '13x17x07_Елена_MTI-340_project_M_79672963889.comp2531.wav',
 		operator: 'Татьяна',
 		client: 'Максим',
@@ -416,7 +416,7 @@ const records = [
 	{
 		id: 47,
 		date: '2022-02-24 16:44',
-		group: 'группа 2',
+		group: 'группа 1',
 		record: '01x36x04_Татьяна_MTI-359_project_M_79013903787.comp2531.wav',
 		operator: 'Алина',
 		client: 'Григорий',
@@ -424,7 +424,7 @@ const records = [
 	{
 		id: 48,
 		date: '2022-02-24 16:43',
-		group: 'группа 2',
+		group: 'группа 1',
 		record: '13x36x05_Светлана_MTI-343_project_M_79501960892.comp2531.wav',
 		operator: 'Злата',
 		client: 'Лев',
@@ -464,7 +464,7 @@ const records = [
 	{
 		id: 53,
 		date: '2022-02-15 20:49',
-		group: 'группа 2',
+		group: 'группа 1',
 		record: '15x51x00_Елена_MTI-340_project_M_79113590074.comp2531.wav',
 		operator: 'Яна',
 		client: 'Владислав',
@@ -480,7 +480,7 @@ const records = [
 	{
 		id: 55,
 		date: '2022-02-15 20:47',
-		group: 'группа 3',
+		group: 'группа 1',
 		record: '07x13x11_Татьяна_MTI-359_project_M_79667664515.comp2531.wav',
 		operator: 'Алиса',
 		client: 'Глеб',
@@ -488,7 +488,7 @@ const records = [
 	{
 		id: 56,
 		date: '2022-02-15 20:46',
-		group: 'группа 2',
+		group: 'группа 1',
 		record: '13x17x07_Елена_MTI-340_project_M_79672963889.comp2531.wav',
 		operator: 'Маргарита',
 		client: 'Марк',
@@ -512,7 +512,7 @@ const records = [
 	{
 		id: 59,
 		date: '2022-02-11 17:55',
-		group: 'группа 2',
+		group: 'группа 1',
 		record: '01x36x2_Татьяна_MTI-359_project_M_79013903787.comp2531.wav',
 		operator: 'Эмилия',
 		client: 'Евгений',
@@ -520,7 +520,7 @@ const records = [
 	{
 		id: 60,
 		date: '2022-02-11 17:54',
-		group: 'группа 3',
+		group: 'группа 1',
 		record: '13x36x8_Светлана_MTI-343_project_M_79501960892.comp2531.wav',
 		operator: 'Диана',
 		client: 'Матвей',
@@ -536,7 +536,7 @@ const records = [
 	{
 		id: 62,
 		date: '2022-02-11 17:53',
-		group: 'группа 3',
+		group: 'группа 1',
 		record: '13x36x11_Светлана_MTI-343_project_M_79501960892.comp2531.wav',
 		operator: 'Аделина',
 		client: 'Николай',

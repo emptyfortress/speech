@@ -68,6 +68,7 @@ const rec = ref(true)
 const selected: Ref<Row[]> = ref([])
 const player = computed(() => {
 	if (selected.value.length) {
+		mystore.setRecord(selected.value[0].group)
 		mystore.openSpeechDrawer()
 		return true
 	} else {

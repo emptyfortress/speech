@@ -12,10 +12,14 @@ export const useStore = defineStore({
 		keys: [],
 		chips: [],
 		sett: false,
+		record: 'группа 1',
 	}),
 	getters: {},
 
 	actions: {
+		setRecord(payload) {
+			this.record = payload
+		},
 		toggleSetup() {
 			this.sett = !this.sett
 			console.log(444)

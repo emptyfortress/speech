@@ -88,3 +88,7 @@ body {
 		font-size: x-small;
 	}
 }
+
+.q-message-text:last-child {
+	min-height: 24px;
+}
