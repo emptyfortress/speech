@@ -1,12 +1,12 @@
 <template lang="pug">
 q-drawer(v-model="mystore.dateDrawer" overlay side="right" :width="300" ).rd
 	q-btn(flat round icon="mdi-close" @click="toggle")
-	q-btn(flat round icon="mdi-check" color="accent")
-	q-btn(flat round icon="mdi-check-circle" color="accent" @click="toggle" )
-	q-date(v-model="model" range flat color="accent").date
-	q-btn(flat color="accent") Первый квартал
-	q-btn(flat color="accent") Второй квартал
-	q-btn(flat color="accent") Прошлый год
+	q-btn(flat round icon="mdi-check" color="blue-9")
+	q-btn(flat round icon="mdi-check-circle" color="blue-9" @click="toggle" )
+	q-date(v-model="model" range flat color="blue-9").date
+	q-btn(flat color="blue-9") Первый квартал
+	q-btn(flat color="blue-9") Второй квартал
+	q-btn(flat color="blue-9") Прошлый год
 </template>
 
 <script setup lang="ts">
