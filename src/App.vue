@@ -33,7 +33,7 @@ const refresh = () => {
 
 <template lang="pug">
 q-layout(view="hHh LpR fFf")
-	q-header(reveal ).head
+	q-header().head
 		q-toolbar(shrink)
 			q-btn(dense flat round  @click="toggleLeftDrawer")
 				SvgIcon(name="sound" color="var(--q-accent)")

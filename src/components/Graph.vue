@@ -1,5 +1,5 @@
 <template lang="pug">
-q-expansion-item(v-model="integ")
+q-expansion-item(v-model="mystore.integral")
 	template(v-slot:header)
 		q-item-section(avatar)
 			q-avatar(icon="mdi-abacus" flat)
@@ -7,7 +7,16 @@ q-expansion-item(v-model="integ")
 		q-item-section
 			.zag Интегральная оценка
 	q-card-section
-		.grid
+		content-loader(v-if="mystore.loading" :width="1132"
+			:height="429"
+			:speed="2"
+			primaryColor="#f2f2f2"
+			secondaryColor="#ffffff")
+			rect(x="0" y="27" rx="8" ry="8" width="371" height="402")
+			rect(x="390" y="27" rx="8" ry="8" width="742" height="402")
+			path(d="M 0 0 h 186 v 19 H 0 z M 393 0 h 155 v 19 H 393 z")
+
+		.grid(v-else)
 			div
 				.zg Соответствие сценарию
 				q-card
@@ -40,10 +49,12 @@ q-expansion-item(v-model="integ")
 
 <script setup lang="ts">
 import VueApexCharts from 'vue3-apexcharts'
+import { useStore } from '@/stores/store'
 import Zoomchart1 from '@/components/Zoomchart1.vue'
-import { ref } from 'vue'
+import { ContentLoader } from 'vue-content-loader'
 
-const integ = ref(false)
+// const integ = ref(false)
+const mystore = useStore()
 
 const series = [80, 55, 23]
 const options = {

@@ -18,7 +18,7 @@ q-expansion-item(v-model="rec")
 
 q-dialog(v-model="player" no-backdrop-dismiss no-shake seamless position="bottom").player
 	q-card(style="width: 650px")
-		q-btn(color="red" round icon="mdi-close" size="sm").close
+		q-btn(color="red" round icon="mdi-close" size="sm" @click="closePlayer").close
 		q-linear-progress(:value="0.6" color="red")
 		q-card-section.row.items-center.no-wrap
 			div
@@ -36,7 +36,7 @@ Teleport(to="#speech")
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, watchEffect, watch, computed } from 'vue'
 import type { Ref } from 'vue'
 import { records } from '@/stores/operators'
 import { useStore } from '@/stores/store'
@@ -69,6 +69,7 @@ interface Row {
 const mystore = useStore()
 const rec = ref(false)
 const selected: Ref<Row[]> = ref([])
+
 const player = computed(() => {
 	if (selected.value.length) {
 		mystore.setRecord(selected.value[0].group)
@@ -79,6 +80,17 @@ const player = computed(() => {
 		return false
 	}
 })
+
+const closePlayer = () => {
+	selected.value = []
+}
+
+watch(rec, (value) => {
+	if (value === false) {
+		selected.value = []
+	}
+})
+
 const select = (e: Row) => {
 	if (selected.value.length === 0) {
 		selected.value.push(e)
@@ -89,6 +101,7 @@ const select = (e: Row) => {
 		selected.value.push(e)
 	}
 }
+
 const getSelectedString = (e: number) => {
 	return `Выбрана ${e} запись`
 }
@@ -125,5 +138,8 @@ const columns: RecordColumn[] = [
 }
 .recdate {
 	font-weight: 600;
+}
+.table {
+	margin-bottom: 6rem;
 }
 </style>

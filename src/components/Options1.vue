@@ -43,7 +43,12 @@ import { useStore } from '@/stores/store'
 
 const mystore = useStore()
 const toggle = () => {
+	mystore.loading = true
 	mystore.sett = false
+	mystore.integral = true
+	setTimeout(() => {
+		mystore.loading = false
+	}, 1700)
 }
 const dialog = ref(false)
 const name = ref('')

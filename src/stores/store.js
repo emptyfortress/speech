@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 export const useStore = defineStore({
 	id: 'store',
 	state: () => ({
+		loading: false,
 		rightDrawer: false,
 		leftDrawer: true,
 		dateDrawer: false,
@@ -12,6 +13,7 @@ export const useStore = defineStore({
 		keys: [],
 		chips: [],
 		sett: true,
+		integral: false,
 		record: 'группа 1',
 	}),
 	getters: {},
@@ -22,6 +24,10 @@ export const useStore = defineStore({
 		},
 		toggleSetup() {
 			this.sett = !this.sett
+			console.log(444)
+		},
+		toggleIntegral() {
+			this.iintegral = !this.integral
 			console.log(444)
 		},
 		toggleDateDrawer() {
