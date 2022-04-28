@@ -31,6 +31,14 @@ app.use(Quasar, {
 			classes: 'notific',
 		},
 	},
+	supportTS: {
+		tsCheckerConfig: {
+			eslint: {
+				enabled: true,
+				files: './src/**/*.{ts,tsx,js,jsx,vue}'
+			}
+		}
+	},
 	/*
   config: {
     brand: {

@@ -5,14 +5,23 @@ q-expansion-item(v-model="rec")
 			q-avatar(icon="mdi-record-circle-outline" flat)
 		q-item-section
 			.zag Записи сеансов обслуживания
-	q-card-section.q-px-md.q-pt-md
-		q-table(:rows="records"
+	q-card-section.q-px-md.q-pt-none
+		q-table(ref="table"
+			:rows="records"
 			:columns="columns"
 			selection="single"
 			:selected-rows-label="getSelectedString"
 			v-model:selected="selected"
 			rows-per-page-label="Записей на странице"
-			:rows-per-page-options='[10, 20, 50]').table
+			:filter="filter"
+			:rows-per-page-options='shownRows').table
+			template(v-slot:top="props")
+				q-btn(unelevated color="grey" size="sm" label="Скачать одним архивом")
+				q-space
+				q-input(dense debounce="300" color="primary" v-model="filter" clearable)
+					template(v-slot:prepend)
+						q-icon(name="mdi-magnify")
+				q-btn(flat round dense :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'" @click="togg").q-ml-md
 			template(v-slot:body-selection)
 			template(v-slot:body="props")
 				q-tr(:props="props" @click="select(props.row)").rel
@@ -22,7 +31,7 @@ q-expansion-item(v-model="rec")
 					q-td(key="client") {{props.row.client}}
 					q-td(key="group") {{props.row.group}}
 					q-td(key="record") {{props.row.record}}
-					q-btn(flat round color="primary" icon="mdi-download" size="sm" @click.stop="$q.notify({message: 'Скачано', icon: 'mdi-check'} )").dd
+					q-btn(flat round color="primary" icon="mdi-download" size="sm" @click.stop="$q.notify({message: 'Запись скачана', icon: 'mdi-check'} )").dd
 
 
 q-dialog(v-model="player" no-backdrop-dismiss no-shake seamless position="bottom").player
@@ -46,7 +55,7 @@ Teleport(to="#speech")
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect, watch, computed } from 'vue'
+import { ref, watch, computed } from 'vue'
 import type { Ref } from 'vue'
 import { records } from '@/stores/operators'
 import { useStore } from '@/stores/store'
@@ -76,6 +85,16 @@ interface Row {
 	client: string
 }
 
+const table: any = ref(null)
+const shownRows = ref([10, 20, 50])
+const togg = () => {
+	table.value.toggleFullscreen()
+	table.value.setPagination({
+		rowsPerPage: 0,
+	})
+}
+
+const filter = ref('')
 const mystore = useStore()
 const rec = ref(false)
 const selected: Ref<Row[]> = ref([])
@@ -150,7 +169,7 @@ const columns: RecordColumn[] = [
 	font-weight: 600;
 }
 .table {
-	margin-bottom: 6rem;
+	// margin-bottom: 6rem;
 }
 .rel {
 	position: relative;

@@ -22,7 +22,7 @@
 	.bt
 		q-btn(color="primary" flat label="Добавить к сравнению")
 		div
-			q-btn(color="primary" icon="mdi-star"  label="Сохранить" @click="dialog = !dialog").q-mr-sm
+			q-btn(color="primary" icon="mdi-star-outline"  label="Сохранить" @click="dialog = !dialog").q-mr-sm
 			q-btn(color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
 		q-btn(flat label="Добавить к сравнению"  @click="dialog = !dialog" disabled style="visibility: hidden;")
 

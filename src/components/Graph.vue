@@ -24,23 +24,23 @@ q-expansion-item(v-model="mystore.integral")
 					q-markup-table.tab
 						tr
 							td.desc Всего разговоров
-							td 98
-							td 34%
+							td 158
+							td 100%
 						tr
 							td.desc
 								span.blue Соответствует сценарию
-							td 45
-							td 6%
+							td 80
+							td 51%
 						tr
 							td.desc
 								span.green Частично соответствуют
-							td 12
-							td 4%
+							td 55
+							td 35%
 						tr
 							td.desc
 								span.orange Не соответствуют
-							td 5
-							td 7%
+							td 23
+							td 15%
 			div
 				.zg Динамика за период
 				q-card
@@ -61,7 +61,7 @@ const options = {
 	chart: {
 		type: 'donut',
 	},
-	labels: ['Не соответствует сценарию', 'Соответствует сценарию'],
+	labels: ['Соответствует', 'Частично', 'Не соответстует'],
 	legend: {
 		show: false,
 		position: 'bottom',
@@ -70,7 +70,27 @@ const options = {
 		pie: {
 			donut: {
 				size: '50%',
+				labels: {
+					show: true,
+					name: {
+						show: true,
+						label: 'fuck',
+					},
+					total: {
+						show: true,
+						label: 'Всего',
+					},
+				},
 			},
+		},
+	},
+	dataLabels: {
+		enabled: true,
+		formatter: function (val: number) {
+			return Math.round(val) + '%'
+		},
+		dropShadow: {
+			enabled: true,
 		},
 	},
 }

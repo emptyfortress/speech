@@ -12,7 +12,4 @@ const mystore = useStore()
 
 <style scoped lang="scss">
 //@import '@/assets/css/colors.scss';
-.rd.speech {
-	background: pink;
-}
 </style>
