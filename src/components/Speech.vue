@@ -5,13 +5,13 @@
 		q-btn(flat color="blue-5" padding="xs" :label="talk.time" size="md")
 		q-chat-message(name="оператор"
 			:text="[talk.text]"
-			bg-color="blue-6"
+			bg-color="blue-3"
 			).receive
 	.grid(v-else)
 		q-btn(flat color="primary" padding="xs" :label="talk.time" size="md")
 		q-chat-message(name="клиент"
 			:text="[talk.text]"
-			bg-color="blue-grey-5"
+			bg-color="blue-grey-3"
 			sent).sent
 
 </template>
