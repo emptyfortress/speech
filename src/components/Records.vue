@@ -12,9 +12,18 @@ q-expansion-item(v-model="rec")
 			:selected-rows-label="getSelectedString"
 			v-model:selected="selected"
 			rows-per-page-label="Записей на странице"
-			:rows-per-page-options='[10, 20, 50]'
-			@row-click="(evt, row, index) => select(row)").table
+			:rows-per-page-options='[10, 20, 50]').table
 			template(v-slot:body-selection)
+			template(v-slot:body="props")
+				q-tr(:props="props" @click="select(props.row)").rel
+					q-td
+					q-td(key="date" :props="props") {{ props.row.date }}
+					q-td(key="operator") {{props.row.operator}}
+					q-td(key="client") {{props.row.client}}
+					q-td(key="group") {{props.row.group}}
+					q-td(key="record") {{props.row.record}}
+					q-btn(flat round color="primary" icon="mdi-download" size="sm" @click.stop="$q.notify({message: 'Скачано', icon: 'mdi-check'} )").dd
+
 
 q-dialog(v-model="player" no-backdrop-dismiss no-shake seamless position="bottom").player
 	q-card(style="width: 650px")
@@ -142,5 +151,20 @@ const columns: RecordColumn[] = [
 }
 .table {
 	margin-bottom: 6rem;
+}
+.rel {
+	position: relative;
+	.dd {
+		position: absolute;
+		top: 50%;
+		right: 1rem;
+		transform: translateY(-50%);
+		visibility: hidden;
+	}
+	&:hover {
+		.dd {
+			visibility: visible;
+		}
+	}
 }
 </style>
