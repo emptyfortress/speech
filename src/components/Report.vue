@@ -4,11 +4,9 @@ q-page(padding)
 		q-expansion-item(v-model="mystore.sett")
 			template(v-slot:header)
 				q-item-section(avatar)
-					q-avatar(icon="mdi-finance" flat)
+					q-avatar(icon="mdi-tune-variant" flat)
 				q-item-section
 					.zag Отчеты
-				q-item-section(side)
-					q-icon(name="mdi-tune-variant")
 			q-card-section.q-px-md
 				Starred
 				Options

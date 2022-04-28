@@ -20,8 +20,11 @@
 						q-btn(label="Cancel" color="primary" flat v-close-popup)
 						q-btn(label="OK" color="primary" flat v-close-popup)
 	.bt
-		q-btn(color="primary" icon="mdi-star"  label="Сохранить" @click="dialog = !dialog")
-		q-btn(color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
+		q-btn(color="primary" flat label="Добавить к сравнению")
+		div
+			q-btn(color="primary" icon="mdi-star"  label="Сохранить" @click="dialog = !dialog").q-mr-sm
+			q-btn(color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
+		q-btn(flat label="Добавить к сравнению"  @click="dialog = !dialog" disabled style="visibility: hidden;")
 
 q-dialog(v-model="dialog" persistent)
 	q-card.save
@@ -77,9 +80,9 @@ const date = ref('2019/03/01')
 }
 .bt {
 	grid-column: 1 / -1;
-	justify-self: center;
 	display: flex;
-	gap: 0.5rem;
+	justify-content: space-between;
+	align-items: center;
 }
 .label {
 	font-size: 0.8rem;

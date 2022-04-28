@@ -36,10 +36,10 @@ q-layout(view="hHh LpR fFf")
 	q-header().head
 		q-toolbar(shrink)
 			q-btn(dense flat round  @click="toggleLeftDrawer")
-				SvgIcon(name="sound" color="var(--q-accent)")
+				SvgIcon(name="sound" color="#1565c0")
 
 			q-toolbar-title(@click="toggleLeftDrawer").gt-sm.cursor-pointer
-				span Речевая платформа Speech Drive
+				span.hd Речевая платформа Speech Drive
 			q-space
 			q-btn(dense flat round @click="refresh").q-mr-sm
 				SvgIcon(name="refresh" :spin="isLoading" )
@@ -49,8 +49,8 @@ q-layout(view="hHh LpR fFf")
 			q-btn(dense round unelevated).q-mx-md
 				q-avatar(color="blue" size="30px")
 					img(src="@/assets/img/user0.svg")
+		q-linear-progress(indeterminate color="accent" size="3px" v-show="isLoading")
 
-	q-linear-progress(indeterminate color="accent" size="3px" v-show="isLoading")
 	Drawer(:show="mystore.leftDrawer")
 	DateDrawer
 	KeyDrawer
@@ -86,5 +86,10 @@ q-layout(view="hHh LpR fFf")
 	position: fixed;
 	top: 0;
 	left: 0;
+}
+.hd {
+	color: #777;
+	// text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+	// font-weight: 600;
 }
 </style>

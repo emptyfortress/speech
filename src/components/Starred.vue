@@ -53,6 +53,7 @@ const show = (e: any) => {
 	let message = e.label + ' - удалено.'
 	$q.notify({
 		message: message,
+		color: 'negative',
 		actions: [
 			{
 				label: 'Вернуть',

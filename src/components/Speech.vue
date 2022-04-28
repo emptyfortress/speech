@@ -2,16 +2,16 @@
 #speech
 .talk(v-for="talk in filterTalks")
 	.grid(v-if="talk.send")
-		q-btn(flat color="primary" padding="xs" :label="talk.time" size="md")
+		q-btn(flat color="blue-5" padding="xs" :label="talk.time" size="md")
 		q-chat-message(name="оператор"
 			:text="[talk.text]"
-			bg-color="blue-2"
+			bg-color="blue-6"
 			).receive
 	.grid(v-else)
 		q-btn(flat color="primary" padding="xs" :label="talk.time" size="md")
 		q-chat-message(name="клиент"
 			:text="[talk.text]"
-			bg-color="white"
+			bg-color="blue-grey-5"
 			sent).sent
 
 </template>
@@ -32,13 +32,14 @@ const filterTalks = computed(() => {
 		default:
 			return talks
 	}
-
-	return
 })
 </script>
 
 <style scoped lang="scss">
 //@import '@/assets/css/colors.scss';
+#speech {
+	color: white;
+}
 .talk {
 	padding: 0;
 	font-size: 0.9rem;

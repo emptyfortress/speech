@@ -31,6 +31,9 @@ body {
 	.rd {
 		padding: 1rem;
 		box-shadow: -1px 0 3px rgba(0, 0, 0, 0.3);
+		&.speech {
+			background: $blue-grey-9;
+		}
 	}
 }
 .date {
@@ -77,15 +80,9 @@ body {
 	}
 }
 .talk {
-	.q-message-avatar {
-		width: 22px;
-		height: 22px;
-		svg {
-			fill: red;
-		}
-	}
 	.q-message-name {
-		font-size: x-small;
+		font-size: 11px;
+		color: #fff;
 	}
 }
 

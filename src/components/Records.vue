@@ -30,6 +30,7 @@ q-dialog(v-model="player" no-backdrop-dismiss no-shake seamless position="bottom
 			q-btn(flat round icon="mdi-fast-forward")
 			q-space
 			.time 02:31
+			q-btn(round flat icon="mdi-dots-vertical" size="md")
 
 Teleport(to="#speech")
 	.recdate(v-if="selected.length") {{ selected[0].date}}

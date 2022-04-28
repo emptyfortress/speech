@@ -1,5 +1,5 @@
 <template lang="pug">
-q-drawer(v-model="mystore.speechDrawer" overlay side="right" :width="400" ).rd
+q-drawer(v-model="mystore.speechDrawer" overlay side="right" :width="400" ).rd.speech
 	Speech
 </template>
 
@@ -12,4 +12,7 @@ const mystore = useStore()
 
 <style scoped lang="scss">
 //@import '@/assets/css/colors.scss';
+.rd.speech {
+	background: pink;
+}
 </style>

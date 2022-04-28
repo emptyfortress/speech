@@ -6,7 +6,7 @@
 	q-input(ref="input" dense v-model="filter" autofocus clearable hide-bottom-space @clear="filter = ''")
 		template(v-slot:prepend)
 			q-icon(name="mdi-magnify")
-	q-icon(name="mdi-plus-circle" size="md" color="primary" v-show="filter.length > 2" @click="add").plus
+	//- q-icon(name="mdi-plus-circle" size="md" color="primary" v-show="filter.length > 2" ).plus
 
 q-list(dense)
 	q-item(v-for="item in filteredItems" clickable :key="item.key")
@@ -14,6 +14,11 @@ q-list(dense)
 			q-checkbox(v-model="selection" size="xs" dense :val="item.key" :label="item.key")
 		q-item-section(side)
 			q-icon(name="mdi-trash-can-outline" size="xs" @click="remove(item)")
+	template(v-if="filteredItems.length === 0")
+		.notfound
+			q-icon(name="mdi-emoticon-tongue-outline" size="sm" color="primary")
+			span.q-mx-sm Ничего нет.
+			q-btn(color="primary" label="Добавить" size="sm" unelevated @click="add")
 </template>
 
 <script setup lang="ts">
@@ -61,6 +66,8 @@ const add = () => {
 		}
 		items.value.push(temp)
 		items.value.sort(compare)
+		added(filter.value)
+		filter.value = ''
 	}
 }
 
@@ -74,6 +81,7 @@ const show = (e: keyword) => {
 	let message = e.key + ' - удалено.'
 	$q.notify({
 		message: message,
+		color: 'negative',
 		actions: [
 			{
 				label: 'Вернуть',
@@ -81,6 +89,15 @@ const show = (e: keyword) => {
 				handler: () => undo(e),
 			},
 		],
+	})
+}
+
+const added = (e: string) => {
+	let message = 'Добавлено ' + e
+	$q.notify({
+		color: 'positive',
+		message: message,
+		icon: 'mdi-check',
 	})
 }
 </script>
@@ -127,5 +144,10 @@ const show = (e: keyword) => {
 	display: flex;
 	justify-content: flex-start;
 	gap: 1rem;
+}
+.notfound {
+	margin-top: 1rem;
+	font-size: 0.9rem;
+	// text-align: center;
 }
 </style>
