@@ -52,6 +52,9 @@ body {
 .notific {
 	transition: all 0.4s ease;
 }
+.q-chip {
+	background: $accent2;
+}
 .q-chip--selected {
 	background: $primary;
 	color: white;

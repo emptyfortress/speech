@@ -54,13 +54,15 @@ const calc = computed(() => {
 	margin-right: 8px;
 	margin-bottom: 8px;
 	cursor: pointer;
-	background: #d9d9d9;
+	// background: #d9d9d9;
+	background: $accent2;
 	border-radius: 16px;
 	position: relative;
 	font-size: 0.9rem;
 	.count {
 		font-size: 0.8rem;
-		background: #7f8f96;
+		// background: #7f8f96;
+		background: #9c9c9c;
 		color: #fff;
 		padding: 0 4px;
 		border-radius: 8px;
