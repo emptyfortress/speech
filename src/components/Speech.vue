@@ -39,6 +39,7 @@ const filterTalks = computed(() => {
 //@import '@/assets/css/colors.scss';
 #speech {
 	color: white;
+	margin-bottom: 0.5rem;
 }
 .talk {
 	padding: 0;

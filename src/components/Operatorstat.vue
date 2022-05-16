@@ -21,8 +21,16 @@ q-expansion-item(v-model="oper").car
 				:pagination="pagination"
 				:selected-rows-label="getSelectedString"
 				rows-per-page-label="Записей на странице"
-				@row-click="(evt, row, index) => select(row)").table
+				).table
 				template(v-slot:body-selection)
+				template(v-slot:body="props")
+					q-tr(:props="props" @click="select(props.row)" :class="operClass(props.row)")
+						q-td(auto-width)
+						q-td(key="name") {{ props.row.name }}
+						q-td(key="total").text-right {{ props.row.total }}
+						q-td(key="good").text-right {{ props.row.good }}
+						q-td(key="percent").text-right {{ props.row.percent }}
+
 			q-card
 				q-card-section(v-if="!selected.length") Соответствие сценарию
 				q-card-section(v-else) {{ selected[0].name}}
@@ -176,6 +184,16 @@ const pagination = ref({
 })
 
 const operator = ref('')
+
+const operClass = (e: Row) => {
+	if (e.percent < 10) {
+		return 'pink'
+	}
+	if (e.percent > 30) {
+		return 'green'
+	}
+	return ''
+}
 </script>
 
 <style scoped lang="scss">
@@ -190,5 +208,14 @@ const operator = ref('')
 }
 .search {
 	width: 220px;
+}
+.pink {
+	background: #ffdbe1;
+}
+.green {
+	background: #bcf3c9;
+}
+.yellow {
+	background: #ffedb6;
 }
 </style>

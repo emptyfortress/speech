@@ -9,9 +9,7 @@ q-expansion-item(v-model="rec").car
 		q-table(ref="table"
 			:rows="records"
 			:columns="columns"
-			selection="single"
 			:selected-rows-label="getSelectedString"
-			v-model:selected="selected"
 			rows-per-page-label="Записей на странице"
 			:filter="filter"
 			:rows-per-page-options='shownRows').table
@@ -25,33 +23,28 @@ q-expansion-item(v-model="rec").car
 			template(v-slot:body-selection)
 			template(v-slot:body="props")
 				q-tr(:props="props" @click="select(props.row)").rel
-					q-td
 					q-td(key="date" :props="props") {{ props.row.date }}
 					q-td(key="operator") {{props.row.operator}}
 					q-td(key="client") {{props.row.client}}
 					q-td(key="group") {{props.row.group}}
-					q-td(key="record") {{props.row.record}}
+					q-td(key="record" v-html="props.row.record")
 					q-btn(flat round color="primary" icon="mdi-download" size="sm" @click.stop="$q.notify({message: 'Запись скачана', icon: 'mdi-check'} )").dd
-
-
-q-dialog(v-model="player" no-backdrop-dismiss no-shake seamless position="bottom").player
-	q-card(style="width: 650px")
-		q-btn(color="red" round icon="mdi-close" size="sm" @click="closePlayer").close
-		q-linear-progress(:value="0.6" color="red")
-		q-card-section.row.items-center.no-wrap
-			div
-				.text-weight-bold {{ selected[0].date}}
-				.oper Оператор: {{ selected[0].operator}}
-			q-space
-			q-btn(flat round icon="mdi-rewind")
-			q-btn(flat round icon="mdi-pause")
-			q-btn(flat round icon="mdi-fast-forward")
-			q-space
-			.time 02:31
-			q-btn(round flat icon="mdi-dots-vertical" size="md")
+					.myplayer(v-if="selected === props.row.id")
+						q-linear-progress(:value=".6" color="positive")
+						div {{props.row.date}}
+						div {{props.row.operator}}
+						.player
+							q-btn(round flat icon="mdi-rewind" @click.stop)
+							q-btn(round flat icon="mdi-pause" @click.stop)
+							q-btn(round flat icon="mdi-fast-forward" @click.stop)
+						.time 02:31
+						.row.items-center
+							q-icon(name="mdi-volume-medium" size="sm")
+							q-slider(color="primary" v-model="sound").slide
+							q-icon(name="mdi-volume-high" size="sm")
 
 Teleport(to="#speech")
-	.recdate(v-if="selected.length") {{ selected[0].date}}
+	.recdate(v-if="selected !== null") {{ records[selected].date}}
 </template>
 
 <script setup lang="ts">
@@ -83,6 +76,7 @@ interface Row {
 	record: string
 	operator: string
 	client: string
+	expand: boolean
 }
 
 const table: any = ref(null)
@@ -96,38 +90,22 @@ const togg = () => {
 
 const filter = ref('')
 const mystore = useStore()
-const rec = ref(false)
-const selected: Ref<Row[]> = ref([])
+const rec = ref(true)
 
-const player = computed(() => {
-	if (selected.value.length) {
-		mystore.setRecord(selected.value[0].group)
-		mystore.openSpeechDrawer()
-		return true
-	} else {
-		mystore.closeSpeechDrawer()
-		return false
-	}
-})
-
-const closePlayer = () => {
-	selected.value = []
-}
-
-watch(rec, (value) => {
-	if (value === false) {
-		selected.value = []
-	}
-})
+const selected: Ref<number | null> = ref(null)
 
 const select = (e: Row) => {
-	if (selected.value.length === 0) {
-		selected.value.push(e)
-	} else if (selected.value[0].id === e.id) {
-		selected.value = []
+	if (selected.value === null) {
+		selected.value = e.id
+		mystore.setRecord(e.group)
+		mystore.openSpeechDrawer()
+	} else if (selected.value === e.id) {
+		selected.value = null
+		mystore.setRecord('группа1')
+		mystore.closeSpeechDrawer()
 	} else {
-		selected.value = []
-		selected.value.push(e)
+		selected.value = e.id
+		mystore.setRecord(e.group)
 	}
 }
 
@@ -135,44 +113,24 @@ const getSelectedString = (e: number) => {
 	return `Выбрана ${e} запись`
 }
 
+const sound = ref(50)
+
 const columns: RecordColumn[] = [
 	{ name: 'date', label: 'Дата, время', align: 'left', field: 'date', sortable: true },
 	{ name: 'operator', label: 'Оператор', align: 'left', field: 'operator', sortable: true },
 	{ name: 'client', label: 'Клиент', align: 'left', field: 'client', sortable: true },
 	{ name: 'group', label: 'Группа', align: 'left', field: 'group', sortable: true },
-	{ name: 'record', label: 'Запись', align: 'left', field: 'record', sortable: true },
+	{ name: 'record', label: 'Контекст', align: 'left', field: 'record', sortable: false },
 ]
 </script>
 
 <style scoped lang="scss">
-//@import '@/assets/css/colors.scss';
-.player .q-card {
-	background: $blue-grey-9;
-	color: white;
-	position: relative;
-	overflow: visible;
-	.close {
-		position: absolute;
-		top: -13px;
-		right: -13px;
-	}
-	.oper {
-		color: #6d8e9e;
-	}
-	.time {
-		font-size: 2rem;
-		font-weight: lighter;
-		letter-spacing: 1px;
-	}
-}
 .recdate {
 	font-weight: 600;
 }
-.table {
-	// margin-bottom: 6rem;
-}
 .rel {
 	position: relative;
+	cursor: pointer;
 	.dd {
 		position: absolute;
 		top: 50%;
@@ -184,6 +142,45 @@ const columns: RecordColumn[] = [
 		.dd {
 			visibility: visible;
 		}
+	}
+}
+td.ellipsis {
+	max-width: 400px;
+}
+.myplayer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: $blue-grey-9;
+	color: #6d8e9e;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding-left: 1rem;
+	gap: 2rem;
+	font-size: 0.9rem;
+	.q-linear-progress {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	.player {
+		color: white;
+		display: flex;
+		justify-items: flex-start;
+		align-items: center;
+		height: 100%;
+	}
+	.time {
+		font-size: 2rem;
+		font-weight: lighter;
+		letter-spacing: 1px;
+		color: white;
+	}
+	.slide {
+		width: 150px;
 	}
 }
 </style>
