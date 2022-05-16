@@ -31,8 +31,8 @@ q-expansion-item(v-model="rec").car
 					q-btn(flat round color="primary" icon="mdi-download" size="sm" @click.stop="$q.notify({message: 'Запись скачана', icon: 'mdi-check'} )").dd
 					.myplayer(v-if="selected === props.row.id")
 						q-linear-progress(:value=".6" color="positive")
-						div {{props.row.date}}
-						div {{props.row.operator}}
+						div(v-if="!mystore.wide") {{props.row.date}}
+						div(v-if="!mystore.wide") {{props.row.operator}}
 						.player
 							q-btn(round flat icon="mdi-rewind" @click.stop)
 							q-btn(round flat icon="mdi-pause" @click.stop)

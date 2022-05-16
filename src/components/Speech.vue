@@ -1,5 +1,7 @@
 <template lang="pug">
-#speech
+.row.justify-between.items-center
+	q-btn(flat round icon="mdi-unfold-more-vertical" color="white" size="md" @click="mystore.wide = !mystore.wide")
+	#speech
 .talk(v-for="talk in filterTalks")
 	.grid(v-if="talk.send")
 		q-btn(flat color="blue-5" padding="xs" :label="talk.time" size="md")

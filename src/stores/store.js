@@ -15,6 +15,7 @@ export const useStore = defineStore({
 		sett: false,
 		integral: false,
 		record: 'группа 1',
+		wide: false,
 	}),
 	getters: {},
 
