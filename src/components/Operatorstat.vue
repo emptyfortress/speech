@@ -6,6 +6,10 @@ q-expansion-item(v-model="oper").car
 
 		q-item-section
 			.zag Операторы
+		q-item-section(v-if="oper" side @click.stop)
+			q-input(v-model="operator" dense debounce="300" color="primary" clearable).search
+				template(v-slot:prepend)
+					q-icon(name="mdi-magnify")
 	q-card-section.q-px-md.q-pt-md
 		.grid
 			q-table(:rows="rows"
@@ -13,6 +17,8 @@ q-expansion-item(v-model="oper").car
 				row-key="name"
 				selection="single"
 				v-model:selected="selected"
+				binary-state-sort
+				:pagination="pagination"
 				:selected-rows-label="getSelectedString"
 				rows-per-page-label="Записей на странице"
 				@row-click="(evt, row, index) => select(row)").table
@@ -55,6 +61,7 @@ interface Row {
 	notgood: number
 	bad: number
 	total: number
+	percent: number
 }
 
 const columns: MyColumns[] = [
@@ -82,22 +89,15 @@ const columns: MyColumns[] = [
 		field: 'good',
 		sortable: true,
 	},
-	// {
-	// 	name: 'notgood',
-	// 	required: false,
-	// 	label: 'Частично соответствует',
-	// 	align: 'right',
-	// 	field: 'notgood',
-	// 	sortable: true,
-	// },
-	// {
-	// 	name: 'bad',
-	// 	required: false,
-	// 	label: 'Не соответствует',
-	// 	align: 'right',
-	// 	field: 'bad',
-	// 	sortable: true,
-	// },
+	{
+		name: 'percent',
+		required: false,
+		label: '%',
+		align: 'right',
+		field: 'percent',
+		sortable: true,
+		format: (val, row) => `${val}%`,
+	},
 ]
 
 const rows = operators
@@ -167,6 +167,15 @@ const options1 = {
 		type: 'bar',
 	},
 }
+
+const pagination = ref({
+	sortBy: 'total' as keyof Row,
+	descending: true,
+	page: 1,
+	rowsPerPage: 5,
+})
+
+const operator = ref('')
 </script>
 
 <style scoped lang="scss">
@@ -178,5 +187,8 @@ const options1 = {
 	.q-card {
 		min-height: 100px;
 	}
+}
+.search {
+	width: 220px;
 }
 </style>
