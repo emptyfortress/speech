@@ -90,9 +90,16 @@ const togg = () => {
 
 const filter = ref('')
 const mystore = useStore()
-const rec = ref(true)
+const rec = ref(false)
 
 const selected: Ref<number | null> = ref(null)
+
+watch(rec, (value, oldvalue) => {
+	if (value === false) {
+		selected.value = null
+		mystore.speechDrawer = false
+	}
+})
 
 const select = (e: Row) => {
 	if (selected.value === null) {

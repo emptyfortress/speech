@@ -2,16 +2,16 @@
 .grid
 	div
 		.label Регион
-		q-select(v-model="regModel"  :options="region" filled dense bg-color="white")
+		q-select(v-model="regModel"  :options="region" outlined dense bg-color="white")
 	div
 		.label Группа
-		q-select(v-model="groupModel"  :options="group" filled dense bg-color="white")
+		q-select(v-model="groupModel"  :options="group" outlined dense bg-color="white")
 	div
 		.label Оператор
-		q-select(v-model="operModel"  :options="operator" filled dense bg-color="white")
+		q-select(v-model="operModel"  :options="operator" outlined dense bg-color="white")
 	div
 		.label Период
-		q-select(v-model="perModel"  :options="period" filled dense bg-color="white")
+		q-select(v-model="perModel"  :options="period" outlined dense bg-color="white")
 	div
 		q-btn(flat round icon="mdi-calendar")
 			q-popup-proxy( cover transition-show="scale" transition-hide="scale")
@@ -24,7 +24,7 @@
 		div
 			q-btn(unelevated color="primary" icon="mdi-star-outline"  label="Сохранить" @click="dialog = !dialog").q-mr-sm
 			q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
-		q-btn(flat label="Добавить к сравнению"  @click="dialog = !dialog" disabled style="visibility: hidden;")
+		q-btn(flat color="primary" label="Сбросить").q-mr-sm
 
 q-dialog(v-model="dialog" persistent)
 	q-card.save

@@ -8,6 +8,7 @@
 			use-chips
 			multiple
 			clearable
+			outlined
 			input-debounce="0"
 			:options="options"
 			@filter="filterFn"
@@ -18,14 +19,14 @@
 					q-item-section No results
 	div
 		.label Тип искомых слов
-		q-select(v-model="typmodel"  :options="typ" filled dense bg-color="white")
+		q-select(v-model="typmodel" outlined  :options="typ" dense bg-color="white")
 
 	div
 		.label Положение слова в записи
-		q-select(v-model="placemodel"  :options="place" filled dense bg-color="white")
+		q-select(v-model="placemodel"  outlined :options="place" dense bg-color="white")
 	div
 		.label Канал
-		q-select(v-model="channelmodel"  :options="channel" filled dense bg-color="white")
+		q-select(v-model="channelmodel" outlined  :options="channel" dense bg-color="white")
 </template>
 
 <script setup>

@@ -2,7 +2,7 @@
 q-expansion-item(v-model="stat").car.white
 	template(v-slot:header)
 		q-item-section(avatar)
-			q-avatar(icon="mdi-key-variant" flat)
+			q-avatar(icon="mdi-dice-5-outline" flat)
 		q-item-section
 			.zag Частотность
 	q-card-section.q-px-md.q-pt-md
