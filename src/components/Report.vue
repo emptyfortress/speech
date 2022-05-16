@@ -1,7 +1,7 @@
 <template lang="pug">
 q-page(padding)
 	.container
-		q-expansion-item(v-model="mystore.sett")
+		q-expansion-item(v-model="mystore.sett").car
 			template(v-slot:header)
 				q-item-section(avatar)
 					q-avatar(icon="mdi-tune-variant" flat)
@@ -32,4 +32,7 @@ const mystore = useStore()
 
 <style scoped lang="scss">
 //@import '@/assets/css/colors.scss';
+.car .q-expansion-item__content {
+	background: white;
+}
 </style>

@@ -96,3 +96,10 @@ body {
 .q-expansion-item--collapsed:not(:last-child) {
 	border-bottom: 1px dotted #999;
 }
+
+.car.q-expansion-item.q-expansion-item--expanded .q-expansion-item__container {
+	background: white;
+	margin-bottom: 1rem;
+	box-shadow: $card-shadow;
+	border-radius: $radius-md;
+}

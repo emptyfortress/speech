@@ -18,7 +18,7 @@ export default defineConfig({
 		}),
 
 		quasar({
-			sassVariables: 'src/quasar-variables.sass',
+			sassVariables: 'src/quasar-variables.scss',
 		}),
 
 		createSvgIconsPlugin({
