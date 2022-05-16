@@ -109,10 +109,4 @@ const click = (e: any) => {
 	transform: translateY(-7px);
 	width: 230px;
 }
-.test {
-	padding: 1rem;
-	background: pink;
-	margin: 0.5rem;
-	display: inline-block;
-}
 </style>

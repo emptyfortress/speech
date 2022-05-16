@@ -69,7 +69,7 @@ q-layout(view="hHh LpR fFf")
 
 .head {
 	color: $text-bright;
-	// background: $mainBg;
+	// background: $bgMain;
 	background: rgba(0, 0, 0, 0.07);
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);

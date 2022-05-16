@@ -5,7 +5,7 @@ body {
 	font-size: $font-size;
 	color: $text-color;
 	// background-color: #0000001a;
-	background-color: $mainBg;
+	background-color: $bgMain;
 }
 
 .container {
@@ -27,7 +27,7 @@ body {
 }
 
 .q-drawer {
-	background: $mainBg;
+	background: $bgMain;
 	.rd {
 		padding: 1rem;
 		box-shadow: -1px 0 3px rgba(0, 0, 0, 0.3);
@@ -49,11 +49,15 @@ body {
 	box-shadow: $card-shadow;
 	cursor: pointer;
 }
+.q-card--flat {
+	border: 1px solid $bgHead;
+}
 .notific {
 	transition: all 0.4s ease;
 }
 .q-chip {
-	background: $accent2;
+	// background: $accent2;
+	background: $bgHead;
 }
 .q-chip--selected {
 	background: $primary;
@@ -98,8 +102,25 @@ body {
 }
 
 .car.q-expansion-item.q-expansion-item--expanded .q-expansion-item__container {
-	background: white;
+	// background: $bgLight;
+	// background: white;
 	margin-bottom: 1rem;
-	box-shadow: $card-shadow;
+	margin-top: 1rem;
+	box-shadow: $big-shadow;
 	border-radius: $radius-md;
+	transition: 0.5s ease all;
+	.q-item {
+		background: $bgHead;
+		border-radius: $radius-md $radius-md 0 0;
+		border: 1px solid white;
+		border-bottom: none;
+	}
+}
+.car .q-expansion-item__content {
+	border: 1px solid white;
+	border-radius: 0 0 $radius-md $radius-md;
+	border-top: none;
+}
+.car.white .q-expansion-item__content {
+	background: white !important;
 }

@@ -1,11 +1,11 @@
 <template lang="pug">
-q-expansion-item(v-model="rec")
+q-expansion-item(v-model="rec").car
 	template(v-slot:header)
 		q-item-section(avatar)
 			q-avatar(icon="mdi-record-circle-outline" flat)
 		q-item-section
 			.zag Записи сеансов обслуживания
-	q-card-section.q-px-md.q-pt-none
+	q-card-section.q-px-md
 		q-table(ref="table"
 			:rows="records"
 			:columns="columns"

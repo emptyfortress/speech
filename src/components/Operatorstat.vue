@@ -1,11 +1,11 @@
 <template lang="pug">
-q-expansion-item(v-model="oper")
+q-expansion-item(v-model="oper").car
 	template(v-slot:header)
 		q-item-section(avatar)
 			q-avatar(icon="mdi-headset" flat)
 
 		q-item-section
-			.zag Статистика по операторам
+			.zag Операторы
 	q-card-section.q-px-md.q-pt-md
 		.grid
 			q-table(:rows="rows"
@@ -54,6 +54,7 @@ interface Row {
 	good: number
 	notgood: number
 	bad: number
+	total: number
 }
 
 const columns: MyColumns[] = [
@@ -66,6 +67,14 @@ const columns: MyColumns[] = [
 		sortable: true,
 	},
 	{
+		name: 'total',
+		required: false,
+		label: 'Всего звонков',
+		align: 'right',
+		field: 'total',
+		sortable: true,
+	},
+	{
 		name: 'good',
 		required: false,
 		label: 'Соответствует сценарию',
@@ -73,22 +82,22 @@ const columns: MyColumns[] = [
 		field: 'good',
 		sortable: true,
 	},
-	{
-		name: 'notgood',
-		required: false,
-		label: 'Частично соответствует',
-		align: 'right',
-		field: 'notgood',
-		sortable: true,
-	},
-	{
-		name: 'bad',
-		required: false,
-		label: 'Не соответствует',
-		align: 'right',
-		field: 'bad',
-		sortable: true,
-	},
+	// {
+	// 	name: 'notgood',
+	// 	required: false,
+	// 	label: 'Частично соответствует',
+	// 	align: 'right',
+	// 	field: 'notgood',
+	// 	sortable: true,
+	// },
+	// {
+	// 	name: 'bad',
+	// 	required: false,
+	// 	label: 'Не соответствует',
+	// 	align: 'right',
+	// 	field: 'bad',
+	// 	sortable: true,
+	// },
 ]
 
 const rows = operators
@@ -136,7 +145,7 @@ const options = {
 	plotOptions: {
 		pie: {
 			donut: {
-				size: '50%',
+				size: '70%',
 			},
 		},
 	},

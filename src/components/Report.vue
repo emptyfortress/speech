@@ -7,7 +7,7 @@ q-page(padding)
 					q-avatar(icon="mdi-tune-variant" flat)
 				q-item-section
 					.zag Отчеты
-			q-card-section.q-px-md
+			q-card-section
 				Starred
 				Options
 				Options1
@@ -32,7 +32,4 @@ const mystore = useStore()
 
 <style scoped lang="scss">
 //@import '@/assets/css/colors.scss';
-.car .q-expansion-item__content {
-	background: white;
-}
 </style>

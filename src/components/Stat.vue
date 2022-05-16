@@ -1,14 +1,14 @@
 <template lang="pug">
-q-expansion-item(v-model="stat")
+q-expansion-item(v-model="stat").car.white
 	template(v-slot:header)
 		q-item-section(avatar)
 			q-avatar(icon="mdi-key-variant" flat)
 		q-item-section
-			.zag Статистика по ключевым словам
+			.zag Частотность
 	q-card-section.q-px-md.q-pt-md
 		.toolbar
 			q-select(label="Сортировка" v-model="sort" :options="sortModel" dense)
-			q-select(label="Часть речи" v-model="part" :options="partModel" dense)
+			q-select(label="Словарь" v-model="part" :options="partModel" dense)
 			q-input(v-model="filter" dense clearable @clear="filter = ''")
 				template(v-slot:prepend)
 					q-icon(name="mdi-magnify")

@@ -1,5 +1,5 @@
 <template lang="pug">
-q-expansion-item(v-model="mystore.integral")
+q-expansion-item(v-model="mystore.integral").car
 	template(v-slot:header)
 		q-item-section(avatar)
 			q-avatar(icon="mdi-abacus" flat)
@@ -69,7 +69,7 @@ const options = {
 	plotOptions: {
 		pie: {
 			donut: {
-				size: '50%',
+				size: '70%',
 				labels: {
 					show: true,
 					name: {
