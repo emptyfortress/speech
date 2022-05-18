@@ -11,7 +11,7 @@ q-page(padding).rel
 			q-card-section
 				component(:is="Chiplist" :chips="logicRec" :multiple="false" :tooltip="false")
 					template(v-slot:header)
-						q-icon(name="mdi-bookmark-outline").q-mr-sm
+						q-icon(name="mdi-star-outline").q-mr-sm
 						|Мои запросы
 			q-card-section.q-py-none
 				component(:is="CommonOptions")
@@ -41,7 +41,7 @@ import { useStore } from '@/stores/store'
 
 import { logicRec } from '@/stores/data'
 
-const dialog = ref(false)
+const dialog = ref(true)
 const maximizedToggle = ref(true)
 
 const mystore = useStore()

@@ -137,3 +137,16 @@ body {
 span.found {
 	background: yellow;
 }
+
+.q-splitter--vertical > .q-splitter__separator {
+	width: 2px;
+	background: transparent;
+}
+.q-splitter--vertical > .q-splitter__separator:hover,
+.q-splitter--vertical > .q-splitter__separator:active {
+	border-left: 2px dotted black;
+}
+
+.query .q-placeholder::placeholder {
+	opacity: 0.3;
+}
