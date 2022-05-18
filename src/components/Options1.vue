@@ -1,30 +1,11 @@
 <template lang="pug">
-.grid
+CommonOptions
+.bt
+	q-btn(color="primary" flat label="Добавить к сравнению")
 	div
-		.label Регион
-		q-select(v-model="regModel"  :options="region" outlined dense bg-color="white")
-	div
-		.label Группа
-		q-select(v-model="groupModel"  :options="group" outlined dense bg-color="white")
-	div
-		.label Оператор
-		q-select(v-model="operModel"  :options="operator" outlined dense bg-color="white")
-	div
-		.label Период
-		q-select(v-model="perModel"  :options="period" outlined dense bg-color="white")
-	div
-		q-btn(flat round icon="mdi-calendar")
-			q-popup-proxy( cover transition-show="scale" transition-hide="scale")
-				q-date(v-model="date" range)
-					.row.items-center.justify-end.q-gutter-sm
-						q-btn(label="Cancel" color="primary" flat v-close-popup)
-						q-btn(label="OK" color="primary" flat v-close-popup)
-	.bt
-		q-btn(color="primary" flat label="Добавить к сравнению")
-		div
-			q-btn(unelevated color="primary" icon="mdi-star-outline"  label="Сохранить" @click="dialog = !dialog").q-mr-sm
-			q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
-		q-btn(flat color="primary" label="Сбросить").q-mr-sm
+		q-btn(unelevated color="primary" icon="mdi-star-outline"  label="Сохранить" @click="dialog = !dialog").q-mr-sm
+		q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
+	q-btn(flat color="primary" label="Сбросить").q-mr-sm
 
 q-dialog(v-model="dialog" persistent)
 	q-card.save
@@ -43,6 +24,7 @@ q-dialog(v-model="dialog" persistent)
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useStore } from '@/stores/store'
+import CommonOptions from '@/components/common/CommonOptions.vue'
 
 const mystore = useStore()
 const toggle = () => {
@@ -55,31 +37,10 @@ const toggle = () => {
 }
 const dialog = ref(false)
 const name = ref('')
-
-const region = ['Все', 'Не определен']
-const group = ['Все', 'Не все', 'Самые-самые']
-const operator = ['Все', 'Катя', 'Маша', 'Миша']
-const period = ['Последние 30 дней', 'Прошлый месяц', 'Текущий месяц', 'Сегодня']
-
-const regModel = ref('Все')
-const perModel = ref('Последние 30 дней')
-const groupModel = ref('Все')
-const operModel = ref('Все')
-const date = ref('2019/03/01')
 </script>
 
 <style scoped lang="scss">
-//@import '@/assets/css/colors.scss';
-.grid {
-	margin-top: 1rem;
-	margin-bottom: 1rem;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 30px;
-	align-items: flex-end;
-	gap: 1rem;
-}
 .bt {
-	grid-column: 1 / -1;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

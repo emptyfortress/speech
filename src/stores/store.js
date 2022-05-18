@@ -13,6 +13,7 @@ export const useStore = defineStore({
 		keys: [],
 		chips: [],
 		sett: true,
+		req: true,
 		integral: false,
 		record: 'группа 1',
 		wide: false,

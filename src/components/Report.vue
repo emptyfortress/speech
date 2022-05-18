@@ -13,18 +13,17 @@ q-page(padding)
 						q-icon(name="mdi-star-outline").q-mr-sm
 						|Избранное
 
-				//- Starred
 				Options
 				Options1
 		Graph
 		Stat
 		Operatorstat
 		Records
+
 </template>
 
 <script setup lang="ts">
 import { useStore } from '@/stores/store'
-import Starred from '@/components/Starred.vue'
 import Options from '@/components/Options.vue'
 import Options1 from '@/components/Options1.vue'
 import Graph from '@/components/Graph.vue'

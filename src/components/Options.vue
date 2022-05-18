@@ -17,22 +17,18 @@
 			template(v-slot:no-option)
 				q-item.text-grey
 					q-item-section No results
-	div
-		.label Тип искомых слов
-		q-select(v-model="typmodel" outlined  :options="typ" dense bg-color="white")
 
-	div
-		.label Положение слова в записи
-		q-select(v-model="placemodel"  outlined :options="place" dense bg-color="white")
-	div
-		.label Канал
-		q-select(v-model="channelmodel" outlined  :options="channel" dense bg-color="white")
+	MySelect(label="Тип искомых слов" :model="typmodel" :options="typ")
+	MySelect(label="Положение слова в записи" :model="placemodel" :options="place")
+	MySelect(label="Канал" :model="channelmodel" :options="channel")
+
 </template>
 
 <script setup>
 import { ref, reactive } from 'vue'
 import { words } from '@/stores/list'
 import { useStore } from '@/stores/store'
+import MySelect from '@/components/common/MySelect.vue'
 
 const typ = ['Рекомендованные', 'Запрещенные']
 const place = ['Весь файл', 'Первые', 'Последние']

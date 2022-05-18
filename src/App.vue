@@ -58,8 +58,7 @@ q-layout(view="hHh LpR fFf")
 
 	q-page-container
 		router-view(v-slot="{ Component, route }")
-			transition(:name="route.meta.transition || 'fade'")
-				component(:is="Component")
+			component(:is="Component")
 	transition(name="fade")
 		#siri(v-show="isLoading")
 </template>

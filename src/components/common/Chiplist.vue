@@ -85,11 +85,11 @@ const undo = (e: Chip) => {
 
 const click = (e: Chip) => {
 	if (props.multiple === true) {
-	if (e.selected === true) {
-		mystore.addKey(e.value)
-	} else {
-		mystore.removeKey(e)
-	}
+		if (e.selected === true) {
+			mystore.addKey(e.value)
+		} else {
+			mystore.removeKey(e)
+		}
 	} else {
 		if (e.selected === true) {
 			chips.map((item) => (item.selected = false))
