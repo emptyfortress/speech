@@ -28,6 +28,13 @@ import { useStore } from '@/stores/store'
 import { useQuasar } from 'quasar'
 import { starredReports } from '@/stores/data'
 
+const props = defineProps({
+	chips: {
+		type: String,
+		default: 'test',
+	},
+})
+
 const mystore = useStore()
 const init = mystore.setChips(starredReports)
 const chips = reactive(starredReports)

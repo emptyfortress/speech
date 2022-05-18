@@ -81,6 +81,7 @@ export const useStore = defineStore({
 		},
 		clearSelected() {
 			this.chips.map((item) => (item.selected = false))
+			this.keys = []
 		},
 	},
 })

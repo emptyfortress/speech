@@ -8,29 +8,47 @@
 			template(v-slot:prepend)
 				q-icon(name="mdi-magnify")
 	q-card-section
-		q-chip(v-for="(item,index) in chips"
+		q-chip(v-for="(item,index) in filteredChips"
 			v-model:selected="item.selected"
 			:key="item.id"
 			:removable="editMode"
 			:class="chipClass"
 			clickable
 			@remove="removeChip(index)"
-			@click="click(item)")
-			slot(name="content")
-			//- q-tooltip(anchor="top middle" self="bottom middle" :delay="800") {{ item.label}}
+			@click="click(item)").rel
+			.inf(@click.stop) ?
+				q-menu(transition-show="jump-down" transition-hide="jump-up" anchor="bottom middle" self="top middle")
+					.infmenu
+						.zg {{item.label}}
+						.desc Здесь информация что это за запрос? Когда и кем создан и тп.
+			.ellipsis
+				|{{ item.label}}
+			q-tooltip(v-if="props.tooltip" anchor="top middle" self="bottom middle" :delay="800") {{ item.label}}
 </template>
 
 <script setup lang="ts">
 import { ref, computed, reactive } from 'vue'
 import { useStore } from '@/stores/store'
 import { useQuasar } from 'quasar'
-import { starredReports } from '@/stores/data'
+
+const props = defineProps<{
+	chips: Chip[]
+	multiple: boolean
+	tooltip: boolean
+}>()
 
 const mystore = useStore()
-const init = mystore.setChips(starredReports)
-const chips = reactive(starredReports)
-
+const init = mystore.setChips(props.chips)
 const filter = ref('')
+
+const chips = reactive(props.chips)
+const filteredChips = computed(() => {
+	if (filter.value.length > 0) {
+		return chips.filter((item) => item.label.includes(filter.value))
+	}
+	return chips
+})
+
 const editMode = ref(false)
 const toggleEdit = () => (editMode.value = !editMode.value)
 
@@ -47,7 +65,7 @@ const removeChip = (e: number) => {
 }
 
 const $q = useQuasar()
-const show = (e: any) => {
+const show = (e: Chip) => {
 	let message = e.label + ' - удалено.'
 	$q.notify({
 		message: message,
@@ -61,15 +79,25 @@ const show = (e: any) => {
 		],
 	})
 }
-const undo = (e: any) => {
+const undo = (e: Chip) => {
 	chips.push(e)
 }
 
-const click = (e: any) => {
+const click = (e: Chip) => {
+	if (props.multiple === true) {
 	if (e.selected === true) {
 		mystore.addKey(e.value)
 	} else {
 		mystore.removeKey(e)
+	}
+	} else {
+		if (e.selected === true) {
+			chips.map((item) => (item.selected = false))
+			mystore.addKey(e.value)
+			e.selected = true
+		} else {
+			mystore.removeKey(e)
+		}
 	}
 }
 </script>
@@ -106,5 +134,29 @@ const click = (e: any) => {
 .q-input {
 	transform: translateY(-7px);
 	width: 230px;
+}
+.inf {
+	color: $primary;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background: white;
+	border-radius: 20px;
+	top: 4px;
+	right: 4px;
+	text-align: center;
+	font-size: 1rem;
+	font-weight: bold;
+	line-height: 20px;
+}
+.infmenu {
+	padding: 1rem;
+	.zg {
+		font-size: 0.9rem;
+		font-weight: bold;
+	}
+	.desc {
+		font-size: 0.8rem;
+	}
 }
 </style>

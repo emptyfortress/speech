@@ -8,11 +8,19 @@ q-page(padding)
 				q-item-section
 					.zag Логические запросы
 			q-card-section
-				Requestlist
+				Chiplist(:chips="logicRec" :multiple="false" :tooltip="false")
+					template(v-slot:header)
+						q-icon(name="mdi-star-outline").q-mr-sm
+						|Избранное
+
+				//- Requestlist
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import Chiplist from '@/components/common/Chiplist.vue'
+import { logicRec } from '@/stores/data'
+
 import Requestlist from '@/components/Requestlist.vue'
 
 const req = ref(true)

@@ -8,7 +8,12 @@ q-page(padding)
 				q-item-section
 					.zag Отчеты
 			q-card-section
-				Starred
+				Chiplist(:chips="starredReports" :multiple="true" :tooltip="true")
+					template(v-slot:header)
+						q-icon(name="mdi-star-outline").q-mr-sm
+						|Избранное
+
+				//- Starred
 				Options
 				Options1
 		Graph
@@ -26,6 +31,8 @@ import Graph from '@/components/Graph.vue'
 import Stat from '@/components/Stat.vue'
 import Operatorstat from '@/components/Operatorstat.vue'
 import Records from '@/components/Records.vue'
+import Chiplist from '@/components/common/Chiplist.vue'
+import { starredReports } from '@/stores/data'
 
 const mystore = useStore()
 </script>

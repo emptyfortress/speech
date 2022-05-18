@@ -1,9 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Report from '@/components/Report.vue'
-import Compare from '@/components/Compare.vue'
-import Conversation from '@/components/Conversation.vue'
-import Requests from '@/components/Requests.vue'
-import Checklists from '@/components/Checklists.vue'
+// import Report from '@/components/Report.vue'
+// import Compare from '@/components/Compare.vue'
+// import Conversation from '@/components/Conversation.vue'
+// import Requests from '@/components/Requests.vue'
+// import Checklists from '@/components/Checklists.vue'
 import Home from '@/components/Home.vue'
 
 declare module 'vue-router' {
@@ -27,31 +27,31 @@ export const router = createRouter({
 		},
 		{
 			path: '/report',
-			component: Report,
+			component: () => import('@/components/Report.vue'),
 			props: { variant: 'success' },
 			meta: { transition: 'slide-left', title: 'Отчеты', requiresAuth: false },
 		},
 		{
 			path: '/compare',
-			component: Compare,
+			component: () => import('@/components/Compare.vue'),
 			props: { variant: 'success' },
 			meta: { transition: 'slide-left', title: 'Сравнить', requiresAuth: false },
 		},
 		{
 			path: '/checklists',
-			component: Checklists,
+			component: () => import('@/components/Checklists.vue'),
 			props: { variant: 'success' },
 			meta: { transition: 'slide-left', title: 'Чек-листы', requiresAuth: false },
 		},
 		{
 			path: '/conversation',
-			component: Conversation,
+			component: () => import('@/components/Conversation.vue'),
 			props: { variant: 'success' },
 			meta: { transition: 'slide-left', title: 'Диалоги', requiresAuth: false },
 		},
 		{
 			path: '/requests',
-			component: Requests,
+			component: () => import('@/components/Requests.vue'),
 			props: { variant: 'success' },
 			meta: { transition: 'slide-left', title: 'Логические запросы', requiresAuth: false },
 		},

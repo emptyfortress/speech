@@ -21,6 +21,9 @@ body {
 		font-size: 1.2rem;
 	}
 }
+.rel {
+	position: relative;
+}
 .my-ripple-class {
 	background: white;
 	opacity: 0.2;
@@ -58,12 +61,18 @@ body {
 .q-chip {
 	// background: $accent2;
 	background: $bgHead;
+	.inf {
+		display: none;
+	}
 }
 .q-chip--selected {
 	background: $primary;
 	color: white;
 	.q-chip__icon {
 		color: inherit;
+	}
+	.inf {
+		display: block;
 	}
 }
 
