@@ -12,11 +12,20 @@
 					q-btn(outline size="10px" color="primary" @click="mystore.duble").q-mr-xs Дублировать
 					q-btn(round flat icon="mdi-plus" dense color="primary" @click="mystore.addLogic")
 			#comment(contenteditable @blur="updatecomment") {{mystore.activeLogic.comment}}
+
+			//- Puzzle
+
+			.row.items-center.justify-between.q-mt-xl
+				q-btn(flat icon="mdi-trash-can-outline" label="Удалить поиск" color="primary" @click="mystore.deleteLogic")
+				div
+					q-btn(flat icon="mdi-share-variant" label="Поделиться" color="primary")
+					q-btn(unelevated color="primary" icon="mdi-content-save-outline" label="Сохранить" @click="save")
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { useQuasar } from 'quasar'
 import { useLogic } from '@/stores/logic'
+// import Puzzle from '@/components/Puzzle.vue'
 
 const mystore = useLogic()
 
@@ -41,6 +50,16 @@ const updatecomment = () => {
 	const text = comm!.innerHTML
 	const index = mystore.allLogic.findIndex((item) => item.active)
 	mystore.allLogic[index].comment = text
+}
+
+const $q = useQuasar()
+const save = () => {
+	$q.notify({
+		icon: undefined,
+		message: 'Запрос сохранен',
+		color: 'positive',
+		position: 'top-right',
+	})
 }
 </script>
 

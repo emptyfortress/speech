@@ -130,5 +130,10 @@ export const useLogic = defineStore({
 			item.label = 'Новый запрос'
 			this.allLogic.push(item)
 		},
+		deleteLogic() {
+			const index = this.allLogic.findIndex((item) => item.active)
+			this.allLogic.splice(index, 1)
+			this.allLogic[0].active = true
+		},
 	},
 })
