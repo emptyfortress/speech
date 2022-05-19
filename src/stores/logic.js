@@ -24,7 +24,7 @@ export const useLogic = defineStore({
 				comment: 'В конце разговора нет прощания',
 				star: true,
 				active: false,
-				label: 'Отстутствует до свидание',
+				label: 'Отстутствует до свидания',
 			},
 			{
 				id: 3,
@@ -105,7 +105,30 @@ export const useLogic = defineStore({
 			},
 		],
 	}),
-	getters: {},
+	getters: {
+		activeLogic: (state) => state.allLogic.filter((item) => item.active)[0],
+	},
 
-	actions: {},
+	actions: {
+		duble() {
+			const active = this.activeLogic
+			const temp = {}
+			Object.assign(temp, active)
+			temp.label = temp.label + ' - (копия)'
+			this.allLogic.map((e) => (e.active = false))
+			temp.active = true
+			temp.id = this.allLogic.length
+			this.allLogic.push(temp)
+		},
+		addLogic() {
+			this.allLogic.map((e) => (e.active = false))
+			const item = {}
+			item.id = this.allLogic.length
+			item.star = true
+			item.active = true
+			item.comment = 'Введите комментарий к запросу'
+			item.label = 'Новый запрос'
+			this.allLogic.push(item)
+		},
+	},
 })

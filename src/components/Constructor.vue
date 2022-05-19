@@ -10,27 +10,30 @@ q-dialog(v-model="props.dialog" persistent :maximized="props.maximized" transiti
 					component(:is="LogicList" :commentList="commentList")
 
 				template(v-slot:after)
-					div
+					component(:is="LogicCard"
+						:splitter="splitterModel"
+						@maximize="splitterModel = 0"
+						@reset="splitterModel = 25" )
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import WordHighlighter from 'vue-word-highlighter'
 import LogicList from '@/components/LogicList.vue'
+import LogicCard from '@/components/LogicCard.vue'
 
 const props = defineProps({
 	dialog: Boolean,
 	maximized: Boolean,
 })
 
-const splitterModel = ref(30)
+const splitterModel = ref(25)
 const hei = computed(() => {
 	return 'height: ' + (window.innerHeight - 105) + 'px;'
 })
 
 const commentList = ref(false)
-const split = (val) => {
-	if (val > 44) {
+const split = (val: number) => {
+	if (val > 40) {
 		commentList.value = true
 	} else commentList.value = false
 }

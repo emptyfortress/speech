@@ -81,7 +81,7 @@ q-scroll-area.list
 						q-item-label
 							WordHighlighter(:query="query") {{ item.label }}
 					q-item-section(v-show="props.commentList")
-						div(v-if="item.comment.length !== 28")
+						div(v-if="item.comment.length !== 28").comment
 							WordHighlighter(:query="query") {{ item.comment }}
 
 		q-expansion-item(v-model="secondItem" header-class="text-bold")
@@ -98,7 +98,7 @@ q-scroll-area.list
 						q-item-label
 							WordHighlighter(:query="query") {{ item.label }}
 					q-item-section(v-show="props.commentList")
-						div(v-if="item.comment.length !== 28")
+						div(v-if="item.comment.length !== 28").comment
 							WordHighlighter(:query="query") {{ item.comment }}
 </template>
 
@@ -126,5 +126,9 @@ q-scroll-area.list
 }
 .list {
 	font-size: 0.9rem;
+}
+.comment {
+	font-size: 0.8rem;
+	line-height: 100%;
 }
 </style>
