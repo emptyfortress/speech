@@ -1,6 +1,6 @@
 <template lang="pug">
 .q-ml-md
-	.q-mt-lg Добавляйте критерии и настраивайте условия запросов
+	.q-mt-lg
 	q-card
 		q-card-section
 			.row.items-center.justify-between
@@ -13,7 +13,7 @@
 					q-btn(round flat icon="mdi-plus" dense color="primary" @click="mystore.addLogic")
 			#comment(contenteditable @blur="updatecomment") {{mystore.activeLogic.comment}}
 
-			//- Puzzle
+			Puzzle
 
 			.row.items-center.justify-between.q-mt-xl
 				q-btn(flat icon="mdi-trash-can-outline" label="Удалить поиск" color="primary" @click="mystore.deleteLogic")
@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { useQuasar } from 'quasar'
 import { useLogic } from '@/stores/logic'
-// import Puzzle from '@/components/Puzzle.vue'
+import Puzzle from '@/components/Puzzle.vue'
 
 const mystore = useLogic()
 

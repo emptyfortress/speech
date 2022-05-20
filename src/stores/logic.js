@@ -104,6 +104,16 @@ export const useLogic = defineStore({
 				label: 'Arcu dictum varius',
 			},
 		],
+		allList: [
+			{
+				id: 0,
+				list: [
+					{ id: 0, condition: 'and' },
+					{ id: 1, condition: 'and' },
+				],
+			},
+			{ id: 1, list: [{ id: 0, condition: 'and' }] },
+		],
 	}),
 	getters: {
 		activeLogic: (state) => state.allLogic.filter((item) => item.active)[0],

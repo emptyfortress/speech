@@ -1,6 +1,7 @@
 <template lang="pug">
 q-dialog(v-model="props.dialog" persistent :maximized="props.maximized" transition-show="slide-up" transition-hide="slide-down")
-	.container
+	.cnt
+		.top Добавляйте критерии и настраивайте условия запросов
 		.zg
 			q-icon(name="mdi-android-studio" size="26px")
 			span Конструктор запросов
@@ -42,7 +43,7 @@ const split = (val: number) => {
 <style scoped lang="scss">
 @import '@/assets/styles/myvariables.scss';
 
-.container {
+.cnt {
 	background: moz-linear-gradient(top, #d8e3f1 0%, #f4e8f4 52.6%, #fdf5e5 100%);
 	background: webkit-linear-gradient(top, #d8e3f1 0%, #f4e8f4 52.6%, #fdf5e5 100%);
 	background: linear-gradient(180deg, #d8e3f1 0%, #f4e8f4 52.6%, #fdf5e5 100%);
@@ -62,5 +63,12 @@ const split = (val: number) => {
 		margin-right: 1rem;
 		transform: translateY(-5px);
 	}
+}
+.top {
+	background: #9db2c3;
+	padding: 2px 2rem;
+	font-size: 0.8rem;
+	text-align: center;
+	color: white;
 }
 </style>

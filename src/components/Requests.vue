@@ -26,7 +26,7 @@ q-page(padding).rel
 		component(:is="Operatorstat")
 		component(:is="Records")
 
-		Constructor(:dialog="dialog" :maximized="maximizedToggle")
+Constructor(:dialog="dialog" :maximized="maximizedToggle")
 </template>
 
 <script setup lang="ts">
