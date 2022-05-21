@@ -6,11 +6,27 @@
 				q-icon(name="mdi-plus")
 		.cond
 			.myrow
-				q-select(label="Контекстное правило" dense v-model="rule" :options="ruleOptions" width="200")
-				template(v-if="rule !== '' ")
+				q-select(label="Контекстное правило" dense v-model="props.item.mod1" :options="ruleOptions" width="200")
+				template(v-if="props.item.mod1 !== '' ")
 					div
 						q-select(dense
-							v-model="mystore.keys"
+							v-model="props.item.mod2"
+							use-input
+							input-debounce="0"
+							:options="options"
+							@filter="filterFn"
+							label="Ключевое слово"
+							).keys
+							template(v-slot:no-option)
+								q-item.text-grey
+									q-item-section No results
+						q-checkbox(v-model="wordforms" label="Искать производные формы" dense size="xs").wordform
+					q-select(label="Канал" dense v-model="channel" :options="channelOptions")
+				template(v-if="okolo")
+					div
+					div
+						q-select(dense
+							v-model="key2"
 							use-input
 							input-debounce="0"
 							:options="options"
@@ -22,6 +38,11 @@
 									q-item-section No results
 						q-checkbox(v-model="wordforms" label="Искать формы" dense size="xs").wordform
 					q-select(label="Канал" dense v-model="channel" :options="channelOptions")
+				.start(v-if="okolo")
+					.full
+						|Расстояние между словами, сек
+						q-slider(v-model="fromStart" :min="0" :max="60" :step="1"  label color="primary")
+					q-input(:model-value="fromStart" dense outlined bg-color="white" style="width: 50px")
 				.start(v-if="start")
 					.full
 						|Расстояние от начала записи, сек
@@ -33,25 +54,9 @@
 						q-slider(v-model="fromStart" :min="0" :max="60" :step="1"  label color="primary")
 					q-input(:model-value="fromStart" dense outlined bg-color="white" style="width: 50px")
 
-				template(v-if="okolo")
-					div
-					div
-						q-select(dense
-							v-model="mystore.keys"
-							use-input
-							input-debounce="0"
-							:options="options"
-							@filter="filterFn"
-							label="Ключевое слово"
-							).keys
-							template(v-slot:no-option)
-								q-item.text-grey
-									q-item-section No results
-						q-checkbox(v-model="wordforms" label="Искать формы" dense size="xs").wordform
-					q-select(label="Канал" dense v-model="channel" :options="channelOptions")
 		.btngr
 			q-btn(round dense size="sm" unelevated icon="mdi-reload" @click="reset").invert
-			q-btn(round dense size="sm" unelevated icon="mdi-trash-can-outline" @click="$emit('delete')")
+			q-btn(round dense size="sm" unelevated icon="mdi-trash-can-outline" @click="$emit('delete')" :disabled="disabled")
 </template>
 
 <script setup lang="ts">
@@ -62,19 +67,27 @@ import { ConditionEnum } from '@/types/type'
 
 const props = defineProps<{
 	item: Condition
+	disabled: boolean
 }>()
 
-const okolo = ref(false)
-const rule = ref('')
+const rule = ref(props.item.mod1)
+const key1 = ref(props.item.mod2)
+const key2 = ref('')
 
 const start = computed(() => {
-	if (rule.value === 'Начало') {
+	if (props.item.mod1 === 'Начало') {
 		return true
 	}
 	return false
 })
 const end = computed(() => {
-	if (rule.value === 'Завершение') {
+	if (props.item.mod1 === 'Завершение') {
+		return true
+	}
+	return false
+})
+const okolo = computed(() => {
+	if (props.item.mod1 === 'Около') {
 		return true
 	}
 	return false
@@ -84,7 +97,7 @@ const fromStart = ref(10)
 const mystore = useStore()
 const stringOptions = words.map((item) => item.key)
 const options = ref(stringOptions)
-const filterFn = (val, update, abort) => {
+const filterFn = (val: string, update: Function) => {
 	update(() => {
 		if (val === '') {
 			options.value = stringOptions
@@ -105,8 +118,11 @@ const next = () => {
 		props.item.condition = ConditionEnum[num + 1]
 	}
 }
-const ruleOptions = ['Присутствует', 'Отстуствует', 'Около', 'Начало', 'Завершение']
+const ruleOptions = ['Присутствует', 'Отсутствует', 'Около', 'Начало', 'Завершение']
 const wordforms = ref(false)
+const reset = () => {
+	rule.value = ''
+}
 </script>
 
 <style scoped lang="scss">

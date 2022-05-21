@@ -9,7 +9,7 @@ q-page(padding).rel
 				q-item-section
 					.zag Логические запросы
 			q-card-section
-				component(:is="Chiplist" :chips="logicRec" :multiple="false" :tooltip="false")
+				component(:is="Chiplist" :chips="chips" :multiple="false" :tooltip="false")
 					template(v-slot:header)
 						q-icon(name="mdi-star-outline").q-mr-sm
 						|Мои запросы
@@ -26,7 +26,7 @@ q-page(padding).rel
 		component(:is="Operatorstat")
 		component(:is="Records")
 
-Constructor(:dialog="dialog" :maximized="maximizedToggle")
+		Constructor(:dialog="dialog" :maximized="maximizedToggle")
 </template>
 
 <script setup lang="ts">
@@ -38,13 +38,14 @@ import Operatorstat from '@/components/Operatorstat.vue'
 import Records from '@/components/Records.vue'
 import Constructor from '@/components/Constructor.vue'
 import { useStore } from '@/stores/store'
+import { useLogic } from '@/stores/logic'
 
-import { logicRec } from '@/stores/data'
-
-const dialog = ref(true)
+const mylogic = useLogic()
+const mystore = useStore()
+const chips = mylogic.allLogic
+const dialog = ref(false)
 const maximizedToggle = ref(true)
 
-const mystore = useStore()
 const toggle = () => {
 	mystore.loading = true
 	mystore.req = false

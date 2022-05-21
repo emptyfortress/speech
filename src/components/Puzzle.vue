@@ -3,7 +3,7 @@
 	draggable(:list="list" item-key="id" @start="begin" @end="end")
 		template(#item="{ element }")
 			div
-				QueryItem(:item="element"  @add="add(element)" @delete="del(element)" @reset="res" )
+				QueryItem(:item="element"  @add="add(element)" @delete="del(element)" :disabled="list.length === 1")
 </template>
 
 <script setup lang="ts">
@@ -33,11 +33,6 @@ const add = (e: List) => {
 const del = (e: any) => {
 	let index = itemIndex(e)
 	list.value.splice(index, 1)
-}
-const res = (e: any) => {
-	// list.value[e].mod1 = null
-	// list.value[e].mod2 = null
-	// list.value[e].mod3 = null
 }
 
 const drag = ref(false)

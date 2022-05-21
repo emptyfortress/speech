@@ -38,13 +38,12 @@ const props = defineProps<{
 }>()
 
 const mystore = useStore()
-const init = mystore.setChips(props.chips)
 const filter = ref('')
 
 const chips = reactive(props.chips)
 const filteredChips = computed(() => {
 	if (filter.value.length > 0) {
-		return chips.filter((item) => item.label.includes(filter.value))
+		return chips.filter((item) => item.label.toLowerCase().includes(filter.value.toLowerCase()))
 	}
 	return chips
 })

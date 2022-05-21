@@ -69,6 +69,6 @@ const split = (val: number) => {
 	padding: 2px 2rem;
 	font-size: 0.8rem;
 	text-align: center;
-	color: white;
+	// color: white;
 }
 </style>

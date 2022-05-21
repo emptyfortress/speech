@@ -24,6 +24,8 @@ interface Logic {
 interface Condition {
 	id: number
 	condition: ConditionEnum
+	mod1: string
+	mod2: string
 }
 
 interface List {

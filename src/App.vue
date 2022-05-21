@@ -57,8 +57,7 @@ q-layout(view="hHh LpR fFf")
 	SpeechDrawer
 
 	q-page-container
-		router-view(v-slot="{ Component, route }")
-			component(:is="Component")
+		router-view
 	transition(name="fade")
 		#siri(v-show="isLoading")
 </template>
