@@ -49,7 +49,7 @@ const split = (val: number) => {
 	background: linear-gradient(180deg, #d8e3f1 0%, #f4e8f4 52.6%, #fdf5e5 100%);
 	background-attachment: fixed;
 	.content {
-		max-width: 1200px;
+		max-width: 1400px;
 		margin: 0 auto;
 	}
 }

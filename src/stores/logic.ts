@@ -6,10 +6,10 @@ export const useLogic = defineStore({
 		allLogic: [
 			{
 				id: 0,
-				comment: 'В начале разговора отстутствует приветствие',
+				comment: 'В начале разговора отсутствует приветствие',
 				star: true,
 				active: true,
-				label: 'Отстутствует здравствуйте',
+				label: 'Отсутствует здравствуйте',
 			},
 			{
 				id: 1,
@@ -17,14 +17,13 @@ export const useLogic = defineStore({
 				star: true,
 				active: false,
 				label: 'Отсутствует спасибо за ожидание',
-				list: [{ id: 0, and: true, mod1: '', mod2: '', mod3: '' }],
 			},
 			{
 				id: 2,
 				comment: 'В конце разговора нет прощания',
 				star: true,
 				active: false,
-				label: 'Отстутствует до свидания',
+				label: 'Отсутствует до свидания',
 			},
 			{
 				id: 3,
@@ -110,9 +109,28 @@ export const useLogic = defineStore({
 				list: [
 					{ id: 0, condition: 'and' },
 					{ id: 1, condition: 'and' },
+					{ id: 2, condition: 'or' },
 				],
 			},
-			{ id: 1, list: [{ id: 0, condition: 'and' }] },
+			{
+				id: 1,
+				list: [
+					{ id: 0, condition: 'or' },
+					{ id: 1, condition: 'not' },
+				],
+			},
+			{ id: 2, list: [{ id: 0, condition: 'and' }] },
+			{ id: 3, list: [{ id: 0, condition: 'and' }] },
+			{ id: 4, list: [{ id: 0, condition: 'and' }] },
+			{ id: 5, list: [{ id: 0, condition: 'and' }] },
+			{ id: 6, list: [{ id: 0, condition: 'and' }] },
+			{ id: 7, list: [{ id: 0, condition: 'and' }] },
+			{ id: 8, list: [{ id: 0, condition: 'and' }] },
+			{ id: 9, list: [{ id: 0, condition: 'and' }] },
+			{ id: 10, list: [{ id: 0, condition: 'and' }] },
+			{ id: 11, list: [{ id: 0, condition: 'and' }] },
+			{ id: 12, list: [{ id: 0, condition: 'and' }] },
+			{ id: 13, list: [{ id: 0, condition: 'and' }] },
 		],
 	}),
 	getters: {
@@ -122,17 +140,23 @@ export const useLogic = defineStore({
 	actions: {
 		duble() {
 			const active = this.activeLogic
-			const temp = {}
+			const activeList = this.allList.find((e) => e.id === active.id)
+			const temp = {} as Logic
 			Object.assign(temp, active)
 			temp.label = temp.label + ' - (копия)'
 			this.allLogic.map((e) => (e.active = false))
 			temp.active = true
-			temp.id = this.allLogic.length
+			temp.id = active.id + 100
 			this.allLogic.push(temp)
+			const templist = {
+				id: temp.id,
+				list: activeList!.list,
+			}
+			this.allList.push(templist)
 		},
 		addLogic() {
 			this.allLogic.map((e) => (e.active = false))
-			const item = {}
+			const item = {} as Logic
 			item.id = this.allLogic.length
 			item.star = true
 			item.active = true

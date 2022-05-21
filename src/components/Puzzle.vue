@@ -3,7 +3,7 @@
 	draggable(:list="list" item-key="id" @start="begin" @end="end")
 		template(#item="{ element }")
 			div
-				QueryItem(:item="element" @invert="invert(element)" @add="add(element)" @delete="del(element)" @reset="res" )
+				QueryItem(:item="element"  @add="add(element)" @delete="del(element)" @reset="res" )
 </template>
 
 <script setup lang="ts">
@@ -15,23 +15,19 @@ import { useLogic } from '@/stores/logic'
 const mystore = useLogic()
 
 const list = computed(() => {
-	const index = mystore.allLogic.findIndex((e) => e.id === mystore.activeLogic.id)
-	if (mystore.allList[index].list.length) {
-		return mystore.allList[index].list
-	} else return [{ id: 0, and: true, mod1: null, mod2: null, mod3: null }]
+	const id = mystore.activeLogic.id
+	const temp = mystore.allList.find((e) => e.id === id)
+	return temp!.list
 })
 
-const invert = (e: any) => {
-	e.and = !e.and
-}
-const itemIndex = (e: any) => {
+const itemIndex = (e: List) => {
 	return list.value.findIndex((item) => item.id === e.id)
 }
-const add = (e: any) => {
+const add = (e: List) => {
 	let index = itemIndex(e)
-	let newItem = {}
-	newItem.id = new Date()
-	newItem.and = true
+	let newItem = {} as Condition
+	newItem.id = list.value.length + 1
+	newItem.condition = 'and'
 	list.value.splice(index + 1, 0, newItem)
 }
 const del = (e: any) => {
@@ -39,9 +35,9 @@ const del = (e: any) => {
 	list.value.splice(index, 1)
 }
 const res = (e: any) => {
-	list.value[e].mod1 = null
-	list.value[e].mod2 = null
-	list.value[e].mod3 = null
+	// list.value[e].mod1 = null
+	// list.value[e].mod2 = null
+	// list.value[e].mod3 = null
 }
 
 const drag = ref(false)

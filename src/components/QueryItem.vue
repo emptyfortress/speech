@@ -1,39 +1,112 @@
 <template lang="pug">
-.all()
+.all
 	.group
-		.scope(@click="next" :class="setClass")
+		.scope(@click="next" :class="props.item.condition")
 			.add(@click.stop="$emit('add')")
 				q-icon(name="mdi-plus")
 		.cond
-			.myrow laskjlk
+			.myrow
+				q-select(label="Контекстное правило" dense v-model="rule" :options="ruleOptions" width="200")
+				template(v-if="rule !== '' ")
+					div
+						q-select(dense
+							v-model="mystore.keys"
+							use-input
+							input-debounce="0"
+							:options="options"
+							@filter="filterFn"
+							label="Ключевое слово"
+							).keys
+							template(v-slot:no-option)
+								q-item.text-grey
+									q-item-section No results
+						q-checkbox(v-model="wordforms" label="Искать формы" dense size="xs").wordform
+					q-select(label="Канал" dense v-model="channel" :options="channelOptions")
+				.start(v-if="start")
+					.full
+						|Расстояние от начала записи, сек
+						q-slider(v-model="fromStart" :min="0" :max="60" :step="1"  label color="primary")
+					q-input(:model-value="fromStart" dense outlined bg-color="white" style="width: 50px")
+				.start(v-if="end")
+					.full
+						|Расстояние от конца записи, сек
+						q-slider(v-model="fromStart" :min="0" :max="60" :step="1"  label color="primary")
+					q-input(:model-value="fromStart" dense outlined bg-color="white" style="width: 50px")
+
+				template(v-if="okolo")
+					div
+					div
+						q-select(dense
+							v-model="mystore.keys"
+							use-input
+							input-debounce="0"
+							:options="options"
+							@filter="filterFn"
+							label="Ключевое слово"
+							).keys
+							template(v-slot:no-option)
+								q-item.text-grey
+									q-item-section No results
+						q-checkbox(v-model="wordforms" label="Искать формы" dense size="xs").wordform
+					q-select(label="Канал" dense v-model="channel" :options="channelOptions")
+		.btngr
+			q-btn(round dense size="sm" unelevated icon="mdi-reload" @click="reset").invert
+			q-btn(round dense size="sm" unelevated icon="mdi-trash-can-outline" @click="$emit('delete')")
 </template>
 
 <script setup lang="ts">
-import { computed, reactive } from 'vue'
-import { useLogic } from '@/stores/logic'
+import { ref, computed } from 'vue'
+import { words } from '@/stores/list'
+import { useStore } from '@/stores/store'
+import { ConditionEnum } from '@/types/type'
 
-const mystore = useLogic()
+const props = defineProps<{
+	item: Condition
+}>()
 
-const list = mystore.allList[0].list
+const okolo = ref(false)
+const rule = ref('')
 
-const setClass = computed(() => {
-	return list[0].condition
+const start = computed(() => {
+	if (rule.value === 'Начало') {
+		return true
+	}
+	return false
+})
+const end = computed(() => {
+	if (rule.value === 'Завершение') {
+		return true
+	}
+	return false
 })
 
-enum Conditions {
-	'and' = 0,
-	'or',
-	'not',
+const fromStart = ref(10)
+const mystore = useStore()
+const stringOptions = words.map((item) => item.key)
+const options = ref(stringOptions)
+const filterFn = (val, update, abort) => {
+	update(() => {
+		if (val === '') {
+			options.value = stringOptions
+		} else {
+			const needle = val.toLowerCase()
+			options.value = stringOptions.filter((v) => v.toLowerCase().indexOf(needle) > -1)
+		}
+	})
 }
+const channelOptions = ['Все', 'Оператор', 'Клиент']
+const channel = ref('Все')
 
 const next = () => {
-	const num = Conditions[list[0].condition]
+	const num: any = ConditionEnum[props.item.condition]
 	if (num === 2) {
-		list[0].condition = Conditions[0]
+		props.item.condition = ConditionEnum[0]
 	} else {
-		list[0].condition = Conditions[num + 1]
+		props.item.condition = ConditionEnum[num + 1]
 	}
 }
+const ruleOptions = ['Присутствует', 'Отстуствует', 'Около', 'Начало', 'Завершение']
+const wordforms = ref(false)
 </script>
 
 <style scoped lang="scss">
@@ -54,6 +127,7 @@ const next = () => {
 	align-items: center;
 	background: $bgLight;
 	position: relative;
+	padding-right: 0.5rem;
 	&:hover {
 		border: 2px solid $primary;
 		z-index: 4;
@@ -83,11 +157,11 @@ const next = () => {
 	left: 0;
 	height: 100%;
 	width: 80px;
-	background: $blue-3;
+	background: #81df75;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: $blue-10;
+	color: #2d5e27;
 	&::after {
 		content: 'and';
 	}
@@ -98,11 +172,11 @@ const next = () => {
 	left: 0;
 	height: 100%;
 	width: 80px;
-	background: $blue-3;
+	background: #fbb7e8;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: $blue-10;
+	color: #4f1c3c;
 	&::after {
 		content: 'not';
 	}
@@ -137,11 +211,11 @@ const next = () => {
 	display: none;
 }
 .myrow {
-	display: flex;
-	justify-content: space-evenly;
-	align-items: center;
-	padding-left: 1rem;
-	flex-wrap: wrap;
+	margin: 0 2rem;
+	display: grid;
+	grid-template-columns: 180px 1fr 130px;
+	align-items: flex-start;
+	gap: 2rem;
 }
 .norm {
 	font-size: 0.8rem;
@@ -152,6 +226,21 @@ const next = () => {
 	white-space: nowrap;
 	.invert {
 		transform: scaleX(-1);
+	}
+}
+.q-checkbox__label {
+	font-size: 0.8rem;
+}
+.wordform {
+	margin-top: 5px;
+}
+.start {
+	grid-column: 2/-1;
+	display: flex;
+	font-size: 0.9rem;
+	gap: 1rem;
+	.full {
+		width: 100%;
 	}
 }
 </style>
