@@ -1,7 +1,7 @@
 <template lang="pug">
 q-page(padding)
 	.container
-		q-expansion-item(v-model="mystore.sett").car
+		q-expansion-item(v-model="mystore.sett")
 			template(v-slot:header)
 				q-item-section(avatar)
 					q-avatar(icon="mdi-tune-variant" flat)
@@ -15,6 +15,7 @@ q-page(padding)
 
 				Options
 				Options1
+				br
 		Graph
 		Stat
 		Operatorstat

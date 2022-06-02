@@ -20,8 +20,7 @@ q-page(padding).rel
 					div
 						q-btn(color="primary" flat label="Добавить к сравнению")
 						q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
-		br
-		br
+				br
 		component(:is="Graph")
 		component(:is="Operatorstat")
 		component(:is="Records")

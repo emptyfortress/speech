@@ -1,11 +1,12 @@
 <template lang="pug">
 CommonOptions
 .bt
-	q-btn(color="primary" flat label="Добавить к сравнению")
 	div
+		q-btn(flat color="primary" label="Сбросить").q-mr-sm
+	div
+		q-btn(color="primary" flat label="Добавить к сравнению")
 		q-btn(unelevated color="primary" icon="mdi-star-outline"  label="Сохранить" @click="dialog = !dialog").q-mr-sm
 		q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
-	q-btn(flat color="primary" label="Сбросить").q-mr-sm
 
 q-dialog(v-model="dialog" persistent)
 	q-card.save

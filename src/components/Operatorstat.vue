@@ -1,5 +1,5 @@
 <template lang="pug">
-q-expansion-item(v-model="oper").car
+q-expansion-item(v-model="oper")
 	template(v-slot:header)
 		q-item-section(avatar)
 			q-avatar(icon="mdi-headset" flat)
