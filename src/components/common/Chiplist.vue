@@ -4,9 +4,11 @@
 		.subtitle-1(@click="toggleEdit")
 			slot(name="header")
 			q-icon(name="mdi-pencil-outline" ).editicon
-		q-input(dense v-model="filter" clearable hide-bottom-space @clear="filter = ''")
-			template(v-slot:prepend)
-				q-icon(name="mdi-magnify")
+		.row
+			slot(name="addbutton")
+			q-input(dense v-model="filter" clearable hide-bottom-space @clear="filter = ''").q-ml-lg
+				template(v-slot:prepend)
+					q-icon(name="mdi-magnify")
 	q-card-section
 		q-chip(v-for="(item,index) in filteredChips"
 			v-model:selected="item.selected"
