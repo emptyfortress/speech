@@ -23,7 +23,6 @@ interface Logic {
 	comment: string
 	star: boolean
 	selected: boolean
-	list?: Condition[]
 }
 
 interface Condition {
