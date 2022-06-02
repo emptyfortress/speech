@@ -4,6 +4,8 @@
 		.scope(@click="next" :class="props.item.condition")
 			.add(@click.stop="$emit('add')")
 				q-icon(name="mdi-plus")
+		.newscope(:class="{'not' : not}")
+			q-checkbox(label="Not" v-model="not" dense size="xs" color="negative")
 		.cond
 			.myrow
 				q-select(label="Контекстное правило" dense v-model="props.item.mod1" :options="ruleOptions" width="200")
@@ -73,6 +75,7 @@ const props = defineProps<{
 const rule = ref(props.item.mod1)
 const key1 = ref(props.item.mod2)
 const key2 = ref('')
+const not = ref(false)
 
 const start = computed(() => {
 	if (props.item.mod1 === 'Начало') {
@@ -112,7 +115,7 @@ const channel = ref('Все')
 
 const next = () => {
 	const num: any = ConditionEnum[props.item.condition]
-	if (num === 2) {
+	if (num === 1) {
 		props.item.condition = ConditionEnum[0]
 	} else {
 		props.item.condition = ConditionEnum[num + 1]
@@ -140,7 +143,7 @@ const reset = () => {
 	border: 2px solid #ccc;
 	border-radius: 0.5rem;
 	display: flex;
-	justify-content: justify-between;
+	justify-content: space-between;
 	align-items: center;
 	background: $bgLight;
 	position: relative;
@@ -163,16 +166,27 @@ const reset = () => {
 		display: block;
 	}
 }
+.newscope {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 80px;
+	width: 80px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 6px;
+}
 .cond {
 	flex-grow: 1;
 	padding: 0.5rem;
-	margin-left: 80px;
+	margin-left: 140px;
 }
 .and {
 	position: absolute;
 	top: 0;
+	bottom: 0;
 	left: 0;
-	height: 100%;
 	width: 80px;
 	background: #dff9c2;
 	background: -moz-linear-gradient(top, #dff9c2 0%, #abdb7f 50%, #76d12b 51%, #b4e391 100%);
@@ -189,24 +203,12 @@ const reset = () => {
 	}
 }
 .not {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 80px;
 	background: #f6ecef;
 	background: -moz-linear-gradient(top, #f6ecef 0%, #eeacc3 50%, #eb89ab 51%, #fbd5e2 100%);
 	background: -webkit-linear-gradient(top, #f6ecef 0%, #eeacc3 50%, #eb89ab 51%, #fbd5e2 100%);
 	background: linear-gradient(to bottom, #f6ecef 0%, #eeacc3 50%, #eb89ab 51%, #fbd5e2 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6ecef', endColorstr='#fbd5e2',GradientType=0 );
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: #4f1c3c;
 	border-radius: 0.5rem 0 0 0.5rem;
-	&::after {
-		content: 'not';
-	}
 }
 .or {
 	position: absolute;
