@@ -3,7 +3,7 @@ interface Chip {
 	label: string
 	star: boolean
 	selected: boolean
-	comment: string
+	comment?: string
 	value?: string
 }
 

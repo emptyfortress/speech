@@ -91,7 +91,7 @@ q-scroll-area.list
 				q-item-section Другие запросы
 				q-item-section(side) ({{otherlogic.length}})
 			q-list(dense).q-mb-lg
-				q-item(v-for="item in otherlogic" :key="item.id" tag="label" v-ripple :active="item.active" active-class="selected" @click.prevent="setActive(item.id)" )
+				q-item(v-for="item in otherlogic" :key="item.id" tag="label" v-ripple :active="item.selected" active-class="selected" @click.prevent="setActive(item.id)" )
 					q-item-section(side top)
 						q-btn(dense unelevated round icon="mdi-star-outline" size="10px" @click.stop="setStar(item.id)")
 					q-item-section
