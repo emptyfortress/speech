@@ -138,7 +138,7 @@ export const useLogic = defineStore({
 			Object.assign(temp, active)
 			temp.label = temp.label + ' - (копия)'
 			this.allLogic.map((e) => (e.selected = false))
-			temp.active = true
+			temp.selected = true
 			temp.id = active.id + 100
 			this.allLogic.push(temp)
 			const templist = {
@@ -155,6 +155,7 @@ export const useLogic = defineStore({
 			item.selected = true
 			item.comment = 'Введите комментарий к запросу'
 			item.label = 'Новый запрос'
+			item.list = [{ id: 0, condition: 'and', mod1: 'Отсутствует', mod2: 'здравствуйте' }]
 			this.allLogic.push(item)
 		},
 		deleteLogic() {

@@ -7,21 +7,23 @@ interface Chip {
 	value?: string
 }
 
-interface Logic {
-	id: number
-	label: string
-	star: boolean
-	selected: boolean
-	comment: string
-	value?: string
-}
+// interface Logic {
+// 	id: number
+// 	label: string
+// 	star: boolean
+// 	selected: boolean
+// 	comment: string
+// 	value?: string
+// 	list?: []
+// }
 
 interface Logic {
 	id: number
 	label: string
 	comment: string
 	star: boolean
-	active: boolean
+	selected: boolean
+	list?: Condition[]
 }
 
 interface Condition {
