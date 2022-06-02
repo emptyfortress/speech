@@ -138,6 +138,7 @@ const reset = () => {
 .group {
 	width: 100%;
 	border: 2px solid #ccc;
+	border-radius: 0.5rem;
 	display: flex;
 	justify-content: justify-between;
 	align-items: center;
@@ -173,11 +174,16 @@ const reset = () => {
 	left: 0;
 	height: 100%;
 	width: 80px;
-	background: #81df75;
+	background: #dff9c2;
+	background: -moz-linear-gradient(top, #dff9c2 0%, #abdb7f 50%, #76d12b 51%, #b4e391 100%);
+	background: -webkit-linear-gradient(top, #dff9c2 0%, #abdb7f 50%, #76d12b 51%, #b4e391 100%);
+	background: linear-gradient(to bottom, #dff9c2 0%, #abdb7f 50%, #76d12b 51%, #b4e391 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dff9c2', endColorstr='#b4e391',GradientType=0 );
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	color: #2d5e27;
+	border-radius: 0.5rem 0 0 0.5rem;
 	&::after {
 		content: 'and';
 	}
@@ -188,11 +194,16 @@ const reset = () => {
 	left: 0;
 	height: 100%;
 	width: 80px;
-	background: #fbb7e8;
+	background: #f6ecef;
+	background: -moz-linear-gradient(top, #f6ecef 0%, #eeacc3 50%, #eb89ab 51%, #fbd5e2 100%);
+	background: -webkit-linear-gradient(top, #f6ecef 0%, #eeacc3 50%, #eb89ab 51%, #fbd5e2 100%);
+	background: linear-gradient(to bottom, #f6ecef 0%, #eeacc3 50%, #eb89ab 51%, #fbd5e2 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6ecef', endColorstr='#fbd5e2',GradientType=0 );
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	color: #4f1c3c;
+	border-radius: 0.5rem 0 0 0.5rem;
 	&::after {
 		content: 'not';
 	}
@@ -206,8 +217,15 @@ const reset = () => {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: $blue-3;
+	// background: $blue-3;
+	background: #ebf1f6;
+	background: -moz-linear-gradient(top, #ebf1f6 0%, #abd3ee 50%, #89c3eb 51%, #d5ebfb 100%);
+	background: -webkit-linear-gradient(top, #ebf1f6 0%, #abd3ee 50%, #89c3eb 51%, #d5ebfb 100%);
+	background: linear-gradient(to bottom, #ebf1f6 0%, #abd3ee 50%, #89c3eb 51%, #d5ebfb 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', endColorstr='#d5ebfb',GradientType=0 );
+
 	color: $blue-10;
+	border-radius: 0.5rem 0 0 0.5rem;
 	&::after {
 		content: 'or';
 	}
