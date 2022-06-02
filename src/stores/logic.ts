@@ -155,8 +155,12 @@ export const useLogic = defineStore({
 			item.selected = true
 			item.comment = 'Введите комментарий к запросу'
 			item.label = 'Новый запрос'
-			item.list = [{ id: 0, condition: 'and', mod1: 'Отсутствует', mod2: 'здравствуйте' }]
 			this.allLogic.push(item)
+			const templist = {
+				id: item.id,
+				list: [{ id: 0, condition: 'and', mod1: '', mod2: '' }],
+			}
+			this.allList.push(templist)
 		},
 		deleteLogic() {
 			const index = this.allLogic.findIndex((item) => item.selected)
