@@ -1,6 +1,7 @@
 const words = [
 	{ key: 'здравствуйте', value: 4000, selected: false, part: 'adv' },
 	{ key: 'добрый вечер', value: 3990, selected: false, part: 'adv' },
+	{ key: 'доброе утро', value: 3995, selected: false, part: 'adv' },
 	{ key: 'до свидания', value: 3500, selected: false, part: 'adv' },
 	{ key: 'спасибо за ожидание', value: 3400, selected: false, part: 'f' },
 	{ key: 'всего доброго', value: 3400, selected: false, part: 'adv' },

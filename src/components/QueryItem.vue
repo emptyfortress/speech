@@ -55,8 +55,8 @@
 					q-input(:model-value="fromStart" dense outlined bg-color="white" style="width: 50px")
 
 		.btngr
-			q-btn(round dense size="sm" unelevated icon="mdi-reload" @click="reset").invert
-			q-btn(round dense size="sm" unelevated icon="mdi-trash-can-outline" @click="$emit('delete')" :disabled="disabled")
+			q-btn(round dense  unelevated icon="mdi-reload" @click="reset").invert
+			q-btn(round dense  unelevated icon="mdi-trash-can-outline" @click="$emit('delete')" :disabled="disabled")
 </template>
 
 <script setup lang="ts">

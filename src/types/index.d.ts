@@ -1,7 +1,9 @@
 interface Chip {
 	id: number
 	label: string
+	star: boolean
 	selected: boolean
+	comment: string
 	value?: string
 }
 
@@ -9,8 +11,9 @@ interface Logic {
 	id: number
 	label: string
 	star: boolean
-	active: boolean
+	selected: boolean
 	comment: string
+	value?: string
 }
 
 interface Logic {

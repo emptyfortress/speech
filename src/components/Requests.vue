@@ -16,10 +16,10 @@ q-page(padding).rel
 			q-card-section.q-py-none
 				component(:is="CommonOptions")
 				.bt
-					q-btn(color="primary" flat label="Добавить к сравнению")
-					div
-						q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
 					q-btn(flat color="primary" label="Сбросить").q-mr-sm
+					div
+						q-btn(color="primary" flat label="Добавить к сравнению")
+						q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
 		br
 		br
 		component(:is="Graph")
@@ -42,7 +42,7 @@ import { useLogic } from '@/stores/logic'
 
 const mylogic = useLogic()
 const mystore = useStore()
-const chips = mylogic.allLogic
+const chips = mylogic.allLogic.filter((e) => e.star)
 const dialog = ref(false)
 const maximizedToggle = ref(true)
 

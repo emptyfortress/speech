@@ -1,7 +1,7 @@
 <template lang="pug">
 q-dialog(v-model="props.dialog" persistent :maximized="props.maximized" transition-show="slide-up" transition-hide="slide-down")
 	.cnt
-		.top Добавляйте критерии и настраивайте условия запросов
+		.top Добавляйте критерии и настраивайте условия запросов. Определите их порядок перетаскиванием.
 		.zg
 			q-icon(name="mdi-android-studio" size="26px")
 			span Конструктор запросов
@@ -67,7 +67,7 @@ const split = (val: number) => {
 .top {
 	background: #9db2c3;
 	padding: 2px 2rem;
-	font-size: 0.8rem;
+	font-size: 1rem;
 	text-align: center;
 	// color: white;
 }

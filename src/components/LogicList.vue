@@ -42,9 +42,9 @@ watch(query, (val) => {
 const setActive = (e: number) => {
 	const index = mystore.allLogic.findIndex((item) => item.id === e)
 	mystore.allLogic.map((item) => {
-		item.active = false
+		item.selected = false
 	})
-	mystore.allLogic[index].active = true
+	mystore.allLogic[index].selected = true
 }
 const setStar = (e: number) => {
 	const index = mystore.allLogic.findIndex((item) => item.id === e)
@@ -74,7 +74,7 @@ q-scroll-area.list
 				q-item-section(side) ({{mylogic.length}})
 
 			q-list(dense).q-mb-lg
-				q-item(v-for="item in mylogic" :key="item.id" tag="label" v-ripple :active="item.active" active-class="selected" @click.prevent="setActive(item.id)" )
+				q-item(v-for="item in mylogic" :key="item.id" tag="label" v-ripple :active="item.selected" active-class="selected" @click.prevent="setActive(item.id)" )
 					q-item-section(side top)
 						q-btn(dense unelevated round icon="mdi-star" size="10px" @click.stop="setStar(item.id)")
 					q-item-section

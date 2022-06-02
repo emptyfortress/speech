@@ -18,11 +18,15 @@
 			.row.items-center.justify-between.q-mt-xl
 				q-btn(flat icon="mdi-trash-can-outline" label="Удалить запрос" color="primary" @click="mystore.deleteLogic")
 				div
-					q-btn(flat icon="mdi-share-variant" label="Поделиться" color="primary")
+					q-btn(flat icon="mdi-share-variant" label="Поделиться" color="primary" @click="dialog = !dialog")
 					q-btn(unelevated color="primary" icon="mdi-content-save-outline" label="Сохранить" @click="save")
+	q-dialog(v-model="dialog")
+		q-card
+			q-card-section lkaj
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { useLogic } from '@/stores/logic'
 import Puzzle from '@/components/Puzzle.vue'
@@ -39,16 +43,17 @@ const switchSidebar = () => {
 		emit('maximize')
 	} else emit('reset')
 }
+const dialog = ref(false)
 const update = () => {
 	const zag = document.getElementById('zg')
 	const text = zag!.innerHTML
-	const index = mystore.allLogic.findIndex((item) => item.active)
+	const index = mystore.allLogic.findIndex((item) => item.selected)
 	mystore.allLogic[index].label = text
 }
 const updatecomment = () => {
 	const comm = document.getElementById('comment')
 	const text = comm!.innerHTML
-	const index = mystore.allLogic.findIndex((item) => item.active)
+	const index = mystore.allLogic.findIndex((item) => item.selected)
 	mystore.allLogic[index].comment = text
 }
 

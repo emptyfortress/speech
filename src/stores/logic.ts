@@ -8,98 +8,98 @@ export const useLogic = defineStore({
 				id: 0,
 				comment: 'В начале разговора отсутствует приветствие',
 				star: true,
-				active: true,
+				selected: true,
 				label: 'Отсутствует здравствуйте',
 			},
 			{
 				id: 1,
 				comment: 'Отсутствует благодарность за ожидание',
 				star: true,
-				active: false,
+				selected: false,
 				label: 'Отсутствует спасибо за ожидание',
 			},
 			{
 				id: 2,
 				comment: 'В конце разговора нет прощания',
 				star: true,
-				active: false,
+				selected: false,
 				label: 'Отсутствует до свидания',
 			},
 			{
 				id: 3,
 				comment: 'Присутствует нецензурная лексика',
 				star: true,
-				active: false,
+				selected: false,
 				label: 'Грубость в разговоре',
 			},
 			{
 				id: 4,
 				comment: 'Паузы более 10 сек',
 				star: true,
-				active: false,
+				selected: false,
 				label: 'Длинные паузы',
 			},
 			{
 				id: 5,
 				comment: 'Спасибо за обращение',
 				star: true,
-				active: false,
+				selected: false,
 				label: 'Завершение разговора',
 			},
 			{
 				id: 6,
 				comment: '',
 				star: true,
-				active: false,
+				selected: false,
 				label: 'Агрессия',
 			},
 			{
 				id: 7,
 				comment: '',
 				star: true,
-				active: false,
+				selected: false,
 				label: 'Проверка статуса',
 			},
 			{
 				id: 8,
 				comment: '',
 				star: true,
-				active: false,
+				selected: false,
 				label: 'Другая симка',
 			},
 			{
 				id: 9,
 				comment: '',
 				star: false,
-				active: false,
+				selected: false,
 				label: 'Pretium vulputate sapien',
 			},
 			{
 				id: 10,
 				comment: '',
 				star: false,
-				active: false,
+				selected: false,
 				label: 'Aenean sed adipiscing diam',
 			},
 			{
 				id: 11,
 				comment: '',
 				star: false,
-				active: false,
+				selected: false,
 				label: 'Diam phasellus',
 			},
 			{
 				id: 12,
 				comment: '',
 				star: false,
-				active: false,
+				selected: false,
 				label: 'Отстутствует отстутсвие',
 			},
 			{
 				id: 13,
 				comment: '',
 				star: false,
-				active: false,
+				selected: false,
 				label: 'Arcu dictum varius',
 			},
 		],
@@ -127,7 +127,7 @@ export const useLogic = defineStore({
 		],
 	}),
 	getters: {
-		activeLogic: (state) => state.allLogic.filter((item) => item.active)[0],
+		activeLogic: (state) => state.allLogic.filter((item) => item.selected)[0],
 	},
 
 	actions: {
@@ -137,7 +137,7 @@ export const useLogic = defineStore({
 			const temp = {} as Logic
 			Object.assign(temp, active)
 			temp.label = temp.label + ' - (копия)'
-			this.allLogic.map((e) => (e.active = false))
+			this.allLogic.map((e) => (e.selected = false))
 			temp.active = true
 			temp.id = active.id + 100
 			this.allLogic.push(temp)
@@ -148,19 +148,19 @@ export const useLogic = defineStore({
 			this.allList.push(templist)
 		},
 		addLogic() {
-			this.allLogic.map((e) => (e.active = false))
+			this.allLogic.map((e) => (e.selected = false))
 			const item = {} as Logic
 			item.id = this.allLogic.length
 			item.star = true
-			item.active = true
+			item.selected = true
 			item.comment = 'Введите комментарий к запросу'
 			item.label = 'Новый запрос'
 			this.allLogic.push(item)
 		},
 		deleteLogic() {
-			const index = this.allLogic.findIndex((item) => item.active)
+			const index = this.allLogic.findIndex((item) => item.selected)
 			this.allLogic.splice(index, 1)
-			this.allLogic[0].active = true
+			this.allLogic[0].selected = true
 		},
 	},
 })

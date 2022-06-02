@@ -20,7 +20,8 @@
 				q-menu(transition-show="jump-down" transition-hide="jump-up" anchor="bottom middle" self="top middle")
 					.infmenu
 						.zg {{item.label}}
-						.desc Здесь информация что это за запрос? Когда и кем создан и тп.
+						.desc {{ item.comment }}
+						.desc.q-mt-md Создано: 23.10.2022 Автор: Иванов П.С.
 			.ellipsis
 				|{{ item.label}}
 			q-tooltip(v-if="props.tooltip" anchor="top middle" self="bottom middle" :delay="800") {{ item.label}}
