@@ -208,7 +208,6 @@ const reset = () => {
 	background: -webkit-linear-gradient(top, #f6ecef 0%, #eeacc3 50%, #eb89ab 51%, #fbd5e2 100%);
 	background: linear-gradient(to bottom, #f6ecef 0%, #eeacc3 50%, #eb89ab 51%, #fbd5e2 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6ecef', endColorstr='#fbd5e2',GradientType=0 );
-	border-radius: 0.5rem 0 0 0.5rem;
 }
 .or {
 	position: absolute;
