@@ -1,29 +1,7 @@
 <template lang="pug">
 .grid
-	q-markup-table.cat
-		thead
-			tr
-				th.text-left
-				th.text-left Название
-				th.text-right Звонки
-				th.text-right АНТ
-				th.text-right Тишина
-				th.text-right Перебивания
-				th.text-center Димамика за период
-				th.text-center Объем
-		tbody
-			tr(v-for="row in rows" :key="row.id" @click="select(row.id)" :class="{ 'sel' : selection === row.id}")
-				td
-					.legend(:class="row.classname")
-				td.text-left {{ row.title }}
-				td.text-right {{ row.call }}<span class="up">&uarr;</span>
-				td.text-right {{ row.ant }}<span class="down">&darr;</span>
-				td.text-right {{ row.sound }}<span class="down">&uarr;</span>
-				td.text-right {{ row.interrupt }}<span class="down">&uarr;</span>
-				td.text-center.graph(@click.stop="showDialog1")
-					VueApexCharts(type="line" height="35" width="150" :options="row.options1" :series="row.series1" )
-				td.text-center.graph(@click.stop="showDialog2")
-					VueApexCharts(type="donut" height="35" width="35" :options="row.options2" :series="row.series2" )
+	.cat
+		CategoryTable
 
 	q-card()
 		VueApexCharts(type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="selection === 0")
@@ -51,6 +29,7 @@ import {
 	chartTable4,
 	seriesTable4,
 } from '@/stores/charts1'
+import CategoryTable from '@/components/CategoryTable.vue'
 
 const seriesTableBig1 = [{ name: 'Parameter', data: [55, 57, 65, 70, 77, 80, 67] }]
 
@@ -228,8 +207,6 @@ const barSeries = [
 	.cat {
 		grid-column: 1/4;
 		overflow: inherit;
-		border-radius: $radius-md;
-		box-shadow: $card-shadow;
 	}
 }
 .q-table th {

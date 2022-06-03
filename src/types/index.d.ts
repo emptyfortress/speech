@@ -7,16 +7,6 @@ interface Chip {
 	value?: string
 }
 
-// interface Logic {
-// 	id: number
-// 	label: string
-// 	star: boolean
-// 	selected: boolean
-// 	comment: string
-// 	value?: string
-// 	list?: []
-// }
-
 interface Logic {
 	id: number
 	label: string
@@ -35,4 +25,32 @@ interface Condition {
 interface List {
 	id: number
 	list: Condition[]
+}
+
+interface Column {
+	id: number
+	name: string
+	label: string
+	field: string | ((row: any) => any)
+	required?: boolean
+	align?: 'left' | 'right' | 'center'
+	sortable?: boolean
+	sort?: (a: any, b: any, rowA: any, rowB: any) => number
+	sortOrder?: 'ad' | 'da'
+	format?: (val: any, row: any) => any
+	style?: string | ((row: any) => string)
+	classes?: string | ((row: any) => string)
+	headerStyle?: string
+	headerClasses?: string
+}
+
+interface Row {
+	id: number
+	name: string
+	call: string
+	ant: string
+	loud: string
+	interrupt: string
+	dynamics: any
+	volume: any
 }

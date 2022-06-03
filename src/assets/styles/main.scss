@@ -88,6 +88,7 @@ body {
 
 .table {
 	box-shadow: $card-shadow;
+	border-radius: $radius-md;
 	tr.selected td::after {
 		background: transparent;
 	}
@@ -153,4 +154,9 @@ span.found {
 
 .wordform .q-checkbox__label {
 	font-size: 0.8rem;
+}
+
+.thinhd .q-table th {
+	font-weight: 300;
+	font-size: 0.7rem;
 }
