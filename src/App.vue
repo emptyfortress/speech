@@ -49,6 +49,25 @@ q-layout(view="hHh LpR fFf")
 			q-btn(dense round unelevated).q-mx-md
 				q-avatar(color="blue" size="30px")
 					img(src="@/assets/img/user0.svg")
+				q-menu(transition-show="jump-down" transition-hide="jump-up")
+					q-list
+						q-item(clickable v-close-popup)
+							q-item-section(avatar)
+								q-icon(name="mdi-account-search")
+							q-item-section Пользователи
+						q-item(clickable v-close-popup)
+							q-item-section(avatar)
+								q-icon(name="mdi-card-account-details-outline")
+							q-item-section Профиль
+						q-item(clickable v-close-popup)
+							q-item-section(avatar)
+								q-icon(name="mdi-information-outline")
+							q-item-section О программе
+						q-item(clickable v-close-popup)
+							q-item-section(avatar)
+								q-icon(name="mdi-location-exit")
+							q-item-section Выйти
+
 		q-linear-progress(indeterminate color="accent" size="3px" v-show="isLoading")
 
 	Drawer(:show="mystore.leftDrawer")
