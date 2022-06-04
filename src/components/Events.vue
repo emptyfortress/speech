@@ -10,7 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 import CategoryTable from '@/components/CategoryTable.vue'
 import { useSelect } from '@/stores/select'
