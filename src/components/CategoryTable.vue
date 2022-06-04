@@ -54,14 +54,30 @@ q-table(:rows="rows"
 
 q-dialog(v-model="bigTable")
 	q-card(style="width: 900px; max-width: 80vw;")
+		q-btn(round color="negative" icon="mdi-close" @click="bigTable = false").close
 		q-card-section
-			component(:is="VueApexCharts" type="area" :options="chartTableAreaBig" :series="seriesTableBig1")
+			q-table(:rows="addition"
+				:columns="columns1"
+				row-key="id"
+				binary-state-sort
+				flat
+				)
+				template(v-slot:top)
+					.text-h6 Название категории
+					q-space
+					q-input(dense debounce="300" color="primary" clearable v-model="fil")
+						template(v-slot:prepend)
+							q-icon(name="mdi-magnify")
+
+
 q-dialog(v-model="dialog1")
 	q-card(style="width: 900px; max-width: 80vw;")
+		q-btn(round color="negative" icon="mdi-close" @click="dialog1 = false").close
 		q-card-section
 			component(:is="VueApexCharts" type="area" :options="chartTableAreaBig" :series="seriesTableBig1")
 q-dialog(v-model="dialog2")
 	q-card(style="width: 600px; max-width: 80vw;")
+		q-btn(round color="negative" icon="mdi-close" @click="dialog2 = false").close
 		q-card-section
 			VueApexCharts(type="donut" :options="chartTableDonutBig" :series="seriesTable4")
 </template>
@@ -83,6 +99,7 @@ import { useSelect } from '@/stores/select'
 
 const emit = defineEmits(['select'])
 
+const fil = ref('')
 const dialog1 = ref(false)
 const dialog2 = ref(false)
 const showDialog1 = () => {
@@ -215,6 +232,42 @@ const columns: Column[] = [
 	{ id: 6, name: 'volume', label: 'Объем', field: 'volume', sortable: false, align: 'center' },
 ]
 
+const columns1: Column[] = [
+	{ name: 'name', label: 'Подкатегория', field: 'name', sortable: true, align: 'left' },
+	{ name: 'call', label: 'Звонки', field: 'call', sortable: true, align: 'right' },
+	{
+		name: 'ant',
+		label: 'АНТ',
+		field: 'ant',
+		sortable: true,
+		align: 'right',
+	},
+	{
+		name: 'loud',
+		label: 'Тишина',
+		field: 'loud',
+		sortable: true,
+		align: 'right',
+	},
+	{
+		id: 4,
+		name: 'interrupt',
+		label: 'Перебивания',
+		field: 'interrupt',
+		sortable: true,
+		align: 'right',
+	},
+	{
+		id: 5,
+		name: 'dynamics',
+		label: 'Динамика за период',
+		field: 'dynamics',
+		sortable: false,
+		align: 'center',
+	},
+	{ id: 6, name: 'volume', label: 'Объем', field: 'volume', sortable: false, align: 'center' },
+]
+
 const rows = [
 	{
 		id: 0,
@@ -333,5 +386,15 @@ const bigTable = ref(false)
 }
 .graph:hover {
 	outline: 1px solid #249efa;
+}
+.q-dialog .q-card {
+	overflow: visible;
+	position: relative;
+	.close {
+		z-index: 100;
+		position: absolute;
+		top: -1.2rem;
+		right: -1.2rem;
+	}
 }
 </style>
