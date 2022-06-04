@@ -239,6 +239,7 @@ const pagination = ref({
 }
 .graph:hover {
 	outline: 1px solid #249efa;
+	user-select: none;
 }
 .q-dialog .q-card {
 	overflow: visible;

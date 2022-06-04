@@ -350,6 +350,11 @@ const chartTable4 = {
 	tooltip: {
 		enabled: false,
 	},
+	plotOptions: {
+		pie: {
+			expandOnClick: false,
+		},
+	},
 }
 
 export {
