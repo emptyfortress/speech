@@ -304,7 +304,6 @@ const seriesTable3 = [{ data: randomArray(9, 40, 100) }]
 const chartTable1 = {
 	chart: {
 		type: 'line',
-		width: 100,
 		height: 35,
 		sparkline: {
 			enabled: true,

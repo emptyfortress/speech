@@ -1,11 +1,14 @@
 <template lang="pug">
 .grid
 	.cat
-		CategoryTable
+		component(:is="CategoryTable")
 
-	q-card()
-		VueApexCharts(type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="selection === 0")
-		VueApexCharts(type="bar" height="183" :options="barOptions" :series="barSeries" v-else)
+	q-card
+		component(:is="VueApexCharts" type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="!sel.selection")
+		component(:is="VueApexCharts" type="bar" height="183" :options="barOptions" :series="barSeries" v-else)
+
+		//- VueApexCharts(type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="!sel.selection")
+		//- VueApexCharts(type="bar" height="183" :options="barOptions" :series="barSeries" v-else)
 
 q-dialog(v-model="dialog1")
 	q-card(style="width: 900px; max-width: 80vw;")
@@ -30,13 +33,22 @@ import {
 	seriesTable4,
 } from '@/stores/charts1'
 import CategoryTable from '@/components/CategoryTable.vue'
+import { useSelect } from '@/stores/select'
+
+const sel = useSelect()
 
 const seriesTableBig1 = [{ name: 'Parameter', data: [55, 57, 65, 70, 77, 80, 67] }]
 
 const dialog1 = ref(false)
 const dialog2 = ref(false)
 
-const selection = ref(0)
+const selection = ref(false)
+const graphOn = () => {
+	selection.value = !selection.value
+}
+// const graphOff = () => {
+// 	selection.value = 0
+// }
 
 const select = (e: any) => {
 	if (selection.value === e) {
