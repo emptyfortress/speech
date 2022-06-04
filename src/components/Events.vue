@@ -7,103 +7,15 @@
 		component(:is="VueApexCharts" type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="!sel.selection")
 		component(:is="VueApexCharts" type="bar" height="183" :options="barOptions" :series="barSeries" v-else)
 
-		//- VueApexCharts(type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="!sel.selection")
-		//- VueApexCharts(type="bar" height="183" :options="barOptions" :series="barSeries" v-else)
-
-q-dialog(v-model="dialog1")
-	q-card(style="width: 900px; max-width: 80vw;")
-		q-card-section
-			VueApexCharts(type="area" :options="chartTableAreaBig" :series="seriesTableBig1")
-q-dialog(v-model="dialog2")
-	q-card(style="width: 600px; max-width: 80vw;")
-		q-card-section
-			VueApexCharts(type="donut" :options="chartTableDonutBig" :series="seriesTable4")
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
-import { chartOptions1 as chartTableAreaBig } from '@/stores/charts1'
-import {
-	chartTable1,
-	seriesTable1,
-	seriesTable2,
-	seriesTable3,
-	chartTable4,
-	seriesTable4,
-} from '@/stores/charts1'
 import CategoryTable from '@/components/CategoryTable.vue'
 import { useSelect } from '@/stores/select'
 
 const sel = useSelect()
-
-const seriesTableBig1 = [{ name: 'Parameter', data: [55, 57, 65, 70, 77, 80, 67] }]
-
-const dialog1 = ref(false)
-const dialog2 = ref(false)
-
-const selection = ref(false)
-const graphOn = () => {
-	selection.value = !selection.value
-}
-// const graphOff = () => {
-// 	selection.value = 0
-// }
-
-const select = (e: any) => {
-	if (selection.value === e) {
-		selection.value = 0
-	} else selection.value = e
-}
-
-const showDialog1 = () => {
-	dialog1.value = true
-}
-const showDialog2 = () => {
-	dialog2.value = true
-}
-
-const rows = [
-	{
-		id: 1,
-		classname: 'blue',
-		title: 'Продажи',
-		call: '4.32',
-		ant: '4:15 мин',
-		sound: '1.89%',
-		interrupt: '2.43%',
-		options1: chartTable1,
-		series1: seriesTable1,
-		options2: chartTable4,
-		series2: seriesTable4,
-	},
-	{
-		id: 2,
-		classname: 'green',
-		title: 'Сервис',
-		call: '7.32',
-		ant: '3:05 мин',
-		sound: '3.62%',
-		interrupt: '4.56%',
-		options1: chartTable1,
-		series1: seriesTable2,
-		options2: chartTable4,
-		series2: seriesTable4,
-	},
-	{
-		id: 3,
-		classname: 'orange',
-		title: 'Оплата',
-		call: '15.3',
-		ant: '1:07 мин',
-		sound: '3.25%',
-		interrupt: '0.35 %',
-		options1: chartTable1,
-		series1: seriesTable3,
-		options2: chartTable4,
-		series2: seriesTable4,
-	},
-]
 
 const series = [76, 67, 61]
 
@@ -133,24 +45,6 @@ const chartOptions1 = {
 		},
 	},
 	labels: ['Продажи', 'Сервис', 'Оплата'],
-}
-
-const chartTableDonutBig = {
-	chartOptions: {
-		chart: {
-			type: 'donut',
-		},
-		responsive: [
-			{
-				breakpoint: 480,
-				options: {
-					legend: {
-						position: 'right',
-					},
-				},
-			},
-		],
-	},
 }
 
 const barOptions = {
