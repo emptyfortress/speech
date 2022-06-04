@@ -112,6 +112,7 @@ const rows = operators
 
 const oper = ref(false)
 const selected: Ref<Row[]> = ref([])
+
 const select = (e: Row) => {
 	if (selected.value.length === 0) {
 		selected.value.push(e)

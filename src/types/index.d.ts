@@ -28,7 +28,7 @@ interface List {
 }
 
 interface Column {
-	id: number
+	id?: number
 	name: string
 	label: string
 	field: string | ((row: any) => any)
@@ -44,7 +44,7 @@ interface Column {
 	headerClasses?: string
 }
 
-interface Row {
+interface RowCategory {
 	id: number
 	name: string
 	call: string
@@ -53,4 +53,6 @@ interface Row {
 	interrupt: string
 	dynamics: any
 	volume: any
+	selected?: boolean
+	classname?: string
 }
