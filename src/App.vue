@@ -6,7 +6,9 @@ import Drawer from '@/components/Drawer.vue'
 import DateDrawer from '@/components/DateDrawer.vue'
 import KeyDrawer from '@/components/KeyDrawer.vue'
 import SpeechDrawer from '@/components/SpeechDrawer.vue'
+import Login from '@/components/Login.vue'
 import SiriWave from 'siriwave'
+import { router } from './router/router'
 
 const mystore = useStore()
 const toggleLeftDrawer = mystore.toggleLeftDrawer
@@ -22,6 +24,12 @@ onMounted(() => {
 	})
 })
 
+const isLogged = ref(true)
+const login = () => {
+	isLogged.value = true
+	router.push('/')
+}
+
 const isLoading = ref(false)
 const refresh = () => {
 	isLoading.value = true
@@ -32,53 +40,57 @@ const refresh = () => {
 </script>
 
 <template lang="pug">
-q-layout(view="hHh LpR fFf")
-	q-header().head
-		q-toolbar(shrink)
-			q-btn(dense flat round  @click="toggleLeftDrawer")
-				SvgIcon(name="sound" color="#1565c0")
+template(v-if="isLogged")
+	q-layout(view="hHh LpR fFf")
+		q-header().head
+			q-toolbar(shrink)
+				q-btn(dense flat round  @click="toggleLeftDrawer")
+					SvgIcon(name="sound" color="#1565c0")
 
-			q-toolbar-title(@click="toggleLeftDrawer").gt-sm.cursor-pointer
-				span.hd Речевая платформа Speech Drive
-			q-space
-			q-btn(dense flat round @click="refresh").q-mr-sm
-				SvgIcon(name="refresh" :spin="isLoading" )
-			q-btn(dense flat round icon="mdi-book-open-page-variant-outline" @click="mystore.toggleKeyDrawer").q-mr-sm
-			q-btn(dense flat round icon="mdi-bell-outline")
-				q-badge(floating rounded color="red") 3
-			q-btn(dense round unelevated).q-mx-md
-				q-avatar(color="blue" size="30px")
-					img(src="@/assets/img/user0.svg")
-				q-menu(transition-show="jump-down" transition-hide="jump-up")
-					q-list
-						q-item(clickable v-close-popup)
-							q-item-section(avatar)
-								q-icon(name="mdi-account-search")
-							q-item-section Пользователи
-						q-item(clickable v-close-popup)
-							q-item-section(avatar)
-								q-icon(name="mdi-card-account-details-outline")
-							q-item-section Профиль
-						q-item(clickable v-close-popup)
-							q-item-section(avatar)
-								q-icon(name="mdi-information-outline")
-							q-item-section О программе
-						q-item(clickable v-close-popup)
-							q-item-section(avatar)
-								q-icon(name="mdi-location-exit")
-							q-item-section Выйти
+				q-toolbar-title(@click="toggleLeftDrawer").gt-sm.cursor-pointer
+					span.hd Речевая платформа Speech Drive
+				q-space
+				q-btn(dense flat round @click="refresh").q-mr-sm
+					SvgIcon(name="refresh" :spin="isLoading" )
+				q-btn(dense flat round icon="mdi-book-open-page-variant-outline" @click="mystore.toggleKeyDrawer").q-mr-sm
+				q-btn(dense flat round icon="mdi-bell-outline")
+					q-badge(floating rounded color="red") 3
+				q-btn(dense round unelevated).q-mx-md
+					q-avatar(color="blue" size="30px")
+						img(src="@/assets/img/user0.svg")
+					q-menu(transition-show="jump-down" transition-hide="jump-up")
+						q-list
+							q-item(clickable v-close-popup)
+								q-item-section(avatar)
+									q-icon(name="mdi-account-search")
+								q-item-section Пользователи
+							q-item(clickable v-close-popup)
+								q-item-section(avatar)
+									q-icon(name="mdi-card-account-details-outline")
+								q-item-section Профиль
+							q-item(clickable v-close-popup)
+								q-item-section(avatar)
+									q-icon(name="mdi-information-outline")
+								q-item-section О программе
+							q-item(clickable v-close-popup @click="isLogged = false")
+								q-item-section(avatar)
+									q-icon(name="mdi-location-exit")
+								q-item-section Выйти
 
-		q-linear-progress(indeterminate color="accent" size="3px" v-show="isLoading")
+			q-linear-progress(indeterminate color="accent" size="3px" v-show="isLoading")
 
-	Drawer(:show="mystore.leftDrawer")
-	DateDrawer
-	KeyDrawer
-	SpeechDrawer
+		Drawer(:show="mystore.leftDrawer")
+		DateDrawer
+		KeyDrawer
+		SpeechDrawer
 
-	q-page-container
-		router-view
-	transition(name="fade")
-		#siri(v-show="isLoading")
+		q-page-container
+			router-view
+		transition(name="fade")
+			#siri(v-show="isLoading")
+template(v-else)
+	Login(@login="login")
+
 </template>
 
 <style scoped lang="scss">

@@ -38,12 +38,12 @@ const pages = [
 		icon: 'mdi-finance',
 		url: '/report',
 	},
-	{
-		id: 2,
-		title: 'Сравнение',
-		icon: 'mdi-scale-balance',
-		url: '/compare',
-	},
+	// {
+	// 	id: 2,
+	// 	title: 'Сравнение',
+	// 	icon: 'mdi-scale-balance',
+	// 	url: '/compare',
+	// },
 	{
 		id: 4,
 		title: 'Чек-листы',

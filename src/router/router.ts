@@ -23,31 +23,26 @@ export const router = createRouter({
 		{
 			path: '/report',
 			component: () => import('@/components/Report.vue'),
-			props: { variant: 'success' },
 			meta: { transition: 'slide-left', title: 'Отчеты', requiresAuth: false },
 		},
 		{
 			path: '/compare',
 			component: () => import('@/components/Compare.vue'),
-			props: { variant: 'success' },
 			meta: { transition: 'slide-left', title: 'Сравнить', requiresAuth: false },
 		},
 		{
 			path: '/checklists',
 			component: () => import('@/components/Checklists.vue'),
-			props: { variant: 'success' },
 			meta: { transition: 'slide-left', title: 'Чек-листы', requiresAuth: false },
 		},
 		{
 			path: '/conversation',
 			component: () => import('@/components/Conversation.vue'),
-			props: { variant: 'success' },
 			meta: { transition: 'slide-left', title: 'Диалоги', requiresAuth: false },
 		},
 		{
 			path: '/requests',
 			component: () => import('@/components/Requests.vue'),
-			props: { variant: 'success' },
 			meta: { transition: 'slide-left', title: 'Логические запросы', requiresAuth: false },
 		},
 		{
