@@ -1,3 +1,4 @@
+import NotificationDrawerVue from '@/components/NotificationDrawer.vue'
 import { defineStore } from 'pinia'
 
 export const useStore = defineStore({
@@ -8,6 +9,7 @@ export const useStore = defineStore({
 		leftDrawer: true,
 		dateDrawer: false,
 		keyDrawer: false,
+		notificationDrawer: false,
 		speechDrawer: false,
 		mini: false,
 		keys: [],
@@ -35,6 +37,9 @@ export const useStore = defineStore({
 		toggleDateDrawer() {
 			this.mini = true
 			this.dateDrawer = !this.dateDrawer
+		},
+		toggleNotificationDrawer() {
+			this.notificationDrawer = !this.notificationDrawer
 		},
 		toggleKeyDrawer() {
 			this.mini = true

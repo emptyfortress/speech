@@ -1,7 +1,7 @@
 interface Chip {
 	id: number
 	label: string
-	star: boolean
+	star?: boolean
 	selected: boolean
 	comment?: string
 	value?: string
