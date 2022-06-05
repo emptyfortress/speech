@@ -46,6 +46,11 @@ export const router = createRouter({
 			meta: { transition: 'slide-left', title: 'Логические запросы', requiresAuth: false },
 		},
 		{
+			path: '/notifications',
+			component: () => import('@/components/Notifications.vue'),
+			meta: { transition: 'slide-left', title: 'Уведомления', requiresAuth: false },
+		},
+		{
 			path: '/:pathMatch(.*)*',
 			redirect: '/404',
 		},
