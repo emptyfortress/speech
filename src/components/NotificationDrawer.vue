@@ -13,7 +13,7 @@ q-drawer(v-model="mystore.notificationDrawer" overlay side="right" :width="300" 
 						q-item-section(avatar)
 							q-icon(name="mdi-bell-outline")
 						q-item-section Открыть уведомления
-					q-item(clickable v-close-popup)
+					q-item(clickable v-close-popup @click="$router.push('/setup')")
 						q-item-section(avatar)
 							q-icon(name="mdi-cog-outline")
 						q-item-section Настройки уведомлений

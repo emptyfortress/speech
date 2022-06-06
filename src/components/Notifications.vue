@@ -73,11 +73,6 @@ const remove = () => {
 
 <style scoped lang="scss">
 //@import '@/assets/css/colors.scss';
-.notific {
-	max-width: 800px;
-	height: 100%;
-	margin: 0 auto;
-}
 .mybuttons {
 	margin-top: 1rem;
 	transition: 0.3s ease all;
