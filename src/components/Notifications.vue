@@ -3,7 +3,7 @@ q-page(padding)
 	.container
 		.notific
 			q-table(:columns="columns"
-				:rows="notifications"
+				:rows="items"
 				binary-state-sort
 				:pagination="pagination"
 				:filter="filter"
@@ -17,24 +17,34 @@ q-page(padding)
 					.zag
 						q-icon(name="mdi-bell-outline").q-mr-md
 						|Уведомления
+						span.q-ml-md ({{notifications.length}})
 					q-space
 					q-input(dense debounce="300" color="primary" v-model="filter" clearable)
 						template(v-slot:prepend)
 							q-icon(name="mdi-magnify")
 
+				template(v-slot:body="props")
+					q-tr(:props="props" :class="{'unread' : props.row.unread}")
+						q-td(auto-width)
+							q-checkbox(v-model="props.selected")
+						q-td(:props="props" v-for="col in props.cols" :key="col.name") {{props.row[col.name]}}
+
 			transition(name="slide-top")
 				.mybuttons(v-show="selected.length")
-					q-btn(color="primary" label="Прочитать" )
-					q-btn(color="primary" label="Удалить" )
+					q-btn(color="primary" label="Прочитать"  @click="read")
+					q-btn(color="primary" label="Удалить" @click="remove")
 
 </template>
 
 <script setup lang="ts">
 import { notifications } from '@/stores/notifications'
 import { ref } from 'vue'
+import type { Ref } from 'vue'
 
 const filter = ref('')
-const selected = ref([])
+// const selected:  = ref([])
+const selected: Ref<RowNotific[]> = ref([])
+const items = ref(notifications)
 
 const columns: Column[] = [
 	{ name: 'date', label: 'Дата', field: 'date', sortable: true, align: 'left' },
@@ -48,6 +58,16 @@ const pagination = ref({
 
 const label = () => {
 	return `Выбрано ${selected.value.length} строк`
+}
+
+const read = () => {
+	if (selected.value.length === 10) {
+		selected.value.forEach((item) => (item.unread = true))
+	}
+	selected.value.forEach((item) => (item.unread = !item.unread))
+}
+const remove = () => {
+	items.value = items.value.filter((el: RowNotific) => !selected.value.includes(el))
 }
 </script>
 

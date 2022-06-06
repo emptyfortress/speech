@@ -163,3 +163,10 @@ span.found {
 	font-weight: 300;
 	font-size: 0.7rem;
 }
+
+.notific .q-table tr.unread {
+	font-weight: bold;
+	> td:first-child {
+		border-left: 3px solid $primary;
+	}
+}

@@ -56,3 +56,14 @@ interface RowCategory {
 	selected?: boolean
 	classname?: string
 }
+
+interface RowNotific {
+	id: number
+	name: string
+	channel: string
+	date: string
+	unread?: boolean
+	old?: boolean
+	selected?: boolean
+	classname?: string
+}
