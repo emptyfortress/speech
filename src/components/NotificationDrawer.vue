@@ -28,10 +28,11 @@ q-drawer(v-model="mystore.notificationDrawer" overlay side="right" :width="300" 
 	q-list(separator).list
 		q-item(clickable v-ripple v-for="item in newitems" :key="item.id" :class="{'active' : item.unread}")
 			q-item-section
-				q-item-label(overline).thin {{item.date}}
-				q-item-label(:class="{'text-weight-bold' : item.unread}") {{item.name}}
+				q-item-label(overline) {{item.date}}, {{item.time}}
+				q-item-label(:class="{'text-weight-bold' : item.unread}").text-subtitile1 {{item.name}}
+				q-item-label оператор: Катя
 			q-item-section(side)
-				q-item-label &nbsp;
+				q-item-label
 				q-item-label.normal {{item.channel}}
 			.mybt
 				q-btn(round color="white" text-color="black" icon="mdi-check" size="sm" @click.stop="read(item)").q-mr-xs
@@ -42,8 +43,9 @@ q-drawer(v-model="mystore.notificationDrawer" overlay side="right" :width="300" 
 	q-list(separator).list
 		q-item(clickable v-ripple v-for="item in olditems" :key="item.id" :class="{'active' : item.unread}")
 			q-item-section
-				q-item-label(overline).thin {{item.date}}
+				q-item-label(overline).thin {{item.date}}, {{item.time}}
 				q-item-label(:class="{'text-weight-bold' : item.unread}") {{item.name}}
+				q-item-label оператор: Катя
 			q-item-section(side)
 				q-item-label &nbsp;
 				q-item-label.normal {{item.channel}}

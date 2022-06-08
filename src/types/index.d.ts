@@ -62,8 +62,11 @@ interface RowNotific {
 	name: string
 	channel: string
 	date: string
+	time: string
+	oper: string
 	unread?: boolean
 	old?: boolean
 	selected?: boolean
 	classname?: string
+	context?: string
 }
