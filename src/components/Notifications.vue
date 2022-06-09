@@ -55,9 +55,10 @@ Teleport(to="#speech")
 
 <script setup lang="ts">
 import { notifications } from '@/stores/notifications'
-import { ref } from 'vue'
+import { watchEffect, ref } from 'vue'
 import type { Ref } from 'vue'
 import { useStore } from '@/stores/store'
+import { useRoute } from 'vue-router'
 
 const filter = ref('')
 // const selected:  = ref([])
@@ -91,6 +92,21 @@ const read = () => {
 const remove = () => {
 	items.value = items.value.filter((item) => !selected.value.includes(item))
 }
+
+const props = defineProps({
+	id: {
+		type: String,
+		default: undefined,
+	},
+})
+const handleChange = (e: string | undefined) => {
+	if (e === undefined) {
+		selected.value = []
+	} else {
+		selected.value = notifications.filter((item) => item.id === +e)
+	}
+}
+watchEffect(() => handleChange(props.id))
 
 const mystore = useStore()
 const select = (e: number) => {

@@ -51,6 +51,12 @@ export const router = createRouter({
 			meta: { transition: 'slide-left', title: 'Уведомления', requiresAuth: false },
 		},
 		{
+			path: '/notifications/:id',
+			component: () => import('@/components/Notifications.vue'),
+			props: true,
+			meta: { transition: 'slide-left', title: 'Уведомления', requiresAuth: false },
+		},
+		{
 			path: '/setup',
 			component: () => import('@/components/Setup.vue'),
 			meta: { transition: 'slide-left', title: 'Настройка уведомлений', requiresAuth: false },

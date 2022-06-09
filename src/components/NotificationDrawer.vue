@@ -26,7 +26,7 @@ q-drawer(v-model="mystore.notificationDrawer" overlay side="right" :width="300" 
 		div Новые
 		.normal ({{newitems.length}})
 	q-list(separator).list
-		q-item(clickable v-ripple v-for="item in newitems" :key="item.id" :class="{'active' : item.unread}")
+		q-item(clickable v-ripple v-for="item in newitems" :key="item.id" :class="{'active' : item.unread}" @click="goTo(item.id)")
 			q-item-section
 				q-item-label(overline) {{item.date}}, {{item.time}}
 				q-item-label(:class="{'text-weight-bold' : item.unread}").text-subtitile1 {{item.name}}
@@ -41,7 +41,7 @@ q-drawer(v-model="mystore.notificationDrawer" overlay side="right" :width="300" 
 		div Остальные
 		div.normal ({{olditems.length}})
 	q-list(separator).list
-		q-item(clickable v-ripple v-for="item in olditems" :key="item.id" :class="{'active' : item.unread}")
+		q-item(clickable v-ripple v-for="item in olditems" :key="item.id" :class="{'active' : item.unread}" @click="goTo(item.id)")
 			q-item-section
 				q-item-label(overline).thin {{item.date}}, {{item.time}}
 				q-item-label(:class="{'text-weight-bold' : item.unread}") {{item.name}}
@@ -59,6 +59,7 @@ q-drawer(v-model="mystore.notificationDrawer" overlay side="right" :width="300" 
 import { ref, computed } from 'vue'
 import { useStore } from '@/stores/store'
 import { notifications } from '@/stores/notifications'
+import { router } from '@/router/router'
 
 const noti = ref(notifications)
 const chips = ref([
@@ -89,6 +90,9 @@ const readAll = () => {
 const remove = (e: any) => {
 	let ind = noti.value.findIndex((item) => item.id === e.id)
 	noti.value.splice(ind, 1)
+}
+const goTo = (e: number) => {
+	router.push('/notifications/' + e)
 }
 </script>
 
