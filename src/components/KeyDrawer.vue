@@ -1,6 +1,6 @@
 <template lang="pug">
 q-drawer(v-model="mystore.keyDrawer" overlay side="right" :width="300" ).rd
-	KeywordList
+	component(:is="KeywordList")
 </template>
 
 <script setup lang="ts">

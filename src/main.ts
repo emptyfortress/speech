@@ -28,16 +28,16 @@ app.use(Quasar, {
 			timeout: 3000,
 			icon: 'mdi-alert',
 			color: 'primary',
-			classes: 'notific',
+			classes: 'notifications',
 		},
 	},
 	supportTS: {
 		tsCheckerConfig: {
 			eslint: {
 				enabled: true,
-				files: './src/**/*.{ts,tsx,js,jsx,vue}'
-			}
-		}
+				files: './src/**/*.{ts,tsx,js,jsx,vue}',
+			},
+		},
 	},
 	/*
   config: {
