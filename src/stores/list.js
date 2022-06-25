@@ -306,7 +306,7 @@ const words = [
 ]
 
 const vocabs = [
-	{ name: 'Приветствие', keys: ['привет', 'здравствуйте', 'доброе утро'], selected: false },
+	{ name: 'Приветствие', keys: ['здравствуйте', 'добрый вечер', 'доброе утро'], selected: false },
 	{ name: 'Прощание', keys: ['до свидания', 'всего доброго'], selected: false },
 ]
 

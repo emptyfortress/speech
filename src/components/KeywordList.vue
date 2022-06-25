@@ -5,24 +5,36 @@
 q-input(ref="input" dense v-model="filter" autofocus clearable hide-bottom-space @clear="filter = ''")
 	template(v-slot:prepend)
 		q-icon(name="mdi-magnify")
-//- q-icon(name="mdi-plus-circle" size="md" color="primary" v-show="filter.length > 2" ).plus
 
 //- p {{ selection}}
 q-list(dense)
-	q-item(v-for="item in vocabularies" clickable :key="item.name")
-		q-item-section(side)
-			component(:is="SvgIcon" name="vocabulary").voc
-		q-item-section
-			q-checkbox(v-model="selection" size="xs" dense :val="item.keys" :label="item.name")
-		q-item-section(side)
-			.row
-				q-icon(name="mdi-pencil" size="xs" @click="removeVoc(item)").q-mr-sm
-				q-icon(name="mdi-trash-can-outline" size="xs" @click="removeVoc(item)")
+	template(v-if="editMode && currentVoc")
+		q-card.full-background
+			q-item(clickable)
+				q-item-section(side)
+					component(:is="SvgIcon" name="vocabulary").voc
+				q-item-section {{currentVoc.name}}
+				q-item-section(side)
+					q-icon(name="mdi-arrow-up-right" size="xs" dense @click="save")
+			q-item(v-for="item in selection" clickable :key="item")
+				q-item-section {{item}}
+				q-item-section(side)
+					q-icon(name="mdi-close" size="xs" @click="removeFromVoc(item)").hov
+	template(v-if="!editMode")
+		q-item(v-for="item in vocabularies" clickable :key="item.name")
+			q-item-section(side)
+				component(:is="SvgIcon" name="vocabulary").voc
+			q-item-section
+				q-checkbox(v-model="selection" size="xs" dense :val="item.keys" :label="item.name")
+			q-item-section(side)
+				.row
+					q-icon(name="mdi-pencil" size="xs" @click="edit(item)").q-mr-sm.hov
+					q-icon(name="mdi-trash-can-outline" size="xs" @click="removeVoc(item)").hov
 	q-item(v-for="item in filteredItems" clickable :key="item.key")
 		q-item-section
 			q-checkbox(v-model="selection" size="xs" dense :val="item.key" :label="item.key")
-		q-item-section(side)
-			q-icon(name="mdi-trash-can-outline" size="xs" @click="remove(item)")
+		q-item-section(side v-if="!editMode")
+			q-icon(name="mdi-trash-can-outline" size="xs" @click="remove(item)").hov
 	template(v-if="filteredItems.length === 0")
 		.notfound
 			q-icon(name="mdi-emoticon-tongue-outline" size="sm" color="primary")
@@ -30,7 +42,7 @@ q-list(dense)
 			q-btn(color="primary" label="Добавить" size="sm" unelevated @click="add")
 
 transition(name="slide-bottom")
-	.addvoc(v-show="selection.length > 0")
+	.addvoc(v-show="selection.length > 0 && !editMode")
 		.total
 			|Выбрано:
 			span {{ calcKeys }}
@@ -44,6 +56,7 @@ transition(name="slide-bottom")
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import type { Ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { words, vocabs } from '@/stores/list'
 import SvgIcon from '@/components/SvgIcon.vue'
@@ -61,7 +74,7 @@ interface Voc {
 	keys: string[]
 }
 
-const selection = ref([])
+const selection: Ref<string[]> = ref([])
 const input = ref(null)
 const filter = ref('')
 
@@ -77,12 +90,12 @@ const filteredItems = computed(() => {
 const remove = (e: Keyword) => {
 	let index = items.value.findIndex((item) => item.key === e.key)
 	items.value.splice(index, 1)
-	show(e)
+	show(e.key)
 }
 const removeVoc = (e: Voc) => {
 	let index = vocabularies.value.findIndex((item: Voc) => item.name === e.name)
 	vocabularies.value.splice(index, 1)
-	// show(e)
+	show(e.name)
 }
 const compare = (a: Keyword, b: Keyword) => {
 	if (a.value > b.value) return -1
@@ -111,8 +124,9 @@ const undo = (e: Keyword) => {
 }
 
 const $q = useQuasar()
-const show = (e: Keyword) => {
-	let message = e.key + ' - удалено.'
+
+const show = (e: string) => {
+	let message = e + ' - удалено.'
 	$q.notify({
 		message: message,
 		color: 'negative',
@@ -155,13 +169,26 @@ const calcKeys = computed(() => {
 	return selection.value.flat(2).length
 })
 
-// const calcVal = (item) => {
-// 	return [...item.keys]
-// }
+const editMode = ref(false)
+const currentVoc: Ref<null | Voc> = ref(null)
+const edit = (item: Voc) => {
+	editMode.value = !editMode.value
+	currentVoc.value = item
+	selection.value = item.keys.flat(2)
+}
+
+const removeFromVoc = (e: string) => {
+	selection.value = selection.value.filter((item) => item !== e)
+}
+const save = () => {
+	currentVoc.value!.keys = selection.value
+	selection.value = []
+	editMode.value = false
+}
 </script>
 
 <style scoped lang="scss">
-//@import '@/assets/css/colors.scss';
+// @import '@/assets/styles/myvariables.scss';
 .rel {
 	position: relative;
 	.plus {
@@ -184,11 +211,11 @@ const calcKeys = computed(() => {
 	height: 32px;
 }
 .q-item {
-	.q-icon {
+	.hov {
 		display: none;
 	}
 	&:hover {
-		.q-icon {
+		.hov {
 			display: block;
 		}
 	}
@@ -230,5 +257,14 @@ const calcKeys = computed(() => {
 	.q-btn {
 		transform: translateY(-2px);
 	}
+}
+.full-background {
+	--c: #d9ecfa;
+	background: var(--c);
+	box-shadow: 0 0 0 100vmax var(--c);
+	clip-path: inset(0 -100vmax);
+	padding: 10px 0;
+	margin-bottom: 1rem;
+	margin-top: 0.5rem;
 }
 </style>
