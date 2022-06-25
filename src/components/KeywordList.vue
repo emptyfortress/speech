@@ -7,22 +7,34 @@ q-input(ref="input" dense v-model="filter" autofocus clearable hide-bottom-space
 		q-icon(name="mdi-magnify")
 //- q-icon(name="mdi-plus-circle" size="md" color="primary" v-show="filter.length > 2" ).plus
 
+//- p {{ selection}}
 q-list(dense)
-q-item(v-for="item in filteredItems" clickable :key="item.key")
-	q-item-section(side v-show="item.voc")
-		component(:is="SvgIcon" name="vocabulary").voc
-	q-item-section
-		q-checkbox(v-model="selection" size="xs" dense :val="item.key" :label="item.key")
-	q-item-section(side)
-		q-icon(name="mdi-trash-can-outline" size="xs" @click="remove(item)")
-template(v-if="filteredItems.length === 0")
-	.notfound
-		q-icon(name="mdi-emoticon-tongue-outline" size="sm" color="primary")
-		span.q-mx-sm Ничего нет.
-		q-btn(color="primary" label="Добавить" size="sm" unelevated @click="add")
+	q-item(v-for="item in vocabularies" clickable :key="item.name")
+		q-item-section(side)
+			component(:is="SvgIcon" name="vocabulary").voc
+		q-item-section
+			q-checkbox(v-model="selection" size="xs" dense :val="item.keys" :label="item.name")
+		q-item-section(side)
+			.row
+				q-icon(name="mdi-pencil" size="xs" @click="removeVoc(item)").q-mr-sm
+				q-icon(name="mdi-trash-can-outline" size="xs" @click="removeVoc(item)")
+	q-item(v-for="item in filteredItems" clickable :key="item.key")
+		q-item-section
+			q-checkbox(v-model="selection" size="xs" dense :val="item.key" :label="item.key")
+		q-item-section(side)
+			q-icon(name="mdi-trash-can-outline" size="xs" @click="remove(item)")
+	template(v-if="filteredItems.length === 0")
+		.notfound
+			q-icon(name="mdi-emoticon-tongue-outline" size="sm" color="primary")
+			span.q-mx-sm Ничего нет.
+			q-btn(color="primary" label="Добавить" size="sm" unelevated @click="add")
 
 transition(name="slide-bottom")
 	.addvoc(v-show="selection.length > 0")
+		.total
+			|Выбрано:
+			span {{ calcKeys }}
+			q-btn(round dense flat icon="mdi-close" size="sm" @click="cancel")
 		q-input(v-model="vocName" outlined dense label="Название словаря" bg-color="white")
 		q-card-actions
 			q-btn(label="Отмена" flat color="white" @click="cancel")
@@ -33,7 +45,7 @@ transition(name="slide-bottom")
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useQuasar } from 'quasar'
-import { words } from '@/stores/list'
+import { words, vocabs } from '@/stores/list'
 import SvgIcon from '@/components/SvgIcon.vue'
 
 interface Keyword {
@@ -43,11 +55,17 @@ interface Keyword {
 	part: string
 	voc?: boolean
 }
+interface Voc {
+	name: string
+	selected: boolean
+	keys: string[]
+}
 
 const selection = ref([])
 const input = ref(null)
 const filter = ref('')
 
+const vocabularies = ref(vocabs)
 const items = ref(words)
 const filteredItems = computed(() => {
 	if (filter.value) {
@@ -60,6 +78,11 @@ const remove = (e: Keyword) => {
 	let index = items.value.findIndex((item) => item.key === e.key)
 	items.value.splice(index, 1)
 	show(e)
+}
+const removeVoc = (e: Voc) => {
+	let index = vocabularies.value.findIndex((item: Voc) => item.name === e.name)
+	vocabularies.value.splice(index, 1)
+	// show(e)
 }
 const compare = (a: Keyword, b: Keyword) => {
 	if (a.value > b.value) return -1
@@ -106,19 +129,11 @@ const show = (e: Keyword) => {
 const added = (e: string) => {
 	let message = 'Добавлено ' + e
 	$q.notify({
-		color: 'positive',
 		message: message,
 		icon: 'mdi-check',
 		position: 'bottom-right',
 	})
 }
-// watchEffect(() => {
-// 	if (selection.value.length > 0) {
-// 		emit('select', selection.value)
-// 	} else emit('deselect')
-// })
-
-// const voc = ref()
 const vocName = ref('')
 
 const cancel = () => {
@@ -126,19 +141,23 @@ const cancel = () => {
 }
 
 const addVoc = () => {
-	let temp: Keyword = {
-		key: vocName.value,
-		value: 5000,
+	let temp: Voc = {
+		name: vocName.value,
 		selected: false,
-		voc: true,
-		part: '',
+		keys: selection.value,
 	}
-	items.value.push(temp)
-	items.value.sort(compare)
+	vocabularies.value.push(temp)
 	selection.value = []
 	added(vocName.value)
 	vocName.value = ''
 }
+const calcKeys = computed(() => {
+	return selection.value.flat(2).length
+})
+
+// const calcVal = (item) => {
+// 	return [...item.keys]
+// }
 </script>
 
 <style scoped lang="scss">
@@ -200,6 +219,16 @@ const addVoc = () => {
 	width: 100%;
 	background: $primary;
 	padding: 0.5rem;
-	padding-top: 1rem;
+	color: white;
+}
+.total {
+	margin-bottom: 0.5rem;
+	span {
+		margin: 0 1rem;
+		font-size: 1.2rem;
+	}
+	.q-btn {
+		transform: translateY(-2px);
+	}
 }
 </style>

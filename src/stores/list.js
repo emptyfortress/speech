@@ -305,4 +305,9 @@ const words = [
 	// { key: 'заниматься', value: 240.8, selected: false, part: 'v' },
 ]
 
-export { words }
+const vocabs = [
+	{ name: 'Приветствие', keys: ['привет', 'здравствуйте', 'доброе утро'], selected: false },
+	{ name: 'Прощание', keys: ['до свидания', 'всего доброго'], selected: false },
+]
+
+export { words, vocabs }
