@@ -18,7 +18,7 @@
 					q-item-section(side v-if="scope.opt.voc")
 						component(:is="SvgIcon" name="vocabulary").lib
 					q-item-section
-						q-item-label {{scope.opt.value}}
+						q-item-label {{scope.opt.label}}
 			template(v-slot:no-option)
 				q-item.text-grey
 					q-item-section No results
@@ -46,54 +46,20 @@ const channelmodel = ref('Все')
 const mystore = useStore()
 // words.splice(0, 0, { key: 'fuckoff', selected: false, value: 'fuckyou', voc: true })
 // const stringOptions = words.map((item) => (item.label = item.key))
-// const stringOptions = [...words]
-// const options = ref(stringOptions)
+const stringOptions = words
+const options = ref(stringOptions)
 // const options = ref({ key: 'fuckoff', value: 'fuckyou', selected: false, voc: true })
 // options.push({ key: 'fuckoff', value: 'fuckyou', selected: false, voc: true })
-const options = [
-	{
-		label: 'Google',
-		value: 'Google',
-		description: 'Search engine',
-		category: '1',
-		voc: true,
-	},
-	{
-		label: 'Facebook',
-		value: 'Facebook',
-		description: 'Social media',
-		category: '1',
-	},
-	{
-		label: 'Twitter',
-		value: 'Twitter',
-		description: 'Quick updates',
-		category: '2',
-	},
-	{
-		label: 'Apple',
-		value: 'Apple',
-		description: 'iStuff',
-		category: '2',
-	},
-	{
-		label: 'Oracle',
-		value: 'Oracle',
-		disable: true,
-		description: 'Databases',
-		category: '3',
-	},
-]
-// const filterFn = (val, update, abort) => {
-// 	update(() => {
-// 		if (val === '') {
-// 			options.value = stringOptions
-// 		} else {
-// 			const needle = val.toLowerCase()
-// 			options.value = stringOptions.filter((v) => v.toLowerCase().indexOf(needle) > -1)
-// 		}
-// 	})
-// }
+const filterFn = (val, update, abort) => {
+	update(() => {
+		if (val === '') {
+			options.value = stringOptions
+		} else {
+			const needle = val.toLowerCase()
+			options.value = stringOptions.filter((v) => v.toLowerCase().indexOf(needle) > -1)
+		}
+	})
+}
 const clear = () => {
 	mystore.clearSelected()
 }

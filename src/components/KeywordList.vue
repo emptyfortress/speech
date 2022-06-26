@@ -63,8 +63,9 @@ import SvgIcon from '@/components/SvgIcon.vue'
 
 interface Keyword {
 	key: string
+	label: string
 	selected: boolean
-	value: number
+	score: number
 	part: string
 	voc?: boolean
 }
@@ -98,8 +99,8 @@ const removeVoc = (e: Voc) => {
 	show(e.name)
 }
 const compare = (a: Keyword, b: Keyword) => {
-	if (a.value > b.value) return -1
-	if (a.value < b.value) return 1
+	if (a.score > b.score) return -1
+	if (a.score < b.score) return 1
 	return 0
 }
 
@@ -108,7 +109,7 @@ const add = () => {
 		let temp = {
 			key: filter.value,
 			selected: false,
-			value: 4500,
+			score: 4500,
 			part: '',
 		}
 		items.value.push(temp)
