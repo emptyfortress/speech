@@ -1,4 +1,3 @@
-import NotificationDrawerVue from '@/components/NotificationDrawer.vue'
 import { defineStore } from 'pinia'
 
 export const useStore = defineStore({

@@ -11,9 +11,14 @@
 			outlined
 			input-debounce="0"
 			:options="options"
-			@filter="filterFn"
 			@clear="clear"
 			bg-color="white").keys
+			template(v-slot:option="scope")
+				q-item(clickable v-bind="scope.itemProps")
+					q-item-section(side v-if="scope.opt.voc")
+						component(:is="SvgIcon" name="vocabulary").lib
+					q-item-section
+						q-item-label {{scope.opt.value}}
 			template(v-slot:no-option)
 				q-item.text-grey
 					q-item-section No results
@@ -25,10 +30,11 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import { words } from '@/stores/list'
 import { useStore } from '@/stores/store'
 import MySelect from '@/components/common/MySelect.vue'
+import SvgIcon from '@/components/SvgIcon.vue'
 
 const typ = ['Рекомендованные', 'Запрещенные']
 const place = ['Весь файл', 'Первые', 'Последние']
@@ -38,21 +44,61 @@ const placemodel = ref('Весь файл')
 const channelmodel = ref('Все')
 
 const mystore = useStore()
-const stringOptions = words.map((item) => item.key)
-const options = ref(stringOptions)
-
-const filterFn = (val, update, abort) => {
-	update(() => {
-		if (val === '') {
-			options.value = stringOptions
-		} else {
-			const needle = val.toLowerCase()
-			options.value = stringOptions.filter((v) => v.toLowerCase().indexOf(needle) > -1)
-		}
-	})
-}
+// words.splice(0, 0, { key: 'fuckoff', selected: false, value: 'fuckyou', voc: true })
+// const stringOptions = words.map((item) => (item.label = item.key))
+// const stringOptions = [...words]
+// const options = ref(stringOptions)
+// const options = ref({ key: 'fuckoff', value: 'fuckyou', selected: false, voc: true })
+// options.push({ key: 'fuckoff', value: 'fuckyou', selected: false, voc: true })
+const options = [
+	{
+		label: 'Google',
+		value: 'Google',
+		description: 'Search engine',
+		category: '1',
+		voc: true,
+	},
+	{
+		label: 'Facebook',
+		value: 'Facebook',
+		description: 'Social media',
+		category: '1',
+	},
+	{
+		label: 'Twitter',
+		value: 'Twitter',
+		description: 'Quick updates',
+		category: '2',
+	},
+	{
+		label: 'Apple',
+		value: 'Apple',
+		description: 'iStuff',
+		category: '2',
+	},
+	{
+		label: 'Oracle',
+		value: 'Oracle',
+		disable: true,
+		description: 'Databases',
+		category: '3',
+	},
+]
+// const filterFn = (val, update, abort) => {
+// 	update(() => {
+// 		if (val === '') {
+// 			options.value = stringOptions
+// 		} else {
+// 			const needle = val.toLowerCase()
+// 			options.value = stringOptions.filter((v) => v.toLowerCase().indexOf(needle) > -1)
+// 		}
+// 	})
+// }
 const clear = () => {
 	mystore.clearSelected()
+}
+const setOpt = () => {
+	mystore.addKey('fuck')
 }
 </script>
 
@@ -69,5 +115,8 @@ const clear = () => {
 .label {
 	font-size: 0.8rem;
 	font-weight: 600;
+}
+.lib {
+	font-size: 0.8rem;
 }
 </style>

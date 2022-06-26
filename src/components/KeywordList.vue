@@ -10,13 +10,13 @@ q-input(ref="input" dense v-model="filter" autofocus clearable hide-bottom-space
 q-list(dense)
 	template(v-if="editMode && currentVoc")
 		q-card.full-background
-			q-item(clickable)
+			q-item(clickable dense)
 				q-item-section(side)
 					component(:is="SvgIcon" name="vocabulary").voc
 				q-item-section {{currentVoc.name}}
 				q-item-section(side)
 					q-icon(name="mdi-arrow-up-right" size="xs" dense @click="save")
-			q-item(v-for="item in selection" clickable :key="item")
+			q-item(v-for="item in selection" clickable :key="item" dense)
 				q-item-section {{item}}
 				q-item-section(side)
 					q-icon(name="mdi-close" size="xs" @click="removeFromVoc(item)").hov
