@@ -11,6 +11,7 @@
 			outlined
 			input-debounce="0"
 			:options="options"
+			@filter="filterFn"
 			@clear="clear"
 			bg-color="white").keys
 			template(v-slot:option="scope")
@@ -31,7 +32,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { words } from '@/stores/list'
+import { words, vocabs } from '@/stores/list'
 import { useStore } from '@/stores/store'
 import MySelect from '@/components/common/MySelect.vue'
 import SvgIcon from '@/components/SvgIcon.vue'
@@ -44,27 +45,23 @@ const placemodel = ref('Весь файл')
 const channelmodel = ref('Все')
 
 const mystore = useStore()
-// words.splice(0, 0, { key: 'fuckoff', selected: false, value: 'fuckyou', voc: true })
-// const stringOptions = words.map((item) => (item.label = item.key))
 const stringOptions = words
 const options = ref(stringOptions)
-// const options = ref({ key: 'fuckoff', value: 'fuckyou', selected: false, voc: true })
-// options.push({ key: 'fuckoff', value: 'fuckyou', selected: false, voc: true })
+vocabs.forEach((item) => {
+	words.splice(0, 0, { label: item.name, value: item.name, selected: false, voc: true })
+})
 const filterFn = (val, update, abort) => {
 	update(() => {
 		if (val === '') {
 			options.value = stringOptions
 		} else {
 			const needle = val.toLowerCase()
-			options.value = stringOptions.filter((v) => v.toLowerCase().indexOf(needle) > -1)
+			options.value = stringOptions.filter((v) => v.label.toLowerCase().indexOf(needle) > -1)
 		}
 	})
 }
 const clear = () => {
 	mystore.clearSelected()
-}
-const setOpt = () => {
-	mystore.addKey('fuck')
 }
 </script>
 
