@@ -17,11 +17,11 @@ q-page(padding).rel
 						q-btn(color="primary" unelevated size="sm" @click="dialog = true").q-ml-xl Новый запрос
 			q-card-section.q-py-none
 				component(:is="CommonOptions")
-				.bt
+				q-card-actions.q-px-none
 					q-btn(flat color="primary" label="Сбросить").q-mr-sm
-					div
-						q-btn(color="primary" flat label="Добавить к сравнению")
-						q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
+					q-space
+					q-btn(color="primary" flat label="Добавить к сравнению")
+					q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
 				br
 		component(:is="Graph")
 		component(:is="Operatorstat")
@@ -57,20 +57,4 @@ const toggle = () => {
 }
 </script>
 
-<style scoped lang="scss">
-.bt {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-.fab {
-	position: fixed;
-	bottom: 2rem;
-	right: 2rem;
-	z-index: 6005;
-	transition: 0.3s ease all;
-}
-.rot {
-	transform: rotate(45deg);
-}
-</style>
+<style scoped lang="scss"></style>

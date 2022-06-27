@@ -22,7 +22,7 @@
 				q-menu(transition-show="jump-down" transition-hide="jump-up" anchor="bottom middle" self="top middle")
 					.infmenu
 						.zg {{item.label}}
-						.desc {{ item.comment }}
+						.desc(v-html="item.comment")
 						.desc.q-mt-md Создано: 23.10.2022 Автор: Иванов П.С.
 			.ellipsis
 				|{{ item.label}}

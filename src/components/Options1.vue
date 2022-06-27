@@ -1,12 +1,11 @@
 <template lang="pug">
 CommonOptions
-.bt
-	div
-		q-btn(flat color="primary" label="Сбросить").q-mr-sm
-	div
-		q-btn(color="primary" flat label="Добавить к сравнению")
-		q-btn(unelevated color="primary" icon="mdi-star-outline"  label="Сохранить" @click="dialog = !dialog").q-mr-sm
-		q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
+q-card-actions.q-px-none
+	q-btn(flat color="primary" label="Сбросить").q-mr-sm
+	q-space
+	q-btn(color="primary" flat label="Добавить к сравнению")
+	q-btn(unelevated color="primary" icon="mdi-star-outline"  label="Сохранить" @click="dialog = !dialog").q-mr-sm
+	q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
 
 q-dialog(v-model="dialog" persistent)
 	q-card.save
@@ -41,11 +40,6 @@ const name = ref('')
 </script>
 
 <style scoped lang="scss">
-.bt {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
 .label {
 	font-size: 0.8rem;
 	font-weight: 600;
