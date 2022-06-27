@@ -27,9 +27,9 @@ q-expansion-item(v-model="veha")
 						q-td(key="total") {{props.row.total}}
 						q-td(key="percent") {{props.row.percent}}
 			q-card
-				VehCharts(v-if="selected.length === 0")
-				VehCharts1(v-else :veha="selected")
-				//- Test
+				component(:is="Test")
+				//- component(:is="VehCharts" v-if="selected.length === 0")
+				//- component(:is="VehCharts1" v-else :veha="selected")
 </template>
 
 <script setup lang="ts">

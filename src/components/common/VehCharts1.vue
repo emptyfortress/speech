@@ -1,6 +1,6 @@
 <template lang="pug">
 .rel
-	VueApexCharts(height="300px" type="area" :options="chartOptions" :series="series").q-my-sm
+	VueApexCharts(height="300px" type="area" :options="chartOptions" :series="series" @dataPointMouseEnter="test").q-my-sm
 	.tit(@click="updateChart") {{veha[0].veha}}
 
 </template>
@@ -11,6 +11,7 @@ import VueApexCharts from 'vue3-apexcharts'
 export default {
 	components: { VueApexCharts },
 	props: ['veha'],
+	emits: ['dataPointSelection'],
 	data: function () {
 		return {
 			chartOptions: {
@@ -20,6 +21,9 @@ export default {
 						enabled: false,
 					},
 					toolbar: { show: false },
+					events: {
+						dataPointSelection: function (event, chartContext, config) {},
+					},
 				},
 				dataLabels: {
 					enabled: false,
@@ -62,6 +66,9 @@ export default {
 		},
 	},
 	methods: {
+		test() {
+			console.log('fuck')
+		},
 		updateChart() {
 			const max = 90
 			const min = 20
