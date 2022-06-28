@@ -35,7 +35,7 @@ q-expansion-item(v-model="oper")
 						q-td(key="total").text-right {{ props.row.total }}
 						q-td(key="good").text-right {{ props.row.good }}
 						q-td(key="percent").text-right {{ props.row.percent }}%
-			q-card
+			q-card.q-px-md
 				component(:is="VehOperChart" v-if="selected.length === 0")
 				component(:is="VehOperChart1" v-else :oper="selected[0]")
 </template>
@@ -56,7 +56,7 @@ interface Row {
 	percent: number
 }
 
-const oper = ref(true)
+const oper = ref(false)
 const filter = ref('')
 const selected: Ref<Row[]> = ref([])
 const label = ref({ min: 0, max: 100 })

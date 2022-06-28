@@ -63,13 +63,12 @@ const updateChart = () => {
 	series.value = [{ data: newData }]
 }
 
-// const operName = ref(props.oper)
-
-// watch(props.oper, (value, oldvalue) => {
-// 	if (value) {
-// 		console.log('fuck')
-// 	}
-// })
+watch(
+	() => props.oper,
+	() => {
+		updateChart()
+	}
+)
 </script>
 
 <style scoped lang="scss">

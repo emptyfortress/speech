@@ -1,7 +1,7 @@
 <template lang="pug">
 q-item
 	q-item-section
-		.text-subtitle1 По всем операторам
+		.text-subtitle1 Все операторы
 .cent
 		component(:is="VueApexCharts" width="400" type="donut" :options="options" :series="series")
 </template>

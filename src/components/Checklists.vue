@@ -24,6 +24,7 @@ q-page(padding).rel
 		component(:is="Graph1")
 		component(:is="VehaStat")
 		component(:is="OperStat")
+		component(:is="VehaRecord")
 </template>
 
 <script setup lang="ts">
@@ -35,6 +36,7 @@ import CommonOptions from '@/components/common/CommonOptions.vue'
 import Graph1 from '@/components/Graph1.vue'
 import VehaStat from '@/components/VehaStat.vue'
 import OperStat from '@/components/OperStat.vue'
+import VehaRecord from '@/components/VehaRecord.vue'
 
 const mystore = useStore()
 const mycheck = useCheck()
