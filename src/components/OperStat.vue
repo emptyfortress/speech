@@ -6,10 +6,6 @@ q-expansion-item(v-model="oper")
 
 		q-item-section
 			.zag Операторы
-		//- q-item-section(v-if="oper" side @click.stop)
-		//- 	q-input(v-model="operator" dense debounce="300" color="primary" clearable).search
-		//- 		template(v-slot:prepend)
-		//- 			q-icon(name="mdi-magnify")
 	q-card-section.q-px-md.q-pt-md
 		.grid
 			q-table(:rows="rows"
@@ -41,7 +37,7 @@ q-expansion-item(v-model="oper")
 						q-td(key="percent").text-right {{ props.row.percent }}%
 			q-card
 				component(:is="VehOperChart" v-if="selected.length === 0")
-				//- component(:is="VehCharts1" v-else :veha="selected")
+				component(:is="VehOperChart1" v-else :oper="selected[0]")
 </template>
 
 <script setup lang="ts">
@@ -49,6 +45,7 @@ import { ref, computed } from 'vue'
 import type { Ref } from 'vue'
 import { operators } from '@/stores/operators'
 import VehOperChart from '@/components/VehOperChart.vue'
+import VehOperChart1 from '@/components/VehOperChart1.vue'
 
 interface Row {
 	name: string
@@ -88,7 +85,7 @@ const columns: Column[] = [
 	{
 		name: 'good',
 		required: false,
-		label: 'По чеклисту',
+		label: 'Всего баллов',
 		align: 'right',
 		field: 'good',
 		sortable: true,
@@ -100,7 +97,7 @@ const columns: Column[] = [
 		align: 'right',
 		field: 'percent',
 		sortable: true,
-		format: (val, row) => `${val}%`,
+		format: (val) => `${val}%`,
 	},
 ]
 
@@ -122,7 +119,7 @@ const select = (e: Row) => {
 	}
 }
 const getSelectedString = (e: number) => {
-	return `Выбран ${e} оператор`
+	return `Выбран оператор`
 }
 </script>
 

@@ -19,7 +19,7 @@ const options = {
 		},
 	},
 	dataLabels: {
-		enabled: false,
+		enabled: true,
 	},
 	xaxis: {
 		categories: [

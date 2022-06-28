@@ -26,7 +26,7 @@ export default {
 					},
 				},
 				dataLabels: {
-					enabled: false,
+					enabled: true,
 				},
 				subtitle: {
 					text: 'Динамика вехи',

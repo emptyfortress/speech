@@ -5,7 +5,7 @@ q-expansion-item(v-model="oper")
 			q-avatar(icon="mdi-headset" flat)
 
 		q-item-section
-			.zag Операторы
+			.zag Операторы laskj
 		q-item-section(v-if="oper" side @click.stop)
 			q-input(v-model="operator" dense debounce="300" color="primary" clearable).search
 				template(v-slot:prepend)
@@ -124,7 +124,7 @@ const select = (e: Row) => {
 	}
 }
 const getSelectedString = (e: number) => {
-	return `Выбран ${e} оператор`
+	return `Выбран оператор`
 }
 
 const getSeries = computed(() => {

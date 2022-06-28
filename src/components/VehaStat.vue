@@ -22,10 +22,10 @@ q-expansion-item(v-model="veha")
 				template(v-slot:body="props")
 					q-tr(:props="props" @click="select(props.row)")
 						q-td(auto-width)
-						q-td(key="num" auto-width) {{props.row.num}}
+						q-td(key="num" auto-width).text-right {{props.row.num}}
 						q-td(key="veha") {{props.row.veha}}
-						q-td(key="total") {{props.row.total}}
-						q-td(key="percent") {{props.row.percent}}
+						q-td(key="total").text-right {{props.row.total}}
+						q-td(key="percent").text-right {{props.row.percent}}%
 			q-card
 				component(:is="VehCharts" v-if="selected.length === 0")
 				component(:is="VehCharts1" v-else :veha="selected")
