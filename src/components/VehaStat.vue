@@ -48,7 +48,7 @@ interface Row {
 	percent: number
 }
 
-const veha = ref(true)
+const veha = ref(false)
 const selected: Ref<Row[]> = ref([])
 
 const select = (e: Row) => {

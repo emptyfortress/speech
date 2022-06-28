@@ -23,6 +23,7 @@ q-page(padding).rel
 				br
 		component(:is="Graph1")
 		component(:is="VehaStat")
+		component(:is="OperStat")
 </template>
 
 <script setup lang="ts">
@@ -33,6 +34,7 @@ import Chiplist from '@/components/common/Chiplist.vue'
 import CommonOptions from '@/components/common/CommonOptions.vue'
 import Graph1 from '@/components/Graph1.vue'
 import VehaStat from '@/components/VehaStat.vue'
+import OperStat from '@/components/OperStat.vue'
 
 const mystore = useStore()
 const mycheck = useCheck()

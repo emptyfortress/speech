@@ -13,3 +13,14 @@ export interface MyColumns {
 	headerStyle?: string
 	headerClasses?: string
 }
+
+const randomArray = (length: number, min: number, max: number) => {
+	let result = []
+	while (result.length < length) {
+		let random = Math.floor(Math.random() * (max - min + 1) + min)
+		result.push(random)
+	}
+	return result
+}
+
+export { randomArray }

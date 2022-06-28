@@ -29,7 +29,7 @@ q-expansion-item(v-model="oper")
 						q-td(key="name") {{ props.row.name }}
 						q-td(key="total").text-right {{ props.row.total }}
 						q-td(key="good").text-right {{ props.row.good }}
-						q-td(key="percent").text-right {{ props.row.percent }}
+						q-td(key="percent").text-right {{ props.row.percent }}%
 
 			q-card
 				q-card-section(v-if="!selected.length") Соответствие сценарию
