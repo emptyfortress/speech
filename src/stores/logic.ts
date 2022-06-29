@@ -1,5 +1,13 @@
 import { defineStore } from 'pinia'
 
+interface Logic {
+	id: number
+	comment: string
+	star: boolean
+	selected: boolean
+	label: string
+}
+
 export const useLogic = defineStore({
 	id: 'logic',
 	state: () => ({
@@ -166,6 +174,9 @@ export const useLogic = defineStore({
 			const index = this.allLogic.findIndex((item) => item.selected)
 			this.allLogic.splice(index, 1)
 			this.allLogic[0].selected = true
+		},
+		updateLogicList(val: Logic[]) {
+			this.allLogic = val
 		},
 	},
 })
