@@ -13,6 +13,7 @@ q-expansion-item(v-model="rec")
 			rows-per-page-label="Записей на странице"
 			:filter="filter"
 			:pagination="pagination"
+			row-key="id"
 			).table
 			template(v-slot:top="props")
 				.text-h6 Записи по вехам
@@ -46,13 +47,19 @@ q-expansion-item(v-model="rec")
 							q-icon(name="mdi-volume-medium" size="sm")
 							q-slider(color="primary" v-model="sound").slide
 							q-icon(name="mdi-volume-high" size="sm")
+br
+br
+br
+br
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { Ref } from 'vue'
 import { records } from '@/stores/operators'
+import { useStore } from '@/stores/store'
 
-const rec = ref(true)
+const rec = ref(false)
 const vehModel = ref('Приветствие')
 const label = ref({ min: 0, max: 100 })
 const filter = ref('')
@@ -76,25 +83,50 @@ const vehOptions = [
 	'Прощание',
 ]
 
-const columns = [
+const columns: Column[] = [
 	{ id: 0, name: 'date', label: 'Дата и время', field: 'date', align: 'left', sortable: true },
 	{ id: 1, name: 'operator', label: 'Оператор', field: 'operator', align: 'left', sortable: true },
 	{ id: 2, name: 'client', label: 'Клиент', field: 'client', align: 'left', sortable: true },
 	{ id: 3, name: 'group', label: 'Группа', field: 'group', align: 'left', sortable: true },
 	{ id: 4, name: 'context', label: 'Контекст', field: 'context', align: 'left', sortable: false },
-	{},
 ]
 
-const getSelectedString = (e: number) => {
-	return `Выбран оператор`
+const getSelectedString = () => {
+	return 'Выбран оператор'
 }
 
 const pagination = ref({
 	sortBy: 'total' as keyof Row,
 	descending: true,
 	page: 1,
-	rowsPerPage: 5,
+	rowsPerPage: 10,
 })
+
+const sound = ref(50)
+const table: any = ref(null)
+const togg = () => {
+	table.value.toggleFullscreen()
+	table.value.setPagination({
+		rowsPerPage: 0,
+	})
+}
+
+const mystore = useStore()
+const selected: Ref<number | null> = ref(null)
+const select = (e: Row) => {
+	if (selected.value === null) {
+		selected.value = e.id
+		mystore.setRecord(e.group)
+		mystore.openSpeechDrawer()
+	} else if (selected.value === e.id) {
+		selected.value = null
+		mystore.setRecord('группа1')
+		mystore.closeSpeechDrawer()
+	} else {
+		selected.value = e.id
+		mystore.setRecord(e.group)
+	}
+}
 </script>
 
 <style scoped lang="scss">
@@ -106,7 +138,7 @@ const pagination = ref({
 	gap: 5rem;
 	align-items: end;
 }
-.rel {
+.q-tr.rel {
 	position: relative;
 	cursor: pointer;
 	.dd {
@@ -120,6 +152,42 @@ const pagination = ref({
 		.dd {
 			visibility: visible;
 		}
+	}
+}
+.myplayer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: $blue-grey-9;
+	color: #6d8e9e;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding-left: 1rem;
+	gap: 2rem;
+	font-size: 0.9rem;
+	.q-linear-progress {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	.player {
+		color: white;
+		display: flex;
+		justify-items: flex-start;
+		align-items: center;
+		height: 100%;
+	}
+	.time {
+		font-size: 2rem;
+		font-weight: lighter;
+		letter-spacing: 1px;
+		color: white;
+	}
+	.slide {
+		width: 150px;
 	}
 }
 </style>

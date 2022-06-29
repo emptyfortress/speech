@@ -1,6 +1,6 @@
 <template lang="pug">
 q-page(padding).rel
-	q-btn(round color="primary" icon="mdi-plus" size="lg" @click="dialog = !dialog" :class="{rot : dialog}").fab
+	q-btn(round color="primary" icon="mdi-plus" size="lg" @click="dialog1 = !dialog1" :class="{rot : dialog1}").fab
 	.container
 		q-expansion-item(v-model="mystore.chec")
 			template(v-slot:header)
@@ -25,6 +25,8 @@ q-page(padding).rel
 		component(:is="VehaStat")
 		component(:is="OperStat")
 		component(:is="VehaRecord")
+
+		component(:is="Constructor1" :dialog="dialog1" :maximized="maximizedToggle")
 </template>
 
 <script setup lang="ts">
@@ -37,11 +39,13 @@ import Graph1 from '@/components/Graph1.vue'
 import VehaStat from '@/components/VehaStat.vue'
 import OperStat from '@/components/OperStat.vue'
 import VehaRecord from '@/components/VehaRecord.vue'
+import Constructor1 from '@/components/Constructor1.vue'
 
 const mystore = useStore()
 const mycheck = useCheck()
-const dialog = ref(false)
+const dialog1 = ref(true)
 const chips = mycheck.allCheck.filter((e) => e.star)
+const maximizedToggle = ref(true)
 
 const toggle = () => {
 	mystore.loading = true

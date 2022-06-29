@@ -6,26 +6,38 @@ export const useCheck = defineStore({
 		allCheck: [
 			{
 				id: 0,
-				comment:
-					'<b>Веха:</b> Оператор приветствует клиента.<br /><b>Веха:</b> оператор прощается с клиентом.',
+				comment: 'Оператор здоровается и прощается с клиентом',
 				star: true,
 				selected: false,
 				label: 'Приветствие и прощание',
 			},
 			{
 				id: 1,
-				comment: '<b>Веха:</b> Оператор называет свое имя и должность',
+				comment: 'Оператор не употребляет бранные слова',
 				star: true,
 				selected: false,
-				label: 'Представление',
+				label: 'Вежливое общение',
 			},
 			{
 				id: 2,
-				comment:
-					'<b>Веха:</b> Оператор предлагает новые услуги<br /><b>Веха:</b> Оператор предлагает выслать персональные предложения',
+				comment: 'Оператор предлагает новые услуги.',
 				star: true,
 				selected: false,
 				label: 'Новые услуги',
+			},
+			{
+				id: 3,
+				comment: 'Описание чеклиста',
+				star: false,
+				selected: false,
+				label: 'Чеклист 1',
+			},
+			{
+				id: 4,
+				comment: 'Описание чеклиста',
+				star: false,
+				selected: false,
+				label: 'Чеклист 2',
 			},
 		],
 		allList: [
