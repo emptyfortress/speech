@@ -6,13 +6,24 @@ q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei")
 				.row.items-center.justify-between
 					q-btn(flat round dense)
 						q-icon(name="mdi-backburger")
-					#zg(contenteditable @blur="update") Заголовок
+					#zg(contenteditable @blur="update") {{mycheck.activeCheck.label}}
 					.btngroup
-						q-btn(outline size="10px" color="primary" @click="mystore.duble").q-mr-xs Дублировать
-						q-btn(round flat icon="mdi-plus" dense color="primary" @click="mystore.addLogic")
-			component(:is="draggable" class="list-group" :list="list1" group="vehi" itemKey="id" )
+						q-btn(outline size="10px" color="primary" @click="mylogic.duble").q-mr-xs Дублировать
+						q-btn(round flat icon="mdi-plus" dense color="primary" @click="mylogic.addLogic")
+				#comment(contenteditable @blur="updatecomment") {{mycheck.activeCheck.comment}}
+			component(:is="draggable" class="list-group" :list="list1" group="vehi" itemKey="id")
 				template(#item="{ element }")
-					div(class="list-group-item") {{ element.label }}
+					.list-group-item
+						.label {{ element.label }}
+						.input
+							.lab Вес:
+							input(value="15")
+						q-btn(flat round dense icon="mdi-trash-can-outline" size="sm")
+			q-card-actions.q-mt-xl
+				q-btn(flat icon="mdi-trash-can-outline" label="Удалить запрос" color="primary" @click="")
+				q-space
+				q-btn(flat icon="mdi-share-variant" label="Поделиться" color="primary" )
+				q-btn(unelevated color="primary" icon="mdi-content-save-outline" label="Сохранить" )
 
 	template(v-slot:after)
 		q-scroll-area.list
@@ -29,13 +40,15 @@ q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei")
 				q-expansion-item(v-model="firstItem" header-class="text-bold")
 					template(v-slot:header)
 						q-item-section Логические запросы
-						q-item-section(side) ({{mystore.allLogic.length}})
+						q-item-section(side) ({{mylogic.allLogic.length}})
 					q-list(dense).q-mb-lg
-						component(:is="draggable" v-model="alllogic" group="vehi" itemKey="id")
+						component(:is="draggable" v-model="alllogic"  itemKey="id"  :group="{ name: 'vehi', pull: 'clone', put: false }")
 							template(#item="{ element }")
 								q-item(tag="label" v-ripple dense)
 									q-item-section(side v-if="element.star")
 										q-icon(dense name="mdi-star" size="10px")
+									q-item-section(side v-else)
+										q-icon(dense name="" size="10px")
 									q-item-section
 										q-item-label
 											WordHighlighter(:query="query") {{ element.label }}
@@ -45,6 +58,7 @@ q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei")
 <script setup lang="ts">
 import draggable from 'vuedraggable'
 import { ref, computed, reactive } from 'vue'
+import { useCheck } from '@/stores/check'
 import { useLogic } from '@/stores/logic'
 import WordHighlighter from 'vue-word-highlighter'
 
@@ -54,8 +68,10 @@ const hei = computed(() => {
 })
 const firstItem = ref(true)
 
-const mystore = useLogic()
+const mylogic = useLogic()
+const mycheck = useCheck()
 const query = ref('')
+const knob = ref(15)
 
 const clearFilter = () => {
 	query.value = ''
@@ -65,13 +81,26 @@ const list1 = ref([])
 const alllogic = computed({
 	get: () => {
 		if (query.value) {
-			return mystore.allLogic.filter((e) =>
+			return mylogic.allLogic.filter((e) =>
 				e.label.toLowerCase().includes(query.value.toLowerCase())
 			)
-		} else return mystore.allLogic
+		} else return mylogic.allLogic
 	},
-	set: (val) => mystore.updateLogicList(val),
+	set: (val) => mylogic.updateLogicList(val),
 })
+
+const update = () => {
+	const zag = document.getElementById('zg')
+	const text = zag!.innerHTML
+	const index = mycheck.allCheck.findIndex((item) => item.selected)
+	mycheck.allCheck[index].label = text
+}
+const updatecomment = () => {
+	const comm = document.getElementById('comment')
+	const text = comm!.innerHTML
+	const index = mycheck.allCheck.findIndex((item) => item.selected)
+	mycheck.allCheck[index].comment = text
+}
 
 // import { useQuasar } from 'quasar'
 // import Puzzle from '@/components/Puzzle.vue'
@@ -87,18 +116,6 @@ const alllogic = computed({
 // 	} else emit('reset')
 // }
 // const dialog = ref(false)
-// const update = () => {
-// 	const zag = document.getElementById('zg')
-// 	const text = zag!.innerHTML
-// 	const index = mystore.allLogic.findIndex((item) => item.selected)
-// 	mystore.allLogic[index].label = text
-// }
-// const updatecomment = () => {
-// 	const comm = document.getElementById('comment')
-// 	const text = comm!.innerHTML
-// 	const index = mystore.allLogic.findIndex((item) => item.selected)
-// 	mystore.allLogic[index].comment = text
-// }
 
 // const $q = useQuasar()
 // const save = () => {
@@ -141,11 +158,6 @@ const alllogic = computed({
 	// padding: 1rem;
 	padding-top: 0;
 }
-.list-group {
-	width: 100%;
-	min-height: 200px;
-	background: pink;
-}
 #zg {
 	font-size: 1rem;
 	text-transform: uppercase;
@@ -159,6 +171,53 @@ const alllogic = computed({
 		outline: none;
 		border-bottom: 1px dotted $primary;
 		background: $bgSelection;
+	}
+}
+#comment {
+	font-size: 0.9rem;
+	margin-top: 1rem;
+	padding: 0.5rem;
+	padding-bottom: 0;
+	/* text-align: center; */
+	&:hover {
+		background: $bgLight;
+	}
+	&:focus {
+		outline: none;
+		border-bottom: 1px dotted $primary;
+		background: $bgSelection;
+	}
+}
+.sortable-ghost {
+	background: $bgSelection;
+	border: 1px solid $primary;
+}
+.list-group {
+	min-height: 50px;
+	background-image: url(@/assets/img/vert.png);
+	background-repeat: repeat-y;
+	background-position-x: 48px;
+}
+.list-group-item {
+	width: 100%;
+	border: 2px solid #ccc;
+	border-radius: 0.5rem;
+	background: #f2f3ef;
+	padding: 0.5rem;
+	min-height: 50px;
+	margin-bottom: 0.5rem;
+	display: grid;
+	grid-template-columns: 1fr 90px auto;
+	gap: 1rem;
+}
+.input {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	input {
+		width: 40px;
+		border: 1px solid #ccc;
+		text-align: center;
 	}
 }
 </style>

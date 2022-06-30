@@ -8,7 +8,7 @@ export const useCheck = defineStore({
 				id: 0,
 				comment: 'Оператор здоровается и прощается с клиентом',
 				star: true,
-				selected: false,
+				selected: true,
 				label: 'Приветствие и прощание',
 			},
 			{

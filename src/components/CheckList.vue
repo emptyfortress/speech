@@ -39,13 +39,13 @@ watch(query, (val) => {
 	} else return
 })
 
-// const setActive = (e: number) => {
-// 	const index = mystore.allLogic.findIndex((item) => item.id === e)
-// 	mystore.allLogic.map((item) => {
-// 		item.selected = false
-// 	})
-// 	mystore.allLogic[index].selected = true
-// }
+const setActive = (e: number) => {
+	const index = mystore.allCheck.findIndex((item) => item.id === e)
+	mystore.allCheck.map((item) => {
+		item.selected = false
+	})
+	mystore.allCheck[index].selected = true
+}
 const setStar = (e: number) => {
 	const index = mystore.allCheck.findIndex((item) => item.id === e)
 	mystore.allCheck[index].star = !mystore.allCheck[index].star
