@@ -8,8 +8,8 @@ q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei")
 						q-icon(name="mdi-backburger")
 					#zg(contenteditable @blur="update") {{mycheck.activeCheck.label}}
 					.btngroup
-						q-btn(outline size="10px" color="primary" @click="mylogic.duble").q-mr-xs Дублировать
-						q-btn(round flat icon="mdi-plus" dense color="primary" @click="mylogic.addLogic")
+						q-btn(outline size="10px" color="primary" @click="mycheck.duble").q-mr-xs Дублировать
+						q-btn(round flat icon="mdi-plus" dense color="primary" @click="mycheck.addCheckList")
 				#comment(contenteditable @blur="updatecomment") {{mycheck.activeCheck.comment}}
 			component(:is="draggable" class="list-group" :list="list1" group="vehi" itemKey="id")
 				template(#item="{ element }")
@@ -18,9 +18,9 @@ q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei")
 						.input
 							.lab Вес:
 							input(value="15")
-						q-btn(flat round dense icon="mdi-trash-can-outline" size="sm")
+						q-btn(flat round icon="mdi-trash-can-outline" size="12px" @click="kill(element)")
 			q-card-actions.q-mt-xl
-				q-btn(flat icon="mdi-trash-can-outline" label="Удалить запрос" color="primary" @click="")
+				q-btn(flat icon="mdi-trash-can-outline" label="Удалить чеклист" color="primary" @click="mycheck.deleteCheckList")
 				q-space
 				q-btn(flat icon="mdi-share-variant" label="Поделиться" color="primary" )
 				q-btn(unelevated color="primary" icon="mdi-content-save-outline" label="Сохранить" )
@@ -57,7 +57,7 @@ q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei")
 
 <script setup lang="ts">
 import draggable from 'vuedraggable'
-import { ref, computed, reactive } from 'vue'
+import { ref, computed } from 'vue'
 import { useCheck } from '@/stores/check'
 import { useLogic } from '@/stores/logic'
 import WordHighlighter from 'vue-word-highlighter'
@@ -71,12 +71,10 @@ const firstItem = ref(true)
 const mylogic = useLogic()
 const mycheck = useCheck()
 const query = ref('')
-const knob = ref(15)
 
 const clearFilter = () => {
 	query.value = ''
 }
-const list1 = ref([])
 
 const alllogic = computed({
 	get: () => {
@@ -102,30 +100,19 @@ const updatecomment = () => {
 	mycheck.allCheck[index].comment = text
 }
 
-// import { useQuasar } from 'quasar'
-// import Puzzle from '@/components/Puzzle.vue'
+const itemIndex = (e: Logic) => {
+	return list1.value.findIndex((item) => item.id === e.id)
+}
 
-// const props = defineProps({
-// 	splitter: Number,
-// })
-// const emit = defineEmits(['maximize', 'reset'])
-
-// const switchSidebar = () => {
-// 	if (props.splitter !== 0) {
-// 		emit('maximize')
-// 	} else emit('reset')
-// }
-// const dialog = ref(false)
-
-// const $q = useQuasar()
-// const save = () => {
-// 	$q.notify({
-// 		icon: undefined,
-// 		message: 'Запрос сохранен',
-// 		color: 'positive',
-// 		position: 'top-right',
-// 	})
-// }
+const list1 = computed(() => {
+	const id = mycheck.activeCheck.id
+	const temp = mycheck.allList.find((e) => e.id === id)
+	return temp!.list
+})
+const kill = (e: Logic) => {
+	let index = itemIndex(e)
+	list1.value.splice(index, 1)
+}
 </script>
 
 <style scoped lang="scss">
@@ -209,6 +196,7 @@ const updatecomment = () => {
 	display: grid;
 	grid-template-columns: 1fr 90px auto;
 	gap: 1rem;
+	align-items: center;
 }
 .input {
 	display: flex;

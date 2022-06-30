@@ -30,7 +30,7 @@ q-page(padding).rel
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useStore } from '@/stores/store'
 import { useCheck } from '@/stores/check'
 import Chiplist from '@/components/common/Chiplist.vue'

@@ -44,15 +44,57 @@ export const useCheck = defineStore({
 			{
 				id: 0,
 				list: [
-					{ id: 0, condition: 'and', mod1: 'Отсутствует', mod2: 'здравствуйте' },
-					{ id: 1, condition: 'and', mod1: 'Отсутствует', mod2: 'добрый вечер' },
+					{ id: 0, label: 'Приветствие' },
+					{ id: 1, label: 'Прощание' },
 				],
 			},
+			{ id: 1, list: [] },
+			{ id: 2, list: [] },
+			{ id: 3, list: [] },
+			{ id: 4, list: [] },
+			{ id: 5, list: [] },
 		],
 	}),
 	getters: {
 		activeCheck: (state) => state.allCheck.filter((item) => item.selected)[0],
 	},
 
-	actions: {},
+	actions: {
+		deleteCheckList() {
+			const index = this.allCheck.findIndex((item) => item.selected)
+			this.allCheck.splice(index, 1)
+			this.allCheck[0].selected = true
+		},
+		addCheckList() {
+			this.allCheck.map((e) => (e.selected = false))
+			const item = {} as Logic
+			item.id = this.allCheck.length
+			item.star = true
+			item.selected = true
+			item.comment = 'Введите комментарий к чеклисту'
+			item.label = 'Новый чеклист'
+			this.allCheck.push(item)
+			const templist = {
+				id: item.id,
+				list: [],
+			}
+			this.allList.push(templist)
+		},
+		duble() {
+			const active = this.activeCheck
+			const activeList = this.allList.find((e) => e.id === active.id)
+			const temp = {} as Logic
+			Object.assign(temp, active)
+			temp.label = temp.label + ' - (копия)'
+			this.allCheck.map((e) => (e.selected = false))
+			temp.selected = true
+			temp.id = active.id + 100
+			this.allCheck.push(temp)
+			const templist = {
+				id: temp.id,
+				list: activeList!.list,
+			}
+			this.allList.push(templist)
+		},
+	},
 })
