@@ -14,7 +14,9 @@ q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei")
 			component(:is="draggable" class="list-group" :list="list1" group="vehi" itemKey="id")
 				template(#item="{ element }")
 					.list-group-item
-						.label {{ element.label }}
+						.label
+							q-icon(name="mdi-toy-brick-search-outline").q-mr-sm
+							|{{ element.label }}
 						.input
 							.lab Вес:
 							input(value="15")

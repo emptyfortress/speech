@@ -6,6 +6,8 @@ q-expansion-item(v-model="oper")
 
 		q-item-section
 			.zag Операторы
+		q-item-section(side)
+			q-btn(round flat icon="mdi-cloud-download-outline")
 	q-card-section.q-px-md.q-pt-md
 		.grid
 			q-table(:rows="rows"
