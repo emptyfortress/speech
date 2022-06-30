@@ -108,6 +108,7 @@ const add = () => {
 	if (filter.value) {
 		let temp = {
 			key: filter.value,
+			label: filter.value,
 			selected: false,
 			score: 4500,
 			part: '',
@@ -126,8 +127,8 @@ const undo = (e: Keyword) => {
 
 const $q = useQuasar()
 
-const show = (e: string) => {
-	let message = e + ' - удалено.'
+const show = (e: Keyword) => {
+	let message = e.label + ' - удалено.'
 	$q.notify({
 		message: message,
 		color: 'negative',
