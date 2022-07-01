@@ -1,6 +1,6 @@
 <template lang="pug">
 q-page(padding).rel
-	q-btn(round color="primary" icon="mdi-plus" size="lg" @click="dialog1 = !dialog1" :class="{rot : dialog1}").fab
+	q-btn(round color="primary" icon="mdi-plus" size="lg" @click="openDialog" :class="{rot : dialog1}").fab
 	.container
 		q-expansion-item(v-model="mystore.chec")
 			template(v-slot:header)
@@ -43,7 +43,7 @@ import Constructor1 from '@/components/Constructor1.vue'
 
 const mystore = useStore()
 const mycheck = useCheck()
-const dialog1 = ref(true)
+const dialog1 = ref(false)
 const chips = mycheck.allCheck.filter((e) => e.star)
 const maximizedToggle = ref(true)
 
@@ -54,6 +54,13 @@ const toggle = () => {
 	setTimeout(() => {
 		mystore.loading = false
 	}, 1700)
+}
+
+const openDialog = () => {
+	if (mycheck.activeCheck === undefined) {
+		mycheck.allCheck[0].selected = true
+	}
+	dialog1.value = !dialog1.value
 }
 </script>
 

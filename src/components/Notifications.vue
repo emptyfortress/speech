@@ -6,7 +6,6 @@ q-page(padding)
 			binary-state-sort
 			:pagination="pagination"
 			:filter="filter"
-			color="primary"
 			selection="multiple"
 			v-model:selected="selected"
 			:selected-rows-label="label"
@@ -58,7 +57,6 @@ import { notifications } from '@/stores/notifications'
 import { watchEffect, ref } from 'vue'
 import type { Ref } from 'vue'
 import { useStore } from '@/stores/store'
-import { useRoute } from 'vue-router'
 
 const filter = ref('')
 // const selected:  = ref([])

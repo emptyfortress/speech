@@ -5,7 +5,7 @@ q-expansion-item(v-model="oper")
 			q-avatar(icon="mdi-headset" flat)
 
 		q-item-section
-			.zag Операторы laskj
+			.zag Операторы
 		q-item-section(v-if="oper" side @click.stop)
 			q-input(v-model="operator" dense debounce="300" color="primary" clearable).search
 				template(v-slot:prepend)

@@ -1,6 +1,6 @@
 <template lang="pug">
 q-page(padding).rel
-	q-btn(round color="primary" icon="mdi-plus" size="lg" @click="dialog = !dialog" :class="{rot : dialog}").fab
+	q-btn(round color="primary" icon="mdi-plus" size="lg" @click="openDialog" :class="{rot : dialog}").fab
 	.container
 		q-expansion-item(v-model="mystore.req")
 			template(v-slot:header)
@@ -27,7 +27,7 @@ q-page(padding).rel
 		component(:is="Operatorstat")
 		component(:is="Records")
 
-		Constructor(:dialog="dialog" :maximized="maximizedToggle")
+		component(:is="Constructor" :dialog="dialog" :maximized="maximizedToggle")
 </template>
 
 <script setup lang="ts">
@@ -54,6 +54,13 @@ const toggle = () => {
 	setTimeout(() => {
 		mystore.loading = false
 	}, 1700)
+}
+
+const openDialog = () => {
+	if (mylogic.activeLogic === undefined) {
+		mylogic.allLogic[0].selected = true
+	}
+	dialog.value = !dialog.value
 }
 </script>
 

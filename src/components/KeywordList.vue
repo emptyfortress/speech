@@ -91,12 +91,12 @@ const filteredItems = computed(() => {
 const remove = (e: Keyword) => {
 	let index = items.value.findIndex((item) => item.key === e.key)
 	items.value.splice(index, 1)
-	show(e.key)
+	show(e)
 }
 const removeVoc = (e: Voc) => {
 	let index = vocabularies.value.findIndex((item: Voc) => item.name === e.name)
 	vocabularies.value.splice(index, 1)
-	show(e.name)
+	showVoc(e)
 }
 const compare = (a: Keyword, b: Keyword) => {
 	if (a.score > b.score) return -1
@@ -124,6 +124,9 @@ const undo = (e: Keyword) => {
 	items.value.push(e)
 	items.value.sort(compare)
 }
+const undoVoc = (e: Voc) => {
+	vocabularies.value.push(e)
+}
 
 const $q = useQuasar()
 
@@ -137,6 +140,20 @@ const show = (e: Keyword) => {
 				label: 'Вернуть',
 				color: 'white',
 				handler: () => undo(e),
+			},
+		],
+	})
+}
+const showVoc = (e: Voc) => {
+	let message = e.name + ' - удалено.'
+	$q.notify({
+		message: message,
+		color: 'negative',
+		actions: [
+			{
+				label: 'Вернуть',
+				color: 'white',
+				handler: () => undoVoc(e),
 			},
 		],
 	})
