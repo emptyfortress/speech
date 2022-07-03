@@ -69,7 +69,7 @@ template(v-if="isLogged")
 								q-item-section(avatar)
 									q-icon(name="mdi-card-account-details-outline")
 								q-item-section Профиль
-							q-item(clickable v-close-popup)
+							q-item(clickable v-close-popup @click="$router.push('/about')")
 								q-item-section(avatar)
 									q-icon(name="mdi-information-outline")
 								q-item-section О программе
