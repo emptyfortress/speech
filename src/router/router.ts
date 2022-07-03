@@ -56,6 +56,11 @@ export const router = createRouter({
 			meta: { transition: 'slide-left', title: 'О программе', requiresAuth: false },
 		},
 		{
+			path: '/profile',
+			component: () => import('@/components/Profile.vue'),
+			meta: { transition: 'slide-left', title: 'О программе', requiresAuth: false },
+		},
+		{
 			path: '/notifications/:id',
 			component: () => import('@/components/Notifications.vue'),
 			props: true,
