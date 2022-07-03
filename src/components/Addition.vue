@@ -2,7 +2,7 @@
 .grid
 	q-card.tags
 		canvas#canvas
-		.zg Словарь
+		.zg Голос клиента
 	q-card.q-pa-sm
 		Heat
 </template>
