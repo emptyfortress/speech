@@ -44,6 +44,7 @@ const chartOptions1 = {
 		},
 	},
 	labels: ['Продажи', 'Сервис', 'Оплата'],
+	colors: ['#29A1F9', '#FDB948', '#C72829'],
 }
 
 const barOptions = {
@@ -84,6 +85,7 @@ const barOptions = {
 			},
 		},
 	},
+	colors: ['#29A1F9', '#FDB948', '#C72829'],
 }
 
 const barSeries = [
