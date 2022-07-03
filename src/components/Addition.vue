@@ -4,7 +4,8 @@
 		canvas#canvas
 		.zg Голос клиента
 	q-card.q-pa-sm
-		Heat
+		StackedChart
+		//- Heat
 </template>
 
 <script setup>
@@ -12,7 +13,8 @@ import { Chart, registerables } from 'chart.js'
 import { WordCloudChart } from 'chartjs-chart-wordcloud'
 import { onMounted } from 'vue'
 import { words } from '@/stores/cloud'
-import Heat from '@/components/Heat.vue'
+import StackedChart from '@/components/common/StackedChart.vue'
+// import Heat from '@/components/Heat.vue'
 
 Chart.register(...registerables)
 
