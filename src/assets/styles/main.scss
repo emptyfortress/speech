@@ -186,3 +186,7 @@ span.found {
 .rot {
 	transform: rotate(45deg);
 }
+
+.border-primary {
+	border: 1px solid $primary;
+}
