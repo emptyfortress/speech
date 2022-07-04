@@ -32,7 +32,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { words, vocabs } from '@/stores/list'
+import { words } from '@/stores/list'
 import { useStore } from '@/stores/store'
 import MySelect from '@/components/common/MySelect.vue'
 import SvgIcon from '@/components/SvgIcon.vue'
@@ -47,9 +47,6 @@ const channelmodel = ref('Все')
 const mystore = useStore()
 const stringOptions = words
 const options = ref(stringOptions)
-vocabs.forEach((item) => {
-	words.splice(0, 0, { label: item.name, value: item.name, selected: false, voc: true })
-})
 const filterFn = (val, update, abort) => {
 	update(() => {
 		if (val === '') {

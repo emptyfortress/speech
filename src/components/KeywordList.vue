@@ -5,36 +5,32 @@
 q-input(ref="input" dense v-model="filter" autofocus clearable hide-bottom-space @clear="filter = ''")
 	template(v-slot:prepend)
 		q-icon(name="mdi-magnify")
-
-//- p {{ selection}}
 q-list(dense)
 	template(v-if="editMode && currentVoc")
 		q-card.full-background
 			q-item(clickable dense)
 				q-item-section(side)
 					component(:is="SvgIcon" name="vocabulary").voc
-				q-item-section {{currentVoc.name}}
+				q-item-section {{currentVoc.label}}
 				q-item-section(side)
 					q-icon(name="mdi-arrow-up-right" size="xs" dense @click="save")
 			q-item(v-for="item in selection" clickable :key="item" dense)
 				q-item-section {{item}}
 				q-item-section(side)
 					q-icon(name="mdi-close" size="xs" @click="removeFromVoc(item)").hov
-	template(v-if="!editMode")
-		q-item(v-for="item in vocabularies" clickable :key="item.name")
-			q-item-section(side)
-				component(:is="SvgIcon" name="vocabulary").voc
-			q-item-section
-				q-checkbox(v-model="selection" size="xs" dense :val="item.keys" :label="item.name")
-			q-item-section(side)
-				.row
-					q-icon(name="mdi-pencil" size="xs" @click="edit(item)").q-mr-sm.hov
-					q-icon(name="mdi-trash-can-outline" size="xs" @click="removeVoc(item)").hov
+
 	q-item(v-for="item in filteredItems" clickable :key="item.key")
 		q-item-section
-			q-checkbox(v-model="selection" size="xs" dense :val="item.key" :label="item.key")
+			label
+				q-checkbox(v-model="selection" size="xs" dense :val="item.label").q-mr-sm
+				component(:is="SvgIcon" name="vocabulary" v-if="item.voc").voc
+				|{{item.label}}
+
 		q-item-section(side v-if="!editMode")
-			q-icon(name="mdi-trash-can-outline" size="xs" @click="remove(item)").hov
+			.row
+				q-icon(name="mdi-pencil" size="xs" @click="edit(item)" v-if="item.voc").q-mr-sm.hov
+				q-icon(name="mdi-trash-can-outline" size="xs" @click="remove(item)").hov
+
 	template(v-if="filteredItems.length === 0")
 		.notfound
 			q-icon(name="mdi-emoticon-tongue-outline" size="sm" color="primary")
@@ -58,32 +54,29 @@ transition(name="slide-bottom")
 import { ref, computed } from 'vue'
 import type { Ref } from 'vue'
 import { useQuasar } from 'quasar'
-import { words, vocabs } from '@/stores/list'
+import { words } from '@/stores/list'
 import SvgIcon from '@/components/SvgIcon.vue'
 
 interface Keyword {
-	key: string
+	key?: string
+	keys?: string[]
 	label: string
 	selected: boolean
 	score: number
-	part: string
+	part?: string
 	voc?: boolean
-}
-interface Voc {
-	name: string
-	selected: boolean
-	keys: string[]
 }
 
 const selection: Ref<string[]> = ref([])
 const input = ref(null)
 const filter = ref('')
 
-const vocabularies = ref(vocabs)
 const items = ref(words)
 const filteredItems = computed(() => {
 	if (filter.value) {
-		return items.value.filter((item) => item.key.includes(filter.value))
+		return items.value.filter((item) =>
+			item.label.toLowerCase().includes(filter.value.toLowerCase())
+		)
 	}
 	return items.value
 })
@@ -93,11 +86,7 @@ const remove = (e: Keyword) => {
 	items.value.splice(index, 1)
 	show(e)
 }
-const removeVoc = (e: Voc) => {
-	let index = vocabularies.value.findIndex((item: Voc) => item.name === e.name)
-	vocabularies.value.splice(index, 1)
-	showVoc(e)
-}
+
 const compare = (a: Keyword, b: Keyword) => {
 	if (a.score > b.score) return -1
 	if (a.score < b.score) return 1
@@ -120,12 +109,9 @@ const add = () => {
 	}
 }
 
-const undo = (e: Keyword) => {
+const undo = (e: any) => {
 	items.value.push(e)
 	items.value.sort(compare)
-}
-const undoVoc = (e: Voc) => {
-	vocabularies.value.push(e)
 }
 
 const $q = useQuasar()
@@ -140,20 +126,6 @@ const show = (e: Keyword) => {
 				label: 'Вернуть',
 				color: 'white',
 				handler: () => undo(e),
-			},
-		],
-	})
-}
-const showVoc = (e: Voc) => {
-	let message = e.name + ' - удалено.'
-	$q.notify({
-		message: message,
-		color: 'negative',
-		actions: [
-			{
-				label: 'Вернуть',
-				color: 'white',
-				handler: () => undoVoc(e),
 			},
 		],
 	})
@@ -174,12 +146,15 @@ const cancel = () => {
 }
 
 const addVoc = () => {
-	let temp: Voc = {
-		name: vocName.value,
-		selected: false,
+	let temp = {
+		label: vocName.value,
 		keys: selection.value,
+		selected: false,
+		score: 5000,
+		voc: true,
 	}
-	vocabularies.value.push(temp)
+	items.value.push(temp)
+	items.value.sort(compare)
 	selection.value = []
 	added(vocName.value)
 	vocName.value = ''
@@ -189,11 +164,12 @@ const calcKeys = computed(() => {
 })
 
 const editMode = ref(false)
-const currentVoc: Ref<null | Voc> = ref(null)
-const edit = (item: Voc) => {
+const currentVoc: Ref<null | Keyword> = ref(null)
+
+const edit = (item: Keyword) => {
 	editMode.value = !editMode.value
 	currentVoc.value = item
-	selection.value = item.keys.flat(2)
+	selection.value = item.keys?.flat(2) || []
 }
 
 const removeFromVoc = (e: string) => {
@@ -252,11 +228,10 @@ const save = () => {
 .notfound {
 	margin-top: 1rem;
 	font-size: 0.9rem;
-	// text-align: center;
 }
 .voc {
 	font-size: 0.8rem;
-	transform: translateY(2px);
+	margin-right: 0.5rem;
 }
 .addvoc {
 	position: fixed;
@@ -285,5 +260,8 @@ const save = () => {
 	padding: 10px 0;
 	margin-bottom: 1rem;
 	margin-top: 0.5rem;
+}
+.q-item__section--avatar {
+	padding-right: 0;
 }
 </style>

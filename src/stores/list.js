@@ -1,4 +1,18 @@
 const words = [
+	{
+		label: 'Приветствие',
+		keys: ['здравствуйте', 'добрый вечер', 'доброе утро'],
+		selected: false,
+		score: 4500,
+		voc: true,
+	},
+	{
+		label: 'Прощание',
+		keys: ['до свидания', 'всего доброго'],
+		selected: false,
+		score: 4500,
+		voc: true,
+	},
 	{ label: 'здравствуйте', key: 'здравствуйте', score: 4000, selected: false, part: 'adv' },
 	{ label: 'добрый вечер', key: 'добрый вечер', score: 3990, selected: false, part: 'adv' },
 	{ label: 'доброе утро', key: 'доброе утро', score: 3995, selected: false, part: 'adv' },

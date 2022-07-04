@@ -129,8 +129,12 @@ export const useLogic = defineStore({
 			{
 				id: 0,
 				list: [
-					{ id: 0, condition: 'and', mod1: 'Отсутствует', mod2: 'здравствуйте' },
-					{ id: 1, condition: 'and', mod1: 'Отсутствует', mod2: 'добрый вечер' },
+					{
+						id: 0,
+						condition: 'and',
+						mod1: 'Отсутствует',
+						mod2: ['здравствуйте', 'добрый вечер', 'доброе утро'],
+					},
 				],
 			},
 			{ id: 1, list: [{ id: 0, condition: 'and', mod1: '' }] },

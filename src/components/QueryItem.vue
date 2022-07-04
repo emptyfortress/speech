@@ -12,13 +12,23 @@
 				template(v-if="props.item.mod1 !== '' ")
 					div
 						q-select(dense
-							v-model="props.item.mod2"
+							v-model="mystore.keys"
 							use-input
+							use-chips
+							multiple
+							clearable
+							outlined
 							input-debounce="0"
 							:options="options"
 							@filter="filterFn"
-							label="Ключевое слово"
+							bg-color="white"
 							).keys
+							template(v-slot:option="scope")
+								q-item(clickable v-bind="scope.itemProps")
+									q-item-section(side v-if="scope.opt.voc")
+										component(:is="SvgIcon" name="vocabulary").lib
+									q-item-section
+										q-item-label {{scope.opt.label}}
 							template(v-slot:no-option)
 								q-item.text-grey
 									q-item-section No results
@@ -30,14 +40,35 @@
 						q-select(dense
 							v-model="key2"
 							use-input
+							use-chips
+							multiple
+							clearable
+							outlined
 							input-debounce="0"
 							:options="options"
 							@filter="filterFn"
-							label="Ключевое слово"
+							bg-color="white"
 							).keys
+							template(v-slot:option="scope")
+								q-item(clickable v-bind="scope.itemProps")
+									q-item-section(side v-if="scope.opt.voc")
+										component(:is="SvgIcon" name="vocabulary").lib
+									q-item-section
+										q-item-label {{scope.opt.label}}
 							template(v-slot:no-option)
 								q-item.text-grey
 									q-item-section No results
+						//- q-select(dense
+						//- 	v-model="key2"
+						//- 	use-input
+						//- 	input-debounce="0"
+						//- 	:options="options"
+						//- 	@filter="filterFn"
+						//- 	label="Ключевое слово"
+						//- 	).keys
+						//- 	template(v-slot:no-option)
+						//- 		q-item.text-grey
+						//- 			q-item-section No results
 						q-checkbox(v-model="wordforms" label="Искать формы" dense size="xs").wordform
 					q-select(label="Канал" dense v-model="channel" :options="channelOptions")
 				.start(v-if="okolo")
@@ -62,10 +93,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { words } from '@/stores/list'
 import { useStore } from '@/stores/store'
 import { ConditionEnum } from '@/types/type'
+import SvgIcon from '@/components/SvgIcon.vue'
 
 const props = defineProps<{
 	item: Condition
@@ -73,8 +105,7 @@ const props = defineProps<{
 }>()
 
 const rule = ref(props.item.mod1)
-const key1 = ref(props.item.mod2)
-const key2 = ref('')
+const key2 = ref([])
 const not = ref(false)
 
 const start = computed(() => {
@@ -98,15 +129,17 @@ const okolo = computed(() => {
 
 const fromStart = ref(10)
 const mystore = useStore()
-const stringOptions = words.map((item) => item.key)
+
+const stringOptions = words
 const options = ref(stringOptions)
+
 const filterFn = (val: string, update: Function) => {
 	update(() => {
 		if (val === '') {
 			options.value = stringOptions
 		} else {
 			const needle = val.toLowerCase()
-			options.value = stringOptions.filter((v) => v.toLowerCase().indexOf(needle) > -1)
+			options.value = stringOptions.filter((v) => v.label.toLowerCase().indexOf(needle) > -1)
 		}
 	})
 }
@@ -126,6 +159,9 @@ const wordforms = ref(false)
 const reset = () => {
 	rule.value = ''
 }
+onMounted(() => {
+	mystore.setKeys(props.item.mod2)
+})
 </script>
 
 <style scoped lang="scss">
