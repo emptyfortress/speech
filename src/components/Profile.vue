@@ -54,13 +54,25 @@ q-page(padding)
 					q-btn(flat color="primary") Отмена
 					q-btn(unelevated color="primary") Сохранить
 			q-tab-panel(name="login")
-				.text-h6 one
+				.mygrid
+					.label Текущий пароль:
+					q-input(outlined dense v-model="old")
+					.label Новый пароль:
+					q-input(outlined dense v-model="old")
+					.label Подтвердите пароль:
+					q-input(outlined dense v-model="old")
+				q-separator.q-mt-lg
+				q-card-actions()
+					q-btn(flat color="primary") Отмена
+					q-btn(unelevated color="primary") Сохранить
+
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
 
 const tab = ref('info')
+const old = ref('')
 const inf = ref(true)
 const edit = ref(false)
 const prava = [
@@ -129,6 +141,7 @@ onMounted(() => {
 	justify-content: start;
 	gap: 1rem;
 	grid-column-gap: 2rem;
+	align-items: center;
 }
 .mygrid1 {
 	display: grid;
