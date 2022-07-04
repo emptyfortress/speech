@@ -61,7 +61,7 @@ template(v-if="isLogged")
 						img(src="@/assets/img/user0.svg")
 					q-menu(transition-show="jump-down" transition-hide="jump-up")
 						q-list
-							q-item(clickable v-close-popup)
+							q-item(clickable v-close-popup @click="$router.push('/users')")
 								q-item-section(avatar)
 									q-icon(name="mdi-account-search")
 								q-item-section Пользователи

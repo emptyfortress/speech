@@ -31,6 +31,11 @@ export const router = createRouter({
 			meta: { transition: 'slide-left', title: 'Сравнить', requiresAuth: false },
 		},
 		{
+			path: '/users',
+			component: () => import('@/components/Users.vue'),
+			meta: { transition: 'slide-left', title: 'Пользователи', requiresAuth: false },
+		},
+		{
 			path: '/checklists',
 			component: () => import('@/components/Checklists.vue'),
 			meta: { transition: 'slide-left', title: 'Чек-листы', requiresAuth: false },
