@@ -58,7 +58,7 @@ q-page(padding)
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 
 const tab = ref('info')
 const inf = ref(true)
@@ -83,9 +83,11 @@ const items = reactive([
 ])
 const check = ref([false, true, true, false, true, false, false, false, false, false])
 
-const test = () => {
-	console.log(1)
-}
+onMounted(() => {
+	if (location.hash === '#/profile#tab3') {
+		tab.value = 'notific'
+	}
+})
 </script>
 
 <style scoped lang="scss">
