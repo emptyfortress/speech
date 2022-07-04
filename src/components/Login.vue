@@ -1,12 +1,12 @@
 <template lang="pug">
 .myrow
-	video( autoplay loop playsinline muted ).vid
-		source(src="@/assets/img/autumn.mp4" type="video/mp4")
+	//- video( autoplay loop playsinline muted ).vid
+	//- 	source(src="@/assets/img/autumn.mp4" type="video/mp4")
 	q-card.card.shadow-5
 		.logo
 			q-avatar
 				img(src="@/assets/img/user0.svg")
-		.he Привет, админ!
+		.he Модуль речевой аналитики ANALYZE
 		q-card-section
 			form
 				q-input(type="text" dense placeholder="Email" v-model="mail").big
@@ -20,8 +20,8 @@
 				q-checkbox(v-model="alien" color="negative" label="Чужой компьютер" dense size="sm")
 		q-card-section
 			q-btn(:loading="loading" color="primary" label="Вход" @click="login").full-width
-		.forget
-			a(href="#") Напомнить пароль
+		//- .forget
+		//- 	a(href="#") Напомнить пароль
 	.dv
 		.row.justify-start.items-center
 			SvgIcon(name="sound" color="#fff").q-mr-md
@@ -37,7 +37,7 @@ const emit = defineEmits(['login'])
 const alien = ref(false)
 const loading = ref(false)
 
-const mail = ref('admin@admin.ru')
+const mail = ref('')
 const pass = ref('')
 const login = () => {
 	loading.value = true
@@ -56,6 +56,9 @@ const login = () => {
 	justify-content: center;
 	align-items: center;
 	position: relative;
+	background: url(@/assets/img/city.webp) no-repeat;
+	background-position: 30%;
+	background-size: cover;
 	.dv {
 		position: absolute;
 		top: 50%;
