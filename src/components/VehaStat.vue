@@ -1,7 +1,7 @@
 <template lang="pug">
 q-expansion-item(v-model="veha")
 	template(v-slot:header)
-		q-item-section(avatar)
+		q-item-section(avatar).line
 			q-avatar(icon="mdi-map-marker-check-outline" flat)
 				a
 		q-item-section

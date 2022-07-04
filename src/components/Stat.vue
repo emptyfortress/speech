@@ -1,7 +1,7 @@
 <template lang="pug">
 q-expansion-item(v-model="stat")
 	template(v-slot:header)
-		q-item-section(avatar)
+		q-item-section(avatar).line
 			q-avatar(icon="mdi-dice-5-outline" flat)
 		q-item-section
 			.zag Частотность

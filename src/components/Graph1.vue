@@ -1,7 +1,7 @@
 <template lang="pug">
 q-expansion-item(v-model="mystore.integral")
 	template(v-slot:header)
-		q-item-section(avatar)
+		q-item-section(avatar).line
 			q-avatar(icon="mdi-abacus" flat)
 
 		q-item-section

@@ -3,7 +3,7 @@ q-page(padding)
 	.container
 		q-expansion-item(v-model="mystore.sett")
 			template(v-slot:header)
-				q-item-section(avatar)
+				q-item-section(avatar).line
 					q-avatar(icon="mdi-tune-variant" flat)
 				q-item-section
 					.zag Отчеты

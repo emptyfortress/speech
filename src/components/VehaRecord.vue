@@ -1,7 +1,7 @@
 <template lang="pug">
 q-expansion-item(v-model="rec")
 	template(v-slot:header)
-		q-item-section(avatar)
+		q-item-section(avatar).line
 			q-avatar(icon="mdi-record-circle-outline" flat)
 		q-item-section
 			.zag Записи сеансов обслуживания
