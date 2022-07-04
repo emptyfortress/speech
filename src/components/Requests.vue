@@ -13,8 +13,8 @@ q-page(padding).rel
 					template(v-slot:header)
 						q-icon(name="mdi-star-outline").q-mr-sm
 						|Мои запросы
-					template(v-slot:addbutton)
-						q-btn(color="primary" unelevated size="sm" @click="dialog = true").q-ml-xl Новый запрос
+					//- template(v-slot:addbutton)
+					//- 	q-btn(color="primary" unelevated size="sm" @click="dialog = true").q-ml-xl Новый запрос
 			q-card-section.q-py-none
 				component(:is="CommonOptions")
 				q-card-actions.q-px-none
