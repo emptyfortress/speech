@@ -14,16 +14,13 @@ q-expansion-item(v-model="veha")
 				:columns="cols"
 				:rows="rows"
 				row-key="id"
-				selection="single"
 				binary-state-sort
 				v-model:selected="selected"
 				:selected-rows-label="getSelectedString"
 				rows-per-page-label="Записей на странице"
 				).fixh.table
-				template(v-slot:body-selection)
 				template(v-slot:body="props")
 					q-tr(:props="props" @click="select(props.row)")
-						q-td(auto-width)
 						q-td(key="num" auto-width).text-right {{props.row.num}}
 						q-td(key="veha") {{props.row.veha}}
 						q-td(key="total").text-right {{props.row.total}}
