@@ -2,12 +2,13 @@
 q-select(dense
 	v-model="innerModel"
 	use-input
+	autofocus
 	multiple
 	clearable
 	input-debounce="0"
 	:options="propOptions"
 	@update:model-value="update"
-	@filter="filterFn").small
+	@filter="filterFn")
 	template(v-slot:no-option)
 		q-item.text-grey
 			q-item-section No results
@@ -21,11 +22,6 @@ const props = defineProps<{
 	options: string[]
 }>()
 const emit = defineEmits(['update'])
-
-const clear = () => {
-	// console.log(val)
-	emit('update', [])
-}
 
 const propOptions = ref(props.options)
 const innerModel = ref(props.model)

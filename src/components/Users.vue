@@ -27,7 +27,7 @@ q-page(padding)
 					q-td(key="password" :props="props")
 					q-td(key="region" :props="props")
 						|{{ list(props.row.region) }}
-						q-popup-edit(v-model="props.row.region" auto-save).border-primary
+						q-popup-edit(v-model="props.row.region").border-primary
 
 							component(:is="NewSelect"
 								:model="props.row.region"
@@ -38,10 +38,16 @@ q-page(padding)
 						|{{ props.row.oper.length }}
 						q-popup-edit(v-model="props.row.oper" auto-save v-slot="scope").border-primary
 							q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
+
 					q-td(key="group" :props="props")
 						|{{ list(props.row.group) }}
 						q-popup-edit(v-model="props.row.group" auto-save v-slot="scope").border-primary
-							q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
+
+							component(:is="NewSelect"
+								:model="props.row.group"
+								:options="groupOptions"
+								@update:model-value="setGroup(props.rowIndex, $event)")
+
 					q-td(key="del" :props="props")
 						q-btn(flat round icon="mdi-trash-can-outline" size="sm" @click="kill(props.row)").hov
 
@@ -197,21 +203,22 @@ const list = (array: string[]): string => {
 const regions = ['Центр', 'Восток', 'Запад', 'Юг', 'Спб и окрестности']
 const regionOptions = ref(regions)
 
-const filterFn = (val, update, abort) => {
-	update(() => {
-		if (val === '') {
-			regionOptions.value = regions
-		} else {
-			const needle = val.toLowerCase()
-			regionOptions.value = regions.filter((v) => v.toLowerCase().indexOf(needle) > -1)
-		}
-	})
-}
 const setRegion = (e: number, a: string[] | null) => {
 	if (a) {
 		users[e].region = a
 	} else {
 		users[e].region = []
+	}
+}
+
+const groups = ['Группа 1', 'Админы', 'Спецконтингент', 'Сервисная служба', 'Глухари']
+const groupOptions = ref(groups)
+
+const setGroup = (e: number, a: string[] | null) => {
+	if (a) {
+		users[e].group = a
+	} else {
+		users[e].group = []
 	}
 }
 </script>
