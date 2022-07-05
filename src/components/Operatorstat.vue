@@ -15,17 +15,14 @@ q-expansion-item(v-model="oper")
 			q-table(:rows="rows"
 				:columns='columns'
 				row-key="name"
-				selection="single"
-				v-model:selected="selected"
 				binary-state-sort
 				:pagination="pagination"
+				v-model:selected="selected"
 				:selected-rows-label="getSelectedString"
 				rows-per-page-label="Записей на странице"
 				).table
-				template(v-slot:body-selection)
 				template(v-slot:body="props")
 					q-tr(:props="props" @click="select(props.row)" :class="operClass(props.row)")
-						q-td(auto-width)
 						q-td(key="name") {{ props.row.name }}
 						q-td(key="total").text-right {{ props.row.total }}
 						q-td(key="good").text-right {{ props.row.good }}
