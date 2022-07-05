@@ -8,7 +8,7 @@ q-select(dense
 	input-debounce="0"
 	:options="propOptions"
 	@update:model-value="update"
-	@filter="filterFn")
+	@filter="filterFn" :style="`width: ${props.width}px`")
 	template(v-slot:no-option)
 		q-item.text-grey
 			q-item-section No results
@@ -20,6 +20,7 @@ import { ref } from 'vue'
 const props = defineProps<{
 	model: string[]
 	options: string[]
+	width?: number
 }>()
 const emit = defineEmits(['update'])
 

@@ -8,7 +8,7 @@ q-page(padding)
 			:filter="filter"
 			rows-per-page-label="Строк на стр."
 			row-key="id"
-			).table
+			).table.rel
 			template(v-slot:top="props")
 				.zag
 					q-icon(name="mdi-account-multiple").q-mr-md
@@ -23,7 +23,7 @@ q-page(padding)
 					q-td(key="email" :props="props")
 						|{{ props.row.email }}
 						q-popup-edit(v-model="props.row.email" auto-save v-slot="scope").border-primary
-							q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
+							q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set").small
 					q-td(key="password" :props="props")
 					q-td(key="region" :props="props")
 						|{{ list(props.row.region) }}
@@ -32,17 +32,21 @@ q-page(padding)
 							component(:is="NewSelect"
 								:model="props.row.region"
 								:options="regionOptions"
-								@update:model-value="setRegion(props.rowIndex, $event)").small
+								:width="250"
+								@update:model-value="setRegion(props.rowIndex, $event)")
 
 					q-td(key="oper" :props="props")
 						|{{ props.row.oper.length }}
 						q-popup-edit(v-model="props.row.oper" auto-save v-slot="scope").border-primary
-							q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
+							component(:is="NewSelect"
+								:model="props.row.oper"
+								:options="operOptions"
+								:width="250"
+								@update:model-value="setOper(props.rowIndex, $event)")
 
 					q-td(key="group" :props="props")
 						|{{ list(props.row.group) }}
-						q-popup-edit(v-model="props.row.group" auto-save v-slot="scope").border-primary
-
+						q-popup-edit(v-model="props.row.group" auto-save v-slot="scope" style="width: 230px;").border-primary
 							component(:is="NewSelect"
 								:model="props.row.group"
 								:options="groupOptions"
@@ -50,13 +54,16 @@ q-page(padding)
 
 					q-td(key="del" :props="props")
 						q-btn(flat round icon="mdi-trash-can-outline" size="sm" @click="kill(props.row)").hov
+			template(v-slot:bottom)
+				q-btn(unelevated round icon="mdi-plus" color="primary" size="sm" @click="addUser")
 
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { useQuasar } from 'quasar'
 import NewSelect from '@/components/common/NewSelect.vue'
+import { operators } from '@/stores/operators'
 
 interface User {
 	id: number
@@ -71,7 +78,6 @@ interface User {
 const columns: Column[] = [
 	{ name: 'email', label: 'Email', field: 'email', sortable: true, align: 'left' },
 	{ name: 'password', label: 'Пароль', field: 'password', sortable: false, align: 'left' },
-	// { name: 'fio', label: 'ФИО', field: 'fio', sortable: true, align: 'left' },
 	{
 		name: 'region',
 		label: 'Регион',
@@ -159,6 +165,7 @@ const users: User[] = reactive([
 ])
 
 const filter = ref('')
+
 const pagination = ref({
 	page: 1,
 	rowsPerPage: 10,
@@ -221,6 +228,30 @@ const setGroup = (e: number, a: string[] | null) => {
 		users[e].group = []
 	}
 }
+
+const oper = computed(() => {
+	return operators.map((e) => e.name)
+})
+const operOptions = ref(oper)
+
+const setOper = (e: number, a: string[] | null) => {
+	if (a) {
+		users[e].oper = a
+	} else {
+		users[e].oper = []
+	}
+}
+const addUser = () => {
+	let user: User = {
+		id: users.length,
+		email: 'Укажите почту',
+		password: '',
+		region: [],
+		group: [],
+		oper: [],
+	}
+	users.push(user)
+}
 </script>
 
 <style scoped lang="scss">
@@ -234,7 +265,9 @@ td {
 		color: black;
 	}
 }
-.small {
-	width: 230px;
+.add {
+	position: absolute;
+	bottom: 0;
+	left: 0;
 }
 </style>
