@@ -18,10 +18,36 @@ q-page(padding)
 				q-input(dense debounce="300" color="primary" v-model="filter" clearable)
 					template(v-slot:prepend)
 						q-icon(name="mdi-magnify")
-			template(v-slot:body-cell-del="props")
-				q-td(:props="props")
-					q-btn(flat round icon="mdi-trash-can-outline" size="sm" @click="kill(props.row)").hov
-						//- q-badge(color="purple" :label="props.value")
+			template(v-slot:body="props")
+				q-tr(:props="props")
+					q-td(key="email" :props="props")
+						|{{ props.row.email }}
+						q-popup-edit(v-model="props.row.email" auto-save v-slot="scope").border-primary
+							q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
+					q-td(key="password" :props="props")
+					q-td(key="region" :props="props")
+						|{{ list(props.row.region) }}
+						q-popup-edit(v-model="props.row.region").border-primary
+							q-select(dense
+								v-model="props.row.region"
+								use-input
+								multiple
+								clearable
+								input-debounce="0"
+								:options="regionOptions"
+								@clear="clear(props.row)"
+								@filter="filterFn"
+								).small
+					q-td(key="oper" :props="props")
+						|{{ props.row.oper.length }}
+						q-popup-edit(v-model="props.row.oper" auto-save v-slot="scope").border-primary
+							q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
+					q-td(key="group" :props="props")
+						|{{ list(props.row.group) }}
+						q-popup-edit(v-model="props.row.group" auto-save v-slot="scope").border-primary
+							q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
+					q-td(key="del" :props="props")
+						q-btn(flat round icon="mdi-trash-can-outline" size="sm" @click="kill(props.row)").hov
 
 </template>
 
@@ -166,6 +192,29 @@ const kill = (e: User) => {
 	users.splice(index, 1)
 	show(e)
 }
+
+const list = (array: string[]): string => {
+	return array.join(', ')
+}
+
+const clear = (e: any) => {
+	const index = users.indexOf(e)
+	users[index].region = []
+}
+
+const regions = ['Центр', 'Восток', 'Запад', 'Юг', 'Спб и окрестности']
+const regionOptions = ref(regions)
+
+const filterFn = (val, update, abort) => {
+	update(() => {
+		if (val === '') {
+			regionOptions.value = regions
+		} else {
+			const needle = val.toLowerCase()
+			regionOptions.value = regions.filter((v) => v.toLowerCase().indexOf(needle) > -1)
+		}
+	})
+}
 </script>
 
 <style scoped lang="scss">
@@ -178,5 +227,8 @@ td {
 	&:hover {
 		color: black;
 	}
+}
+.small {
+	width: 230px;
 }
 </style>
