@@ -28,16 +28,20 @@ q-page(padding)
 					q-td(key="region" :props="props")
 						|{{ list(props.row.region) }}
 						q-popup-edit(v-model="props.row.region").border-primary
-							q-select(dense
-								v-model="props.row.region"
-								use-input
-								multiple
-								clearable
-								input-debounce="0"
-								:options="regionOptions"
-								@clear="clear(props.row)"
-								@filter="filterFn"
-								).small
+							NewSelect(:model="props.row.region" :options="regionOptions")
+							//- q-select(dense
+							//- 	v-model="props.row.region"
+							//- 	use-input
+							//- 	multiple
+							//- 	clearable
+							//- 	input-debounce="0"
+							//- 	:options="regionOptions"
+							//- 	@clear="clear(props.row)"
+							//- 	@filter="filterFn"
+							//- 	).small
+							//- 	template(v-slot:no-option)
+							//- 		q-item.text-grey
+							//- 			q-item-section No results
 					q-td(key="oper" :props="props")
 						|{{ props.row.oper.length }}
 						q-popup-edit(v-model="props.row.oper" auto-save v-slot="scope").border-primary
@@ -54,6 +58,7 @@ q-page(padding)
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { useQuasar } from 'quasar'
+import NewSelect from '@/components/common/NewSelect.vue'
 
 interface User {
 	id: number
