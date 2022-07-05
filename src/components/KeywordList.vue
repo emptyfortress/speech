@@ -71,7 +71,7 @@ const selection: Ref<string[]> = ref([])
 const input = ref(null)
 const filter = ref('')
 
-const items = ref(words)
+const items: Ref<Keyword[]> = ref(words)
 const filteredItems = computed(() => {
 	if (filter.value) {
 		return items.value.filter((item) =>
@@ -109,7 +109,7 @@ const add = () => {
 	}
 }
 
-const undo = (e: any) => {
+const undo = (e: Keyword) => {
 	items.value.push(e)
 	items.value.sort(compare)
 }

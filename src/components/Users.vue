@@ -20,13 +20,24 @@ q-page(padding)
 						q-icon(name="mdi-magnify")
 			template(v-slot:body-cell-del="props")
 				q-td(:props="props")
-					q-btn(flat round icon="mdi-trash-can-outline" size="sm").hov
+					q-btn(flat round icon="mdi-trash-can-outline" size="sm" @click="kill(props.row)").hov
 						//- q-badge(color="purple" :label="props.value")
 
 </template>
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import { useQuasar } from 'quasar'
+
+interface User {
+	id: number
+	fio?: string
+	email: string
+	password?: string
+	region?: string[]
+	group?: string[]
+	oper?: string[]
+}
 
 const columns: Column[] = [
 	{ name: 'email', label: 'Email', field: 'email', sortable: true, align: 'left' },
@@ -44,7 +55,7 @@ const columns: Column[] = [
 		name: 'oper',
 		label: 'Операторы',
 		field: 'oper',
-		sortable: false,
+		sortable: true,
 		align: 'right',
 		format: (val) => `${val.length}`,
 	},
@@ -52,7 +63,7 @@ const columns: Column[] = [
 		name: 'group',
 		label: 'Группы',
 		field: 'group',
-		sortable: false,
+		sortable: true,
 		align: 'left',
 		format: (val) => val.join(', '),
 	},
@@ -63,7 +74,7 @@ const columns: Column[] = [
 	},
 ]
 
-const users = [
+const users: User[] = reactive([
 	{
 		id: 0,
 		fio: 'Соловьев П.С.',
@@ -116,13 +127,45 @@ const users = [
 			'Антонина',
 		],
 	},
-]
+])
 
 const filter = ref('')
 const pagination = ref({
 	page: 1,
 	rowsPerPage: 10,
 })
+
+const compare = (a: User, b: User) => {
+	if (a.id > b.id) return 1
+	if (a.id < b.id) return -1
+	return 0
+}
+
+const undo = (e: User) => {
+	users.push(e)
+	users.sort(compare)
+}
+const show = (e: User) => {
+	let message = e.email + ' - удалено.'
+	$q.notify({
+		message: message,
+		color: 'negative',
+		actions: [
+			{
+				label: 'Вернуть',
+				color: 'white',
+				handler: () => undo(e),
+			},
+		],
+	})
+}
+
+const $q = useQuasar()
+const kill = (e: User) => {
+	const index = users.indexOf(e)
+	users.splice(index, 1)
+	show(e)
+}
 </script>
 
 <style scoped lang="scss">
