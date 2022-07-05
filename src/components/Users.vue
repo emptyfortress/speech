@@ -27,21 +27,13 @@ q-page(padding)
 					q-td(key="password" :props="props")
 					q-td(key="region" :props="props")
 						|{{ list(props.row.region) }}
-						q-popup-edit(v-model="props.row.region").border-primary
-							NewSelect(:model="props.row.region" :options="regionOptions")
-							//- q-select(dense
-							//- 	v-model="props.row.region"
-							//- 	use-input
-							//- 	multiple
-							//- 	clearable
-							//- 	input-debounce="0"
-							//- 	:options="regionOptions"
-							//- 	@clear="clear(props.row)"
-							//- 	@filter="filterFn"
-							//- 	).small
-							//- 	template(v-slot:no-option)
-							//- 		q-item.text-grey
-							//- 			q-item-section No results
+						q-popup-edit(v-model="props.row.region" auto-save).border-primary
+
+							component(:is="NewSelect"
+								:model="props.row.region"
+								:options="regionOptions"
+								@update:model-value="setRegion(props.rowIndex, $event)").small
+
 					q-td(key="oper" :props="props")
 						|{{ props.row.oper.length }}
 						q-popup-edit(v-model="props.row.oper" auto-save v-slot="scope").border-primary
@@ -65,7 +57,7 @@ interface User {
 	fio?: string
 	email: string
 	password?: string
-	region?: string[]
+	region?: string[] | null
 	group?: string[]
 	oper?: string[]
 }
@@ -202,11 +194,6 @@ const list = (array: string[]): string => {
 	return array.join(', ')
 }
 
-const clear = (e: any) => {
-	const index = users.indexOf(e)
-	users[index].region = []
-}
-
 const regions = ['Центр', 'Восток', 'Запад', 'Юг', 'Спб и окрестности']
 const regionOptions = ref(regions)
 
@@ -219,6 +206,13 @@ const filterFn = (val, update, abort) => {
 			regionOptions.value = regions.filter((v) => v.toLowerCase().indexOf(needle) > -1)
 		}
 	})
+}
+const setRegion = (e: number, a: string[] | null) => {
+	if (a) {
+		users[e].region = a
+	} else {
+		users[e].region = []
+	}
 }
 </script>
 

@@ -1,33 +1,38 @@
 <template lang="pug">
 q-select(dense
-	v-model="props.model"
+	v-model="innerModel"
 	use-input
 	multiple
 	clearable
 	input-debounce="0"
 	:options="propOptions"
-	@clear="clear()"
-	@filter="filterFn"
-	).small
+	@update:model-value="update"
+	@filter="filterFn").small
 	template(v-slot:no-option)
 		q-item.text-grey
 			q-item-section No results
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps<{
 	model: string[]
 	options: string[]
 }>()
-const emit = defineEmits(['clear'])
+const emit = defineEmits(['update'])
 
 const clear = () => {
-	emit('clear')
+	// console.log(val)
+	emit('update', [])
 }
 
 const propOptions = ref(props.options)
+const innerModel = ref(props.model)
+
+const update = () => {
+	emit('update', innerModel)
+}
 
 const filterFn = (val: string, update: Function) => {
 	update(() => {
