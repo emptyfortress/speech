@@ -7,6 +7,7 @@ q-page(padding)
 			:pagination="pagination"
 			:filter="filter"
 			rows-per-page-label="Строк на стр."
+			row-key="id"
 			).table
 			template(v-slot:top="props")
 				.zag
@@ -17,6 +18,10 @@ q-page(padding)
 				q-input(dense debounce="300" color="primary" v-model="filter" clearable)
 					template(v-slot:prepend)
 						q-icon(name="mdi-magnify")
+			template(v-slot:body-cell-del="props")
+				q-td(:props="props")
+					q-btn(flat round icon="mdi-trash-can-outline" size="sm").hov
+						//- q-badge(color="purple" :label="props.value")
 
 </template>
 
@@ -41,7 +46,7 @@ const columns: Column[] = [
 		field: 'oper',
 		sortable: false,
 		align: 'right',
-		format: (val) => `${val.length} чел.`,
+		format: (val) => `${val.length}`,
 	},
 	{
 		name: 'group',
@@ -50,6 +55,11 @@ const columns: Column[] = [
 		sortable: false,
 		align: 'left',
 		format: (val) => val.join(', '),
+	},
+	{
+		name: 'del',
+		label: '',
+		field: 'del',
 	},
 ]
 
@@ -119,5 +129,11 @@ const pagination = ref({
 //@import '@/assets/css/colors.scss';
 td {
 	white-space: normal;
+}
+.hov {
+	color: #aaa;
+	&:hover {
+		color: black;
+	}
 }
 </style>
