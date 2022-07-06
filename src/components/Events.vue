@@ -16,9 +16,10 @@
 	.cat
 		component(:is="CategoryTable")
 
-	q-card
-		component(:is="VueApexCharts" type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="!cat.selection")
-		component(:is="VueApexCharts" type="bar" height="183" :options="barOptions" :series="barSeries" v-else)
+	q-card.cool
+		component(:is="VueApexCharts" height="187" type="bar" :options="coolOptions" :series="coolSeries")
+		//- component(:is="VueApexCharts" type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="!cat.selection")
+		//- component(:is="VueApexCharts" type="bar" height="183" :options="barOptions" :series="barSeries" v-else)
 
 </template>
 
@@ -43,6 +44,73 @@ const toggle = () => {
 		cat.unsetAll()
 	} else cat.setAll()
 }
+const coolOptions = {
+	chart: {
+		type: 'bar',
+		stacked: true,
+		toolbar: {
+			show: false,
+		},
+	},
+	plotOptions: {
+		bar: {
+			horizontal: true,
+		},
+	},
+	stroke: {
+		width: 1,
+		colors: ['#fff'],
+	},
+	xaxis: {
+		categories: [
+			'Продажи',
+			'Сервис',
+			'Оплата',
+			'Жалобы',
+			'Неисправности',
+			'Услуги',
+			'Работа',
+			'Регионы',
+			'Грубость',
+			'Остальное',
+		],
+		labels: {
+			show: false,
+			minHeight: 0,
+			maxHeight: 0,
+		},
+	},
+	yaxis: {
+		show: false,
+		title: {
+			text: undefined,
+		},
+	},
+	fill: {
+		opacity: 1,
+	},
+	legend: {
+		show: false,
+		position: 'top',
+		horizontalAlign: 'left',
+	},
+	colors: ['#29A1F9', '#FDB948', '#C72829'],
+}
+const coolSeries = [
+	{
+		seriesName: 'fuck',
+		name: 'AHT',
+		data: [25, 50, 41],
+	},
+	{
+		name: 'Тишина',
+		data: [39, 50, 33],
+	},
+	{
+		name: 'Перебивания',
+		data: [22, 14, 27],
+	},
+]
 </script>
 
 <style scoped lang="scss">
@@ -56,7 +124,6 @@ const toggle = () => {
 	align-content: start;
 	.cat {
 		grid-column: 1/4;
-		overflow: inherit;
 		display: flex;
 		justify-content: space-between;
 	}
@@ -104,5 +171,8 @@ const toggle = () => {
 }
 .right {
 	justify-self: end;
+}
+.cool {
+	padding-top: 15px;
 }
 </style>
