@@ -13,6 +13,8 @@ q-table(:rows="rows"
 			q-th(v-for="col in props.cols" :key="col.name" :props="props") {{ col.label }}
 			q-th(auto-width)
 
+	//- template(v-slot:bottom) fuck
+
 	template(v-slot:body="props")
 		q-tr(:props="props" @click="select(props.row)" )
 			q-td(key="name" :props="props")
@@ -202,6 +204,9 @@ const pagination = ref({
 
 <style scoped lang="scss">
 //@import '@/assets/css/colors.scss';
+.table {
+	width: 100%;
+}
 .table th {
 	font-weight: normal;
 }
@@ -240,15 +245,5 @@ const pagination = ref({
 .graph:hover {
 	outline: 1px solid #249efa;
 	user-select: none;
-}
-.q-dialog .q-card {
-	overflow: visible;
-	position: relative;
-	.close {
-		z-index: 100;
-		position: absolute;
-		top: -1.2rem;
-		right: -1.2rem;
-	}
 }
 </style>

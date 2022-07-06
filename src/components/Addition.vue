@@ -1,5 +1,5 @@
 <template lang="pug">
-.grid
+.grid1
 	q-card.tags
 		canvas#canvas
 		.zg Голос клиента
@@ -40,17 +40,13 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-.grid {
+.grid1 {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 1rem;
-	div {
-		background: white;
-		min-height: 100px;
-	}
 }
 .tags {
-	width: 100%;
+	// width: 100%;
 	height: 300px;
 	padding: 1rem;
 	padding-top: 0;

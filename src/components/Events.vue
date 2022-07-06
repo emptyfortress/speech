@@ -1,5 +1,14 @@
 <template lang="pug">
-.grid
+.gridcat
+	.cat
+		.zag Категории
+		q-btn(flat round icon="mdi-dots-horizontal")
+			q-menu
+				q-list(dense)
+					q-item(clickable v-close-popup v-for="category in categories" :key="category.id")
+						q-item-section
+							q-checkbox(:model-value="category.selected" :label="category.label" dense @update:model-value="update(category)")
+	component(:is="ChipCalendar1" label="Текущий месяц").right
 	.cat
 		component(:is="CategoryTable")
 
@@ -12,6 +21,7 @@
 <script setup lang="ts">
 import VueApexCharts from 'vue3-apexcharts'
 import CategoryTable from '@/components/CategoryTable.vue'
+import ChipCalendar1 from '@/components/ChipCalendar1.vue'
 import { useSelect } from '@/stores/select'
 
 const sel = useSelect()
@@ -107,13 +117,17 @@ const barSeries = [
 <style scoped lang="scss">
 @import '@/assets/styles/myvariables.scss';
 
-.grid {
+.gridcat {
+	margin-top: 1rem;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	gap: 1rem;
+	column-gap: 1rem;
 	.cat {
 		grid-column: 1/4;
 		overflow: inherit;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 }
 .q-table th {
@@ -156,5 +170,8 @@ const barSeries = [
 		font-weight: 400;
 		font-size: 13px;
 	}
+}
+.right {
+	justify-self: end;
 }
 </style>

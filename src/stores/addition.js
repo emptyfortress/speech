@@ -187,6 +187,14 @@ const rows = [
 		options2: chartTable4,
 		series2: seriesTable4,
 	},
+	// {
+	// 	id: 3,
+	// 	name: 'laksjd',
+	// },
+	// {
+	// 	id: 4,
+	// 	name: 'laksjd',
+	// },
 ]
 
 export { addition, rows }

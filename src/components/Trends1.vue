@@ -12,6 +12,7 @@
 
 q-dialog(v-model="dialog")
 	q-card(style="width: 900px; max-width: 80vw;")
+		q-btn(round color="negative" icon="mdi-close" @click="dialog = false").close
 		q-card-section
 			VueApexCharts(type="area" :options="computeOptions" :series="computeSeries")
 </template>
