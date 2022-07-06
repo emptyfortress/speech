@@ -330,6 +330,31 @@ const chartTable1 = {
 		},
 	},
 }
+const chartTableAreaBig = {
+	chart: {
+		type: 'area',
+	},
+	stroke: {
+		width: 3,
+		curve: 'smooth',
+	},
+	tooltip: {
+		enabled: true,
+		x: {
+			show: false,
+		},
+		y: {
+			title: {
+				formatter: function (seriesName) {
+					return ''
+				},
+			},
+		},
+		marker: {
+			show: true,
+		},
+	},
+}
 
 const seriesTable4 = randomArray(4, 20, 5)
 const seriesTable5 = randomArray(4, 20, 5)
@@ -356,6 +381,17 @@ const chartTable4 = {
 		},
 	},
 }
+const chartTableDonutBig = {
+	chart: {
+		type: 'donut',
+	},
+	stroke: {
+		width: 1,
+	},
+	tooltip: {
+		enabled: true,
+	},
+}
 
 export {
 	chartOptions1,
@@ -374,4 +410,6 @@ export {
 	seriesTable4,
 	seriesTable5,
 	seriesTable6,
+	chartTableAreaBig,
+	chartTableDonutBig,
 }

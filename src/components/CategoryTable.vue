@@ -32,9 +32,9 @@ q-table(:rows="rows"
 				|{{ props.row.interrupt }}%
 				span.up &uarr;
 			q-td(@click.stop="showDialog1").graph
-				VueApexCharts(type="line" height="35" width="110" :options="sparkLine" :series="props.row.spark" )
+				component(:is="VueApexCharts" type="line" height="35" width="110" :options="sparkLine" :series="props.row.spark" )
 			q-td(@click.stop="showDialog2").graph
-					VueApexCharts(type="donut" height="35" width="35" :options="sparkDonut" :series="props.row.donut" )
+				component(:is="VueApexCharts" type="donut" height="35" width="35" :options="sparkDonut" :series="props.row.donut" )
 
 			q-td(auto-width)
 				q-btn(size="md" flat round dense icon="mdi-chevron-right" @click.stop="bigTable = true")
@@ -59,27 +59,26 @@ q-dialog(v-model="bigTable")
 							q-icon(name="mdi-magnify")
 
 
-//- q-dialog(v-model="dialog1")
-//- 	q-card(style="width: 900px; max-width: 80vw;")
-//- 		q-btn(round color="negative" icon="mdi-close" @click="dialog1 = false").close
-//- 		q-card-section
-//- 			component(:is="VueApexCharts" type="area" :options="chartTableAreaBig" :series="seriesTableBig1")
-//- q-dialog(v-model="dialog2")
-//- 	q-card(style="width: 600px; max-width: 80vw;")
-//- 		q-btn(round color="negative" icon="mdi-close" @click="dialog2 = false").close
-//- 		q-card-section
-//- 			VueApexCharts(type="donut" :options="chartTableDonutBig" :series="seriesTable4")
+q-dialog(v-model="dialog1")
+	q-card(style="width: 900px; max-width: 80vw;")
+		q-btn(round color="negative" icon="mdi-close" @click="dialog1 = false").close
+		q-card-section
+			component(:is="VueApexCharts" type="area" :options="chartTableAreaBig" :series="seriesTable1")
+
+q-dialog(v-model="dialog2")
+	q-card(style="width: 600px; max-width: 80vw;")
+		q-btn(round color="negative" icon="mdi-close" @click="dialog2 = false").close
+		q-card-section
+			VueApexCharts(type="donut" :options="chartTableDonutBig" :series="seriesTable4")
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { Ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
-// import { chartOptions1 as chartTableAreaBig } from '@/stores/charts1'
-// import { seriesTable4 } from '@/stores/charts1'
+import { chartTableAreaBig, seriesTable1, chartTableDonutBig, seriesTable4 } from '@/stores/charts1'
 import { useCategory } from '@/stores/category'
 import { addition } from '@/stores/addition'
-import { randomArray } from '@/utils/utils'
 
 const fil = ref('')
 const dialog1 = ref(false)
