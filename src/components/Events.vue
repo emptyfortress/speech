@@ -17,8 +17,8 @@
 		component(:is="CategoryTable")
 
 	q-card
-		//- component(:is="VueApexCharts" type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="!cat.selection")
-		//- component(:is="VueApexCharts" type="bar" height="183" :options="barOptions" :series="barSeries" v-else)
+		component(:is="VueApexCharts" type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="!cat.selection")
+		component(:is="VueApexCharts" type="bar" height="183" :options="barOptions" :series="barSeries" v-else)
 
 </template>
 
@@ -27,7 +27,7 @@ import { ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 import CategoryTable from '@/components/CategoryTable.vue'
 import ChipCalendar1 from '@/components/ChipCalendar1.vue'
-// import { series, chartOptions1, barOptions, barSeries } from '@/stores/categchart'
+import { series, chartOptions1, barOptions, barSeries } from '@/stores/categchart'
 import { useCategory } from '@/stores/category'
 import type { Ref } from 'vue'
 

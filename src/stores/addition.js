@@ -11,7 +11,7 @@ const addition = [
 	{
 		id: 0,
 		name: 'Подкатегория 1',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.89',
@@ -19,7 +19,7 @@ const addition = [
 	{
 		id: 1,
 		name: 'Подкатегория 1',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.89',
@@ -27,7 +27,7 @@ const addition = [
 	{
 		id: 2,
 		name: 'Подкатегория 1',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.89',
@@ -35,7 +35,7 @@ const addition = [
 	{
 		id: 3,
 		name: 'Подкатегория 1',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.89',
@@ -43,7 +43,7 @@ const addition = [
 	{
 		id: 4,
 		name: 'Подкатегория 1',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.89',
@@ -51,7 +51,7 @@ const addition = [
 	{
 		id: 5,
 		name: 'Подкатегория 1',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.89',
@@ -59,7 +59,7 @@ const addition = [
 	{
 		id: 6,
 		name: 'Подкатегория 1',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.89',
@@ -67,7 +67,7 @@ const addition = [
 	{
 		id: 7,
 		name: 'Подкатегория 1',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.89',
@@ -75,7 +75,7 @@ const addition = [
 	{
 		id: 8,
 		name: 'Подкатегория 1',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.89',
@@ -83,7 +83,7 @@ const addition = [
 	{
 		id: 9,
 		name: 'Подкатегория 1',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.89',
@@ -91,7 +91,7 @@ const addition = [
 	{
 		id: 10,
 		name: 'Подкатегория 1',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.89',
@@ -99,7 +99,7 @@ const addition = [
 	{
 		id: 11,
 		name: 'Подкатегория 1',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.89',
@@ -107,7 +107,7 @@ const addition = [
 	{
 		id: 12,
 		name: 'Подкатегория 1',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.89',
@@ -115,7 +115,7 @@ const addition = [
 	{
 		id: 13,
 		name: 'Подкатегория 1',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.89',
@@ -123,7 +123,7 @@ const addition = [
 	{
 		id: 14,
 		name: 'Подкатегория 1',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.89',
@@ -131,7 +131,7 @@ const addition = [
 	{
 		id: 15,
 		name: 'Подкатегория 1',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.89',
@@ -142,7 +142,7 @@ const rows = [
 	{
 		id: 0,
 		name: 'Продажи',
-		call: '4.32',
+		call: '120',
 		ant: '4:15',
 		loud: '1.89',
 		interrupt: '1.04',
@@ -174,7 +174,7 @@ const rows = [
 	{
 		id: 2,
 		name: 'Оплата',
-		call: '4.32',
+		call: '120',
 		ant: '4:18',
 		loud: '1.45',
 		interrupt: '2.58',

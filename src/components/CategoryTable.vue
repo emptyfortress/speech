@@ -37,7 +37,7 @@ q-table(:rows="rows"
 				component(:is="VueApexCharts" type="donut" height="35" width="35" :options="sparkDonut" :series="props.row.donut" )
 
 			q-td(auto-width)
-				q-btn(size="md" flat round dense icon="mdi-chevron-right" @click.stop="bigTable = true")
+				q-btn(size="md" flat round dense icon="mdi-chevron-right" @click.stop="showPodcat(props.row.label)")
 
 q-dialog(v-model="bigTable")
 	q-card(style="width: 800px; max-width: 80vw;")
@@ -52,7 +52,7 @@ q-dialog(v-model="bigTable")
 				rows-per-page-label="Записей на странице"
 				)
 				template(v-slot:top)
-					.text-h6 Название категории
+					.text-h6 {{categoryName}}
 					q-space
 					q-input(dense debounce="300" color="primary" clearable v-model="fil")
 						template(v-slot:prepend)
@@ -83,6 +83,12 @@ import { addition } from '@/stores/addition'
 const fil = ref('')
 const dialog1 = ref(false)
 const dialog2 = ref(false)
+const categoryName = ref('')
+
+const showPodcat = (e: string) => {
+	categoryName.value = e
+	bigTable.value = true
+}
 const showDialog1 = () => {
 	dialog1.value = true
 }
