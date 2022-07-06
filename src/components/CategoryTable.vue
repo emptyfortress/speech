@@ -6,6 +6,7 @@ q-table(:rows="rows"
 	v-model:selected="selected"
 	binary-state-sort
 	hide-bottom
+	:rows-per-page-options="[0]"
 	).table.thinhd
 
 	template(v-slot:header="props")
@@ -13,13 +14,11 @@ q-table(:rows="rows"
 			q-th(v-for="col in props.cols" :key="col.name" :props="props") {{ col.label }}
 			q-th(auto-width)
 
-	//- template(v-slot:bottom) fuck
-
 	template(v-slot:body="props")
 		q-tr(:props="props" @click="select(props.row)" )
 			q-td(key="name" :props="props")
 				.legend(:class="props.row.classname")
-				span {{ props.row.name }}
+				span {{ props.row.label }}
 			q-td(key="call" :props="props").big
 				|{{ props.row.call }}
 				span.up &uarr;
@@ -73,13 +72,13 @@ q-dialog(v-model="dialog2")
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import type { Ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 import { chartOptions1 as chartTableAreaBig } from '@/stores/charts1'
 import { seriesTable4 } from '@/stores/charts1'
-import { useSelect } from '@/stores/select'
-import { rows, addition } from '@/stores/addition'
+import { useCategory } from '@/stores/category'
+import { addition } from '@/stores/addition'
 
 const fil = ref('')
 const dialog1 = ref(false)
@@ -91,18 +90,23 @@ const showDialog2 = () => {
 	dialog2.value = true
 }
 
-const sel = useSelect()
+const cat = useCategory()
+
+const rows = computed(() => {
+	return cat.categories.filter((e) => e.selected)
+})
+
 const select = (e: RowCategory) => {
 	if (selected.value.length === 0) {
 		selected.value.push(e)
-		sel.setSelection(true)
+		cat.setSelection(true)
 	} else if (selected.value[0].id === e.id) {
 		selected.value = []
-		sel.setSelection(false)
+		cat.setSelection(false)
 	} else {
 		selected.value = []
 		selected.value.push(e)
-		sel.setSelection(true)
+		cat.setSelection(true)
 	}
 }
 

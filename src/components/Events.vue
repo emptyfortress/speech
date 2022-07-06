@@ -3,9 +3,13 @@
 	.cat
 		.zag Категории
 		q-btn(flat round icon="mdi-dots-horizontal")
-			q-menu
+			q-menu( anchor="bottom right" self="top right")
 				q-list(dense)
-					q-item(clickable v-close-popup v-for="category in categories" :key="category.id")
+					q-item(clickable v-close-popup)
+						q-item-section
+							q-checkbox(v-model="all" label="Показать все" dense)
+					q-separator
+					q-item(clickable v-close-popup v-for="category in cat.categories" :key="category.id")
 						q-item-section
 							q-checkbox(:model-value="category.selected" :label="category.label" dense @update:model-value="update(category)")
 	component(:is="ChipCalendar1" label="Текущий месяц").right
@@ -13,105 +17,31 @@
 		component(:is="CategoryTable")
 
 	q-card
-		component(:is="VueApexCharts" type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="!sel.selection")
+		component(:is="VueApexCharts" type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="!cat.selection")
 		component(:is="VueApexCharts" type="bar" height="183" :options="barOptions" :series="barSeries" v-else)
 
 </template>
 
 <script setup lang="ts">
+import { ref, computed, reactive } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 import CategoryTable from '@/components/CategoryTable.vue'
 import ChipCalendar1 from '@/components/ChipCalendar1.vue'
-import { useSelect } from '@/stores/select'
+import { series, chartOptions1, barOptions, barSeries } from '@/stores/categchart'
+import { useCategory } from '@/stores/category'
 
-const sel = useSelect()
+// interface Category {
+// 	id: number
+// 	label: string
+// 	selected: boolean
+// }
 
-const series = [76, 67, 61]
+const cat = useCategory()
+const all = ref(false)
 
-const chartOptions1 = {
-	chart: {
-		type: 'radialBar',
-	},
-	plotOptions: {
-		radialBar: {
-			dataLabels: {
-				name: {
-					fontSize: '13px',
-				},
-				value: {
-					fontSize: '16px',
-				},
-				total: {
-					show: true,
-					label: 'Всего',
-					fontSize: '20px',
-					formatter: function () {
-						// By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-						return 249
-					},
-				},
-			},
-		},
-	},
-	labels: ['Продажи', 'Сервис', 'Оплата'],
-	colors: ['#29A1F9', '#FDB948', '#C72829'],
+const update = (e: any) => {
+	cat.toggleCategory(e)
 }
-
-const barOptions = {
-	chart: {
-		type: 'bar',
-		height: 183,
-	},
-	plotOptions: {
-		bar: {
-			horizontal: false,
-			columnWidth: '55%',
-			endingShape: 'rounded',
-		},
-	},
-	dataLabels: {
-		enabled: false,
-	},
-	stroke: {
-		show: true,
-		width: 2,
-		colors: ['transparent'],
-	},
-	xaxis: {
-		categories: ['Янв', 'Фев', 'Мар', 'Апр'],
-	},
-	yaxis: {
-		title: {
-			text: '$ (thousands)',
-		},
-	},
-	fill: {
-		opacity: 1,
-	},
-	tooltip: {
-		y: {
-			formatter: function (val: string) {
-				return '$ ' + val + ' thousands'
-			},
-		},
-	},
-	colors: ['#29A1F9', '#FDB948', '#C72829'],
-}
-
-const barSeries = [
-	{
-		name: 'Продажи',
-		data: [44, 55, 57, 56],
-	},
-	{
-		name: 'Сервис',
-		data: [76, 85, 101, 98],
-	},
-	{
-		name: 'Оплата',
-		data: [35, 41, 36, 26],
-	},
-]
 </script>
 
 <style scoped lang="scss">
@@ -122,6 +52,7 @@ const barSeries = [
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	column-gap: 1rem;
+	align-items: start;
 	.cat {
 		grid-column: 1/4;
 		overflow: inherit;
