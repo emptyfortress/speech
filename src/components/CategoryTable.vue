@@ -17,7 +17,7 @@ q-table(:rows="rows"
 	template(v-slot:body="props")
 		q-tr(:props="props" @click="select(props.row)" )
 			q-td(key="name" :props="props")
-				.legend(:class="props.row.classname")
+				//- .legend(:class="props.row.classname")
 				span {{ props.row.label }}
 			q-td(key="call" :props="props").big
 				|{{ props.row.call }}
@@ -32,9 +32,9 @@ q-table(:rows="rows"
 				|{{ props.row.interrupt }}%
 				span.up &uarr;
 			q-td(@click.stop="showDialog1").graph
-				VueApexCharts(type="line" height="35" width="110" :options="props.row.options1" :series="props.row.series1" )
+				VueApexCharts(type="line" height="35" width="110" :options="sparkLine" :series="props.row.spark" )
 			q-td(@click.stop="showDialog2").graph
-					VueApexCharts(type="donut" height="35" width="35" :options="props.row.options2" :series="props.row.series2" )
+					VueApexCharts(type="donut" height="35" width="35" :options="sparkDonut" :series="props.row.donut" )
 
 			q-td(auto-width)
 				q-btn(size="md" flat round dense icon="mdi-chevron-right" @click.stop="bigTable = true")
@@ -59,26 +59,27 @@ q-dialog(v-model="bigTable")
 							q-icon(name="mdi-magnify")
 
 
-q-dialog(v-model="dialog1")
-	q-card(style="width: 900px; max-width: 80vw;")
-		q-btn(round color="negative" icon="mdi-close" @click="dialog1 = false").close
-		q-card-section
-			component(:is="VueApexCharts" type="area" :options="chartTableAreaBig" :series="seriesTableBig1")
-q-dialog(v-model="dialog2")
-	q-card(style="width: 600px; max-width: 80vw;")
-		q-btn(round color="negative" icon="mdi-close" @click="dialog2 = false").close
-		q-card-section
-			VueApexCharts(type="donut" :options="chartTableDonutBig" :series="seriesTable4")
+//- q-dialog(v-model="dialog1")
+//- 	q-card(style="width: 900px; max-width: 80vw;")
+//- 		q-btn(round color="negative" icon="mdi-close" @click="dialog1 = false").close
+//- 		q-card-section
+//- 			component(:is="VueApexCharts" type="area" :options="chartTableAreaBig" :series="seriesTableBig1")
+//- q-dialog(v-model="dialog2")
+//- 	q-card(style="width: 600px; max-width: 80vw;")
+//- 		q-btn(round color="negative" icon="mdi-close" @click="dialog2 = false").close
+//- 		q-card-section
+//- 			VueApexCharts(type="donut" :options="chartTableDonutBig" :series="seriesTable4")
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { Ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
-import { chartOptions1 as chartTableAreaBig } from '@/stores/charts1'
-import { seriesTable4 } from '@/stores/charts1'
+// import { chartOptions1 as chartTableAreaBig } from '@/stores/charts1'
+// import { seriesTable4 } from '@/stores/charts1'
 import { useCategory } from '@/stores/category'
 import { addition } from '@/stores/addition'
+import { randomArray } from '@/utils/utils'
 
 const fil = ref('')
 const dialog1 = ref(false)
@@ -178,24 +179,58 @@ const columns1: Column[] = [
 
 const selected: Ref<RowCategory[]> = ref([])
 
-const seriesTableBig1 = [{ name: 'Parameter', data: [55, 57, 65, 70, 77, 80, 67] }]
-const chartTableDonutBig = {
-	chartOptions: {
-		chart: {
-			type: 'donut',
+const sparkLine = {
+	chart: {
+		type: 'line',
+		height: 35,
+		sparkline: {
+			enabled: true,
 		},
-		responsive: [
-			{
-				breakpoint: 480,
-				options: {
-					legend: {
-						position: 'right',
-					},
+	},
+	stroke: {
+		width: 3,
+		curve: 'smooth',
+	},
+	tooltip: {
+		enabled: false,
+		x: {
+			show: false,
+		},
+		y: {
+			title: {
+				formatter: function () {
+					return ''
 				},
 			},
-		],
+		},
+		marker: {
+			show: false,
+		},
 	},
 }
+
+const sparkDonut = {
+	chart: {
+		type: 'donut',
+		width: 35,
+		height: 35,
+		sparkline: {
+			enabled: true,
+		},
+	},
+	stroke: {
+		width: 1,
+	},
+	tooltip: {
+		enabled: false,
+	},
+	plotOptions: {
+		pie: {
+			expandOnClick: false,
+		},
+	},
+}
+
 const bigTable = ref(false)
 
 const pagination = ref({

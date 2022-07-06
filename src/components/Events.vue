@@ -7,7 +7,7 @@
 				q-list(dense)
 					q-item(clickable v-close-popup)
 						q-item-section
-							q-checkbox(v-model="all" label="Показать все" dense)
+							q-checkbox(v-model="all" label="Показать все" dense @update:model-value="toggle")
 					q-separator
 					q-item(clickable v-close-popup v-for="category in cat.categories" :key="category.id")
 						q-item-section
@@ -17,30 +17,31 @@
 		component(:is="CategoryTable")
 
 	q-card
-		component(:is="VueApexCharts" type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="!cat.selection")
-		component(:is="VueApexCharts" type="bar" height="183" :options="barOptions" :series="barSeries" v-else)
+		//- component(:is="VueApexCharts" type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="!cat.selection")
+		//- component(:is="VueApexCharts" type="bar" height="183" :options="barOptions" :series="barSeries" v-else)
 
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive } from 'vue'
+import { ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 import CategoryTable from '@/components/CategoryTable.vue'
 import ChipCalendar1 from '@/components/ChipCalendar1.vue'
-import { series, chartOptions1, barOptions, barSeries } from '@/stores/categchart'
+// import { series, chartOptions1, barOptions, barSeries } from '@/stores/categchart'
 import { useCategory } from '@/stores/category'
-
-// interface Category {
-// 	id: number
-// 	label: string
-// 	selected: boolean
-// }
+import type { Ref } from 'vue'
 
 const cat = useCategory()
-const all = ref(false)
+const all: Ref<null | boolean> = ref(false)
 
 const update = (e: any) => {
 	cat.toggleCategory(e)
+}
+
+const toggle = () => {
+	if (!all.value) {
+		cat.unsetAll()
+	} else cat.setAll()
 }
 </script>
 
@@ -52,13 +53,12 @@ const update = (e: any) => {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	column-gap: 1rem;
-	align-items: start;
+	align-content: start;
 	.cat {
 		grid-column: 1/4;
 		overflow: inherit;
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
 	}
 }
 .q-table th {
