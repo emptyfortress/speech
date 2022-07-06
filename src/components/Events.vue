@@ -17,20 +17,20 @@
 		component(:is="CategoryTable")
 
 	q-card.cool
-		component(:is="VueApexCharts" height="187" type="bar" :options="coolOptions" :series="coolSeries")
+		component(:is="VueApexCharts" ref="cool" height="100%" type="bar" :options="coolOptions" :series="coolSeries")
 		//- component(:is="VueApexCharts" type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="!cat.selection")
 		//- component(:is="VueApexCharts" type="bar" height="183" :options="barOptions" :series="barSeries" v-else)
 
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 import CategoryTable from '@/components/CategoryTable.vue'
 import ChipCalendar1 from '@/components/ChipCalendar1.vue'
-import { series, chartOptions1, barOptions, barSeries } from '@/stores/categchart'
 import { useCategory } from '@/stores/category'
 import type { Ref } from 'vue'
+import { randomArray } from '@/utils/utils'
 
 const cat = useCategory()
 const all: Ref<null | boolean> = ref(false)
@@ -96,21 +96,23 @@ const coolOptions = {
 	},
 	colors: ['#29A1F9', '#FDB948', '#C72829'],
 }
-const coolSeries = [
-	{
-		seriesName: 'fuck',
-		name: 'AHT',
-		data: [25, 50, 41],
-	},
-	{
-		name: 'Тишина',
-		data: [39, 50, 33],
-	},
-	{
-		name: 'Перебивания',
-		data: [22, 14, 27],
-	},
-]
+
+const coolSeries = computed(() => {
+	return [
+		{
+			name: 'AHT',
+			data: randomArray(cat.rowNum, 10, 40),
+		},
+		{
+			name: 'Тишина',
+			data: randomArray(cat.rowNum, 3, 15),
+		},
+		{
+			name: 'Перебивания',
+			data: randomArray(cat.rowNum, 7, 20),
+		},
+	]
+})
 </script>
 
 <style scoped lang="scss">

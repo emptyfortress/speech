@@ -119,9 +119,9 @@ export const useCategory = defineStore({
 		],
 	}),
 	getters: {
-		// selArray() {
-		// 	return this.categories.filter((e) => e.selected).length
-		// },
+		rowNum() {
+			return this.categories.filter((e) => e.selected).length
+		},
 	},
 	actions: {
 		setSelection(e) {
