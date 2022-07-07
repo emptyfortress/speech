@@ -1,5 +1,5 @@
 <template lang="pug">
-q-drawer(v-model="show" side="left" :mini="mystore.mini" :width="200")
+q-drawer(v-model="props.show" side="left" :mini="mystore.mini" :width="200")
 	q-list.q-mt-lg
 		q-item(clickable v-app-ripple v-for="page in pages" :to="page.url")
 			q-item-section(avatar)
@@ -38,12 +38,12 @@ const pages = [
 		icon: 'mdi-finance',
 		url: '/report',
 	},
-	// {
-	// 	id: 2,
-	// 	title: 'Сравнение',
-	// 	icon: 'mdi-scale-balance',
-	// 	url: '/compare',
-	// },
+	{
+		id: 6,
+		title: 'Запросы',
+		icon: 'mdi-toy-brick-search-outline',
+		url: '/requests',
+	},
 	{
 		id: 4,
 		title: 'Чек-листы',
@@ -52,15 +52,9 @@ const pages = [
 	},
 	{
 		id: 5,
-		title: 'Диалоги',
-		icon: 'mdi-forum',
-		url: '/conversation',
-	},
-	{
-		id: 6,
-		title: 'Запросы',
-		icon: 'mdi-toy-brick-search-outline',
-		url: '/requests',
+		title: 'Категории',
+		icon: 'mdi-lan',
+		url: '/category',
 	},
 ]
 // export default {

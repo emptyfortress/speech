@@ -4,7 +4,7 @@ q-page(padding)
 		q-expansion-item(v-model="mystore.sett")
 			template(v-slot:header)
 				q-item-section(avatar).line
-					q-avatar(icon="mdi-tune-variant" flat)
+					q-avatar(icon="mdi-finance" flat)
 				q-item-section
 					.zag Отчеты
 			q-card-section
