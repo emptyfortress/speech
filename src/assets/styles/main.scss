@@ -149,11 +149,20 @@ span.found {
 	width: 2px;
 	background: transparent;
 }
+
 .q-splitter--vertical > .q-splitter__separator:hover,
 .q-splitter--vertical > .q-splitter__separator:active {
 	border-left: 2px dotted black;
 }
-
+.hei .q-splitter__separator {
+	border: none;
+	background: #ccc;
+}
+.hei .q-splitter__separator:hover,
+.hei .q-splitter__separator:active {
+	border: none;
+	background: $primary;
+}
 .query .q-placeholder::placeholder {
 	opacity: 0.3;
 }

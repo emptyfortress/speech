@@ -41,9 +41,9 @@ export const router = createRouter({
 			meta: { transition: 'slide-left', title: 'Чек-листы', requiresAuth: false },
 		},
 		{
-			path: '/conversation',
-			component: () => import('@/components/Conversation.vue'),
-			meta: { transition: 'slide-left', title: 'Диалоги', requiresAuth: false },
+			path: '/categories',
+			component: () => import('@/components/Categories.vue'),
+			meta: { transition: 'slide-left', title: 'Категории', requiresAuth: false },
 		},
 		{
 			path: '/requests',

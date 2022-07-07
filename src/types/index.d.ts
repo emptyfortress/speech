@@ -46,15 +46,16 @@ interface Column {
 
 interface RowCategory {
 	id: number
-	name: string
-	call: string
-	ant: string
-	loud: string
-	interrupt: string
-	dynamics: any
-	volume: any
+	label: string
+	call?: string
+	ant?: string
+	loud?: string
+	interrupt?: string
+	dynamics?: any
+	volume?: any
 	selected?: boolean
 	classname?: string
+	children: RowCategory[]
 }
 
 interface RowNotific {

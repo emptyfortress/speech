@@ -54,7 +54,7 @@ const pages = [
 		id: 5,
 		title: 'Категории',
 		icon: 'mdi-lan',
-		url: '/category',
+		url: '/categories',
 	},
 ]
 // export default {
