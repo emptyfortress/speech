@@ -12,12 +12,10 @@ q-table(:rows="rows"
 	template(v-slot:header="props")
 		q-tr(:props="props")
 			q-th(v-for="col in props.cols" :key="col.name" :props="props") {{ col.label }}
-			q-th(auto-width)
 
 	template(v-slot:body="props")
-		q-tr(:props="props" @click="select(props.row)" )
+		q-tr(:props="props" @click="showPodcat(props.row.label)" )
 			q-td(key="name" :props="props")
-				//- .legend(:class="props.row.classname")
 				span {{ props.row.label }}
 			q-td(key="call" :props="props").big
 				|{{ props.row.call }}
@@ -36,28 +34,10 @@ q-table(:rows="rows"
 			q-td(@click.stop="showDialog2").graph
 				component(:is="VueApexCharts" type="donut" height="35" width="35" :options="sparkDonut" :series="props.row.donut" )
 
-			q-td(auto-width)
-				q-btn(size="md" flat round dense icon="mdi-chevron-right" @click.stop="showPodcat(props.row.label)")
-
 q-dialog(v-model="bigTable")
-	q-card(style="width: 800px; max-width: 80vw;")
+	q-card(style="width: 1000px; max-width: 80vw;")
 		q-btn(round color="negative" icon="mdi-close" @click="bigTable = false").close
-		q-card-section
-			q-table(:rows="addition"
-				:columns="columns1"
-				row-key="id"
-				binary-state-sort
-				flat
-				:pagination="pagination"
-				rows-per-page-label="Записей на странице"
-				)
-				template(v-slot:top)
-					.text-h6 {{categoryName}}
-					q-space
-					q-input(dense debounce="300" color="primary" clearable v-model="fil")
-						template(v-slot:prepend)
-							q-icon(name="mdi-magnify")
-
+		component(:is="Podcat" :categoryName="categoryName")
 
 q-dialog(v-model="dialog1")
 	q-card(style="width: 900px; max-width: 80vw;")
@@ -78,12 +58,12 @@ import type { Ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 import { chartTableAreaBig, seriesTable1, chartTableDonutBig, seriesTable4 } from '@/stores/charts1'
 import { useCategory } from '@/stores/category'
-import { addition } from '@/stores/addition'
+import Podcat from '@/components/Podcat.vue'
 
-const fil = ref('')
 const dialog1 = ref(false)
 const dialog2 = ref(false)
 const categoryName = ref('')
+const bigTable = ref(false)
 
 const showPodcat = (e: string) => {
 	categoryName.value = e
@@ -101,20 +81,6 @@ const cat = useCategory()
 const rows = computed(() => {
 	return cat.categories.filter((e) => e.selected)
 })
-
-const select = (e: RowCategory) => {
-	if (selected.value.length === 0) {
-		selected.value.push(e)
-		cat.setSelection(true)
-	} else if (selected.value[0].id === e.id) {
-		selected.value = []
-		cat.setSelection(false)
-	} else {
-		selected.value = []
-		selected.value.push(e)
-		cat.setSelection(true)
-	}
-}
 
 const columns: Column[] = [
 	{ name: 'name', label: 'Название', field: 'name', sortable: true, align: 'left' },
@@ -153,33 +119,6 @@ const columns: Column[] = [
 		align: 'center',
 	},
 	{ id: 6, name: 'volume', label: 'Объем', field: 'volume', sortable: false, align: 'center' },
-]
-
-const columns1: Column[] = [
-	{ name: 'name', label: 'Подкатегория', field: 'name', sortable: true, align: 'left' },
-	{ name: 'call', label: 'Звонки', field: 'call', sortable: true, align: 'right' },
-	{
-		name: 'ant',
-		label: 'АНТ',
-		field: 'ant',
-		sortable: true,
-		align: 'right',
-	},
-	{
-		name: 'loud',
-		label: 'Тишина',
-		field: 'loud',
-		sortable: true,
-		align: 'right',
-	},
-	{
-		id: 4,
-		name: 'interrupt',
-		label: 'Перебивания',
-		field: 'interrupt',
-		sortable: true,
-		align: 'right',
-	},
 ]
 
 const selected: Ref<RowCategory[]> = ref([])
@@ -235,15 +174,6 @@ const sparkDonut = {
 		},
 	},
 }
-
-const bigTable = ref(false)
-
-const pagination = ref({
-	sortBy: 'name' as keyof RowCategory,
-	descending: true,
-	page: 1,
-	rowsPerPage: 10,
-})
 </script>
 
 <style scoped lang="scss">
@@ -256,23 +186,6 @@ const pagination = ref({
 }
 .table tr {
 	cursor: pointer;
-}
-.legend {
-	width: 10px;
-	height: 10px;
-	background: #ccc;
-	display: inline-block;
-	margin-right: 0.5rem;
-
-	&.blue {
-		background: #249efa;
-	}
-	&.green {
-		background: #24e6a4;
-	}
-	&.orange {
-		background: #fdba3a;
-	}
 }
 .up {
 	margin-left: 0.5rem;

@@ -9,16 +9,8 @@ import {
 
 const addition = [
 	{
-		id: 0,
-		name: 'Подкатегория 1',
-		call: '120',
-		ant: '4:15',
-		loud: '1.89',
-		interrupt: '1.89',
-	},
-	{
 		id: 1,
-		name: 'Подкатегория 1',
+		name: 'Клиентский спрос',
 		call: '120',
 		ant: '4:15',
 		loud: '1.89',
@@ -26,7 +18,7 @@ const addition = [
 	},
 	{
 		id: 2,
-		name: 'Подкатегория 1',
+		name: 'стратегия',
 		call: '120',
 		ant: '4:15',
 		loud: '1.89',
@@ -34,7 +26,7 @@ const addition = [
 	},
 	{
 		id: 3,
-		name: 'Подкатегория 1',
+		name: 'планирование',
 		call: '120',
 		ant: '4:15',
 		loud: '1.89',
@@ -42,7 +34,7 @@ const addition = [
 	},
 	{
 		id: 4,
-		name: 'Подкатегория 1',
+		name: 'нестандартный подход',
 		call: '120',
 		ant: '4:15',
 		loud: '1.89',
@@ -50,7 +42,7 @@ const addition = [
 	},
 	{
 		id: 5,
-		name: 'Подкатегория 1',
+		name: 'рекламный клаттер',
 		call: '120',
 		ant: '4:15',
 		loud: '1.89',
@@ -58,7 +50,7 @@ const addition = [
 	},
 	{
 		id: 6,
-		name: 'Подкатегория 1',
+		name: 'SWOT-анализ',
 		call: '120',
 		ant: '4:15',
 		loud: '1.89',
@@ -66,7 +58,7 @@ const addition = [
 	},
 	{
 		id: 7,
-		name: 'Подкатегория 1',
+		name: 'тактический формат',
 		call: '120',
 		ant: '4:15',
 		loud: '1.89',
@@ -74,7 +66,7 @@ const addition = [
 	},
 	{
 		id: 8,
-		name: 'Подкатегория 1',
+		name: 'мониторинг активности',
 		call: '120',
 		ant: '4:15',
 		loud: '1.89',
@@ -82,7 +74,7 @@ const addition = [
 	},
 	{
 		id: 9,
-		name: 'Подкатегория 1',
+		name: 'Рейт-карта',
 		call: '120',
 		ant: '4:15',
 		loud: '1.89',
@@ -90,47 +82,7 @@ const addition = [
 	},
 	{
 		id: 10,
-		name: 'Подкатегория 1',
-		call: '120',
-		ant: '4:15',
-		loud: '1.89',
-		interrupt: '1.89',
-	},
-	{
-		id: 11,
-		name: 'Подкатегория 1',
-		call: '120',
-		ant: '4:15',
-		loud: '1.89',
-		interrupt: '1.89',
-	},
-	{
-		id: 12,
-		name: 'Подкатегория 1',
-		call: '120',
-		ant: '4:15',
-		loud: '1.89',
-		interrupt: '1.89',
-	},
-	{
-		id: 13,
-		name: 'Подкатегория 1',
-		call: '120',
-		ant: '4:15',
-		loud: '1.89',
-		interrupt: '1.89',
-	},
-	{
-		id: 14,
-		name: 'Подкатегория 1',
-		call: '120',
-		ant: '4:15',
-		loud: '1.89',
-		interrupt: '1.89',
-	},
-	{
-		id: 15,
-		name: 'Подкатегория 1',
+		name: 'Ретроконверсия',
 		call: '120',
 		ant: '4:15',
 		loud: '1.89',
@@ -140,7 +92,7 @@ const addition = [
 
 const rows = [
 	{
-		id: 0,
+		id: 15,
 		name: 'Продажи',
 		call: '120',
 		ant: '4:15',
@@ -156,7 +108,7 @@ const rows = [
 		series2: seriesTable4,
 	},
 	{
-		id: 1,
+		id: 16,
 		name: 'Сервис',
 		call: '3.36',
 		ant: '5:15',
@@ -172,7 +124,7 @@ const rows = [
 		series2: seriesTable4,
 	},
 	{
-		id: 2,
+		id: 17,
 		name: 'Оплата',
 		call: '120',
 		ant: '4:18',

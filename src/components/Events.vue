@@ -16,10 +16,8 @@
 	.cat
 		component(:is="CategoryTable")
 
-	q-card.cool
-		component(:is="VueApexCharts" ref="cool" height="100%" type="bar" :options="coolOptions" :series="coolSeries")
-		//- component(:is="VueApexCharts" type="radialBar" height="220" :options="chartOptions1" :series="series" v-if="!cat.selection")
-		//- component(:is="VueApexCharts" type="bar" height="183" :options="barOptions" :series="barSeries" v-else)
+	q-card
+		component(:is="VueApexCharts" height="100%" type="bar" :options="coolOptions" :series="coolSeries")
 
 </template>
 
@@ -90,7 +88,7 @@ const coolOptions = {
 		opacity: 1,
 	},
 	legend: {
-		show: false,
+		show: true,
 		position: 'top',
 		horizontalAlign: 'left',
 	},
@@ -173,8 +171,5 @@ const coolSeries = computed(() => {
 }
 .right {
 	justify-self: end;
-}
-.cool {
-	padding-top: 15px;
 }
 </style>
