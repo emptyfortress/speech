@@ -1,7 +1,7 @@
 <template lang="pug">
 .zg
-	q-badge {{ items.length }}
 	div Библиотека
+	q-badge {{ items.length }}
 q-input(ref="input" dense v-model="filter" autofocus clearable hide-bottom-space @clear="filter = ''")
 	template(v-slot:prepend)
 		q-icon(name="mdi-magnify")

@@ -9,7 +9,7 @@ q-page(padding)
 					|Категории
 					q-badge(color="orange" class="q-ml-sm") New!
 		q-card-section
-			q-splitter(v-model="split1" :limits="[25, 100]" :style="hei")
+			q-splitter(v-model="split1" :limits="[20, 50]" :style="hei")
 				template(v-slot:before)
 					.tree
 						q-btn(round color="primary" icon="mdi-plus" size="md").fab1
@@ -17,16 +17,17 @@ q-page(padding)
 							template(v-slot:prepend)
 								q-icon(name="mdi-magnify")
 
-						q-tree(:nodes="rows"
-							node-key="label"
-							selected-color="primary"
-							v-model:selected="selected"
-							:filter="filter"
-							default-expand-all).cat
-							template(v-slot:header-root="prop")
-								.row.items-center.justify-between
-									div {{prop.node.label}}
-									div ({{cat.catList.length}})
+						q-scroll-area(:style="hei1")
+							q-tree(:nodes="rows"
+								node-key="label"
+								selected-color="primary"
+								v-model:selected="selected"
+								:filter="filter"
+								default-expand-all).cat
+								template(v-slot:header-root="prop")
+									.row.items-center.justify-between
+										div {{prop.node.label}}
+										div ({{cat.catList.length}})
 
 				template(v-slot:after)
 					component(:is="Subcategories")
@@ -56,6 +57,9 @@ const rows = computed(() => {
 })
 const hei = computed(() => {
 	return 'height: ' + (window.innerHeight - 190) + 'px;'
+})
+const hei1 = computed(() => {
+	return 'height: ' + (window.innerHeight - 240) + 'px;'
 })
 </script>
 
