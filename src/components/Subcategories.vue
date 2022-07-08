@@ -2,16 +2,20 @@
 q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 	template(v-slot:before)
 		.q-px-sm
+			.text-h6 {{props.selected}}
 			q-tab-panels(v-model="selected" animated transition-prev="jump-up" transition-next="jump-up" )
 				template(v-for="item in list" :key="item.id")
 					q-tab-panel(:name="item.label")
-						.text-h6 {{ item.label }}
-						.q-mt-md Подкатегории:
-						q-list
-							q-item(clickable v-for="podcat in item.childs")
-								q-item-section(avatar)
-									q-icon(name="mdi-magnify")
+						.row.justify-between.text-overline
+							div Подкатегории
+							div Словари
+						q-list.podcat
+							q-item(clickable v-for="(podcat, index) in item.childs")
 								q-item-section {{ podcat.label }}
+								q-item-section(side)
+									.row.items-center
+										SvgIcon(name="vocabulary").small
+										span {{ podcat.label }}
 
 	template(v-slot:after)
 		.right
@@ -40,11 +44,17 @@ import SvgIcon from '@/components/SvgIcon.vue'
 import KeywordList from '@/components/KeywordList.vue'
 import { useQuasar } from 'quasar'
 
+const props = defineProps({
+	selected: {
+		type: String,
+		default: 'Категория',
+	},
+})
+
 const cat = useCategory()
 const $q = useQuasar()
 const split2 = ref(50)
 const list = ref(cat.catList)
-const selected = ref('Продажи')
 const tabs = ref('Voc')
 const cli = ref(true)
 
@@ -67,7 +77,6 @@ const show = () => {
 @import '@/assets/styles/myvariables.scss';
 
 .q-tab-panels {
-	margin-top: 2.5rem;
 	border-radius: $radius-md;
 	box-shadow: $card-shadow;
 }
@@ -78,5 +87,8 @@ const show = () => {
 	background: transparent;
 	box-shadow: none;
 	margin-top: 0;
+}
+.small {
+	font-size: 0.7rem;
 }
 </style>

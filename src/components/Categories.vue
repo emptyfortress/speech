@@ -13,7 +13,7 @@ q-page(padding)
 				template(v-slot:before)
 					.tree
 						q-btn(round color="primary" icon="mdi-plus" size="md").fab1
-						q-input(dense debounce="0" color="primary" v-model="filter" clearable)
+						q-input(dense debounce="0" color="primary" autofocus v-model="filter" clearable)
 							template(v-slot:prepend)
 								q-icon(name="mdi-magnify")
 
@@ -30,7 +30,7 @@ q-page(padding)
 										div ({{cat.catList.length}})
 
 				template(v-slot:after)
-					component(:is="Subcategories")
+					component(:is="Subcategories" :selected="selected")
 </template>
 
 <script setup lang="ts">
@@ -41,7 +41,7 @@ import Subcategories from '@/components/Subcategories.vue'
 const cat = useCategory()
 
 const split1 = ref(25)
-const selected = ref('Продажи')
+const selected = ref(cat.categories[0].label)
 const filter = ref('')
 
 const rows = computed(() => {
@@ -65,7 +65,7 @@ const hei1 = computed(() => {
 
 <style scoped lang="scss">
 .tree {
-	margin-right: 0.5rem;
+	margin-right: 1rem;
 }
 .fab1 {
 	position: absolute;
