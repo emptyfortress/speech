@@ -6,16 +6,16 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 			q-tab-panels(v-model="selected" animated transition-prev="jump-up" transition-next="jump-up" )
 				template(v-for="item in list" :key="item.id")
 					q-tab-panel(:name="item.label")
-						.row.justify-between.text-overline
-							div Подкатегории
-							div Словари
-						q-list.podcat
-							q-item(clickable v-for="(podcat, index) in item.childs")
-								q-item-section {{ podcat.label }}
-								q-item-section(side)
-									.row.items-center
-										SvgIcon(name="vocabulary").small
-										span {{ podcat.label }}
+						.list
+
+						.list()
+							.podzag Подкатегория
+							.podzag Словарь
+							template(v-for="podcat in item.childs" :key="podcat.id")
+								.name Название laksdjlas
+								.name
+									component(:is="SvgIcon" name="vocabulary").small
+									span {{ podcat.label }}
 
 	template(v-slot:after)
 		.right
@@ -53,7 +53,7 @@ const props = defineProps({
 
 const cat = useCategory()
 const $q = useQuasar()
-const split2 = ref(50)
+const split2 = ref(60)
 const list = ref(cat.catList)
 const tabs = ref('Voc')
 const cli = ref(true)
@@ -90,5 +90,19 @@ const show = () => {
 }
 .small {
 	font-size: 0.7rem;
+}
+.podzag {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 0.75rem;
+	letter-spacing: 1px;
+	color: grey;
+	border-bottom: 1px solid #ccc;
+}
+.list {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	column-gap: 2rem;
 }
 </style>
