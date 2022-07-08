@@ -19,17 +19,20 @@ q-list(dense)
 				q-item-section(side)
 					q-icon(name="mdi-close" size="xs" @click="removeFromVoc(item)").hov
 
-	q-item(v-for="item in filteredItems" clickable :key="item.key")
-		q-item-section
-			label
-				q-checkbox(v-model="selection" size="xs" dense :val="item.label").q-mr-sm
-				component(:is="SvgIcon" name="vocabulary" v-if="item.voc").voc
-				|{{item.label}}
 
-		q-item-section(side v-if="!editMode")
-			.row
-				q-icon(name="mdi-pencil" size="xs" @click="edit(item)" v-if="item.voc").q-mr-sm.hov
-				q-icon(name="mdi-trash-can-outline" size="xs" @click="remove(item)").hov
+	component(:is="draggable" v-model="filteredItems"  itemKey="item.key"  group="subcat")
+		template(#item="{ element }")
+			q-item(clickable dense)
+				q-item-section
+					label
+						q-checkbox(v-model="selection" size="xs" dense :val="element.label").q-mr-sm
+						component(:is="SvgIcon" name="vocabulary" v-if="element.voc").voc
+						|{{element.label}}
+
+				q-item-section(side v-if="!editMode")
+					.row
+						q-icon(name="mdi-pencil" size="xs" @click="edit(element)" v-if="element.voc").q-mr-sm.hov
+						q-icon(name="mdi-trash-can-outline" size="xs" @click="remove(element)").hov
 
 	template(v-if="filteredItems.length === 0")
 		.notfound
@@ -52,6 +55,7 @@ transition(name="slide-bottom")
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import draggable from 'vuedraggable'
 import type { Ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { words } from '@/stores/list'

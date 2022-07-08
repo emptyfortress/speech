@@ -6,16 +6,17 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 			q-tab-panels(v-model="selected" animated transition-prev="jump-up" transition-next="jump-up" )
 				template(v-for="item in list" :key="item.id")
 					q-tab-panel(:name="item.label")
-						.list
-
 						.list()
 							.podzag Подкатегория
 							.podzag Словарь
-							template(v-for="podcat in item.childs" :key="podcat.id")
-								.name Название laksdjlas
-								.name
-									component(:is="SvgIcon" name="vocabulary").small
-									span {{ podcat.label }}
+						component(:is="draggable" class="list-group" :list="item.childs" group="subcat" itemKey="id")
+							template(#item="{ element }")
+								div {{element.label}}
+							//- template(v-for="podcat in item.childs" :key="podcat.id")
+							//- 	.name Название laksdjlas
+							//- 	.name
+							//- 		component(:is="SvgIcon" name="vocabulary").small
+							//- 		span {{ podcat.label }}
 
 	template(v-slot:after)
 		.right
@@ -39,6 +40,7 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import draggable from 'vuedraggable'
 import { useCategory } from '@/stores/category'
 import SvgIcon from '@/components/SvgIcon.vue'
 import KeywordList from '@/components/KeywordList.vue'
