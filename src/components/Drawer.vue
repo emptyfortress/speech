@@ -4,7 +4,7 @@ q-drawer(v-model="props.show" side="left" :mini="mystore.mini" :width="200")
 		q-item(clickable v-app-ripple v-for="page in pages" :to="page.url")
 			q-item-section(avatar)
 				q-icon(:name="page.icon")
-			q-item-section()
+			q-item-section
 				q-item-label {{ page.title }}
 
 	q-btn(round flat dense  @click="mystore.toggleMini").mini.gt-sm

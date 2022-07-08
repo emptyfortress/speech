@@ -1,45 +1,71 @@
 <template lang="pug">
 q-page(padding)
-	//- q-btn(round color="primary" icon="mdi-plus" size="lg" @click="openDialog" :class="{rot : dialog}").fab
 	.container
-		q-expansion-item(v-model="mystore.cat")
-			template(v-slot:header)
-				q-item-section(avatar).line
-					q-avatar(icon="mdi-lan" flat)
-				q-item-section
-					.zag Категории
-			q-card-section
-				q-splitter(v-model="splitterModel" :limits="[20, 100]").hei
-					template(v-slot:before)
-						q-tree(:nodes="cat.categories" node-key="label")
-							template(v-slot:header-root="prop")
-								.row.items-center
-									q-icon(name="mdi-lan")
-									div {{prop.node.label}}
-										q-badge(color="orange" class="q-ml-sm") New!
+		q-item
+			q-item-section(avatar).line
+				q-avatar(icon="mdi-lan" flat)
+			q-item-section
+				.zag
+					|Категории
+					q-badge(color="orange" class="q-ml-sm") New!
+		q-card-section
+			q-splitter(v-model="split1" :limits="[25, 100]" :style="hei")
+				template(v-slot:before)
+					.tree
+						q-btn(round color="primary" icon="mdi-plus" size="md").fab1
+						q-input(dense debounce="0" color="primary" v-model="filter" clearable)
+							template(v-slot:prepend)
+								q-icon(name="mdi-magnify")
 
-					template(v-slot:after)
-						p lajksdlajsl
+						q-tree(:nodes="rows"
+							node-key="label"
+							selected-color="primary"
+							v-model:selected="selected"
+							:filter="filter"
+							default-expand-all).cat
+							template(v-slot:header-root="prop")
+								.row.items-center.justify-between
+									div {{prop.node.label}}
+									div ({{cat.catList.length}})
+
+				template(v-slot:after)
+					component(:is="Subcategories")
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useStore } from '@/stores/store'
 import { useCategory } from '@/stores/category'
+import Subcategories from '@/components/Subcategories.vue'
 
 const cat = useCategory()
-const mystore = useStore()
 
-const splitterModel = ref(45)
+const split1 = ref(25)
+const selected = ref('Продажи')
+const filter = ref('')
+
+const rows = computed(() => {
+	let root = [
+		{
+			id: 100,
+			label: 'Все категории',
+			header: 'root',
+			children: cat.categories,
+		},
+	]
+	return root
+})
+const hei = computed(() => {
+	return 'height: ' + (window.innerHeight - 190) + 'px;'
+})
 </script>
 
 <style scoped lang="scss">
-//@import '@/assets/css/colors.scss';
-
-.hei {
-	height: calc(100vh - 190px);
-	.q-splitter__separator {
-		background: red;
-	}
+.tree {
+	margin-right: 0.5rem;
+}
+.fab1 {
+	position: absolute;
+	bottom: 0.5rem;
+	right: 0.5rem;
 }
 </style>

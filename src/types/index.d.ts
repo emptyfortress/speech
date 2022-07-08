@@ -44,6 +44,12 @@ interface Column {
 	headerClasses?: string
 }
 
+interface Podcategory {
+	id: number
+	label: string
+	typ: number
+}
+
 interface RowCategory {
 	id: number
 	label: string
@@ -55,7 +61,8 @@ interface RowCategory {
 	volume?: any
 	selected?: boolean
 	classname?: string
-	children: RowCategory[]
+	children?: RowCategory[]
+	childs?: Podcategory[]
 }
 
 interface RowNotific {

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { randomNumber, randomArray } from '@/utils/utils'
+import { randomNumber, randomArray, getMembers } from '@/utils/utils'
 
 export const useCategory = defineStore({
 	id: 'category',
@@ -16,6 +16,12 @@ export const useCategory = defineStore({
 				interrupt: randomNumber(3, 7, 2),
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
+				childs: [
+					{ id: 301, label: 'fuck', typ: 0 },
+					{ id: 302, label: 'fuck1', typ: 0 },
+					{ id: 303, label: 'fuck2', typ: 0 },
+				],
+				children: [{ id: 200, label: 'Суперпродажи' }],
 			},
 			{
 				id: 1,
@@ -38,6 +44,11 @@ export const useCategory = defineStore({
 				interrupt: randomNumber(3, 7, 2),
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
+				children: [
+					{ id: 202, label: 'Нал' },
+					{ id: 203, label: 'Безнал' },
+					{ id: 204, label: 'Крипта' },
+				],
 			},
 			{
 				id: 3,
@@ -121,6 +132,9 @@ export const useCategory = defineStore({
 	getters: {
 		rowNum() {
 			return this.categories.filter((e) => e.selected).length
+		},
+		catList() {
+			return getMembers(this.categories)
 		},
 	},
 	actions: {

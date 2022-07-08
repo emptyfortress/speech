@@ -154,15 +154,6 @@ span.found {
 .q-splitter--vertical > .q-splitter__separator:active {
 	border-left: 2px dotted black;
 }
-.hei .q-splitter__separator {
-	border: none;
-	background: #ccc;
-}
-.hei .q-splitter__separator:hover,
-.hei .q-splitter__separator:active {
-	border: none;
-	background: $primary;
-}
 .query .q-placeholder::placeholder {
 	opacity: 0.3;
 }
@@ -215,5 +206,15 @@ span.found {
 		position: absolute;
 		top: -1.2rem;
 		right: -1.2rem;
+	}
+}
+
+.cat .q-tree__node--selected {
+	background: $accent1;
+	color: $blue-9;
+	.text-primary {
+		div {
+			color: $blue-9;
+		}
 	}
 }
