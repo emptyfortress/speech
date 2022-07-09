@@ -39,6 +39,7 @@ export const useCategory = defineStore({
 				interrupt: randomNumber(3, 7, 2),
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
+				childs: [],
 			},
 			{
 				id: 2,
@@ -51,10 +52,11 @@ export const useCategory = defineStore({
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
 				children: [
-					{ id: 202, label: 'Нал' },
-					{ id: 203, label: 'Безнал' },
-					{ id: 204, label: 'Крипта' },
+					{ id: 202, label: 'Нал', childs: [] },
+					{ id: 203, label: 'Безнал', childs: [] },
+					{ id: 204, label: 'Крипта', childs: [] },
 				],
+				childs: [],
 			},
 			{
 				id: 3,
@@ -66,6 +68,7 @@ export const useCategory = defineStore({
 				interrupt: randomNumber(3, 7, 2),
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
+				childs: [],
 			},
 			{
 				id: 4,
@@ -77,6 +80,7 @@ export const useCategory = defineStore({
 				interrupt: randomNumber(3, 7, 2),
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
+				childs: [],
 			},
 			{
 				id: 5,
@@ -88,6 +92,7 @@ export const useCategory = defineStore({
 				interrupt: randomNumber(3, 7, 2),
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
+				childs: [],
 			},
 			{
 				id: 6,
@@ -99,6 +104,7 @@ export const useCategory = defineStore({
 				interrupt: randomNumber(3, 7, 2),
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
+				childs: [],
 			},
 			{
 				id: 7,
@@ -110,6 +116,7 @@ export const useCategory = defineStore({
 				interrupt: randomNumber(3, 7, 2),
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
+				childs: [],
 			},
 			{
 				id: 8,
@@ -121,6 +128,7 @@ export const useCategory = defineStore({
 				interrupt: randomNumber(3, 7, 2),
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
+				childs: [],
 			},
 			{
 				id: 9,
@@ -132,6 +140,7 @@ export const useCategory = defineStore({
 				interrupt: randomNumber(3, 7, 2),
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
+				childs: [],
 			},
 		],
 	}),
@@ -160,6 +169,9 @@ export const useCategory = defineStore({
 			this.categories.map((e) => {
 				return (e.selected = false)
 			})
+		},
+		setCategories(payload) {
+			this.categories = payload
 		},
 	},
 })

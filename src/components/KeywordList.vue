@@ -20,7 +20,7 @@ q-list(dense)
 					q-icon(name="mdi-close" size="xs" @click="removeFromVoc(item)").hov
 
 
-	component(:is="draggable" v-model="filteredItems"  itemKey="item.id"  group="subcat")
+	component(:is="draggable" v-model="filteredItems" itemKey="item.id" group="subcat")
 		template(#item="{ element }")
 			q-item(clickable dense)
 				q-item-section
