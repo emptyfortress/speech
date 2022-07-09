@@ -32,12 +32,7 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 			q-tab-panels(v-model="tabs" animated).cool
 				q-tab-panel(name="Voc")
 					q-scroll-area(:style="hei1")
-						component(:is="draggable" class="list-group" :list="test" itemKey="id" :group="{ name: 'subcat', pull: 'clone', put: false }")
-							template(#item="{ element }")
-								.fu
-									q-icon(name="mdi-close")
-									|{{element.label}}
-						//- component(:is="KeywordList")
+						component(:is="KeywordList")
 				q-tab-panel(name="Rec")
 					.row.items-center
 						img(src="@/assets/img/man.svg" v-if="cli").q-mr-md
@@ -52,6 +47,7 @@ import { useCategory } from '@/stores/category'
 import SvgIcon from '@/components/SvgIcon.vue'
 import KeywordList from '@/components/KeywordList.vue'
 import { useQuasar } from 'quasar'
+import { words } from '@/stores/list'
 
 const props = defineProps({
 	selected: {

@@ -20,7 +20,7 @@ q-list(dense)
 					q-icon(name="mdi-close" size="xs" @click="removeFromVoc(item)").hov
 
 
-	component(:is="draggable" v-model="filteredItems" itemKey="item.id" group="subcat")
+	component(:is="draggable" v-model="filteredItems" itemKey="item.id" group="subcat" )
 		template(#item="{ element }")
 			q-item(clickable dense)
 				q-item-section
@@ -188,7 +188,7 @@ const save = () => {
 </script>
 
 <style scoped lang="scss">
-// @import '@/assets/styles/myvariables.scss';
+@import '@/assets/styles/myvariables.scss';
 .rel {
 	position: relative;
 	.plus {
@@ -268,5 +268,17 @@ const save = () => {
 }
 .q-item__section--avatar {
 	padding-right: 0;
+}
+.item {
+}
+
+.sortable-ghost,
+.sortable-drag {
+	background: $bgMain;
+	border: 1px solid $primary;
+	.q-checkbox,
+	.q-icon {
+		visibility: hidden;
+	}
 }
 </style>
