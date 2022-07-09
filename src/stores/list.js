@@ -13,6 +13,13 @@ const words = [
 		score: 4500,
 		voc: true,
 	},
+	{
+		label: 'Жалобы',
+		keys: ['претензия', 'сим-карта', 'система'],
+		selected: false,
+		score: 4500,
+		voc: true,
+	},
 	{ label: 'здравствуйте', key: 'здравствуйте', score: 4000, selected: false, part: 'adv' },
 	{ label: 'добрый вечер', key: 'добрый вечер', score: 3990, selected: false, part: 'adv' },
 	{ label: 'доброе утро', key: 'доброе утро', score: 3995, selected: false, part: 'adv' },

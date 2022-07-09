@@ -6,12 +6,14 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 			q-tab-panels(v-model="selected" animated transition-prev="jump-up" transition-next="jump-up" )
 				template(v-for="item in list" :key="item.id")
 					q-tab-panel(:name="item.label")
-						.list()
+						.list
 							.podzag Подкатегория
 							.podzag Словарь
 						component(:is="draggable" class="list-group" :list="item.childs" group="subcat" itemKey="id")
 							template(#item="{ element }")
-								div {{element.label}}
+								.list.item
+									div {{element.name}} test
+									div {{element.label}}
 							//- template(v-for="podcat in item.childs" :key="podcat.id")
 							//- 	.name Название laksdjlas
 							//- 	.name
@@ -104,7 +106,14 @@ const show = () => {
 }
 .list {
 	display: grid;
-	grid-template-columns: auto 1fr;
+	grid-template-columns: 1fr 1fr;
 	column-gap: 2rem;
+	&.item {
+		padding: 0.5rem 1rem;
+		background: #fff;
+		cursor: pointer;
+	}
+}
+.list-group {
 }
 </style>
