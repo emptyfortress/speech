@@ -9,6 +9,7 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 						.list
 							.podzag Подкатегория
 							.podzag Словарь
+						.empty(v-if="item.childs.length === 0") Раздел не настроен.
 						component(:is="draggable" class="list-group" :list="item.childs" group="subcat" itemKey="id")
 							template(#item="{ element }")
 								.list.item
@@ -122,10 +123,20 @@ const test = [
 		cursor: pointer;
 	}
 }
-.list-group {
+.list-group:empty {
+	padding-bottom: 3rem;
 }
 .fu {
 	padding: 0.5rem 1rem;
 	background: $bgMain;
+}
+.empty {
+	background: $bgMain;
+	padding: 0.5rem 1rem;
+	font-size: 0.9rem;
+	font-style: italic;
+	color: #999;
+	border: 1px solid #ccc;
+	margin-top: 0.5rem;
 }
 </style>
