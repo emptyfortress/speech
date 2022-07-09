@@ -28,6 +28,10 @@ q-page(padding)
 									.row.items-center.justify-between
 										div {{prop.node.label}}
 										div ({{cat.catList.length}})
+								template(v-slot:default-header="prop")
+									.nod
+										|{{prop.node.label}}
+										q-btn(flat round icon="mdi-close" dense size="xs" @click="killNode(prop.node)").del
 
 				template(v-slot:after)
 					component(:is="Subcategories" :selected="selected")
@@ -41,7 +45,7 @@ import Subcategories from '@/components/Subcategories.vue'
 const cat = useCategory()
 
 const split1 = ref(20)
-const selected = ref(cat.categories[0].label)
+const selected = ref(cat.categories[1].label)
 const filter = ref('')
 
 const rows = computed(() => {
@@ -61,6 +65,10 @@ const hei = computed(() => {
 const hei1 = computed(() => {
 	return 'height: ' + (window.innerHeight - 240) + 'px;'
 })
+const killNode = (e: any) => {
+	let index = cat.categories.indexOf(e)
+	cat.categories.splice(index, 1)
+}
 </script>
 
 <style scoped lang="scss">
@@ -71,5 +79,22 @@ const hei1 = computed(() => {
 	position: absolute;
 	bottom: 0.5rem;
 	right: 0.5rem;
+}
+.row {
+	width: 100%;
+}
+.nod {
+	position: relative;
+	width: 100%;
+	.del {
+		position: absolute;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		visibility: hidden;
+	}
+}
+.q-tree__node--selected .del {
+	visibility: visible;
 }
 </style>

@@ -9,16 +9,12 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 						.list
 							.podzag Подкатегория
 							.podzag Словарь
+						//- p(v-if="!item.childs") fuck
 						component(:is="draggable" class="list-group" :list="item.childs" group="subcat" itemKey="id")
 							template(#item="{ element }")
 								.list.item
-									div {{element.name}} test
+									div {{element.name}}
 									div {{element.label}}
-							//- template(v-for="podcat in item.childs" :key="podcat.id")
-							//- 	.name Название laksdjlas
-							//- 	.name
-							//- 		component(:is="SvgIcon" name="vocabulary").small
-							//- 		span {{ podcat.label }}
 
 	template(v-slot:after)
 		.right
