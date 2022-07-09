@@ -45,7 +45,7 @@ import Subcategories from '@/components/Subcategories.vue'
 const cat = useCategory()
 
 const split1 = ref(20)
-const selected = ref(cat.categories[1].label)
+const selected = ref(cat.categories[0].label)
 const filter = ref('')
 
 const rows = computed(() => {

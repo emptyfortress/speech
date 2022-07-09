@@ -17,9 +17,9 @@ export const useCategory = defineStore({
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
 				childs: [
-					{ id: 301, name: '', label: 'fuck', typ: 1 },
-					{ id: 302, name: '', label: 'fuck1', typ: 1 },
-					{ id: 303, name: '', label: 'fuck2', typ: 1 },
+					{ id: 301, name: 'Подкатергория 1', label: 'Приветствие', typ: 1 },
+					{ id: 302, name: 'Подкатергория 2', label: 'Прощание', typ: 1 },
+					{ id: 303, name: 'Подкатегория 3', label: 'Жалобы', typ: 1 },
 				],
 				children: [
 					{

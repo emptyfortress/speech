@@ -12,8 +12,13 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 						component(:is="draggable" class="list-group" :list="item.childs" group="subcat" itemKey="id")
 							template(#item="{ element }")
 								.list.item
-									div {{element.name}}
-									div {{element.label}}
+									div
+										|{{element.name}}
+										q-popup-edit(v-model="element.name" auto-save v-slot="scope")
+											q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
+									div
+										component(:is="SvgIcon" name="vocabulary").small.q-mr-sm
+										|{{element.label}}
 
 	template(v-slot:after)
 		.right
@@ -27,7 +32,12 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 			q-tab-panels(v-model="tabs" animated).cool
 				q-tab-panel(name="Voc")
 					q-scroll-area(:style="hei1")
-						component(:is="KeywordList")
+						component(:is="draggable" class="list-group" :list="test" itemKey="id" :group="{ name: 'subcat', pull: 'clone', put: false }")
+							template(#item="{ element }")
+								.fu
+									q-icon(name="mdi-close")
+									|{{element.label}}
+						//- component(:is="KeywordList")
 				q-tab-panel(name="Rec")
 					.row.items-center
 						img(src="@/assets/img/man.svg" v-if="cli").q-mr-md
@@ -70,6 +80,13 @@ const show = () => {
 	})
 	cli.value = !cli.value
 }
+
+const test = [
+	{ id: 0, label: 'one', name: 'one' },
+	{ id: 1, label: 'one', name: 'one' },
+	{ id: 2, label: 'one', name: 'one' },
+	{ id: 3, label: 'one', name: 'one' },
+]
 </script>
 
 <style scoped lang="scss">
@@ -110,5 +127,9 @@ const show = () => {
 	}
 }
 .list-group {
+}
+.fu {
+	padding: 0.5rem 1rem;
+	background: $bgMain;
 }
 </style>

@@ -224,8 +224,14 @@ span.found {
 	font-size: 13px;
 }
 
-// .sortable-chosen,
-// .sortable-drag {
-// 	background: white;
-// 	opacity: 1 !important;
-// }
+.sortable-drag {
+	border: 1px solid #ccc;
+	.q-icon {
+		display: none;
+	}
+}
+.sortable-chosen {
+	.q-icon {
+		display: none;
+	}
+}
