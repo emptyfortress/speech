@@ -40,6 +40,7 @@ export const useCategory = defineStore({
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
 				childs: [],
+				children: [],
 			},
 			{
 				id: 2,
@@ -69,6 +70,7 @@ export const useCategory = defineStore({
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
 				childs: [],
+				children: [],
 			},
 			{
 				id: 4,
@@ -81,6 +83,7 @@ export const useCategory = defineStore({
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
 				childs: [],
+				children: [],
 			},
 			{
 				id: 5,
@@ -93,6 +96,7 @@ export const useCategory = defineStore({
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
 				childs: [],
+				children: [],
 			},
 			{
 				id: 6,
@@ -105,6 +109,7 @@ export const useCategory = defineStore({
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
 				childs: [],
+				children: [],
 			},
 			{
 				id: 7,
@@ -117,6 +122,7 @@ export const useCategory = defineStore({
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
 				childs: [],
+				children: [],
 			},
 			{
 				id: 8,
@@ -129,6 +135,7 @@ export const useCategory = defineStore({
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
 				childs: [],
+				children: [],
 			},
 			{
 				id: 9,
@@ -141,6 +148,7 @@ export const useCategory = defineStore({
 				spark: [{ data: randomArray(7, 30, 80) }],
 				donut: randomArray(4, 20, 5),
 				childs: [],
+				children: [],
 			},
 		],
 	}),
@@ -172,6 +180,19 @@ export const useCategory = defineStore({
 		},
 		setCategories(payload) {
 			this.categories = payload
+		},
+		addCategory(payload, node) {
+			if (node === 'Все категории') {
+				this.categories.push({ id: this.categories.length, label: payload, childs: [] })
+			} else {
+				const temp = this.categories.find((e) => e.label === node)
+				const index = this.categories.indexOf(temp)
+				this.categories[index].children.push({
+					id: this.categories.length,
+					label: payload,
+					childs: [],
+				})
+			}
 		},
 	},
 })

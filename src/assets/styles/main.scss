@@ -149,6 +149,10 @@ span.found {
 	width: 2px;
 	background: transparent;
 }
+.spli .q-splitter__separator {
+	width: 2px;
+	background: #e0e2d9;
+}
 
 .q-splitter--vertical > .q-splitter__separator:hover,
 .q-splitter--vertical > .q-splitter__separator:active {
