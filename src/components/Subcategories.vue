@@ -2,19 +2,10 @@
 q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 	template(v-slot:before)
 		.related
-			//- #fuck
 			.text-h6 {{props.selected}}
 			q-tab-panels(v-model="selected" animated transition-prev="jump-up" transition-next="jump-up" )
 				template(v-for="(item, index) in list" :key="item.id")
 					q-tab-panel(:name="item.label")
-						//- Teleport(to="#fuck")
-						//- 	q-btn(v-morph:btn1:categ:200.resize="morphGroupModel1" @click="nextMorph1" round color="primary" icon="mdi-plus" size="md").fab1
-						//- 	q-card(v-morph:card2:categ:200.resize="morphGroupModel1").ccc
-						//- 		.text-subtitile1 Новая подкатегория
-						//- 		q-input(v-model="newsubcat" dense outlined bg-color="white" autofocus)
-						//- 		.row.justify-between.q-mt-sm
-						//- 			q-btn(flat label="Отмена" @click="nextMorph1")
-						//- 			q-btn(flat label="ОК" @click="nextMorph1(index)")
 						component(:is="draggable" class="list-group" :list="item.childs" group="subcat" itemKey="id")
 							template(#header)
 								div
@@ -32,6 +23,14 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 										component(:is="SvgIcon" name="vocabulary").small.q-mr-sm
 										|{{element.label}}
 									q-icon(name="mdi-close" size="xs" @click="killCat(index, element)").del
+
+			q-btn(v-morph:btn1:categ:200.resize="morphGroupModel1" @click="nextMorph1" round color="primary" icon="mdi-plus" size="md").fab1
+			q-card(v-morph:card2:categ:200.resize="morphGroupModel1").ccc
+				.text-subtitile1 Новая подкатегория
+				q-input(v-model="newsubcat" dense outlined bg-color="white" autofocus)
+				.row.justify-between.q-mt-sm
+					q-btn(flat label="Отмена" @click="nextMorph1")
+					q-btn(flat label="ОК" @click="nextMorph1")
 
 	template(v-slot:after)
 		.right
@@ -61,6 +60,7 @@ import SvgIcon from '@/components/SvgIcon.vue'
 import KeywordList from '@/components/KeywordList.vue'
 import { useQuasar } from 'quasar'
 import { getMembers } from '@/utils/utils'
+import Tele from '@/components/Tele.vue'
 
 const props = defineProps({
 	selected: {
@@ -125,18 +125,19 @@ const nextMorphStep1: any = {
 }
 
 const newsubcat = ref('')
-const nextMorph1 = (ind: number) => {
-	//- if (newsubcat.value.length > 2) {
-	//- 	list.value[ind].childs!.push(newsubcat.value)
-		//- console.log(selected.value)
+const nextMorph1 = () => {
+	if (newsubcat.value.length > 2) {
+		let current = list.value.find((e) => e.label === props.selected)
+		let newitem = {
+			id: list.value.length,
+			name: newsubcat.value,
+			label: '',
+			typ: 1,
+		}
+		current?.childs?.push(newitem)
+		newsubcat.value = ''
 	}
 
-	// if (newcat.value.length > 2) {
-	// 	cat.addCategory(newcat.value, selected.value)
-	// 	expanded.value.push(selected.value)
-	// 	selected.value = newcat.value
-	// 	newcat.value = ''
-	// }
 	morphGroupModel1.value = nextMorphStep1[morphGroupModel1.value]
 }
 </script>
