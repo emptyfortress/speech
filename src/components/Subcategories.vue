@@ -60,7 +60,6 @@ import SvgIcon from '@/components/SvgIcon.vue'
 import KeywordList from '@/components/KeywordList.vue'
 import { useQuasar } from 'quasar'
 import { getMembers } from '@/utils/utils'
-import Tele from '@/components/Tele.vue'
 
 const props = defineProps({
 	selected: {
