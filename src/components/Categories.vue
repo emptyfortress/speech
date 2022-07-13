@@ -5,9 +5,7 @@ q-page(padding)
 			q-item-section(avatar).line
 				q-avatar(icon="mdi-lan" flat)
 			q-item-section
-				.zag
-					|Категории
-					q-badge(color="orange" class="q-ml-sm") New!
+				.zag Категории
 		q-card-section
 			q-splitter(v-model="split1" :limits="[20, 50]" :style="hei").spli
 				template(v-slot:before)

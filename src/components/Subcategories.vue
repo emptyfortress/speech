@@ -40,7 +40,7 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 					|Словари
 				q-tab(name="Rec" icon="mdi-toy-brick-search-outline")
 					span.q-mx-sm Запросы
-					q-badge(color="orange" label="Скоро!")
+					q-badge(color="orange" label="New!")
 			q-tab-panels(v-model="tabs" animated).cool
 				q-tab-panel(name="Voc")
 					q-scroll-area(:style="hei1")
