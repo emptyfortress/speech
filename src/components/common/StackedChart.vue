@@ -1,71 +1,89 @@
 <template lang="pug">
-VueApexCharts(type="bar" height="270" :options="options" :series="series")
+q-card(:class="{'full' : isFullscreen}")
+	.top
+		.hd Операторы
+		div(v-if="!isFullscreen")
+			label(@click="tabl = false") Граф
+			q-toggle(v-model="tabl" dense size="xs")
+			label(@click="tabl = true") Таблица
+		q-btn(flat round dense :icon="isFullscreen ? 'fullscreen_exit' : 'fullscreen'" @click="togg")
+	transition(name="slide-bottom" v-if="!isFullscreen")
+		component(:is="VueApexCharts" type="bar" height="235" :options="options" :series="series" v-if="tabl === false").graph
+		q-table(:columns="columns" v-else
+			dense
+			:rows="bigData"
+			row-key="name"
+			binary-state-sort
+			:filter="filter"
+			:pagination="pagination"
+			).table.thinhd.q-mt-md.full-width
+	.grid(v-else)
+		q-table(:columns="columns"
+			:rows="bigData"
+			row-key="name"
+			binary-state-sort
+			:filter="filter"
+			:pagination="pagination1"
+			).table.full-width
+		component(:is="VueApexCharts" type="bar" height="773px" :options="options1" :series="bigSeries")
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
+import { options, options1, series, bigSeries, bigData, columns } from '@/stores/operoptions'
 
-const series = [
-	{
-		name: 'AHT',
-		data: [44, 55, 41, 43, 37, 21, 22],
-	},
-	{
-		name: 'Тишина',
-		data: [53, 32, 52, 43, 33, 32, 13],
-	},
-	{
-		name: 'Перебивания',
-		data: [12, 17, 9, 11, 11, 20, 15],
-	},
-]
-
-const options = {
-	chart: {
-		type: 'bar',
-		height: 270,
-		stacked: true,
-	},
-	plotOptions: {
-		bar: {
-			horizontal: true,
-		},
-	},
-	stroke: {
-		width: 1,
-		colors: ['#fff'],
-	},
-	title: {
-		text: 'Операторы',
-	},
-	xaxis: {
-		categories: [
-			'Орлов П.',
-			'Воробьева К.',
-			'Синичкина Т.',
-			'Гусев И.',
-			'Соколова П.',
-			'Воронов А.',
-			'Сорокина М.',
-		],
-	},
-	yaxis: {
-		title: {
-			text: undefined,
-		},
-	},
-	fill: {
-		opacity: 1,
-	},
-	legend: {
-		position: 'bottom',
-		horizontalAlign: 'center',
-		// offsetX: 60,
-	},
-	colors: ['#29A1F9', '#FDB948', '#C72829'],
+const filter = ref('')
+const isFullscreen = ref(false)
+const tabl = ref(false)
+const togg = () => {
+	isFullscreen.value = !isFullscreen.value
 }
+const pagination = ref({
+	page: 1,
+	rowsPerPage: 6,
+})
+const pagination1 = ref({
+	page: 1,
+	rowsPerPage: 15,
+})
 </script>
 
 <style scoped lang="scss">
 //@import '@/assets/css/colors.scss';
+.top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.hd {
+	font-size: 0.93rem;
+	font-weight: bold;
+	margin-left: 0.5rem;
+}
+.graph {
+	width: 100%;
+}
+label {
+	font-size: 0.8rem;
+	margin: 0 0.5rem;
+	cursor: pointer;
+}
+.full {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 6000;
+	padding: 1.5rem;
+	.table {
+		box-shadow: none;
+	}
+}
+.grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1rem;
+}
 </style>
