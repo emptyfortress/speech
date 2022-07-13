@@ -12,7 +12,7 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 									.list
 										.podzag Подкатегория
 										.podzag Словарь
-									.empty(v-if="item.childs.length === 0") Раздел не настроен.
+									.empty(v-if="item.childs?.length === 0") Раздел не настроен.
 							template(#item="{ element }")
 								.list.item
 									div
