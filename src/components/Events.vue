@@ -17,7 +17,7 @@
 		component(:is="CategoryTable")
 
 	q-card
-		component(:is="VueApexCharts" height="100%" type="bar" :options="coolOptions" :series="coolSeries")
+		component(:is="VueApexCharts" type="bar" height="102%" :options="coolOptions" :series="coolSeries")
 
 </template>
 

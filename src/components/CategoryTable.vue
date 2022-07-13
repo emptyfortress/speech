@@ -183,6 +183,7 @@ const sparkDonut = {
 }
 .table th {
 	font-weight: normal;
+	height: 55px;
 }
 .table tr {
 	cursor: pointer;
