@@ -146,7 +146,7 @@ const bigData = [
 	{ id: 34, name: 'Антонина ', total: 249, ant: 12, loud: 30, interrupt: 70 },
 ]
 
-const columns = [
+const columns: Column[] = [
 	{
 		name: 'name',
 		required: true,
