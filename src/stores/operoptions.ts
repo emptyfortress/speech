@@ -86,11 +86,11 @@ const options1 = {
 			'Сабина',
 			'Антонина',
 		],
-		labels: {
-			show: false,
-			minHeight: 0,
-			maxHeight: 0,
-		},
+		// labels: {
+		// 	show: false,
+		// 	minHeight: 0,
+		// 	maxHeight: 0,
+		// },
 	},
 	yaxis: {
 		show: false,
@@ -207,15 +207,15 @@ const series = [
 const bigSeries = [
 	{
 		name: 'AHT',
-		data: randomArray(15, 40, 80),
+		data: randomArray(35, 40, 80),
 	},
 	{
 		name: 'Тишина',
-		data: randomArray(15, 60, 85),
+		data: randomArray(35, 60, 85),
 	},
 	{
 		name: 'Перебивания',
-		data: randomArray(15, 20, 40),
+		data: randomArray(35, 20, 40),
 	},
 ]
 

@@ -26,11 +26,12 @@ q-card(:class="{'full' : isFullscreen}")
 			:filter="filter"
 			:pagination="pagination1"
 			).table.full-width
-		component(:is="VueApexCharts" type="bar" height="773px" :options="options1" :series="bigSeries")
+		.div
+			component(:is="VueApexCharts" type="bar" :height="hei" :options="options1" :series="bigSeries")
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 import { options, options1, series, bigSeries, bigData, columns } from '@/stores/operoptions'
 
@@ -46,7 +47,10 @@ const pagination = ref({
 })
 const pagination1 = ref({
 	page: 1,
-	rowsPerPage: 15,
+	rowsPerPage: 0,
+})
+const hei = computed(() => {
+	return 50 * 35 + 22
 })
 </script>
 
@@ -78,6 +82,7 @@ label {
 	right: 0;
 	z-index: 6000;
 	padding: 1.5rem;
+	overflow: auto;
 	.table {
 		box-shadow: none;
 	}
@@ -86,5 +91,8 @@ label {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 1rem;
+}
+.div {
+	margin-top: -1px;
 }
 </style>
