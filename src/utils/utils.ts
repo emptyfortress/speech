@@ -1,4 +1,4 @@
-// import type { Ref } from 'vue'
+import { uid } from 'quasar'
 
 export interface MyColumns {
 	name: string
@@ -69,4 +69,21 @@ function deleteNodeFromTree(node: Category, nodeId: string) {
 	}
 }
 
-export { randomArray, randomNumber, getMembers, getNodeFromTree, deleteNodeFromTree }
+function insertNodeIntoTree(node: Category, nodeId: string, newNode: Category) {
+	if (node.id == nodeId) {
+		node.children?.push(newNode)
+	} else if (node.children != null) {
+		for (let i = 0; i < node.children.length; i++) {
+			insertNodeIntoTree(node.children[i], nodeId, newNode)
+		}
+	}
+}
+
+export {
+	randomArray,
+	randomNumber,
+	getMembers,
+	getNodeFromTree,
+	deleteNodeFromTree,
+	insertNodeIntoTree,
+}

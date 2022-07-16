@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { deleteNodeFromTree } from '@/utils/utils'
+import { deleteNodeFromTree, insertNodeIntoTree } from '@/utils/utils'
 
 export const useCat = defineStore({
 	id: 'cat',
@@ -24,11 +24,13 @@ export const useCat = defineStore({
 								id: '100',
 								label: 'Холодные',
 								childs: [{ id: '401', name: '', label: 'test', typ: 0 }],
+								children: [],
 							},
 							{
 								id: '101',
 								label: 'Наводки',
 								childs: [{ id: '402', name: '', label: 'test', typ: 0 }],
+								children: [],
 							},
 						],
 					},
@@ -36,51 +38,59 @@ export const useCat = defineStore({
 						id: '2',
 						label: 'Сервис',
 						childs: [],
+						children: [],
 					},
 					{
 						id: '3',
 						label: 'Оплата',
 						childs: [],
 						children: [
-							{ id: '202', label: 'Нал', childs: [] },
-							{ id: '203', label: 'Безнал', childs: [] },
-							{ id: '204', label: 'Крипта', childs: [] },
+							{ id: '202', label: 'Нал', childs: [], children: [] },
+							{ id: '203', label: 'Безнал', childs: [], children: [] },
+							{ id: '204', label: 'Крипта', childs: [], children: [] },
 						],
 					},
 					{
 						id: '4',
 						label: 'Жалобы',
 						childs: [],
+						children: [],
 					},
 					{
 						id: '5',
 						label: 'Неисправности',
 						childs: [],
+						children: [],
 					},
 					{
 						id: '6',
 						label: 'Услуги',
 						childs: [],
+						children: [],
 					},
 					{
 						id: '7',
 						label: 'Работа',
 						childs: [],
+						children: [],
 					},
 					{
 						id: '8',
 						label: 'Регионы',
 						childs: [],
+						children: [],
 					},
 					{
 						id: '9',
 						label: 'Грубость',
 						childs: [],
+						children: [],
 					},
 					{
 						id: '10',
 						label: 'Остальное',
 						childs: [],
+						children: [],
 					},
 				],
 			},
@@ -90,6 +100,10 @@ export const useCat = defineStore({
 	actions: {
 		killNode(id) {
 			deleteNodeFromTree(this.cat[0], id)
+		},
+		addCategory(newItem, id) {
+			console.log(id)
+			insertNodeIntoTree(this.cat[0], id, newItem)
 		},
 	},
 })

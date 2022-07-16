@@ -19,7 +19,7 @@ q-page(padding)
 								node-key="id"
 								selected-color="primary"
 								v-model:selected="selected"
-								default-expand-all
+								v-model:expanded="expanded"
 								:filter="filter").cat
 								template(v-slot:default-header="prop")
 									.nod()
@@ -45,6 +45,7 @@ import { useCat } from '@/stores/category1'
 import { getNodeFromTree } from '@/utils/utils'
 import Subcategories from '@/components/Subcategories.vue'
 import { useQuasar } from 'quasar'
+import type { Ref } from 'vue'
 
 const cat = useCat()
 const $q = useQuasar()
@@ -71,18 +72,19 @@ const hei1 = computed(() => {
 	return 'height: ' + (window.innerHeight - 240) + 'px;'
 })
 
-const add = (e: any) => {
+const expanded: Ref<string[]> = ref(['0', '1', '3'])
+const add = (e: Category) => {
 	let temp = {
 		id: uid(),
-		label: 'New',
-		selected: true,
-		childs: [],
+		label: 'Название',
 		children: [],
+		childs: [],
 	}
-	// console.log(e)
-	// console.log(temp)
-	// cat.addCategory(temp, e)
+	cat.addCategory(temp, e.id)
+	selected.value = temp.id
+	expanded.value.push(e.id)
 }
+
 const show = (e: Category) => {
 	let message = e.label + ' - удалено.'
 	$q.notify({
@@ -105,14 +107,12 @@ const killNode = (e: Category) => {
 
 const editMode = ref(false)
 
-const node = ref([])
-
-// const el = ref<HTMLDivElement>()
+const node: Ref<any[]> = ref([])
 
 const editNode = async (e: Category) => {
 	editMode.value = true
 	await nextTick(() => {
-		node.value[e.id].show()
+		node.value[e.id as any].show()
 	})
 }
 
