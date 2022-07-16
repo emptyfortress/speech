@@ -24,7 +24,7 @@ q-page(padding)
 								template(v-slot:default-header="prop")
 									.nod()
 										|{{prop.node.label}}
-										q-popup-edit(v-model="prop.node.label" auto-save v-slot="scope" v-if="editMode" :ref="el => { node[prop.node.id] = el }" @hide="editMode = false")
+										q-popup-edit(v-model="prop.node.label" auto-save v-slot="scope" v-if="editMode" :ref="(el: any) => {node[prop.node.id] = el}" @hide="editMode = false")
 											q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
 
 										q-menu(context-menu auto-close)
@@ -106,6 +106,8 @@ const killNode = (e: Category) => {
 const editMode = ref(false)
 
 const node = ref([])
+
+// const el = ref<HTMLDivElement>()
 
 const editNode = async (e: Category) => {
 	editMode.value = true

@@ -16,7 +16,7 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 							.list
 								.podzag Подкатегория
 								.podzag Словарь
-							.empty(v-if="props.selectedItem.childs.length === 0") Раздел не настроен.
+							.empty(v-if="props.selectedItem.childs?.length === 0") Раздел не настроен.
 					template(#item="{ element }")
 						.list.item
 							div
@@ -26,7 +26,7 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 							div
 								component(:is="SvgIcon" name="vocabulary").small.q-mr-sm
 								|{{element.label}}
-							q-icon(name="mdi-close" size="xs" @click="killCat(index, element)").del
+							q-icon(name="mdi-close" size="xs").del
 
 			//- q-btn(v-morph:btn1:categ:200.resize="morphGroupModel1" @click="nextMorph1" round color="primary" icon="mdi-plus" size="md").fab1
 			//- q-card(v-morph:card2:categ:200.resize="morphGroupModel1").ccc
