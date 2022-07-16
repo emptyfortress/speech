@@ -24,8 +24,7 @@
 						.zg {{item.label}}
 						.desc(v-html="item.comment")
 						.desc.q-mt-md Создано: 23.10.2022 Автор: Иванов П.С.
-			.ellipsis
-				|{{ item.label}}
+			WordHighlighter(:query="filter").ellipsis {{ item.label }}
 			q-tooltip(v-if="props.tooltip" anchor="top middle" self="bottom middle" :delay="800") {{ item.label}}
 </template>
 
@@ -33,6 +32,7 @@
 import { ref, computed, reactive } from 'vue'
 import { useStore } from '@/stores/store'
 import { useQuasar } from 'quasar'
+import WordHighlighter from 'vue-word-highlighter'
 
 const props = defineProps<{
 	chips: Chip[]

@@ -17,13 +17,14 @@ q-page(padding)
 						q-scroll-area(:style="hei1")
 							q-tree(:nodes="cat.cat"
 								node-key="id"
+								no-results-label="Ничего нет"
 								selected-color="primary"
 								v-model:selected="selected"
 								v-model:expanded="expanded"
 								:filter="filter").cat
 								template(v-slot:default-header="prop")
-									.nod()
-										|{{prop.node.label}}
+									.nod
+										WordHighlighter(:query="filter") {{prop.node.label}}
 										q-popup-edit(v-model="prop.node.label" auto-save v-slot="scope" v-if="editMode" :ref="(el: any) => {node[prop.node.id] = el}" @hide="editMode = false")
 											q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
 
@@ -46,6 +47,7 @@ import { getNodeFromTree } from '@/utils/utils'
 import Subcategories from '@/components/Subcategories.vue'
 import { useQuasar } from 'quasar'
 import type { Ref } from 'vue'
+import WordHighlighter from 'vue-word-highlighter'
 
 const cat = useCat()
 const $q = useQuasar()
