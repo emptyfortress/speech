@@ -56,4 +56,17 @@ function getNodeFromTree(node: Category, nodeId: any): Category | null {
 	return null
 }
 
-export { randomArray, randomNumber, getMembers, getNodeFromTree }
+function deleteNodeFromTree(node: Category, nodeId: string) {
+	if (node.children != null) {
+		for (let i = 0; i < node.children.length; i++) {
+			let filtered = node.children.filter((f) => f.id == nodeId)
+			if (filtered && filtered.length > 0) {
+				node.children = node.children.filter((f) => f.id != nodeId)
+				return
+			}
+			deleteNodeFromTree(node.children[i], nodeId)
+		}
+	}
+}
+
+export { randomArray, randomNumber, getMembers, getNodeFromTree, deleteNodeFromTree }

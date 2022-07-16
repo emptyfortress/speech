@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { deleteNodeFromTree } from '@/utils/utils'
 
 export const useCat = defineStore({
 	id: 'cat',
@@ -79,6 +80,7 @@ export const useCat = defineStore({
 					{
 						id: '10',
 						label: 'Остальное',
+						childs: [],
 					},
 				],
 			},
@@ -86,6 +88,8 @@ export const useCat = defineStore({
 	}),
 	getters: {},
 	actions: {
-		addCategory(payload, node) {},
+		killNode(id) {
+			deleteNodeFromTree(this.cat[0], id)
+		},
 	},
 })

@@ -25,7 +25,7 @@ q-page(padding)
 									.nod {{prop.node.label}}
 										q-menu(context-menu auto-close)
 											q-list.ctx
-												q-item(clickable v-close-popup v-for="item in menu" :key="item.id" @click="item.action && item.action(prop.node)")
+												q-item(clickable v-close-popup v-for="item in menu" :key="item.id" @click="item.action && item.action(prop.node)" :class="item.className")
 													q-item-section(avatar)
 														q-icon(:name="item.icon")
 													q-item-section {{ item.label }}
@@ -39,11 +39,11 @@ import { ref, computed } from 'vue'
 import { uid } from 'quasar'
 import { useCat } from '@/stores/category1'
 import { getNodeFromTree } from '@/utils/utils'
-
-// import { useCategory } from '@/stores/category'
 import Subcategories from '@/components/Subcategories.vue'
+import { useQuasar } from 'quasar'
 
 const cat = useCat()
+const $q = useQuasar()
 
 const split1 = ref(20)
 const selected = ref(cat.cat[0].id)
@@ -75,19 +75,28 @@ const add = (e: any) => {
 		childs: [],
 		children: [],
 	}
-	console.log(e)
-	console.log(temp)
+	// console.log(e)
+	// console.log(temp)
 	// cat.addCategory(temp, e)
 }
+const show = (e: Category) => {
+	let message = e.label + ' - удалено.'
+	$q.notify({
+		message: message,
+		color: 'negative',
+		actions: [
+			{
+				label: 'Вернуть',
+				color: 'white',
+				handler: () => undo(e),
+			},
+		],
+	})
+}
 
-const addRoot = () => {
-	// let temp: any = {
-	// 	id: 700,
-	// 	label: 'Fuck',
-	// 	selected: true,
-	// }
-	// rows.value[0].children.push(temp)
-	// selected.value = 'Fuck'
+const killNode = (e: Category) => {
+	cat.killNode(e.id)
+	show(e)
 }
 
 const menu = [
@@ -101,23 +110,15 @@ const menu = [
 	{ id: 4, label: 'Редактировать', icon: 'mdi-pencil', className: '' },
 	{ id: 1, label: 'Копировать', icon: 'mdi-content-copy', className: '' },
 	{ id: 2, label: 'Вставить', icon: 'mdi-content-paste', className: '' },
-	{ id: 3, label: 'Удалить', icon: 'mdi-trash-can-outline', className: '' },
+	{ id: 3, label: 'Удалить', action: killNode, icon: 'mdi-trash-can-outline', className: 'top' },
 ]
 
-// const killNode = (e: any) => {
-// 	let index = cat.categories.indexOf(e)
-// 	cat.categories.splice(index, 1)
-// }
-
 // const newcat = ref('')
-const expanded = ref(['Все категории', 'Продажи', 'Оплата'])
 </script>
 
 <style scoped lang="scss">
 .tree {
 	margin-right: 1rem;
-	// background: pink;
-	// position: relative;
 }
 .ccc {
 	position: absolute;
@@ -144,5 +145,12 @@ const expanded = ref(['Все категории', 'Продажи', 'Оплат
 }
 .ctx {
 	min-width: 200px;
+}
+.nod {
+	width: 100%;
+}
+.top {
+	border-top: 1px solid #cdcdcd;
+	color: darkred;
 }
 </style>
