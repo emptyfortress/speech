@@ -1,3 +1,5 @@
+// import type { Ref } from 'vue'
+
 export interface MyColumns {
 	name: string
 	label: string
@@ -41,4 +43,17 @@ const getMembers = (members: RowCategory[]): RowCategory[] => {
 		.concat(children.length ? getMembers(children) : children)
 }
 
-export { randomArray, randomNumber, getMembers }
+function getNodeFromTree(node: Category, nodeId: any): Category | null {
+	if (node.id == nodeId) {
+		return node
+	} else if (node.children != null) {
+		var result = null
+		for (let i = 0; result == null && i < node.children.length; i++) {
+			result = getNodeFromTree(node.children[i], nodeId)
+		}
+		return result
+	}
+	return null
+}
+
+export { randomArray, randomNumber, getMembers, getNodeFromTree }

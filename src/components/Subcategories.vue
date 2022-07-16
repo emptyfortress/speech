@@ -2,29 +2,32 @@
 q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 	template(v-slot:before)
 		.related
-			.text-h6 {{props.selected}}
-			q-tab-panels(v-model="selected" animated transition-prev="jump-up" transition-next="jump-up" )
-				template(v-for="(item, index) in list" :key="item.id")
-					q-tab-panel(:name="item.label")
-						component(:is="draggable" class="list-group" :list="item.childs" group="subcat" itemKey="id")
-							template(#header)
-								div
-									.list
-										.podzag Подкатегория
-										.podzag Словарь
-									.empty(v-if="item.childs?.length === 0") Раздел не настроен.
-							template(#item="{ element }")
-								.list.item
-									div
-										|{{element.name}}
-										q-popup-edit(v-model="element.name" auto-save v-slot="scope").border-primary
-											q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
-									div
-										component(:is="SvgIcon" name="vocabulary").small.q-mr-sm
-										|{{element.label}}
-									q-icon(name="mdi-close" size="xs" @click="killCat(index, element)").del
+			.text-h6 {{props.selectedItem.label}}
+			q-list
+				q-item(v-for="item in props.selectedItem.children" :key="item.id")
+					q-item-section {{ item.label }}
+			q-tab-panels(v-model="selectedItem" animated transition-prev="jump-up" transition-next="jump-up" )
+				//- template(v-for="(item, index) in list" :key="item.id")
+				//- 	q-tab-panel(:name="item.label")
+				//- 		component(:is="draggable" class="list-group" :list="item.childs" group="subcat" itemKey="id")
+				//- 			template(#header)
+				//- 				div
+				//- 					.list
+				//- 						.podzag Подкатегория
+				//- 						.podzag Словарь
+				//- 					.empty(v-if="item.childs?.length === 0") Раздел не настроен.
+				//- 			template(#item="{ element }")
+				//- 				.list.item
+				//- 					div
+				//- 						|{{element.name}}
+				//- 						q-popup-edit(v-model="element.name" auto-save v-slot="scope").border-primary
+				//- 							q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
+				//- 					div
+				//- 						component(:is="SvgIcon" name="vocabulary").small.q-mr-sm
+				//- 						|{{element.label}}
+				//- 					q-icon(name="mdi-close" size="xs" @click="killCat(index, element)").del
 
-			q-btn(v-morph:btn1:categ:200.resize="morphGroupModel1" @click="nextMorph1" round color="primary" icon="mdi-plus" size="md").fab1
+			//- q-btn(v-morph:btn1:categ:200.resize="morphGroupModel1" @click="nextMorph1" round color="primary" icon="mdi-plus" size="md").fab1
 			q-card(v-morph:card2:categ:200.resize="morphGroupModel1").ccc
 				.text-subtitile1 Новая подкатегория
 				q-input(v-model="newsubcat" dense outlined bg-color="white" autofocus)
@@ -59,24 +62,26 @@ import { useCat } from '@/stores/category1'
 import SvgIcon from '@/components/SvgIcon.vue'
 import KeywordList from '@/components/KeywordList.vue'
 import { useQuasar } from 'quasar'
-import { getMembers } from '@/utils/utils'
+// import { getMembers } from '@/utils/utils'
 
-const props = defineProps({
-	selected: {
-		type: String,
-		default: 'Категория',
-	},
-})
+const props = defineProps<{
+	selectedItem: Category
+}>()
 
 const cat = useCat()
 const $q = useQuasar()
 const split2 = ref(60)
 
-const list = computed(() => {
-	return getMembers(cat.categories)
-})
+// const list = computed(() => {
+// 	return getMembers(cat.categories)
+// })
 
 // const list = cat.catList
+
+// const children = computed( () => {
+// 	let selected =
+// 	return c
+// })
 
 const tabs = ref('Voc')
 const cli = ref(true)
@@ -204,9 +209,9 @@ const nextMorph1 = () => {
 	margin-top: 0.5rem;
 }
 .related {
-	position: relative;
+	// position: relative;
 	margin: 0 0.5rem;
-	height: 100%;
+	// height: 100%;
 }
 .fab1 {
 	position: absolute;

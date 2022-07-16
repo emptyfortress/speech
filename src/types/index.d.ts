@@ -45,9 +45,10 @@ interface Column {
 }
 
 interface Podcategory {
-	id: number
+	id: string
 	label: string
 	typ: number
+	name?: string
 }
 
 interface RowCategory {
@@ -68,15 +69,9 @@ interface RowCategory {
 }
 
 interface Category {
-	id: number
+	id: string
 	label: string
-	selected: boolean
-	call?: number
-	ant?: string
-	loud?: string
-	interrupt?: string
-	spark?: Array
-	donut?: number[]
+	header?: string
 	childs?: Podcategory[]
 	children?: Category[]
 }

@@ -15,11 +15,11 @@ q-page(padding)
 								q-icon(name="mdi-magnify")
 
 						q-scroll-area(:style="hei1")
-							q-tree(:nodes="cat.categories"
-								node-key="label"
+							q-tree(:nodes="cat.cat"
+								node-key="id"
 								selected-color="primary"
 								v-model:selected="selected"
-								v-model:expanded="expanded"
+								default-expand-all
 								:filter="filter").cat
 								template(v-slot:default-header="prop")
 									.nod {{prop.node.label}}
@@ -31,13 +31,14 @@ q-page(padding)
 													q-item-section {{ item.label }}
 
 				template(v-slot:after)
-					component(:is="Subcategories" :selected="selected")
+					component(:is="Subcategories" :selectedItem="selectedItem")
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { uid } from 'quasar'
 import { useCat } from '@/stores/category1'
+import { getNodeFromTree } from '@/utils/utils'
 
 // import { useCategory } from '@/stores/category'
 import Subcategories from '@/components/Subcategories.vue'
@@ -45,7 +46,13 @@ import Subcategories from '@/components/Subcategories.vue'
 const cat = useCat()
 
 const split1 = ref(20)
-const selected = ref(cat.categories[0].label)
+const selected = ref(cat.cat[0].id)
+
+const selectedItem = computed(() => {
+	let node = cat.cat[0]
+	return getNodeFromTree(node, selected.value)
+})
+
 const filter = ref('')
 
 // const rows = computed(() => {
@@ -105,12 +112,12 @@ const menu = [
 	{ id: 3, label: 'Удалить', icon: 'mdi-trash-can-outline', className: '' },
 ]
 
-const killNode = (e: any) => {
-	let index = cat.categories.indexOf(e)
-	cat.categories.splice(index, 1)
-}
+// const killNode = (e: any) => {
+// 	let index = cat.categories.indexOf(e)
+// 	cat.categories.splice(index, 1)
+// }
 
-const newcat = ref('')
+// const newcat = ref('')
 const expanded = ref(['Все категории', 'Продажи', 'Оплата'])
 </script>
 
