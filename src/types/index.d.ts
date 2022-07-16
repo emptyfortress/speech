@@ -59,10 +59,26 @@ interface RowCategory {
 	interrupt?: string
 	dynamics?: any
 	volume?: any
+	donut?: number[]
+	spark?: Array
 	selected?: boolean
 	classname?: string
 	children?: RowCategory[]
 	childs?: Podcategory[]
+}
+
+interface Category {
+	id: number
+	label: string
+	selected: boolean
+	call?: number
+	ant?: string
+	loud?: string
+	interrupt?: string
+	spark?: Array
+	donut?: number[]
+	childs?: Podcategory[]
+	children?: Category[]
 }
 
 interface RowNotific {

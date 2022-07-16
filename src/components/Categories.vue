@@ -10,33 +10,25 @@ q-page(padding)
 			q-splitter(v-model="split1" :limits="[20, 50]" :style="hei").spli
 				template(v-slot:before)
 					.tree
-						q-btn(v-morph:btn:mygroup:200.resize="morphGroupModel" @click="nextMorph" round color="primary" icon="mdi-plus" size="md").fab1
-						q-card(v-morph:card1:mygroup:200.resize="morphGroupModel").ccc
-							.text-subtitile1 Новая категория
-							q-input(v-model="newcat" dense outlined bg-color="white" autofocus)
-							.row.justify-between.q-mt-sm
-								q-btn(flat label="Отмена" @click="nextMorph")
-								q-btn(flat label="ОК" @click="nextMorph")
-
 						q-input(dense debounce="0" color="primary" autofocus v-model="filter" clearable)
 							template(v-slot:prepend)
 								q-icon(name="mdi-magnify")
 
 						q-scroll-area(:style="hei1")
-							q-tree(:nodes="rows"
+							q-tree(:nodes="cat.categories"
 								node-key="label"
 								selected-color="primary"
 								v-model:selected="selected"
 								v-model:expanded="expanded"
 								:filter="filter").cat
-								template(v-slot:header-root="prop")
-									.row.items-center.justify-between
-										div {{prop.node.label}}
-										div ({{cat.catList.length}})
 								template(v-slot:default-header="prop")
-									.nod
-										|{{prop.node.label}}
-										q-btn(flat round icon="mdi-close" dense size="xs" @click="killNode(prop.node)").del
+									.nod {{prop.node.label}}
+										q-menu(context-menu auto-close)
+											q-list.ctx
+												q-item(clickable v-close-popup v-for="item in menu" :key="item.id" @click="item.action && item.action(prop.node)")
+													q-item-section(avatar)
+														q-icon(:name="item.icon")
+													q-item-section {{ item.label }}
 
 				template(v-slot:after)
 					component(:is="Subcategories" :selected="selected")
@@ -44,62 +36,89 @@ q-page(padding)
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useCategory } from '@/stores/category'
+import { uid } from 'quasar'
+import { useCat } from '@/stores/category1'
+
+// import { useCategory } from '@/stores/category'
 import Subcategories from '@/components/Subcategories.vue'
 
-const cat = useCategory()
+const cat = useCat()
 
 const split1 = ref(20)
 const selected = ref(cat.categories[0].label)
 const filter = ref('')
 
-const rows = computed(() => {
-	let root = [
-		{
-			id: 100,
-			label: 'Все категории',
-			header: 'root',
-			children: cat.categories,
-		},
-	]
-	return root
-})
+// const rows = computed(() => {
+// 	let root = [
+// 		{
+// 			id: 100,
+// 			label: 'Все категории',
+// 			header: 'root',
+// 			children: cat.categories,
+// 		},
+// 	]
+// 	return root
+// })
+
 const hei = computed(() => {
 	return 'height: ' + (window.innerHeight - 190) + 'px;'
 })
+
 const hei1 = computed(() => {
 	return 'height: ' + (window.innerHeight - 240) + 'px;'
 })
+
+const add = (e: any) => {
+	let temp = {
+		id: uid(),
+		label: 'New',
+		selected: true,
+		childs: [],
+		children: [],
+	}
+	console.log(e)
+	console.log(temp)
+	// cat.addCategory(temp, e)
+}
+
+const addRoot = () => {
+	// let temp: any = {
+	// 	id: 700,
+	// 	label: 'Fuck',
+	// 	selected: true,
+	// }
+	// rows.value[0].children.push(temp)
+	// selected.value = 'Fuck'
+}
+
+const menu = [
+	{
+		id: 0,
+		label: 'Добавить',
+		icon: 'mdi-plus-circle-outline',
+		action: add,
+		className: '',
+	},
+	{ id: 4, label: 'Редактировать', icon: 'mdi-pencil', className: '' },
+	{ id: 1, label: 'Копировать', icon: 'mdi-content-copy', className: '' },
+	{ id: 2, label: 'Вставить', icon: 'mdi-content-paste', className: '' },
+	{ id: 3, label: 'Удалить', icon: 'mdi-trash-can-outline', className: '' },
+]
+
 const killNode = (e: any) => {
 	let index = cat.categories.indexOf(e)
 	cat.categories.splice(index, 1)
 }
 
-const morphGroupModel = ref('btn')
-
-const nextMorphStep: any = {
-	btn: 'card1',
-	card1: 'btn',
-}
 const newcat = ref('')
 const expanded = ref(['Все категории', 'Продажи', 'Оплата'])
-
-const nextMorph = () => {
-	if (newcat.value.length > 2) {
-		cat.addCategory(newcat.value, selected.value)
-		expanded.value.push(selected.value)
-		selected.value = newcat.value
-		newcat.value = ''
-	}
-	morphGroupModel.value = nextMorphStep[morphGroupModel.value]
-}
 </script>
 
 <style scoped lang="scss">
 .tree {
 	margin-right: 1rem;
 	// background: pink;
-	position: relative;
+	// position: relative;
 }
 .ccc {
 	position: absolute;
@@ -121,18 +140,10 @@ const nextMorph = () => {
 .row {
 	width: 100%;
 }
-.nod {
-	position: relative;
-	width: 100%;
-	.del {
-		position: absolute;
-		right: 0;
-		top: 50%;
-		transform: translateY(-50%);
-		visibility: hidden;
-	}
-}
 .q-tree__node--selected .del {
 	visibility: visible;
+}
+.ctx {
+	min-width: 200px;
 }
 </style>

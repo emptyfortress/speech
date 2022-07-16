@@ -55,7 +55,7 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import draggable from 'vuedraggable'
-import { useCategory } from '@/stores/category'
+import { useCat } from '@/stores/category1'
 import SvgIcon from '@/components/SvgIcon.vue'
 import KeywordList from '@/components/KeywordList.vue'
 import { useQuasar } from 'quasar'
@@ -68,7 +68,7 @@ const props = defineProps({
 	},
 })
 
-const cat = useCategory()
+const cat = useCat()
 const $q = useQuasar()
 const split2 = ref(60)
 
