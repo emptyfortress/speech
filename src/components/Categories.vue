@@ -31,7 +31,7 @@ q-page(padding)
 													q-item-section {{ item.label }}
 
 				template(v-slot:after)
-					component(:is="Subcategories" :selectedItem="selectedItem")
+					component(:is="Subcategories" :selectedItem="selectedItem" @select="select")
 </template>
 
 <script setup lang="ts">
@@ -52,6 +52,10 @@ const selectedItem = computed(() => {
 	let node = cat.cat[0]
 	return getNodeFromTree(node, selected.value)
 })
+
+const select = (e: string) => {
+	selected.value = e
+}
 
 const filter = ref('')
 

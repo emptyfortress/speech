@@ -3,37 +3,38 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 	template(v-slot:before)
 		.related
 			.text-h6 {{props.selectedItem.label}}
-			q-list
-				q-item(v-for="item in props.selectedItem.children" :key="item.id")
-					q-item-section {{ item.label }}
-			q-tab-panels(v-model="selectedItem" animated transition-prev="jump-up" transition-next="jump-up" )
-				//- template(v-for="(item, index) in list" :key="item.id")
-				//- 	q-tab-panel(:name="item.label")
-				//- 		component(:is="draggable" class="list-group" :list="item.childs" group="subcat" itemKey="id")
-				//- 			template(#header)
-				//- 				div
-				//- 					.list
-				//- 						.podzag Подкатегория
-				//- 						.podzag Словарь
-				//- 					.empty(v-if="item.childs?.length === 0") Раздел не настроен.
-				//- 			template(#item="{ element }")
-				//- 				.list.item
-				//- 					div
-				//- 						|{{element.name}}
-				//- 						q-popup-edit(v-model="element.name" auto-save v-slot="scope").border-primary
-				//- 							q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
-				//- 					div
-				//- 						component(:is="SvgIcon" name="vocabulary").small.q-mr-sm
-				//- 						|{{element.label}}
-				//- 					q-icon(name="mdi-close" size="xs" @click="killCat(index, element)").del
+			//- p {{props.selectedItem}}
+			.grid(v-if="props.selectedItem.children")
+				div(v-for="item in props.selectedItem.children" :key="item.id" @click="select(item.id)")
+					q-icon(name="mdi-folder-outline" size="md")
+					.label {{item.label}}
+			q-card.sub
+				p {{props.selectedItem.childs}}
+					//- component(:is="draggable" class="list-group" :list="props.selectedItem.childs" group="subcat" itemKey="id")
+					//- 	template(#header)
+					//- 		div
+					//- 			.list
+					//- 				.podzag Подкатегория
+					//- 				.podzag Словарь
+					//- 			//- .empty(v-if="item.childs?.length === 0") Раздел не настроен.
+					//- 	template(#item="{ element }")
+					//- 		.list.item
+					//- 			div
+					//- 				|{{element.name}}
+					//- 				q-popup-edit(v-model="element.name" auto-save v-slot="scope").border-primary
+					//- 					q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
+					//- 			div
+					//- 				component(:is="SvgIcon" name="vocabulary").small.q-mr-sm
+					//- 				|{{element.label}}
+					//- 			q-icon(name="mdi-close" size="xs" @click="killCat(index, element)").del
 
 			//- q-btn(v-morph:btn1:categ:200.resize="morphGroupModel1" @click="nextMorph1" round color="primary" icon="mdi-plus" size="md").fab1
-			q-card(v-morph:card2:categ:200.resize="morphGroupModel1").ccc
-				.text-subtitile1 Новая подкатегория
-				q-input(v-model="newsubcat" dense outlined bg-color="white" autofocus)
-				.row.justify-between.q-mt-sm
-					q-btn(flat label="Отмена" @click="nextMorph1")
-					q-btn(flat label="ОК" @click="nextMorph1")
+			//- q-card(v-morph:card2:categ:200.resize="morphGroupModel1").ccc
+			//- 	.text-subtitile1 Новая подкатегория
+			//- 	q-input(v-model="newsubcat" dense outlined bg-color="white" autofocus)
+			//- 	.row.justify-between.q-mt-sm
+			//- 		q-btn(flat label="Отмена" @click="nextMorph1")
+			//- 		q-btn(flat label="ОК" @click="nextMorph1")
 
 	template(v-slot:after)
 		.right
@@ -62,27 +63,18 @@ import { useCat } from '@/stores/category1'
 import SvgIcon from '@/components/SvgIcon.vue'
 import KeywordList from '@/components/KeywordList.vue'
 import { useQuasar } from 'quasar'
-// import { getMembers } from '@/utils/utils'
 
 const props = defineProps<{
 	selectedItem: Category
 }>()
 
+const emit = defineEmits(['select'])
+
 const cat = useCat()
 const $q = useQuasar()
 const split2 = ref(60)
 
-// const list = computed(() => {
-// 	return getMembers(cat.categories)
-// })
-
-// const list = cat.catList
-
-// const children = computed( () => {
-// 	let selected =
-// 	return c
-// })
-
+const newsubcat = ref('')
 const tabs = ref('Voc')
 const cli = ref(true)
 
@@ -99,60 +91,35 @@ const show = () => {
 	})
 	cli.value = !cli.value
 }
-
-const undo = (i: number, e: any) => {
-	list.value[i].childs!.push(e)
+const select = (e: string) => {
+	emit('select', e)
 }
 
-const killCat = (i: number, e: any) => {
-	let ind = list.value[i].childs!.indexOf(e)
-	list.value[i].childs!.splice(ind, 1)
-	let message = e.label + ' - удалено.'
-	$q.notify({
-		message: message,
-		color: 'negative',
-		actions: [
-			{
-				label: 'Вернуть',
-				color: 'white',
-				handler: () => undo(i, e),
-			},
-		],
-	})
-}
+// const undo = (i: number, e: any) => {
+// 	list.value[i].childs!.push(e)
+// }
 
-const morphGroupModel1 = ref('btn1')
-
-const nextMorphStep1: any = {
-	btn1: 'card2',
-	card2: 'btn1',
-}
-
-const newsubcat = ref('')
-const nextMorph1 = () => {
-	if (newsubcat.value.length > 2) {
-		let current = list.value.find((e) => e.label === props.selected)
-		let newitem = {
-			id: list.value.length,
-			name: newsubcat.value,
-			label: '',
-			typ: 1,
-		}
-		current?.childs?.push(newitem)
-		newsubcat.value = ''
-	}
-
-	morphGroupModel1.value = nextMorphStep1[morphGroupModel1.value]
-}
+// const killCat = (i: number, e: any) => {
+// 	let ind = list.value[i].childs!.indexOf(e)
+// 	list.value[i].childs!.splice(ind, 1)
+// 	let message = e.label + ' - удалено.'
+// 	$q.notify({
+// 		message: message,
+// 		color: 'negative',
+// 		actions: [
+// 			{
+// 				label: 'Вернуть',
+// 				color: 'white',
+// 				handler: () => undo(i, e),
+// 			},
+// 		],
+// 	})
+// }
 </script>
 
 <style scoped lang="scss">
 @import '@/assets/styles/myvariables.scss';
 
-.q-tab-panels {
-	border-radius: $radius-md;
-	box-shadow: $card-shadow;
-}
 .right {
 	padding-left: 0.5rem;
 }
@@ -161,18 +128,18 @@ const nextMorph1 = () => {
 	box-shadow: none;
 	margin-top: 0;
 }
-.small {
-	font-size: 0.7rem;
-}
-.podzag {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	font-size: 0.75rem;
-	letter-spacing: 1px;
-	color: grey;
-	border-bottom: 1px solid #ccc;
-}
+// .small {
+// 	font-size: 0.7rem;
+// }
+// .podzag {
+// 	display: flex;
+// 	justify-content: space-between;
+// 	align-items: center;
+// 	font-size: 0.75rem;
+// 	letter-spacing: 1px;
+// 	color: grey;
+// 	border-bottom: 1px solid #ccc;
+// }
 .list {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -213,26 +180,22 @@ const nextMorph1 = () => {
 	margin: 0 0.5rem;
 	// height: 100%;
 }
-.fab1 {
-	position: absolute;
-	bottom: 0.8rem;
-	left: 0;
-	z-index: 10;
-}
-.ccc {
-	position: absolute;
-	bottom: 0.5rem;
-	left: 0;
-	background: $primary;
-	color: white;
-	width: 250px;
-	z-index: 10;
-	border-bottom-left-radius: 1.5rem;
+.sub {
 	padding: 1rem;
 }
-.test {
-	width: 100px;
-	height: 100px;
-	background: pink;
+.grid {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+	& > div {
+		font-size: 0.9rem;
+		padding: 0.5rem 1rem;
+		cursor: pointer;
+		border: 1px solid transparent;
+		&:hover {
+			border: 1px solid #cdcdcd;
+		}
+	}
 }
 </style>

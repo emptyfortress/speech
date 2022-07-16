@@ -20,9 +20,14 @@ export const useCat = defineStore({
 						],
 						children: [
 							{
-								id: '200',
-								label: 'Суперпродажи',
+								id: '100',
+								label: 'Холодные',
 								childs: [{ id: '401', name: '', label: 'test', typ: 0 }],
+							},
+							{
+								id: '101',
+								label: 'Наводки',
+								childs: [{ id: '402', name: '', label: 'test', typ: 0 }],
 							},
 						],
 					},
