@@ -22,7 +22,11 @@ q-page(padding)
 								default-expand-all
 								:filter="filter").cat
 								template(v-slot:default-header="prop")
-									.nod {{prop.node.label}}
+									.nod(:ref="el => { node[prop.node.id] = el }")
+										|{{prop.node.label}}
+										q-popup-edit(v-model="prop.node.label" auto-save v-slot="scope" v-if="editMode")
+											q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
+
 										q-menu(context-menu auto-close)
 											q-list.ctx
 												q-item(clickable v-close-popup v-for="item in menu" :key="item.id" @click="item.action && item.action(prop.node)" :class="item.className")
@@ -35,7 +39,7 @@ q-page(padding)
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onBeforeUpdate, nextTick } from 'vue'
 import { uid } from 'quasar'
 import { useCat } from '@/stores/category1'
 import { getNodeFromTree } from '@/utils/utils'
@@ -88,7 +92,7 @@ const show = (e: Category) => {
 			{
 				label: 'Вернуть',
 				color: 'white',
-				handler: () => undo(e),
+				// handler: () => undo(e),
 			},
 		],
 	})
@@ -99,6 +103,21 @@ const killNode = (e: Category) => {
 	show(e)
 }
 
+const editMode = ref(false)
+
+const node = ref([])
+
+const editNode = async (e: Category) => {
+	editMode.value = true
+	await nextTick(() => {
+		node.value[e.id].click()
+	})
+}
+
+onBeforeUpdate(() => {
+	node.value = []
+})
+
 const menu = [
 	{
 		id: 0,
@@ -107,7 +126,7 @@ const menu = [
 		action: add,
 		className: '',
 	},
-	{ id: 4, label: 'Редактировать', icon: 'mdi-pencil', className: '' },
+	{ id: 4, label: 'Редактировать', action: editNode, icon: 'mdi-pencil', className: '' },
 	{ id: 1, label: 'Копировать', icon: 'mdi-content-copy', className: '' },
 	{ id: 2, label: 'Вставить', icon: 'mdi-content-paste', className: '' },
 	{ id: 3, label: 'Удалить', action: killNode, icon: 'mdi-trash-can-outline', className: 'top' },
@@ -153,4 +172,13 @@ const menu = [
 	border-top: 1px solid #cdcdcd;
 	color: darkred;
 }
+// .hidd {
+// 	width: 50px;
+// 	height: 20px;
+// 	background: pink;
+// 	display: none;
+// 	&.edit {
+// 		display: block;
+// 	}
+// }
 </style>
