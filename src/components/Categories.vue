@@ -22,9 +22,9 @@ q-page(padding)
 								default-expand-all
 								:filter="filter").cat
 								template(v-slot:default-header="prop")
-									.nod(:ref="el => { node[prop.node.id] = el }")
+									.nod()
 										|{{prop.node.label}}
-										q-popup-edit(v-model="prop.node.label" auto-save v-slot="scope" v-if="editMode")
+										q-popup-edit(v-model="prop.node.label" auto-save v-slot="scope" v-if="editMode" :ref="el => { node[prop.node.id] = el }" @hide="editMode = false")
 											q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
 
 										q-menu(context-menu auto-close)
@@ -110,7 +110,7 @@ const node = ref([])
 const editNode = async (e: Category) => {
 	editMode.value = true
 	await nextTick(() => {
-		node.value[e.id].click()
+		node.value[e.id].show()
 	})
 }
 
