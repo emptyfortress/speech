@@ -27,7 +27,7 @@ q-list(dense)
 					label
 						q-checkbox(v-model="selection" size="xs" dense :val="element.label").q-mr-sm
 						component(:is="SvgIcon" name="vocabulary" v-if="element.voc").voc
-						|{{element.label}}
+						WordHighlighter(:query="filter") {{ element.label }}
 
 				q-item-section(side v-if="!editMode")
 					.row
@@ -60,6 +60,7 @@ import type { Ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { words } from '@/stores/list'
 import SvgIcon from '@/components/SvgIcon.vue'
+import WordHighlighter from 'vue-word-highlighter'
 
 interface Keyword {
 	key?: string
