@@ -59,18 +59,6 @@ const select = (e: string) => {
 
 const filter = ref('')
 
-// const rows = computed(() => {
-// 	let root = [
-// 		{
-// 			id: 100,
-// 			label: 'Все категории',
-// 			header: 'root',
-// 			children: cat.categories,
-// 		},
-// 	]
-// 	return root
-// })
-
 const hei = computed(() => {
 	return 'height: ' + (window.innerHeight - 190) + 'px;'
 })

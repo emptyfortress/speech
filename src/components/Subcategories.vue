@@ -9,24 +9,24 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 					q-icon(name="mdi-folder-outline" size="md")
 					.label {{item.label}}
 			q-card.sub
-				p {{props.selectedItem.childs}}
-					//- component(:is="draggable" class="list-group" :list="props.selectedItem.childs" group="subcat" itemKey="id")
-					//- 	template(#header)
-					//- 		div
-					//- 			.list
-					//- 				.podzag Подкатегория
-					//- 				.podzag Словарь
-					//- 			//- .empty(v-if="item.childs?.length === 0") Раздел не настроен.
-					//- 	template(#item="{ element }")
-					//- 		.list.item
-					//- 			div
-					//- 				|{{element.name}}
-					//- 				q-popup-edit(v-model="element.name" auto-save v-slot="scope").border-primary
-					//- 					q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
-					//- 			div
-					//- 				component(:is="SvgIcon" name="vocabulary").small.q-mr-sm
-					//- 				|{{element.label}}
-					//- 			q-icon(name="mdi-close" size="xs" @click="killCat(index, element)").del
+				//- p {{props.selectedItem.childs}}
+				component(:is="draggable" class="list-group" :list="props.selectedItem.childs" group="subcat" itemKey="id")
+					template(#header)
+						div
+							.list
+								.podzag Подкатегория
+								.podzag Словарь
+							.empty(v-if="props.selectedItem.childs.length === 0") Раздел не настроен.
+					template(#item="{ element }")
+						.list.item
+							div
+								|{{element.name}}
+								q-popup-edit(v-model="element.name" auto-save v-slot="scope").border-primary
+									q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
+							div
+								component(:is="SvgIcon" name="vocabulary").small.q-mr-sm
+								|{{element.label}}
+							q-icon(name="mdi-close" size="xs" @click="killCat(index, element)").del
 
 			//- q-btn(v-morph:btn1:categ:200.resize="morphGroupModel1" @click="nextMorph1" round color="primary" icon="mdi-plus" size="md").fab1
 			//- q-card(v-morph:card2:categ:200.resize="morphGroupModel1").ccc
@@ -131,15 +131,15 @@ const select = (e: string) => {
 // .small {
 // 	font-size: 0.7rem;
 // }
-// .podzag {
-// 	display: flex;
-// 	justify-content: space-between;
-// 	align-items: center;
-// 	font-size: 0.75rem;
-// 	letter-spacing: 1px;
-// 	color: grey;
-// 	border-bottom: 1px solid #ccc;
-// }
+.podzag {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 0.75rem;
+	letter-spacing: 1px;
+	color: grey;
+	border-bottom: 1px solid #ccc;
+}
 .list {
 	display: grid;
 	grid-template-columns: 1fr 1fr;

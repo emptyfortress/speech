@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-// import { randomNumber, randomArray, getMembers } from '@/utils/utils'
 
 export const useCat = defineStore({
 	id: 'cat',
@@ -9,6 +8,7 @@ export const useCat = defineStore({
 				id: '0',
 				label: 'Все категории',
 				header: 'root',
+				childs: [],
 				children: [
 					{
 						id: '1',
@@ -34,10 +34,12 @@ export const useCat = defineStore({
 					{
 						id: '2',
 						label: 'Сервис',
+						childs: [],
 					},
 					{
 						id: '3',
 						label: 'Оплата',
+						childs: [],
 						children: [
 							{ id: '202', label: 'Нал', childs: [] },
 							{ id: '203', label: 'Безнал', childs: [] },
@@ -47,26 +49,32 @@ export const useCat = defineStore({
 					{
 						id: '4',
 						label: 'Жалобы',
+						childs: [],
 					},
 					{
 						id: '5',
 						label: 'Неисправности',
+						childs: [],
 					},
 					{
 						id: '6',
 						label: 'Услуги',
+						childs: [],
 					},
 					{
 						id: '7',
 						label: 'Работа',
+						childs: [],
 					},
 					{
 						id: '8',
 						label: 'Регионы',
+						childs: [],
 					},
 					{
 						id: '9',
 						label: 'Грубость',
+						childs: [],
 					},
 					{
 						id: '10',
