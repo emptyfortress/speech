@@ -128,9 +128,9 @@ const menu = [
 		action: add,
 		className: '',
 	},
-	{ id: 4, label: 'Редактировать', action: editNode, icon: 'mdi-pencil', className: '' },
-	{ id: 1, label: 'Копировать', icon: 'mdi-content-copy', className: '' },
-	{ id: 2, label: 'Вставить', icon: 'mdi-content-paste', className: '' },
+	{ id: 4, label: 'Переименовать', action: editNode, icon: 'mdi-pencil', className: '' },
+	{ id: 1, label: 'Копировать', icon: 'mdi-content-copy', className: 'disab' },
+	{ id: 2, label: 'Вставить', icon: 'mdi-content-paste', className: 'disab' },
 	{ id: 3, label: 'Удалить', action: killNode, icon: 'mdi-trash-can-outline', className: 'top' },
 ]
 
@@ -174,13 +174,10 @@ const menu = [
 	border-top: 1px solid #cdcdcd;
 	color: darkred;
 }
-// .hidd {
-// 	width: 50px;
-// 	height: 20px;
-// 	background: pink;
-// 	display: none;
-// 	&.edit {
-// 		display: block;
-// 	}
-// }
+.disab {
+	opacity: 0.5;
+	&.cursor-pointer {
+		cursor: not-allowed !important;
+	}
+}
 </style>
