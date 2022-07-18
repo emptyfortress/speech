@@ -7,12 +7,16 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 					q-breadcrumbs-el(v-for="bread in props.selectedItem.breads" :label="bread")
 					q-breadcrumbs-el(:label="props.selectedItem.label")
 			//- {{props.selectedItem.label}}
-			.grid(v-if="props.selectedItem.children")
-				div(v-for="item in props.selectedItem.children" :key="item.id" @click="select(item.id)")
-					q-icon(name="mdi-folder-outline" size="md")
-					.label {{item.label}}
+			q-list.q-mt-md
+				q-item(clickable dense v-for="item in props.selectedItem.children" :key="item.id" @click="select(item.id)").nohov
+					q-item-section(avatar)
+						q-icon(name="mdi-folder-outline" size="sm")
+					q-item-section
+						q-item-label {{item.label}}
+					q-item-section(side).hove
+						q-btn(round flat dense icon="mdi-pencil" size="11px" @click.stop="")
+						q-btn(round flat dense icon="mdi-trash-can-outline" size="11px" @click.stop="")
 			q-card(v-if="props.selectedItem.level === 2").sub
-				//- p {{props.selectedItem.childs}}
 				component(:is="draggable" class="list-group" :list="props.selectedItem.childs" group="subcat" itemKey="id")
 					template(#header)
 						div
@@ -31,13 +35,13 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 								|{{element.label}}
 							q-icon(name="mdi-close" size="xs").del
 
-			//- q-btn(v-morph:btn1:categ:200.resize="morphGroupModel1" @click="nextMorph1" round color="primary" icon="mdi-plus" size="md").fab1
-			//- q-card(v-morph:card2:categ:200.resize="morphGroupModel1").ccc
-			//- 	.text-subtitile1 Новая подкатегория
-			//- 	q-input(v-model="newsubcat" dense outlined bg-color="white" autofocus)
-			//- 	.row.justify-between.q-mt-sm
-			//- 		q-btn(flat label="Отмена" @click="nextMorph1")
-			//- 		q-btn(flat label="ОК" @click="nextMorph1")
+			q-btn(v-morph:btn1:categ:200.resize="morphGroupModel1" @click="nextMorph1" round color="primary" icon="mdi-plus" size="md").fab1
+			q-card(v-morph:card2:categ:200.resize="morphGroupModel1").ccc
+				.text-subtitile1 Новая подкатегория
+				q-input(v-model="newsubcat" dense outlined bg-color="white" autofocus)
+				.row.justify-between.q-mt-sm
+					q-btn(flat label="Отмена" @click="nextMorph1")
+					q-btn(flat label="ОК" @click="nextMorph1")
 
 	template(v-slot:after)
 		.right
@@ -98,22 +102,22 @@ const select = (e: string) => {
 	emit('select', e)
 }
 
-const getChain = (node: Category, id: string) => {
-	if (node.id == id) {
-		return
-	} else if (node.children != null) {
-		var result = null
-		var temp = []
-		for (let i = 0; result == null && i < node.children.length; i++) {
-			result = getChain(node.children[i], id)
-		}
-	}
-	return temp
-}
+// const getChain = (node: Category, id: string) => {
+// 	if (node.id == id) {
+// 		return
+// 	} else if (node.children != null) {
+// 		var result = null
+// 		var temp = []
+// 		for (let i = 0; result == null && i < node.children.length; i++) {
+// 			result = getChain(node.children[i], id)
+// 		}
+// 	}
+// 	return temp
+// }
 
-const chain = computed(() => {
-	return getChain(cat.cat[0], props.selectedItem.id)
-})
+// const chain = computed(() => {
+// 	return getChain(cat.cat[0], props.selectedItem.id)
+// })
 
 // const undo = (i: number, e: any) => {
 // 	list.value[i].childs!.push(e)
@@ -196,7 +200,7 @@ const chain = computed(() => {
 	margin-top: 0.5rem;
 }
 .related {
-	// position: relative;
+	position: relative;
 	margin: 0 0.5rem;
 	// height: 100%;
 }
@@ -205,9 +209,10 @@ const chain = computed(() => {
 }
 .grid {
 	display: flex;
+	flex-direction: column;
 	justify-content: flex-start;
-	align-items: center;
-	flex-wrap: wrap;
+	align-items: flex-start;
+	// flex-wrap: wrap;
 	& > div {
 		font-size: 0.9rem;
 		padding: 0.5rem 1rem;
@@ -217,5 +222,20 @@ const chain = computed(() => {
 			border: 1px solid #cdcdcd;
 		}
 	}
+}
+.nohov {
+	.hove {
+		display: none;
+	}
+	&:hover {
+		.hove {
+			display: block;
+		}
+	}
+}
+.fab1 {
+	position: absolute;
+	bottom: 1rem;
+	left: 1rem;
 }
 </style>

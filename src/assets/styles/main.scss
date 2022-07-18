@@ -227,3 +227,7 @@ span.found {
 .q-tree__node-header-content .q-icon {
 	font-size: 13px;
 }
+
+body.desktop .nohov .q-focus-helper {
+	transition: none;
+}
