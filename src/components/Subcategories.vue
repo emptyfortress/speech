@@ -2,13 +2,16 @@
 q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 	template(v-slot:before)
 		.related
-			.text-h6 {{props.selectedItem.label}}
-			//- p {{props.selectedItem}}
+			.text-h6
+				q-breadcrumbs
+					q-breadcrumbs-el(v-for="bread in props.selectedItem.breads" :label="bread")
+					q-breadcrumbs-el(:label="props.selectedItem.label")
+			//- {{props.selectedItem.label}}
 			.grid(v-if="props.selectedItem.children")
 				div(v-for="item in props.selectedItem.children" :key="item.id" @click="select(item.id)")
 					q-icon(name="mdi-folder-outline" size="md")
 					.label {{item.label}}
-			q-card.sub
+			q-card(v-if="props.selectedItem.level === 2").sub
 				//- p {{props.selectedItem.childs}}
 				component(:is="draggable" class="list-group" :list="props.selectedItem.childs" group="subcat" itemKey="id")
 					template(#header)
@@ -94,6 +97,23 @@ const show = () => {
 const select = (e: string) => {
 	emit('select', e)
 }
+
+const getChain = (node: Category, id: string) => {
+	if (node.id == id) {
+		return
+	} else if (node.children != null) {
+		var result = null
+		var temp = []
+		for (let i = 0; result == null && i < node.children.length; i++) {
+			result = getChain(node.children[i], id)
+		}
+	}
+	return temp
+}
+
+const chain = computed(() => {
+	return getChain(cat.cat[0], props.selectedItem.id)
+})
 
 // const undo = (i: number, e: any) => {
 // 	list.value[i].childs!.push(e)

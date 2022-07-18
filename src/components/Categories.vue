@@ -19,6 +19,7 @@ q-page(padding)
 								node-key="id"
 								no-results-label="Ничего нет"
 								selected-color="primary"
+								no-selection-unset
 								v-model:selected="selected"
 								v-model:expanded="expanded"
 								:filter="filter").cat
@@ -30,7 +31,7 @@ q-page(padding)
 
 										q-menu(context-menu auto-close)
 											q-list.ctx
-												q-item(clickable v-close-popup v-for="item in menu" :key="item.id" @click="item.action && item.action(prop.node)" :class="item.className")
+												q-item(clickable v-close-popup v-for="item in menu" :key="item.id" @click="item.action && item.action(prop.node)" :class="calc(item, prop.node)" )
 													q-item-section(avatar)
 														q-icon(:name="item.icon")
 													q-item-section {{ item.label }}
@@ -75,10 +76,16 @@ const hei1 = computed(() => {
 })
 
 const expanded: Ref<string[]> = ref(['0', '1', '3'])
+
 const add = (e: Category) => {
+	if (e.level === 2) {
+		return
+	}
 	let temp = {
 		id: uid(),
 		label: 'Название',
+		level: e.level + 1,
+		breads: [...e.breads, e.label],
 		children: [],
 		childs: [],
 	}
@@ -104,6 +111,7 @@ const show = (e: Category) => {
 
 const killNode = (e: Category) => {
 	cat.killNode(e.id)
+	selected.value = cat.cat[0].id
 	show(e)
 }
 
@@ -122,18 +130,32 @@ onBeforeUpdate(() => {
 	node.value = []
 })
 
+interface Menu {
+	id: number
+	label: string
+	icon: string
+	action?: Function
+}
+const calc = (item: Menu, e: Category) => {
+	if (e.level === 2 && item.id === 0) {
+		return 'disab'
+	}
+	if (item.id === 3) {
+		return 'top'
+	}
+}
+
 const menu = [
 	{
 		id: 0,
 		label: 'Добавить',
 		icon: 'mdi-plus-circle-outline',
 		action: add,
-		className: '',
 	},
-	{ id: 4, label: 'Переименовать', action: editNode, icon: 'mdi-pencil', className: '' },
-	{ id: 1, label: 'Копировать', icon: 'mdi-content-copy', className: 'disab' },
-	{ id: 2, label: 'Вставить', icon: 'mdi-content-paste', className: 'disab' },
-	{ id: 3, label: 'Удалить', action: killNode, icon: 'mdi-trash-can-outline', className: 'top' },
+	{ id: 4, label: 'Переименовать', action: editNode, icon: 'mdi-pencil' },
+	{ id: 1, label: 'Копировать', icon: 'mdi-content-copy' },
+	{ id: 2, label: 'Вставить', icon: 'mdi-content-paste' },
+	{ id: 3, label: 'Удалить', action: killNode, icon: 'mdi-trash-can-outline' },
 ]
 
 // const newcat = ref('')
