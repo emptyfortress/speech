@@ -85,7 +85,7 @@ const add = (e: Category) => {
 		id: uid(),
 		label: 'Название',
 		level: e.level + 1,
-		breads: [...e.breads, e.label],
+		breads: () => e.breads?.push(e.label),
 		children: [],
 		childs: [],
 	}
