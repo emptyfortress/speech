@@ -4,7 +4,9 @@ const options = {
 	chart: {
 		type: 'bar',
 		stacked: true,
-		toolbar: false,
+		toolbar: {
+			show: false,
+		},
 	},
 	plotOptions: {
 		bar: {
