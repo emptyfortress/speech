@@ -2,29 +2,31 @@
 q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 	template(v-slot:before)
 		.related
-			.text-h6
+			.my-h6
 				q-breadcrumbs
 					q-breadcrumbs-el(v-for="bread in props.selectedItem.breads" :label="bread")
 					q-breadcrumbs-el(:label="props.selectedItem.label")
-			//- {{props.selectedItem.label}}
-			q-list( v-click-away="addMode = false").q-mt-md
-				q-item(clickable dense v-for="item in props.selectedItem.children" :key="item.id" @click="select(item.id)").nohov
+			q-list().q-mt-md
+				q-item(clickable dense v-for="(item, index) in props.selectedItem.children" :key="item.id" @click="select(item.id)").nohov
 					q-item-section(avatar)
 						q-icon(name="mdi-menu-right" size="sm")
 					q-item-section
-						q-item-label {{item.label}}
+						q-item-label
+							|{{item.label}}
+						q-popup-edit(v-model="item.label" auto-save v-slot="scope" :ref="(el: any) => {editNode[index] = el}" )
+							q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
 					q-item-section(side).hove
-						q-btn(round flat dense icon="mdi-pencil" size="11px" @click.stop="")
-						q-btn(round flat dense icon="mdi-trash-can-outline" size="11px" @click.stop="")
+						q-btn(round flat dense icon="mdi-pencil" size="11px" @click.stop="editItem(index)")
+						q-btn(round flat dense icon="mdi-trash-can-outline" size="11px" @click.stop="killItem(item)")
 				q-separator.q-my-sm
 
-				q-item(clickable v-if="props.selectedItem.level < 3")
+				q-item(clickable v-if="props.selectedItem.level < 3" v-click-away="addModeOff")
 					q-item-section(avatar)
-						q-icon(name="mdi-plus-circle" color="primary" size="sm" :class="{'rot' : addMode}" @click="addMode = !addMode")
+						q-icon(name="mdi-plus-circle" color="primary" size="sm" :class="{'rot' : addMode}" @click.stop="addMode = !addMode")
 					q-item-section
-						q-item-label(v-if="!addMode" @click="addMode = !addMode") Добавить
+						q-item-label(v-if="!addMode" @click.stop="addMode = !addMode") Добавить
 						.inlineAdd(v-else)
-							q-input(autofocus v-model="newItem" dense ref="addInput").smallinput
+							q-input(autofocus v-model="newItem" dense ref="addInput" @keyup.enter="submit").smallinput
 							q-btn(round unelevated color="positive" icon="mdi-check" dense size="sm" @click.stop="addItem" :disable="newItem.length < 3")
 
 
@@ -47,19 +49,11 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 								|{{element.label}}
 							q-icon(name="mdi-close" size="xs").del
 
-			//- q-btn(v-morph:btn1:categ:200.resize="morphGroupModel1" @click="nextMorph1" round color="primary" icon="mdi-plus" size="md").fab1
-			//- q-card(v-morph:card2:categ:200.resize="morphGroupModel1").ccc
-			//- 	.text-subtitile1 Новая подкатегория
-			//- 	q-input(v-model="newsubcat" dense outlined bg-color="white" autofocus)
-			//- 	.row.justify-between.q-mt-sm
-			//- 		q-btn(flat label="Отмена" @click="nextMorph1")
-			//- 		q-btn(flat label="ОК" @click="nextMorph1")
-
 	template(v-slot:after)
 		.right
 			q-tabs(v-model="tabs" inline-label indicator-color="primary" no-caps dense align="left")
 				q-tab(name="Voc")
-					SvgIcon(name="vocabulary").q-mr-sm
+					component(:is="SvgIcon" name="vocabulary").q-mr-sm
 					|Словари
 				q-tab(name="Rec" icon="mdi-toy-brick-search-outline")
 					span.q-mx-sm Запросы
@@ -83,6 +77,7 @@ import SvgIcon from '@/components/SvgIcon.vue'
 import KeywordList from '@/components/KeywordList.vue'
 import { useQuasar } from 'quasar'
 import { uid } from 'quasar'
+import type { Ref } from 'vue'
 
 const props = defineProps<{
 	selectedItem: Category
@@ -114,7 +109,7 @@ const select = (e: string) => {
 	emit('select', e)
 }
 
-const addMode = ref(true)
+const addMode = ref(false)
 const newItem = ref('')
 const addInput = ref()
 
@@ -134,26 +129,29 @@ const addItem = () => {
 	addInput.value.focus()
 }
 
-// const undo = (i: number, e: any) => {
-// 	list.value[i].childs!.push(e)
-// }
+const submit = () => {
+	if (newItem.value.length > 2) {
+		addItem()
+	}
+}
 
-// const killCat = (i: number, e: any) => {
-// 	let ind = list.value[i].childs!.indexOf(e)
-// 	list.value[i].childs!.splice(ind, 1)
-// 	let message = e.label + ' - удалено.'
-// 	$q.notify({
-// 		message: message,
-// 		color: 'negative',
-// 		actions: [
-// 			{
-// 				label: 'Вернуть',
-// 				color: 'white',
-// 				handler: () => undo(i, e),
-// 			},
-// 		],
-// 	})
-// }
+const addModeOff = () => {
+	addMode.value = false
+}
+
+const killItem = (e: Category) => {
+	cat.killNode(e.id)
+	$q.notify({
+		message: `${e.label} - удалено`,
+		color: 'negative',
+	})
+}
+
+const editNode: Ref<any[]> = ref([])
+
+const editItem = (e: number) => {
+	editNode.value[e].show()
+}
 </script>
 
 <style scoped lang="scss">
@@ -167,9 +165,6 @@ const addItem = () => {
 	box-shadow: none;
 	margin-top: 0;
 }
-// .small {
-// 	font-size: 0.7rem;
-// }
 .podzag {
 	display: flex;
 	justify-content: space-between;
@@ -274,5 +269,8 @@ const addItem = () => {
 }
 .smallinput {
 	margin-top: -9px;
+}
+.my-h6 {
+	font-size: 1.1rem;
 }
 </style>

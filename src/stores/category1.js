@@ -144,7 +144,6 @@ export const useCat = defineStore({
 			deleteNodeFromTree(this.cat[0], id)
 		},
 		addCategory(newItem, id) {
-			console.log(id)
 			insertNodeIntoTree(this.cat[0], id, newItem)
 		},
 	},
