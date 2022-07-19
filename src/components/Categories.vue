@@ -78,7 +78,7 @@ const hei1 = computed(() => {
 const expanded: Ref<string[]> = ref(['0', '1', '3'])
 
 const add = (e: Category) => {
-	if (e.level === 2) {
+	if (e.level === 3) {
 		return
 	}
 	let temp = {
@@ -137,7 +137,7 @@ interface Menu {
 	action?: Function
 }
 const calc = (item: Menu, e: Category) => {
-	if (e.level === 2 && item.id === 0) {
+	if (e.level === 3 && item.id === 0) {
 		return 'disab'
 	}
 	if (item.id === 3) {

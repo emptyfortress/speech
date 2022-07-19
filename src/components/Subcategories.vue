@@ -10,13 +10,19 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 			q-list.q-mt-md
 				q-item(clickable dense v-for="item in props.selectedItem.children" :key="item.id" @click="select(item.id)").nohov
 					q-item-section(avatar)
-						q-icon(name="mdi-folder-outline" size="sm")
+						q-icon(name="mdi-menu-right" size="sm")
 					q-item-section
 						q-item-label {{item.label}}
 					q-item-section(side).hove
 						q-btn(round flat dense icon="mdi-pencil" size="11px" @click.stop="")
 						q-btn(round flat dense icon="mdi-trash-can-outline" size="11px" @click.stop="")
-			q-card(v-if="props.selectedItem.level === 2").sub
+				q-separator.q-my-sm
+				q-item(clickable dense v-if="props.selectedItem.level < 3")
+					q-item-section(avatar)
+						q-icon(name="mdi-plus-circle-outline" size="sm")
+					q-item-section
+						q-item-label Добавить
+			q-card(v-if="props.selectedItem.level === 3").sub
 				component(:is="draggable" class="list-group" :list="props.selectedItem.childs" group="subcat" itemKey="id")
 					template(#header)
 						div
@@ -35,13 +41,13 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 								|{{element.label}}
 							q-icon(name="mdi-close" size="xs").del
 
-			q-btn(v-morph:btn1:categ:200.resize="morphGroupModel1" @click="nextMorph1" round color="primary" icon="mdi-plus" size="md").fab1
-			q-card(v-morph:card2:categ:200.resize="morphGroupModel1").ccc
-				.text-subtitile1 Новая подкатегория
-				q-input(v-model="newsubcat" dense outlined bg-color="white" autofocus)
-				.row.justify-between.q-mt-sm
-					q-btn(flat label="Отмена" @click="nextMorph1")
-					q-btn(flat label="ОК" @click="nextMorph1")
+			//- q-btn(v-morph:btn1:categ:200.resize="morphGroupModel1" @click="nextMorph1" round color="primary" icon="mdi-plus" size="md").fab1
+			//- q-card(v-morph:card2:categ:200.resize="morphGroupModel1").ccc
+			//- 	.text-subtitile1 Новая подкатегория
+			//- 	q-input(v-model="newsubcat" dense outlined bg-color="white" autofocus)
+			//- 	.row.justify-between.q-mt-sm
+			//- 		q-btn(flat label="Отмена" @click="nextMorph1")
+			//- 		q-btn(flat label="ОК" @click="nextMorph1")
 
 	template(v-slot:after)
 		.right
@@ -81,7 +87,6 @@ const cat = useCat()
 const $q = useQuasar()
 const split2 = ref(60)
 
-const newsubcat = ref('')
 const tabs = ref('Voc')
 const cli = ref(true)
 
@@ -139,6 +144,30 @@ const select = (e: string) => {
 // 		],
 // 	})
 // }
+
+const morphGroupModel1 = ref('btn1')
+const nextMorphStep1: any = {
+	btn1: 'card2',
+	card2: 'btn1',
+}
+
+const newsubcat = ref('')
+
+const nextMorph1 = () => {
+	if (newsubcat.value.length > 2) {
+		let current = list.value.find((e) => e.label === props.selected)
+		let newitem = {
+			id: list.value.length,
+			name: newsubcat.value,
+			label: '',
+			typ: 1,
+		}
+		current?.childs?.push(newitem)
+		newsubcat.value = ''
+	}
+
+	morphGroupModel1.value = nextMorphStep1[morphGroupModel1.value]
+}
 </script>
 
 <style scoped lang="scss">
@@ -200,7 +229,7 @@ const select = (e: string) => {
 	margin-top: 0.5rem;
 }
 .related {
-	position: relative;
+	// position: relative;
 	margin: 0 0.5rem;
 	// height: 100%;
 }
@@ -235,7 +264,21 @@ const select = (e: string) => {
 }
 .fab1 {
 	position: absolute;
-	bottom: 1rem;
-	left: 1rem;
+	bottom: 0.8rem;
+	left: 0;
+	z-index: 10;
+}
+.ccc {
+	position: absolute;
+	bottom: 0.5rem;
+	left: 0;
+	background: $primary;
+	color: white;
+	width: 250px;
+	z-index: 10;
+	border-bottom-left-radius: 1.5rem;
+	.sub {
+		padding: 1rem;
+	}
 }
 </style>
