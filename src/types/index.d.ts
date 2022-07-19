@@ -72,7 +72,7 @@ interface Category {
 	id: string
 	label: string
 	level: number
-	breads?: string[]
+	breads: string[]
 	header?: string
 	childs?: Podcategory[]
 	children?: Category[]

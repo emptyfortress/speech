@@ -7,7 +7,7 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 					q-breadcrumbs-el(v-for="bread in props.selectedItem.breads" :label="bread")
 					q-breadcrumbs-el(:label="props.selectedItem.label")
 			//- {{props.selectedItem.label}}
-			q-list.q-mt-md
+			q-list( v-click-away="addMode = false").q-mt-md
 				q-item(clickable dense v-for="item in props.selectedItem.children" :key="item.id" @click="select(item.id)").nohov
 					q-item-section(avatar)
 						q-icon(name="mdi-menu-right" size="sm")
@@ -17,11 +17,17 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 						q-btn(round flat dense icon="mdi-pencil" size="11px" @click.stop="")
 						q-btn(round flat dense icon="mdi-trash-can-outline" size="11px" @click.stop="")
 				q-separator.q-my-sm
-				q-item(clickable dense v-if="props.selectedItem.level < 3")
+
+				q-item(clickable v-if="props.selectedItem.level < 3")
 					q-item-section(avatar)
-						q-icon(name="mdi-plus-circle-outline" size="sm")
+						q-icon(name="mdi-plus-circle" color="primary" size="sm" :class="{'rot' : addMode}" @click="addMode = !addMode")
 					q-item-section
-						q-item-label Добавить
+						q-item-label(v-if="!addMode" @click="addMode = !addMode") Добавить
+						.inlineAdd(v-else)
+							q-input(autofocus v-model="newItem" dense ref="addInput").smallinput
+							q-btn(round unelevated color="positive" icon="mdi-check" dense size="sm" @click.stop="addItem" :disable="newItem.length < 3")
+
+
 			q-card(v-if="props.selectedItem.level === 3").sub
 				component(:is="draggable" class="list-group" :list="props.selectedItem.childs" group="subcat" itemKey="id")
 					template(#header)
@@ -76,6 +82,7 @@ import { useCat } from '@/stores/category1'
 import SvgIcon from '@/components/SvgIcon.vue'
 import KeywordList from '@/components/KeywordList.vue'
 import { useQuasar } from 'quasar'
+import { uid } from 'quasar'
 
 const props = defineProps<{
 	selectedItem: Category
@@ -107,22 +114,25 @@ const select = (e: string) => {
 	emit('select', e)
 }
 
-// const getChain = (node: Category, id: string) => {
-// 	if (node.id == id) {
-// 		return
-// 	} else if (node.children != null) {
-// 		var result = null
-// 		var temp = []
-// 		for (let i = 0; result == null && i < node.children.length; i++) {
-// 			result = getChain(node.children[i], id)
-// 		}
-// 	}
-// 	return temp
-// }
+const addMode = ref(true)
+const newItem = ref('')
+const addInput = ref()
 
-// const chain = computed(() => {
-// 	return getChain(cat.cat[0], props.selectedItem.id)
-// })
+const addItem = () => {
+	const current = props.selectedItem
+	let temp = {
+		id: uid(),
+		label: newItem.value,
+		level: current.level + 1,
+		breads: [...current.breads],
+		children: [],
+		childs: [],
+	}
+	temp.breads?.push(current.label)
+	cat.addCategory(temp, props.selectedItem.id)
+	newItem.value = ''
+	addInput.value.focus()
+}
 
 // const undo = (i: number, e: any) => {
 // 	list.value[i].childs!.push(e)
@@ -144,30 +154,6 @@ const select = (e: string) => {
 // 		],
 // 	})
 // }
-
-const morphGroupModel1 = ref('btn1')
-const nextMorphStep1: any = {
-	btn1: 'card2',
-	card2: 'btn1',
-}
-
-const newsubcat = ref('')
-
-const nextMorph1 = () => {
-	if (newsubcat.value.length > 2) {
-		let current = list.value.find((e) => e.label === props.selected)
-		let newitem = {
-			id: list.value.length,
-			name: newsubcat.value,
-			label: '',
-			typ: 1,
-		}
-		current?.childs?.push(newitem)
-		newsubcat.value = ''
-	}
-
-	morphGroupModel1.value = nextMorphStep1[morphGroupModel1.value]
-}
 </script>
 
 <style scoped lang="scss">
@@ -280,5 +266,13 @@ const nextMorph1 = () => {
 	.sub {
 		padding: 1rem;
 	}
+}
+.inlineAdd {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.smallinput {
+	margin-top: -9px;
 }
 </style>
