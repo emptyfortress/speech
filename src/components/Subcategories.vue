@@ -35,19 +35,13 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 					template(#header)
 						div
 							.list
-								.podzag Подкатегория
 								.podzag Словарь
 							.empty(v-if="props.selectedItem.childs?.length === 0") Раздел не настроен.
-					template(#item="{ element }")
+					template(#item="{ element, index }")
 						.list.item
-							div
-								|{{element.name}}
-								q-popup-edit(v-model="element.name" auto-save v-slot="scope").border-primary
-									q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
-							div
-								component(:is="SvgIcon" name="vocabulary").small.q-mr-sm
-								|{{element.label}}
-							q-icon(name="mdi-close" size="xs").del
+							component(:is="SvgIcon" name="vocabulary").small.q-mr-sm
+							|{{element.label}}
+							q-icon(name="mdi-trash-can-outline" size="xs" @click="killVoc(index)").del
 
 	template(v-slot:after)
 		.right
@@ -146,6 +140,9 @@ const killItem = (e: Category) => {
 		color: 'negative',
 	})
 }
+const killVoc = (e: number) => {
+	props.selectedItem.childs?.splice(e, 1)
+}
 
 const editNode: Ref<any[]> = ref([])
 
@@ -166,18 +163,16 @@ const editItem = (e: number) => {
 	margin-top: 0;
 }
 .podzag {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	padding-left: 1.2rem;
 	font-size: 0.75rem;
 	letter-spacing: 1px;
 	color: grey;
 	border-bottom: 1px solid #ccc;
 }
 .list {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	column-gap: 2rem;
+	// display: grid;
+	// grid-template-columns: 1fr 1fr;
+	// column-gap: 2rem;
 	position: relative;
 	&.item {
 		padding: 0.5rem 1rem;
@@ -272,5 +267,8 @@ const editItem = (e: number) => {
 }
 .my-h6 {
 	font-size: 1.1rem;
+}
+.small {
+	font-size: 0.7rem;
 }
 </style>
