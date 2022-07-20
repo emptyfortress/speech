@@ -13,8 +13,8 @@
 					q-btn(round flat icon="mdi-plus" dense color="primary" @click="mystore.addLogic")
 			#comment(contenteditable @blur="updatecomment") {{mystore.activeLogic.comment}}
 
-			//- Puzzle
-			component(:is="Board")
+			Puzzle
+			//- component(:is="Board")
 
 			.row.items-center.justify-between.q-mt-xl
 				q-btn(flat icon="mdi-trash-can-outline" label="Удалить запрос" color="primary" @click="mystore.deleteLogic")
@@ -31,8 +31,8 @@
 import { ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { useLogic } from '@/stores/logic'
-import Board from '@/components/Board.vue'
-// import Puzzle from '@/components/Puzzle.vue'
+// import Board from '@/components/Board.vue'
+import Puzzle from '@/components/Puzzle.vue'
 
 const mystore = useLogic()
 

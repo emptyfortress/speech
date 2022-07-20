@@ -27,7 +27,7 @@ q-page(padding).rel
 		component(:is="Operatorstat")
 		component(:is="Records")
 
-		component(:is="Constructor2" :dialog="dialog" :maximized="maximizedToggle")
+		component(:is="Constructor" :dialog="dialog" :maximized="maximizedToggle")
 </template>
 
 <script setup lang="ts">
@@ -37,7 +37,7 @@ import CommonOptions from '@/components/common/CommonOptions.vue'
 import Graph from '@/components/Graph.vue'
 import Operatorstat from '@/components/Operatorstat.vue'
 import Records from '@/components/Records.vue'
-import Constructor2 from '@/components/Constructor2.vue'
+import Constructor from '@/components/Constructor.vue'
 import { useStore } from '@/stores/store'
 import { useLogic } from '@/stores/logic'
 
