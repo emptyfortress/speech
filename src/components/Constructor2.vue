@@ -1,17 +1,17 @@
 <template lang="pug">
 q-dialog(v-model="props.dialog" persistent :maximized="props.maximized" transition-show="slide-up" transition-hide="slide-down")
 	.cnt
-		.top Создавайте чеклисты, комбинируя логические запросы...
+		.top Добавляйте критерии и настраивайте условия запросов. Определите их порядок перетаскиванием.//
 		.zg
-			q-icon(name="mdi-checkbox-multiple-outline" size="26px")
-			span Конструктор чеклистов
+			q-icon(name="mdi-android-studio" size="26px")
+			span Конструктор запросов
 		.content
 			q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei" @update:model-value="split")
 				template(v-slot:before)
-					component(:is="CheckList" :commentList="commentList")
+					component(:is="LogicList" :commentList="commentList")
 
 				template(v-slot:after)
-					component(:is="CheckCard"
+					component(:is="LogicCard"
 						:splitter="splitterModel"
 						@maximize="splitterModel = 0"
 						@reset="splitterModel = 25" )
@@ -19,8 +19,8 @@ q-dialog(v-model="props.dialog" persistent :maximized="props.maximized" transiti
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import CheckList from '@/components/CheckList.vue'
-import CheckCard from '@/components/CheckCard.vue'
+import LogicList from '@/components/LogicList.vue'
+import LogicCard from '@/components/LogicCard.vue'
 
 const props = defineProps({
 	dialog: Boolean,
