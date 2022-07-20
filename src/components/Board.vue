@@ -47,7 +47,7 @@ const treeData = reactive([
 		id: '1',
 		text: '',
 		typ: 1,
-		children: [{ id: '2', text: 'fuck', children: [] }],
+		children: [{ id: '2', text: 'Условие', children: [] }],
 	},
 ])
 
@@ -58,7 +58,7 @@ const addOperator = (e: any) => {
 }
 
 const addCondition = (e: any) => {
-	mytree.value.addNode({ id: uid(), text: 'Ghbdtn', children: [] }, e.id)
+	mytree.value.addNode({ id: uid(), text: 'Условие', children: [] }, e.id)
 }
 
 const del = (e: Node) => {
@@ -69,6 +69,16 @@ const next = (e: any) => {
 	if (e.typ === 3) {
 		e.typ = 1
 	} else e.typ = e.typ + 1
+}
+
+const start = () => {
+	console.log(1)
+	console.log(mytree.value.dragging)
+	console.log(mytree.value)
+}
+const end = () => {
+	console.log(2)
+	console.log(mytree.value.dragging)
 }
 
 const test = () => {
