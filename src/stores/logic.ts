@@ -115,7 +115,7 @@ export const useLogic = defineStore({
 				comment: '',
 				star: false,
 				selected: false,
-				label: 'Отстутствует отстутсвие',
+				label: 'Отстутствует отстутствие',
 			},
 			{
 				id: 15,

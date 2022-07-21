@@ -35,11 +35,12 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 					template(#header)
 						div
 							.list
-								.podzag Словарь
+								.podzag Словарь, слово, логический запрос
 							.empty(v-if="props.selectedItem.childs?.length === 0") Раздел не настроен.
 					template(#item="{ element, index }")
 						.list.item
-							component(:is="SvgIcon" name="vocabulary").small.q-mr-sm
+							component(:is="SvgIcon" name="vocabulary" v-if="element.voc").small.q-mr-sm
+							q-icon(name="mdi-toy-brick-search-outline" v-if="!element.score" size="18px").q-mr-sm
 							|{{element.label}}
 							q-icon(name="mdi-trash-can-outline" size="xs" @click="killVoc(index)").del
 
@@ -47,20 +48,19 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 		.right
 			q-tabs(v-model="tabs" inline-label indicator-color="primary" no-caps dense align="left")
 				q-tab(name="Voc")
-					component(:is="SvgIcon" name="vocabulary").q-mr-sm
+					component(:is="SvgIcon" name="vocabulary").vocicon
 					|Словари
-				q-tab(name="Rec" icon="mdi-toy-brick-search-outline")
+				q-tab(name="Rec")
+					q-icon(name="mdi-toy-brick-search-outline" size="20px")
 					span.q-mx-sm Запросы
-					q-badge(color="orange" label="New!")
+					q-badge(color="green" label="New!")
 			q-tab-panels(v-model="tabs" animated).cool
 				q-tab-panel(name="Voc")
 					q-scroll-area(:style="hei1")
 						component(:is="KeywordList")
 				q-tab-panel(name="Rec")
-					.row.items-center
-						img(src="@/assets/img/man.svg" v-if="cli").q-mr-md
-						img(src="@/assets/img/man1.svg" v-else).q-mr-md
-						q-btn(unelevated label="Когда?" color="primary" @click.once="show" v-if="cli")
+					q-scroll-area(:style="hei1")
+						component(:is="LogicList1")
 </template>
 
 <script setup lang="ts">
@@ -69,6 +69,7 @@ import draggable from 'vuedraggable'
 import { useCat } from '@/stores/category1'
 import SvgIcon from '@/components/SvgIcon.vue'
 import KeywordList from '@/components/KeywordList.vue'
+import LogicList1 from '@/components/LogicList1.vue'
 import { useQuasar } from 'quasar'
 import { uid } from 'quasar'
 import type { Ref } from 'vue'
@@ -270,5 +271,9 @@ const editItem = (e: number) => {
 }
 .small {
 	font-size: 0.7rem;
+}
+.vocicon {
+	font-size: 13px;
+	margin-right: 0.5rem;
 }
 </style>
