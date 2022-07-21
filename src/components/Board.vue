@@ -1,7 +1,7 @@
 <template lang="pug">
 q-page(padding)
 	.container
-		component(:is="Draggable" ref="mytree" :treeData="treeData" :gap="8" :indent="80").mytree
+		component(:is="Draggable" ref="mytree" :treeData="treeData" :gap="8" :indent="80" :ondragstart="start").mytree
 			template(v-slot="{ node, tree }")
 				template(v-if="node.typ")
 					.row.items-center
@@ -73,7 +73,6 @@ const next = (e: any) => {
 
 const start = () => {
 	console.log(1)
-	console.log(mytree.value.dragging)
 	console.log(mytree.value)
 }
 const end = () => {

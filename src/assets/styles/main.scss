@@ -270,7 +270,10 @@ body.desktop .nohov .q-focus-helper {
 		z-index: -3;
 	}
 }
-.he-tree-dragging .tree-node::after,
-.he-tree-dragging .tree-node::before {
-	display: none;
+// .he-tree-dragging .tree-node::after,
+// .he-tree-dragging .tree-node::before {
+// 	display: none;
+// }
+.he-tree-dragging .tree-node {
+	// display: none;
 }
