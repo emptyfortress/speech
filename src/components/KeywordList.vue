@@ -270,8 +270,6 @@ const save = () => {
 .q-item__section--avatar {
 	padding-right: 0;
 }
-.item {
-}
 
 .sortable-ghost,
 .sortable-drag {

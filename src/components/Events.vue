@@ -1,7 +1,14 @@
 <template lang="pug">
 .gridcat
 	.cat
-		.zag Категории
+		.zag.cursor-pointer
+			|{{catselect}}
+			q-icon(name="mdi-menu-down")
+			q-menu
+				q-list
+					q-item(clickable v-close-popup v-for="item in cat.categories" :key="item.id" @click="catselect = item.label" :class="{'selected' : item.label === catselect}")
+						q-item-section
+							q-item-label {{ item.label }}
 		q-btn(flat round icon="mdi-dots-horizontal")
 			q-menu( anchor="bottom right" self="top right")
 				q-list(dense)
@@ -111,6 +118,7 @@ const coolSeries = computed(() => {
 		},
 	]
 })
+const catselect = ref('Неисправности')
 </script>
 
 <style scoped lang="scss">
@@ -171,5 +179,9 @@ const coolSeries = computed(() => {
 }
 .right {
 	justify-self: end;
+}
+.selected {
+	background: $bgSelection;
+	color: $blue-9;
 }
 </style>
