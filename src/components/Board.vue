@@ -17,10 +17,7 @@ q-page(padding)
 							img(src="@/assets/img/not.svg" v-if="node.typ" @click="next(node)").q-mr-md
 							span(@click="next(node)") Оператор НЕ
 				template(v-else)
-					.row.items-center.node
-						q-btn(flat dense round  @click="tree.toggleFold(node)")
-							q-icon(:name="node.$folded ? 'mdi-menu-right' : 'mdi-menu-down'")
-						span {{node.text}}
+					component(:is="QueryI")
 				q-menu(context-menu)
 					q-list
 						q-item(clickable v-close-popup @click="addOperator(node)")
@@ -39,8 +36,9 @@ q-page(padding)
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import '@he-tree/vue3/dist/he-tree-vue3.css'
-import { Draggable } from '@he-tree/vue3'
 import { uid } from 'quasar'
+import { Draggable } from '@he-tree/vue3'
+import QueryI from '@/components/common/QueryI.vue'
 
 const treeData = reactive([
 	{
@@ -74,9 +72,4 @@ const next = (e: any) => {
 
 <style scoped lang="scss">
 //@import '@/assets/css/colors.scss';
-.node {
-	background: #fff;
-	border: 1px solid #ccc;
-	padding: 0.5rem;
-}
 </style>
