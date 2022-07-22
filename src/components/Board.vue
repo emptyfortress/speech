@@ -1,66 +1,59 @@
 <template lang="pug">
 q-page(padding)
 	.container
-		component(:is="Draggable" ref="mytree" :treeData="treeData" :gap="8" :indent="80").mytree
-			template(v-slot="{ node, tree }")
-				template(v-if="node.typ")
-					.row.items-center
-						q-btn(flat dense round  @click="tree.toggleFold(node)")
-							q-icon(:name="node.$folded ? 'mdi-menu-right' : 'mdi-menu-down'")
-						template(v-if="node.typ === 1")
-							img(src="@/assets/img/and.svg" v-if="node.typ" @click="next(node)").q-mr-md
-							span(@click="next(node)") Оператор И
-						template(v-if="node.typ === 2")
-							img(src="@/assets/img/or.svg" v-if="node.typ" @click="next(node)").q-mr-md
-							span(@click="next(node)") Оператор ИЛИ
-						template(v-if="node.typ === 3")
-							img(src="@/assets/img/not.svg" v-if="node.typ" @click="next(node)").q-mr-md
-							span(@click="next(node)") Оператор НЕ
-				template(v-else)
-					component(:is="QueryI")
-				q-menu(context-menu)
-					q-list
-						q-item(clickable v-close-popup @click="addOperator(node)")
-							q-item-section(avatar)
-								q-icon(name="mdi-gate-and")
-							q-item-section
-								q-item-label Добавить оператор
-						q-item(clickable v-close-popup @click="addCondition(node)")
-							q-item-section(avatar)
-								q-icon(name="mdi-crosshairs-question")
-							q-item-section
-								q-item-label Добавить условие
+		q-tree(:nodes="treeData" node-key="id" v-model:expanded="expanded" default-expand-all)
+			template(v-slot:default-header="prop")
+				.row.items-center
+					img(src="@/assets/img/and.svg" v-if="prop.node.typ === 0")
+					img(src="@/assets/img/or.svg" v-if="prop.node.typ === 1")
+					.text-weight-bold {{ prop.node.label }}
+				component(:is="TreeMenu" :node="prop.node" @addOp="addOperator(prop.node)" @addCond="addCondition(prop.node)" @kill="del(prop.node)")
+
 
 </template>
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import '@he-tree/vue3/dist/he-tree-vue3.css'
 import { uid } from 'quasar'
-import { Draggable } from '@he-tree/vue3'
 import QueryI from '@/components/common/QueryI.vue'
+import TreeMenu from '@/components/TreeMenu.vue'
+import { deleteNodeFromTree, insertNodeIntoTree } from '@/utils/utils'
+import type { Ref } from 'vue'
 
 const treeData = reactive([
 	{
-		id: '1',
-		text: '',
-		typ: 1,
-		children: [{ id: '2', text: 'Условие', children: [] }],
+		id: '0',
+		label: '',
+		typ: 0,
+		children: [
+			{ id: '2', typ: 1, label: 'Условие', children: [] },
+			{ id: '3', typ: 2, label: 'Условие', children: [] },
+		],
 	},
 ])
 
-const mytree = ref()
+const selected = ref(treeData[0].id)
+const expanded: Ref<string[]> = ref(['0'])
 
-const addOperator = (e: any) => {
-	mytree.value.addNode({ id: uid(), text: '', typ: 1, children: [] }, e.id)
+const addOperator = (e: Category) => {
+	let node = {
+		id: uid(),
+		label: 'fucking',
+		typ: 0,
+		children: [],
+	}
+	insertNodeIntoTree(treeData[0], e.id, node)
+	selected.value = node.id
+	expanded.value.push(e.id)
+}
+const pri = () => {
+	console.log(expanded.value)
 }
 
-const addCondition = (e: any) => {
-	mytree.value.addNode({ id: uid(), text: 'Условие', children: [] }, e.id)
-}
+const addCondition = (e: Category) => {}
 
-const del = (e: Node) => {
-	mytree.value.removeNode(e)
+const del = (e: Category) => {
+	deleteNodeFromTree(treeData[0], e.id)
 }
 
 const next = (e: any) => {

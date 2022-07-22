@@ -71,8 +71,9 @@ interface RowCategory {
 interface Category {
 	id: string
 	label: string
-	level: number
-	breads: string[]
+	level?: number
+	breads?: string[]
+	typ?: number
 	header?: string
 	childs?: Podcategory[]
 	children?: Category[]
