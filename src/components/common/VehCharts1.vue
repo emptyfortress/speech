@@ -28,10 +28,6 @@ export default {
 				dataLabels: {
 					enabled: true,
 				},
-				subtitle: {
-					text: 'Динамика вехи',
-					align: 'left',
-				},
 				labels: [
 					'2022-03-04',
 					'2022-03-11',

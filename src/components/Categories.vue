@@ -4,11 +4,11 @@ q-page(padding).rel
 	.container
 		q-expansion-item(v-model="mystore.cat")
 			template(v-slot:header)
-			q-item-section(avatar).line
-				q-avatar(icon="mdi-lan" flat)
-			q-item-section
-				.zag Категории
-		q-card-section
+				q-item-section(avatar).line
+					q-avatar(icon="mdi-lan" flat)
+				q-item-section
+					.zag Категории
+			q-card-section
 				component(:is="Chiplist" :chips="chips" :multiple="false" :tooltip="false")
 			q-card-section.q-py-none
 				component(:is="CommonOptions")
@@ -19,6 +19,7 @@ q-page(padding).rel
 					q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
 				br
 		component(:is="Graph2")
+		component(:is="CatStat")
 </template>
 
 <script setup lang="ts">
@@ -28,6 +29,7 @@ import { useCat } from '@/stores/category1'
 import Chiplist from '@/components/common/Chiplist.vue'
 import CommonOptions from '@/components/common/CommonOptions.vue'
 import Graph2 from '@/components/Graph2.vue'
+import CatStat from '@/components/CatStat.vue'
 
 const mystore = useStore()
 const mycat = useCat()
