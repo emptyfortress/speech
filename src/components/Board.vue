@@ -14,7 +14,6 @@ q-page(padding)
 							component(:is="QueryI")
 						component(:is="TreeMenu" :node="prop.node" @addOp="addOperator(prop.node)" @addCond="addCondition(prop.node)" @kill="del(prop.node)")
 
-
 </template>
 
 <script setup lang="ts">
@@ -40,7 +39,7 @@ const expanded: Ref<string[]> = ref(['0'])
 const addOperator = (e: Request) => {
 	let node = {
 		id: uid(),
-		label: 'fucking',
+		label: 'Оператор',
 		typ: 0,
 		children: [],
 	}
@@ -52,7 +51,7 @@ const addOperator = (e: Request) => {
 const addCondition = (e: Request) => {
 	let node = {
 		id: uid(),
-		label: 'fucking',
+		label: 'Условие',
 		typ: 2,
 		children: [],
 	}
