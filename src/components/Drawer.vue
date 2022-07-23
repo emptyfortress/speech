@@ -56,12 +56,6 @@ const pages = [
 		icon: 'mdi-lan',
 		url: '/categories',
 	},
-	{
-		id: 6,
-		title: 'Cons',
-		icon: 'mdi-lan',
-		url: '/board',
-	},
 ]
 // export default {
 </script>

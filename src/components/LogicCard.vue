@@ -14,13 +14,16 @@
 			#comment(contenteditable @blur="updatecomment") {{mystore.activeLogic.comment}}
 
 			Puzzle
-			//- component(:is="Board")
 
 			.row.items-center.justify-between.q-mt-xl
 				q-btn(flat icon="mdi-trash-can-outline" label="Удалить запрос" color="primary" @click="mystore.deleteLogic")
 				div
 					q-btn(flat icon="mdi-share-variant" label="Поделиться" color="primary" @click="dialog = !dialog")
 					q-btn(unelevated color="primary" icon="mdi-content-save-outline" label="Сохранить" @click="save")
+	br
+	br
+	br
+	br
 
 	q-dialog(v-model="dialog")
 		q-card

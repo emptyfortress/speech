@@ -1,68 +1,94 @@
 <template lang="pug">
-.box
-	draggable(:list="list" item-key="id" @start="begin" @end="end")
-		template(#item="{ element }")
-			div
-				QueryItem(:item="element"  @add="add(element)" @delete="del(element)" :disabled="list.length === 1")
+q-tree(:nodes="treeData" node-key="id" v-model:expanded="expanded" default-expand-all)
+	template(v-slot:default-header="prop")
+		template(v-if="prop.node.typ !== 2")
+			.row.items-center.cursor-pointer
+				.icon(:class="{or : prop.node.typ === 1}" @click.stop="next(prop.node)")
+				.q-ml-md {{prop.node.label}}
+				.text-weight-bold.q-ml-sm {{prop.node.typ === 1 ? 'ИЛИ' : 'И'}}
+		template(v-else)
+			component(:is="QueryI")
+		component(:is="TreeMenu" :node="prop.node" @addOp="addOperator(prop.node)" @addCond="addCondition(prop.node)" @kill="del(prop.node)" @cut="cut(prop.node)" @paste="paste(prop.node)")
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import draggable from 'vuedraggable'
-import QueryItem from '@/components/QueryItem.vue'
-import { useLogic } from '@/stores/logic'
+import { ref, reactive } from 'vue'
+import { uid } from 'quasar'
+import QueryI from '@/components/common/QueryI.vue'
+import TreeMenu from '@/components/TreeMenu.vue'
+import { deleteNodeFromTree, insertNodeIntoTree } from '@/utils/utils'
+import type { Ref } from 'vue'
 
-const mystore = useLogic()
+const treeData = reactive([
+	{
+		id: '0',
+		label: 'Оператор',
+		typ: 0,
+		children: [{ id: '1', typ: 2, label: 'Условие', children: [] }],
+	},
+])
 
-const list = computed(() => {
-	const id = mystore.activeLogic.id
-	const temp = mystore.allList.find((e) => e.id === id)
-	return temp!.list
-})
+const selected = ref(treeData[0].id)
+const expanded: Ref<string[]> = ref(['0'])
 
-const itemIndex = (e: List) => {
-	return list.value.findIndex((item) => item.id === e.id)
-}
-const add = (e: List) => {
-	let index = itemIndex(e)
-	let newItem = {} as Condition
-	newItem.id = list.value.length + 1
-	newItem.condition = 'and'
-	list.value.splice(index + 1, 0, newItem)
-}
-const del = (e: any) => {
-	let index = itemIndex(e)
-	list.value.splice(index, 1)
-}
-
-const drag = ref(false)
-let xStart = 0
-let distance = 0
-const begin = (e: any) => {
-	drag.value = true
-	xStart = e.originalEvent.clientX
-	e.item.addEventListener('drag', (a: any) => {
-		distance = a.clientX - xStart
-	})
-}
-const end = (e: any) => {
-	drag.value = false
-	let elem = e.item.querySelector('.all')
-	e.item.removeEventListener('drag', () => {})
-	if (distance > 80) {
-		elem.classList.add('fuck')
+const addOperator = (e: Request) => {
+	let node = {
+		id: uid(),
+		label: 'Оператор',
+		typ: 0,
+		children: [],
 	}
-	if (distance < -50) {
-		elem.classList.remove('fuck')
+	insertNodeIntoTree(treeData[0], e.id, node)
+	selected.value = node.id
+	expanded.value.push(e.id)
+}
+
+const addCondition = (e: Request) => {
+	let node = {
+		id: uid(),
+		label: 'Условие',
+		typ: 2,
+		children: [],
 	}
+	insertNodeIntoTree(treeData[0], e.id, node)
+	selected.value = node.id
+	expanded.value.push(e.id)
+}
+
+const del = (e: Request) => {
+	deleteNodeFromTree(treeData[0], e.id)
+}
+
+let copy: any = null
+
+const cut = (e: Request) => {
+	copy = e
+	deleteNodeFromTree(treeData[0], e.id)
+}
+const paste = (e: Request) => {
+	if (copy != null) {
+		insertNodeIntoTree(treeData[0], e.id, copy)
+	}
+}
+
+const next = (e: Request) => {
+	if (e.typ === 1) {
+		e.typ = 0
+	} else e.typ = e.typ + 1
 }
 </script>
 
 <style scoped lang="scss">
 //@import '@/assets/css/colors.scss';
-.box {
-	background-image: url(@/assets/img/vert.png);
-	background-repeat: repeat-y;
-	background-position-x: 48px;
+.icon {
+	width: 49px;
+	height: 36px;
+	background-image: url('@/assets/img/andor.svg');
+	transition: 0.2s ease-out all;
+	background-position: top left;
+	cursor: pointer;
+	&.or {
+		background-position: bottom left;
+	}
 }
 </style>
