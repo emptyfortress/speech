@@ -93,7 +93,7 @@ const next = (e: Request) => {
 	background-position: top left;
 	cursor: pointer;
 	&.or {
-		background-position: top right;
+		background-position: bottom left;
 	}
 }
 </style>

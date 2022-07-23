@@ -28,6 +28,9 @@
 						q-item-section No results
 			q-checkbox(v-model="wordforms" label="Искать производные формы" dense size="xs").wordform
 		q-select(label="Канал" dense v-model="channel" :options="channelOptions")
+		q-btn(round flat dense @click="clear").reload
+			q-icon(name="mdi-reload" size="sm")
+
 		template(v-if="rule1 === 'Около'")
 			div
 			div
@@ -54,25 +57,26 @@
 							q-item-section No results
 				q-checkbox(v-model="wordforms" label="Искать формы" dense size="xs").wordform
 			q-select(label="Канал" dense v-model="channel" :options="channelOptions")
+
 			.start(v-if="rule1 === 'Около'")
 				.full
 					|Расстояние между словами, сек
 					q-slider(v-model="fromStart" :min="0" :max="60" :step="1"  label color="primary")
 				q-input(:model-value="fromStart" dense outlined bg-color="white" style="width: 50px")
-		.start(v-if="rule1 === 'Начало'")
-			.full
-				|Расстояние от начала записи, сек
-				q-slider(v-model="fromStart" :min="0" :max="60" :step="1"  label color="primary")
-			q-input(:model-value="fromStart" dense outlined bg-color="white" style="width: 50px")
-		.start(v-if="rule1 === 'Завершение'")
-			.full
-				|Расстояние от конца записи, сек
-				q-slider(v-model="fromStart" :min="0" :max="60" :step="1"  label color="primary")
-			q-input(:model-value="fromStart" dense outlined bg-color="white" style="width: 50px")
+			.start(v-if="rule1 === 'Начало'")
+				.full
+					|Расстояние от начала записи, сек
+					q-slider(v-model="fromStart" :min="0" :max="60" :step="1"  label color="primary")
+				q-input(:model-value="fromStart" dense outlined bg-color="white" style="width: 50px")
+			.start(v-if="rule1 === 'Завершение'")
+				.full
+					|Расстояние от конца записи, сек
+					q-slider(v-model="fromStart" :min="0" :max="60" :step="1"  label color="primary")
+				q-input(:model-value="fromStart" dense outlined bg-color="white" style="width: 50px")
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { words } from '@/stores/list'
 import SvgIcon from '@/components/SvgIcon.vue'
 
@@ -83,6 +87,17 @@ const rule1 = ref('')
 const stringOptions = words
 const options = ref(stringOptions)
 const wordforms = ref(false)
+const channel = ref('')
+const fromStart = ref(10)
+const clear = () => {
+	rule1.value = ''
+	keys1.value = []
+	keys2.value = []
+	not.value = false
+	wordforms.value = false
+	channel.value = ''
+	fromStart.value = 10
+}
 
 const filterFn = (val: string, update: Function) => {
 	update(() => {
@@ -97,8 +112,6 @@ const filterFn = (val: string, update: Function) => {
 
 const ruleOptions = ['Присутствует', 'Отсутствует', 'Около', 'Начало', 'Завершение']
 const channelOptions = ['Все', 'Оператор', 'Клиент']
-const channel = ref('')
-const fromStart = ref(10)
 </script>
 
 <style scoped lang="scss">
@@ -132,9 +145,8 @@ const fromStart = ref(10)
 	}
 }
 .myrow {
-	margin: 0 1rem;
 	display: grid;
-	grid-template-columns: 170px 1fr 130px;
+	grid-template-columns: 170px 1fr 130px auto;
 	align-items: flex-start;
 	column-gap: 2rem;
 	row-gap: 1rem;
@@ -143,12 +155,15 @@ const fromStart = ref(10)
 	margin-top: 5px;
 }
 .start {
-	grid-column: 2/-1;
+	grid-column: 2/4;
 	display: flex;
 	font-size: 0.9rem;
 	gap: 1rem;
 	.full {
 		width: 100%;
 	}
+}
+.reload {
+	color: #666;
 }
 </style>
