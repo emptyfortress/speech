@@ -9,23 +9,29 @@ q-menu(context-menu)
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(['addOp', 'addCond', 'kill'])
+const emit = defineEmits(['addOp', 'addCond', 'kill', 'cut', 'paste'])
 
 const addOp = () => {
 	emit('addOp')
 }
 const addCond = () => {
-	emit('addOp')
+	emit('addCond')
 }
 const kill = () => {
 	emit('kill')
+}
+const cut = () => {
+	emit('cut')
+}
+const paste = () => {
+	emit('paste')
 }
 
 const menu = [
 	{ id: 0, label: 'Добавить оператор', icon: 'mdi-gate-and', action: addOp },
 	{ id: 1, label: 'Добавить условие', icon: 'mdi-crosshairs-question', action: addCond },
-	{ id: 2, label: 'Вырезать', icon: 'mdi-content-cut', action: addOp },
-	{ id: 3, label: 'Вставить', icon: 'mdi-content-paste', action: addOp },
+	{ id: 2, label: 'Вырезать', icon: 'mdi-content-cut', action: cut },
+	{ id: 3, label: 'Вставить', icon: 'mdi-content-paste', action: paste },
 	{ id: 4, label: 'Удалить', icon: 'mdi-trash-can-outline', action: kill, className: 'sep' },
 ]
 </script>

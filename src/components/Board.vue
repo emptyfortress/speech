@@ -1,13 +1,18 @@
 <template lang="pug">
 q-page(padding)
 	.container
-		q-tree(:nodes="treeData" node-key="id" v-model:expanded="expanded" default-expand-all)
-			template(v-slot:default-header="prop")
-				.row.items-center
-					img(src="@/assets/img/and.svg" v-if="prop.node.typ === 0")
-					img(src="@/assets/img/or.svg" v-if="prop.node.typ === 1")
-					.text-weight-bold {{ prop.node.label }}
-				component(:is="TreeMenu" :node="prop.node" @addOp="addOperator(prop.node)" @addCond="addCondition(prop.node)" @kill="del(prop.node)")
+		q-card
+			q-card-section
+				q-tree(:nodes="treeData" node-key="id" v-model:expanded="expanded" default-expand-all)
+					template(v-slot:default-header="prop")
+						template(v-if="prop.node.typ !== 2")
+							.row.items-center.cursor-pointer
+								.icon(:class="{or : prop.node.typ === 1}" @click.stop="next(prop.node)")
+								.q-ml-md {{prop.node.label}}
+								.text-weight-bold.q-ml-sm {{prop.node.typ === 1 ? 'ИЛИ' : 'И'}}
+						template(v-else)
+							component(:is="QueryI")
+						component(:is="TreeMenu" :node="prop.node" @addOp="addOperator(prop.node)" @addCond="addCondition(prop.node)" @kill="del(prop.node)")
 
 
 </template>
@@ -23,19 +28,16 @@ import type { Ref } from 'vue'
 const treeData = reactive([
 	{
 		id: '0',
-		label: '',
+		label: 'Оператор',
 		typ: 0,
-		children: [
-			{ id: '2', typ: 1, label: 'Условие', children: [] },
-			{ id: '3', typ: 2, label: 'Условие', children: [] },
-		],
+		children: [{ id: '1', typ: 2, label: 'Условие', children: [] }],
 	},
 ])
 
 const selected = ref(treeData[0].id)
 const expanded: Ref<string[]> = ref(['0'])
 
-const addOperator = (e: Category) => {
+const addOperator = (e: Request) => {
 	let node = {
 		id: uid(),
 		label: 'fucking',
@@ -46,23 +48,41 @@ const addOperator = (e: Category) => {
 	selected.value = node.id
 	expanded.value.push(e.id)
 }
-const pri = () => {
-	console.log(expanded.value)
+
+const addCondition = (e: Request) => {
+	let node = {
+		id: uid(),
+		label: 'fucking',
+		typ: 2,
+		children: [],
+	}
+	insertNodeIntoTree(treeData[0], e.id, node)
+	selected.value = node.id
+	expanded.value.push(e.id)
 }
 
-const addCondition = (e: Category) => {}
-
-const del = (e: Category) => {
+const del = (e: Request) => {
 	deleteNodeFromTree(treeData[0], e.id)
 }
 
-const next = (e: any) => {
-	if (e.typ === 2) {
-		e.typ = 1
+const next = (e: Request) => {
+	if (e.typ === 1) {
+		e.typ = 0
 	} else e.typ = e.typ + 1
 }
 </script>
 
 <style scoped lang="scss">
 //@import '@/assets/css/colors.scss';
+.icon {
+	width: 49px;
+	height: 36px;
+	background-image: url('@/assets/img/andor.svg');
+	transition: 0.2s ease-out all;
+	background-position: top left;
+	cursor: pointer;
+	&.or {
+		background-position: top right;
+	}
+}
 </style>
