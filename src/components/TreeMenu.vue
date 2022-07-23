@@ -26,6 +26,8 @@ const calcClass = (e: number) => {
 		return 'disab'
 	} else if (props.node?.typ === 2 && e === 1) {
 		return 'disab'
+	} else if (props.node?.typ === 2 && e === 3) {
+		return 'disab'
 	} else return ''
 }
 
@@ -34,6 +36,9 @@ const action = (item: any) => {
 		return
 	}
 	if (props.node?.typ === 2 && item.id === 1) {
+		return
+	}
+	if (props.node?.typ === 2 && item.id === 3) {
 		return
 	}
 	return item.action()
@@ -71,7 +76,7 @@ const menu = [
 		className: calcClass(1),
 	},
 	{ id: 2, label: 'Вырезать', icon: 'mdi-content-cut', action: cut },
-	{ id: 3, label: 'Вставить', icon: 'mdi-content-paste', action: paste },
+	{ id: 3, label: 'Вставить', icon: 'mdi-content-paste', action: paste, className: calcClass(3) },
 	{ id: 4, label: 'Удалить', icon: 'mdi-trash-can-outline', action: kill },
 ]
 </script>

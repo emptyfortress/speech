@@ -12,7 +12,7 @@ q-page(padding)
 								.text-weight-bold.q-ml-sm {{prop.node.typ === 1 ? 'ИЛИ' : 'И'}}
 						template(v-else)
 							component(:is="QueryI")
-						component(:is="TreeMenu" :node="prop.node" @addOp="addOperator(prop.node)" @addCond="addCondition(prop.node)" @kill="del(prop.node)")
+						component(:is="TreeMenu" :node="prop.node" @addOp="addOperator(prop.node)" @addCond="addCondition(prop.node)" @kill="del(prop.node)" @cut="cut(prop.node)" @paste="paste(prop.node)")
 
 </template>
 
@@ -62,6 +62,18 @@ const addCondition = (e: Request) => {
 
 const del = (e: Request) => {
 	deleteNodeFromTree(treeData[0], e.id)
+}
+
+let copy: any = null
+
+const cut = (e: Request) => {
+	copy = e
+	deleteNodeFromTree(treeData[0], e.id)
+}
+const paste = (e: Request) => {
+	if (copy != null) {
+		insertNodeIntoTree(treeData[0], e.id, copy)
+	}
 }
 
 const next = (e: Request) => {

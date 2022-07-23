@@ -84,7 +84,7 @@ interface Request {
 	label: string
 	typ: number
 	header?: string
-	children?: Request[]
+	children?: Request[] | null
 }
 
 interface RowNotific {
