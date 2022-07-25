@@ -31,6 +31,17 @@
 		q-btn(round flat dense @click="clear").reload
 			q-icon(name="mdi-reload" size="sm")
 
+		.start(v-if="rule1 === 'Начало'")
+			.full
+				|Расстояние от начала записи, сек
+				q-slider(v-model="fromStart" :min="0" :max="60" :step="1"  label color="primary")
+			q-input(:model-value="fromStart" dense outlined bg-color="white" style="width: 50px")
+		.start(v-if="rule1 === 'Завершение'")
+			.full
+				|Расстояние от конца записи, сек
+				q-slider(v-model="fromStart" :min="0" :max="60" :step="1"  label color="primary")
+			q-input(:model-value="fromStart" dense outlined bg-color="white" style="width: 50px")
+
 		template(v-if="rule1 === 'Около'")
 			div
 			div
@@ -59,21 +70,12 @@
 			q-select(label="Канал" dense v-model="channel" :options="channelOptions")
 
 
-			.start(v-if="rule1 === 'Около'")
+			.start
 				.full
 					|Расстояние между словами, сек
 					q-slider(v-model="fromStart" :min="0" :max="60" :step="1"  label color="primary")
 				q-input(:model-value="fromStart" dense outlined bg-color="white" style="width: 50px")
-			.start(v-if="rule1 === 'Начало'")
-				.full
-					|Расстояние от начала записи, сек
-					q-slider(v-model="fromStart" :min="0" :max="60" :step="1"  label color="primary")
-				q-input(:model-value="fromStart" dense outlined bg-color="white" style="width: 50px")
-			.start(v-if="rule1 === 'Завершение'")
-				.full
-					|Расстояние от конца записи, сек
-					q-slider(v-model="fromStart" :min="0" :max="60" :step="1"  label color="primary")
-				q-input(:model-value="fromStart" dense outlined bg-color="white" style="width: 50px")
+
 </template>
 
 <script setup lang="ts">
