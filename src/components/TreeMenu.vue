@@ -9,8 +9,6 @@ q-menu(context-menu)
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-
 const props = defineProps<{
 	node: {
 		id: String

@@ -1,7 +1,7 @@
 <template lang="pug">
 q-dialog(v-model="props.dialog" persistent :maximized="props.maximized" transition-show="slide-up" transition-hide="slide-down")
 	.cnt
-		.top Настройте дерево тем и категорий.
+		.tip Настройте дерево тем и категорий.
 		.zg
 			q-icon(name="mdi-lan-outline" size="26px")
 			span Темы
@@ -187,11 +187,18 @@ const menu = [
 		transform: translateY(-5px);
 	}
 }
-.top {
+.tip {
 	background: #9db2c3;
 	padding: 2px 2rem;
 	font-size: 1rem;
 	text-align: center;
-	// color: white;
+}
+
+.ctx .q-item:last-child {
+	border-top: 1px solid #ccc;
+	color: darkred;
+}
+.q-tree__node * {
+	user-select: none;
 }
 </style>
