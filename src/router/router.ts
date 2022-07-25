@@ -77,6 +77,11 @@ export const router = createRouter({
 			meta: { transition: 'slide-left', title: 'Настройка уведомлений', requiresAuth: false },
 		},
 		{
+			path: '/board',
+			component: () => import('@/components/Board.vue'),
+			meta: { transition: 'slide-left', title: 'Логические запросы', requiresAuth: false },
+		},
+		{
 			path: '/:pathMatch(.*)*',
 			redirect: '/404',
 		},

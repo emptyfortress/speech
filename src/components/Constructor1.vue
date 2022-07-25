@@ -1,7 +1,7 @@
 <template lang="pug">
 q-dialog(v-model="props.dialog" persistent :maximized="props.maximized" transition-show="slide-up" transition-hide="slide-down")
 	.cnt
-		.top Создавайте чеклисты, комбинируя логические запросы.
+		.top Создавайте чеклисты, комбинируя логические запросы...
 		.zg
 			q-icon(name="mdi-checkbox-multiple-outline" size="26px")
 			span Конструктор чеклистов

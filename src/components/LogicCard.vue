@@ -20,6 +20,11 @@
 				div
 					q-btn(flat icon="mdi-share-variant" label="Поделиться" color="primary" @click="dialog = !dialog")
 					q-btn(unelevated color="primary" icon="mdi-content-save-outline" label="Сохранить" @click="save")
+	br
+	br
+	br
+	br
+
 	q-dialog(v-model="dialog")
 		q-card
 			q-card-section lkaj
@@ -29,6 +34,7 @@
 import { ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { useLogic } from '@/stores/logic'
+// import Board from '@/components/Board.vue'
 import Puzzle from '@/components/Puzzle.vue'
 
 const mystore = useLogic()

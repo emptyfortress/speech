@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@he-tree/vue3": "^1.2.9",
     "@quasar/extras": "^1.13.5",
     "apexcharts": "^3.35.0",
     "chart.js": "^3.7.1",

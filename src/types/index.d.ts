@@ -72,10 +72,19 @@ interface Category {
 	id: string
 	label: string
 	level: number
-	breads: string[]
+	breads?: string[]
+	typ?: number
 	header?: string
 	childs?: Podcategory[]
 	children?: Category[]
+}
+
+interface Request {
+	id: string
+	label: string
+	typ: number
+	header?: string
+	children?: Request[] | null
 }
 
 interface RowNotific {

@@ -56,7 +56,7 @@ function getNodeFromTree(node: Category, nodeId: any): Category | null {
 	return null
 }
 
-function deleteNodeFromTree(node: Category, nodeId: string) {
+function deleteNodeFromTree<T extends { id: string; children: T[] }>(node: T, nodeId: string) {
 	if (node.children != null) {
 		for (let i = 0; i < node.children.length; i++) {
 			let filtered = node.children.filter((f) => f.id == nodeId)
@@ -69,7 +69,11 @@ function deleteNodeFromTree(node: Category, nodeId: string) {
 	}
 }
 
-function insertNodeIntoTree(node: Category, nodeId: string, newNode: Category) {
+function insertNodeIntoTree<T extends { id: string; children: T[] }>(
+	node: T,
+	nodeId: string,
+	newNode: T
+) {
 	if (node.id == nodeId) {
 		node.children?.push(newNode)
 	} else if (node.children != null) {
