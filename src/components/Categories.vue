@@ -18,8 +18,8 @@ q-page(padding).rel
 					q-btn(color="primary" flat label="Добавить к сравнению")
 					q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
 				br
-		component(:is="Graph2")
-		component(:is="CatStat")
+		//- component(:is="Graph2")
+		//- component(:is="CatStat")
 </template>
 
 <script setup lang="ts">
@@ -28,8 +28,8 @@ import { useStore } from '@/stores/store'
 import { useCat } from '@/stores/category1'
 import Chiplist from '@/components/common/Chiplist.vue'
 import CommonOptions from '@/components/common/CommonOptions.vue'
-import Graph2 from '@/components/Graph2.vue'
-import CatStat from '@/components/CatStat.vue'
+// import Graph2 from '@/components/Graph2.vue'
+// import CatStat from '@/components/CatStat.vue'
 
 const mystore = useStore()
 const mycat = useCat()
