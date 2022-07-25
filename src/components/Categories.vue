@@ -16,7 +16,7 @@ q-page(padding).rel
 					q-btn(flat color="primary" label="Сбросить").q-mr-sm
 					q-space
 					q-btn(color="primary" flat label="Добавить к сравнению")
-					q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить" @click="toggle")
+					q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить")
 				br
 		//- component(:is="Graph2")
 		//- component(:is="CatStat")

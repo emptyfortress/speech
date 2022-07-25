@@ -114,7 +114,7 @@ const addItem = () => {
 		id: uid(),
 		label: newItem.value,
 		level: current.level + 1,
-		breads: [...current.breads],
+		breads: current.breads,
 		children: [],
 		childs: [],
 	}
