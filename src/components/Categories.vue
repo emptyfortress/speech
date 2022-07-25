@@ -1,6 +1,6 @@
 <template lang="pug">
 q-page(padding).rel
-	q-btn(round color="primary" icon="mdi-plus" size="lg" @click="openDialog" :class="{rot : dialog2}").fab
+	q-btn(round color="primary" icon="mdi-plus" size="lg" @click="openDialog" :class="{rot : dialog}").fab
 	.container
 		q-expansion-item(v-model="mystore.cat")
 			template(v-slot:header)
@@ -20,6 +20,7 @@ q-page(padding).rel
 				br
 		//- component(:is="Graph2")
 		//- component(:is="CatStat")
+		component(:is="Constructor3" :dialog="dialog" :maximized="maximizedToggle")
 </template>
 
 <script setup lang="ts">
@@ -28,15 +29,22 @@ import { useStore } from '@/stores/store'
 import { useCat } from '@/stores/category1'
 import Chiplist from '@/components/common/Chiplist.vue'
 import CommonOptions from '@/components/common/CommonOptions.vue'
+import Constructor3 from '@/components/Constructor3.vue'
 // import Graph2 from '@/components/Graph2.vue'
 // import CatStat from '@/components/CatStat.vue'
 
 const mystore = useStore()
 const mycat = useCat()
+const dialog = ref(false)
+const maximizedToggle = ref(true)
 
 const chips = computed(() => {
 	return mycat.cat[0].children
 })
+
+const openDialog = () => {
+	dialog.value = !dialog.value
+}
 </script>
 
 <style scoped lang="scss"></style>
