@@ -58,6 +58,7 @@
 				q-checkbox(v-model="wordforms" label="Искать формы" dense size="xs").wordform
 			q-select(label="Канал" dense v-model="channel" :options="channelOptions")
 
+
 			.start(v-if="rule1 === 'Около'")
 				.full
 					|Расстояние между словами, сек
