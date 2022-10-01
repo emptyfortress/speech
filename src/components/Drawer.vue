@@ -52,7 +52,7 @@ const pages = [
 	},
 	{
 		id: 5,
-		title: 'Категории',
+		title: 'Темы',
 		icon: 'mdi-lan',
 		url: '/categories',
 	},

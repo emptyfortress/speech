@@ -20,7 +20,7 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 						q-btn(round flat dense icon="mdi-trash-can-outline" size="11px" @click.stop="killItem(item)")
 				q-separator.q-my-sm
 
-				q-item(clickable v-if="props.selectedItem.level < 3" v-click-away="addModeOff")
+				q-item(clickable v-if="props.selectedItem.level < 2" v-click-away="addModeOff")
 					q-item-section(avatar)
 						q-icon(name="mdi-plus-circle" color="primary" size="sm" :class="{'rot' : addMode}" @click.stop="addMode = !addMode")
 					q-item-section
@@ -30,7 +30,7 @@ q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 							q-btn(round unelevated color="positive" icon="mdi-check" dense size="sm" @click.stop="addItem" :disable="newItem.length < 3")
 
 
-			q-card(v-if="props.selectedItem.level === 3").sub
+			q-card(v-if="props.selectedItem.level === 2").sub
 				component(:is="draggable" class="list-group" :list="props.selectedItem.childs" group="subcat" itemKey="id")
 					template(#header)
 						div
