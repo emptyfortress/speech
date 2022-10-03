@@ -293,5 +293,8 @@ export const useCat = defineStore({
 		addCategory(newItem, id) {
 			insertNodeIntoTree(this.cat[0], id, newItem)
 		},
+		setCatselect(payload) {
+			this.catselect = payload
+		},
 	},
 })

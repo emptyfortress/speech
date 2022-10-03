@@ -1,11 +1,11 @@
 <template lang="pug">
 .gridcat
-	p fuck {{cat.getSubCat}}
-	p fuuck {{cat.rowNum}}
 	q-table(:columns="columns"
+		ref="table"
 		:rows="rows"
 		no-data-label="Категории не настроены"
 		:rows-per-page-options="[0]"
+		hide-bottom
 		).table
 		template(v-slot:top)
 			.zag.cursor-pointer
@@ -13,9 +13,10 @@
 				q-icon(name="mdi-menu-down")
 				q-menu
 					q-list
-						q-item(clickable v-close-popup v-for="item in cat.cat[0].children" :key="item.id" @click="cat.catselect = item.label" :class="{'selected' : item.label === cat.catselect}")
-							q-item-section
-								q-item-label {{ item.label }}
+						template(v-for="item in cat.cat[0].children" :key="item.id" )
+							q-item(clickable v-close-popup @click="selectCat(item.label)" :class="{'selected' : item.label === cat.catselect}")
+								q-item-section
+									q-item-label {{ item.label }}
 		template(v-slot:body="props")
 			q-tr(:props="props")
 				q-td(key="label" :props="props") {{ props.row.label }}
@@ -25,28 +26,41 @@
 				q-td(key="interrupt" :props="props") {{ props.row.interrupt }}
 
 	q-card.graph
-		component(ref="chart" :is="VueApexCharts" type="bar" height="102%" :options="coolOptions" :series="coolSeries")
+		component(ref="chart" :is="VueApexCharts" type="bar" :options="coolOptions" :series="coolSeries" :height="calcHeight").chh
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { useCat } from '@/stores/category1'
 import VueApexCharts from 'vue3-apexcharts'
 import { randomArray } from '@/utils/utils'
 
 const cat = useCat()
+const table = ref()
 
 const chart = ref()
 
-// const catselect = ref('Продажи')
-// const catselect = ref('Выберите тему')
+// const myselect = ref('Продажи')
+
+const selectCat = (label: string) => {
+	cat.setCatselect(label)
+
+	chart.value.updateOptions({
+		xaxis: {
+			categories: cat.getSubCat,
+		},
+	})
+}
+
+const calcHeight = computed(() => {
+	let rows = cat.rowNum
+	return rows * 50 + 42 + 'px'
+})
 
 const rows = computed(() => {
 	let cur = cat.cat[0].children.filter((e: any) => e.label === cat.catselect)
 	return cur[0].children
 })
-
-const myCat = ref(cat.getSubCat)
 
 const columns: Column[] = [
 	{ name: 'label', label: 'Категории', field: 'label', sortable: true, align: 'left' },
@@ -93,7 +107,7 @@ const coolOptions = {
 		colors: ['#fff'],
 	},
 	xaxis: {
-		categories: myCat.value,
+		categories: cat.getSubCat,
 		labels: {
 			show: false,
 			minHeight: 0,
@@ -112,7 +126,7 @@ const coolOptions = {
 	legend: {
 		show: true,
 		position: 'top',
-		horizontalAlign: 'left',
+		horizontalAlign: 'center',
 	},
 	colors: ['#29A1F9', '#FDB948', '#C72829'],
 }
@@ -153,5 +167,9 @@ const coolSeries = computed(() => {
 .selected {
 	background: $bgSelection;
 	color: $blue-9;
+}
+.chh {
+	margin-top: 51px;
+	// background: pink;
 }
 </style>
