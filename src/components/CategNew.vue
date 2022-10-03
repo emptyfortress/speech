@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, reactive } from 'vue'
 import { useCat } from '@/stores/category1'
 import VueApexCharts from 'vue3-apexcharts'
 import { randomArray } from '@/utils/utils'
@@ -46,9 +46,10 @@ const selectCat = (label: string) => {
 	cat.setCatselect(label)
 
 	chart.value.updateOptions({
-		xaxis: {
-			categories: cat.getSubCat,
-		},
+		coolOptions,
+		// xaxis: {
+		// 	categories: cat.getSubCat,
+		// },
 	})
 }
 
@@ -89,47 +90,50 @@ const columns: Column[] = [
 	},
 ]
 
-const coolOptions = {
-	chart: {
-		type: 'bar',
-		stacked: true,
-		toolbar: {
+const coolOptions = computed(() => {
+	return {
+		chart: {
+			type: 'bar',
+			stacked: true,
+			toolbar: {
+				show: false,
+			},
+		},
+		plotOptions: {
+			bar: {
+				horizontal: true,
+			},
+		},
+		stroke: {
+			width: 1,
+			colors: ['#fff'],
+		},
+		xaxis: {
+			categories: cat.getSubCat,
+			labels: {
+				show: false,
+				minHeight: 0,
+				maxHeight: 0,
+			},
+		},
+		yaxis: {
 			show: false,
+			title: {
+				text: undefined,
+			},
 		},
-	},
-	plotOptions: {
-		bar: {
-			horizontal: true,
+		fill: {
+			opacity: 1,
 		},
-	},
-	stroke: {
-		width: 1,
-		colors: ['#fff'],
-	},
-	xaxis: {
-		categories: cat.getSubCat,
-		labels: {
-			show: false,
-			minHeight: 0,
-			maxHeight: 0,
+		legend: {
+			show: true,
+			position: 'top',
+			horizontalAlign: 'center',
 		},
-	},
-	yaxis: {
-		show: false,
-		title: {
-			text: undefined,
-		},
-	},
-	fill: {
-		opacity: 1,
-	},
-	legend: {
-		show: true,
-		position: 'top',
-		horizontalAlign: 'center',
-	},
-	colors: ['#29A1F9', '#FDB948', '#C72829'],
-}
+		colors: ['#29A1F9', '#FDB948', '#C72829'],
+	}
+})
+
 const coolSeries = computed(() => {
 	return [
 		{
