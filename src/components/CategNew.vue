@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive } from 'vue'
+import { ref, computed } from 'vue'
 import { useCat } from '@/stores/category1'
 import VueApexCharts from 'vue3-apexcharts'
 import { randomArray } from '@/utils/utils'
@@ -40,17 +40,8 @@ const table = ref()
 
 const chart = ref()
 
-// const myselect = ref('Продажи')
-
 const selectCat = (label: string) => {
 	cat.setCatselect(label)
-
-	chart.value.updateOptions({
-		coolOptions,
-		// xaxis: {
-		// 	categories: cat.getSubCat,
-		// },
-	})
 }
 
 const calcHeight = computed(() => {
