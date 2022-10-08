@@ -16,7 +16,7 @@ q-page(padding).rel
 					q-btn(color="primary" flat label="Добавить к сравнению")
 					q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить")
 				br
-		CategNew
+		component(:is="CategNew")
 		component(:is="Constructor3" :dialog="dialog" :maximized="maximizedToggle")
 </template>
 

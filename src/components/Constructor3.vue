@@ -82,7 +82,7 @@ const hei1 = computed(() => {
 const expanded: Ref<string[]> = ref(['0', '1'])
 
 const add = (e: Category) => {
-	if (e.level === 3) {
+	if (e.level === 4) {
 		return
 	}
 	let temp = {

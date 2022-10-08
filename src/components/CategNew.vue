@@ -148,6 +148,7 @@ const coolSeries = computed(() => {
 //@import '@/assets/css/colors.scss';
 .gridcat {
 	margin-top: 1rem;
+	margin-left: 1rem;
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	column-gap: 1rem;
