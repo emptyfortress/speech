@@ -5,7 +5,6 @@
 		:rows="rows"
 		no-data-label="Категории не настроены"
 		:rows-per-page-options="[0]"
-		hide-bottom
 		).table
 		template(v-slot:top)
 			.zag.cursor-pointer
@@ -18,7 +17,7 @@
 								q-item-section
 									q-item-label {{ item.label }}
 		template(v-slot:body="props")
-			q-tr(:props="props")
+			q-tr(:props="props" @click="showPodcat(props.row.label)" ).cursor-pointer
 				q-td(key="label" :props="props") {{ props.row.label }}
 				q-td(key="call" :props="props") {{ props.row.call }}
 				q-td(key="ant" :props="props") {{ props.row.ant }}
@@ -26,7 +25,11 @@
 				q-td(key="interrupt" :props="props") {{ props.row.interrupt }}
 
 	q-card.graph
-		component(ref="chart" :is="VueApexCharts" type="bar" :options="coolOptions" :series="coolSeries" :height="calcHeight").chh
+		.flex.flex-center.full-height(v-if="rows.length === 0")
+			q-icon(name="mdi-emoticon-poop" size="48px")
+		component(v-else ref="chart" :is="VueApexCharts" type="bar" :options="coolOptions" :series="coolSeries" :height="calcHeight").chh
+
+component(:is="DialogPodcat" :show="bigTable" :category="categoryName" @close="bigTable = false")
 </template>
 
 <script setup lang="ts">
@@ -34,6 +37,7 @@ import { ref, computed } from 'vue'
 import { useCat } from '@/stores/category1'
 import VueApexCharts from 'vue3-apexcharts'
 import { randomArray } from '@/utils/utils'
+import DialogPodcat from '@/components/common/DialogPodcat.vue'
 
 const cat = useCat()
 const table = ref()
@@ -141,6 +145,13 @@ const coolSeries = computed(() => {
 		},
 	]
 })
+
+const bigTable = ref(false)
+const categoryName = ref('')
+const showPodcat = (e: string) => {
+	bigTable.value = true
+	categoryName.value = e
+}
 </script>
 
 <style scoped lang="scss">
@@ -149,6 +160,7 @@ const coolSeries = computed(() => {
 .gridcat {
 	margin-top: 1rem;
 	margin-left: 1rem;
+	margin-right: 1rem;
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	column-gap: 1rem;

@@ -17,20 +17,22 @@ q-page(padding).rel
 					q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить")
 				br
 		component(:is="CategNew")
+		br
+		component(:is="Records")
+
 		component(:is="Constructor3" :dialog="dialog" :maximized="maximizedToggle")
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useStore } from '@/stores/store'
-import { useCat } from '@/stores/category1'
 import CommonOptions from '@/components/common/CommonOptions.vue'
 import CategNew from '@/components/CategNew.vue'
+import Records from '@/components/Records.vue'
 
 import Constructor3 from '@/components/Constructor3.vue'
 
 const mystore = useStore()
-const mycat = useCat()
 const dialog = ref(false)
 const maximizedToggle = ref(true)
 
