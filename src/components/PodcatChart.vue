@@ -1,5 +1,5 @@
 <template lang="pug">
-component(:is="VueApexCharts" type="bar" height="360" :options="podcatOptions" :series="podcatSeries" v-if="cat.getItem?.level < 3")
+component(:is="VueApexCharts" type="bar" height="360" :options="podcatOptions" :series="podcatSeries" v-if="cat.getItem!.level < 3")
 </template>
 
 <script setup lang="ts">

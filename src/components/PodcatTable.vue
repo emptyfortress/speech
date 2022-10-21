@@ -7,10 +7,10 @@
 		label(@click="tabl = true") Таблица
 
 transition(name="fade")
-	component(:is="NotPodcat" v-if="cat.getItem?.level > 2").full-width
+	component(:is="NotPodcat" v-if="cat.getItem!.level > 2").full-width
 	.full-width(v-else)
 		transition(name="slide-bottom")
-			component(:is="CatTable" v-if="tabl" :rows="cat.getItemChildren" :level="cat.getItem?.level").full-width
+			component(:is="CatTable" v-if="tabl" :rows="cat.getItemChildren" :level="cat.getItem!.level").full-width
 			.full-width(v-else)
 				component(:is="PodcatChart")
 </template>
