@@ -1,53 +1,80 @@
 <template lang="pug">
-q-expansion-item(v-model="tree")
+q-expansion-item(v-model="treepanel")
 	template(v-slot:header)
 		q-item-section(avatar).line
 			q-avatar(icon="mdi-file-tree" flat)
-								q-item-section
+		q-item-section
 			.zag Дерево категорий
-q-splitter(v-model="splitterModel" style="height: 490px;")
-	template(v-slot:before)
-		q-card.left
-			.top
-				q-btn(round flat dense icon="mdi-unfold-more-horizontal")
-					q-tooltip Развернуть
-				q-input(dense ref="input" debounce="0" hide-bottom-space color="primary" autofocus v-model="filter" clearable @clear="filter = ''").input
-					template(v-slot:prepend)
-						q-icon(name="mdi-magnify")
 
-			q-card-section
-				q-scroll-area.scroll
-					q-tree(:nodes="cat.cat"
-						node-key="id"
-						no-results-label="Ничего нет"
-						selected-color="primary"
-						no-selection-unset
-						v-model:selected="selected"
-						v-model:expanded="expanded"
-						:filter="filter").cat
-						template(v-slot:default-header="prop")
-							.nod
-								component(:is="WordHighlighter" :query="filter") {{prop.node.label}}
+	q-splitter(v-model="splitterModel" style="height: 450px;")
+		template(v-slot:before)
+			q-card.left
+				.top
+					q-btn(round flat dense icon="mdi-unfold-more-horizontal" @click="expandAll")
+						q-tooltip Развернуть
+					q-input(dense ref="input" debounce="0" hide-bottom-space color="primary" autofocus v-model="filter" clearable @clear="filter = ''").input
+						template(v-slot:prepend)
+							q-icon(name="mdi-magnify")
 
-	template(v-slot:after)
-		q-card.right
-			p lakjsldj
+				q-card-section
+					q-scroll-area.scroll
+						q-tree(:nodes="cat.cat"
+							ref="tree"
+							node-key="id"
+							no-results-label="Ничего нет"
+							selected-color="primary"
+							no-selection-unset
+							v-model:selected="selected"
+							v-model:expanded="expanded"
+							:filter="filter").cat
+							template(v-slot:default-header="prop")
+								.nod
+									component(:is="WordHighlighter" :query="filter") {{prop.node.label}}
+
+		template(v-slot:after)
+			q-card.right
+				component(:is="PodcatTable" :label="label")
+				//- component(:is="CatTable" :rows="cat.getItemChildren" :level="cat.getItem?.level")
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watchEffect } from 'vue'
 import type { Ref } from 'vue'
 import { useCat } from '@/stores/category1'
 import WordHighlighter from 'vue-word-highlighter'
-import { randomArray } from '@/utils/utils'
+// import CatTable from '@/components/CatTable.vue'
+import PodcatTable from '@/components/PodcatTable.vue'
 
 const cat = useCat()
-const selected = ref(cat.cat[0].id)
+const selected = ref('100')
 const expanded: Ref<string[]> = ref(['0', '1'])
 
 const splitterModel = ref(30)
-const tree = ref(true)
+const treepanel = ref(true)
 const filter = ref('')
+
+const label = computed(() => {
+	return cat.getItem?.label
+})
+
+const tree = ref()
+const expandAll = () => {
+	if (expanded.value.length === 0) {
+		tree.value.expandAll()
+	} else tree.value.collapseAll()
+}
+watchEffect(() => {
+	cat.setCatselect(selected.value)
+})
+
+onMounted(() => {
+	watchEffect(() => {
+		if (filter.value.length > 1) {
+			tree.value.expandAll()
+		}
+		cat.setCatselect(selected.value)
+	})
+})
 </script>
 
 <style scoped lang="scss">
@@ -69,6 +96,16 @@ const filter = ref('')
 	cursor: pointer;
 }
 .scroll {
-	height: 380px;
+	height: 332px;
+}
+.nod {
+	font-size: 0.8rem;
+}
+.input {
+	width: 200px;
+}
+.right {
+	height: 420px;
+	overflow: hidden;
 }
 </style>

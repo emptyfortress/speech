@@ -17,7 +17,6 @@ q-page(padding).rel
 					q-btn(unelevated color="primary" icon="mdi-check-bold" label="Применить")
 				br
 		component(:is="CategNew")
-		br
 		component(:is="Records")
 
 		component(:is="Constructor3" :dialog="dialog" :maximized="maximizedToggle")

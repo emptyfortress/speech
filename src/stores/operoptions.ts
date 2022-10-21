@@ -221,4 +221,58 @@ const bigSeries = [
 	},
 ]
 
-export { options, options1, bigData, columns, series, bigSeries }
+const podcatOptions = {
+	chart: {
+		type: 'bar',
+		stacked: true,
+		toolbar: false,
+	},
+	plotOptions: {
+		bar: {
+			horizontal: true,
+		},
+	},
+	stroke: {
+		width: 1,
+		colors: ['#fff'],
+	},
+	xaxis: {
+		categories: [],
+		// labels: {
+		// 	show: false,
+		// 	minHeight: 0,
+		// 	maxHeight: 0,
+		// },
+	},
+	yaxis: {
+		show: true,
+		title: {
+			text: undefined,
+		},
+	},
+	fill: {
+		opacity: 1,
+	},
+	legend: {
+		position: 'top',
+		horizontalAlign: 'center',
+	},
+	colors: ['#29A1F9', '#FDB948', '#C72829'],
+}
+
+const podcatSeries = [
+	{
+		name: 'AHT',
+		data: [44, 55, 41, 43, 37, 21],
+	},
+	{
+		name: 'Тишина',
+		data: [53, 32, 52, 43, 33, 32],
+	},
+	{
+		name: 'Перебивания',
+		data: [12, 17, 9, 11, 11, 20],
+	},
+]
+
+export { options, options1, bigData, columns, series, bigSeries, podcatSeries, podcatOptions }

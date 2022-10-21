@@ -231,3 +231,15 @@ span.found {
 body.desktop .nohov .q-focus-helper {
 	transition: none;
 }
+
+.stikytable {
+	height: 365px;
+	thead tr th {
+		position: sticky;
+		z-index: 1;
+		background: #fff;
+	}
+	thead tr:first-child th {
+		top: 0;
+	}
+}
