@@ -34,7 +34,6 @@ q-expansion-item(v-model="treepanel")
 		template(v-slot:after)
 			q-card.right
 				component(:is="PodcatTable" :label="label")
-				//- component(:is="CatTable" :rows="cat.getItemChildren" :level="cat.getItem?.level")
 </template>
 
 <script setup lang="ts">
@@ -42,7 +41,6 @@ import { ref, computed, onMounted, watchEffect } from 'vue'
 import type { Ref } from 'vue'
 import { useCat } from '@/stores/category1'
 import WordHighlighter from 'vue-word-highlighter'
-// import CatTable from '@/components/CatTable.vue'
 import PodcatTable from '@/components/PodcatTable.vue'
 
 const cat = useCat()

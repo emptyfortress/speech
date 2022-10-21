@@ -2,6 +2,7 @@
 q-table(:rows="props.rows"
 	:columns='columns'
 	row-key="id"
+	flat
 	binary-state-sort
 	hide-bottom
 	:rows-per-page-options="[0]"
@@ -21,7 +22,7 @@ q-table(:rows="props.rows"
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import type { Ref } from 'vue'
 import { useStore } from '@/stores/store'
 

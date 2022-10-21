@@ -555,6 +555,10 @@ export const useCat = defineStore({
 			let item = getNodeFromTree(this.cat[0], this.catselect)
 			return item.children
 		},
+		getItemPodcat() {
+			let item = getNodeFromTree(this.cat[0], this.catselect)
+			return item.children.map((a) => a.label)
+		},
 	},
 	actions: {
 		killNode(id) {
