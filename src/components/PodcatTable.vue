@@ -7,16 +7,16 @@
 		label(@click="tabl = true") Таблица
 
 transition(name="fade")
-	component(:is="NotPodcat" v-if="cat.getItem!.level > 2").full-width
+	component(:is="NotPodcat" v-if="levelCheck").full-width
 	.full-width(v-else)
 		transition(name="slide-bottom")
-			component(:is="CatTable" v-if="tabl" :rows="cat.getItemChildren" :level="cat.getItem!.level").full-width
+			component(:is="CatTable" v-if="tabl" :rows="cat.getItemChildren" :level="getLevel").full-width
 			.full-width(v-else)
 				component(:is="PodcatChart")
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useCat } from '@/stores/category1'
 import CatTable from '@/components/CatTable.vue'
 import PodcatChart from '@/components/PodcatChart.vue'
@@ -28,6 +28,18 @@ const props = defineProps({
 
 const tabl = ref(true)
 const cat = useCat()
+
+const getLevel = computed(() => {
+	if (cat.getItem && cat.getItem.level) {
+		return cat.getItem.level
+	}
+})
+
+const levelCheck = computed(() => {
+	if (cat.getItem?.level! > 2 || cat.getItemChildren?.length! == 0) {
+		return true
+	} else return false
+})
 </script>
 
 <style scoped lang="scss">

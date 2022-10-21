@@ -1,5 +1,5 @@
 <template lang="pug">
-component(:is="VueApexCharts" type="bar" height="360" :options="podcatOptions" :series="podcatSeries" v-if="cat.getItem!.level < 3")
+component(:is="VueApexCharts" type="bar" height="360" :options="podcatOptions" :series="podcatSeries" v-if="levelCheck")
 </template>
 
 <script setup lang="ts">
@@ -9,6 +9,13 @@ import { useCat } from '@/stores/category1'
 import { randomArray } from '@/utils/utils'
 
 const cat = useCat()
+
+const levelCheck = computed(() => {
+	if (cat.getItem?.level! < 3) {
+		return true
+	} else return false
+})
+
 const podcatSeries = computed(() => {
 	return [
 		{

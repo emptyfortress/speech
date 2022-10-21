@@ -2,7 +2,7 @@
 .full-height.flex.flex-center
 	.move
 		img(src="@/assets/img/check-chose.svg" width="200")
-		div Выберите категорию слева
+		div Выберите категорию слева или настройте ее
 
 </template>
 

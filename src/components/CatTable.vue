@@ -6,7 +6,7 @@ q-table(:rows="props.rows"
 	binary-state-sort
 	hide-bottom
 	:rows-per-page-options="[0]"
-	v-if="props.level < 3"
+	v-if="levelCheck"
 	).stikytable
 	template(v-slot:top-row v-if="props.rows.length == 0")
 		q-td(colspan="5").text-center Категория не настроена.
@@ -22,7 +22,7 @@ q-table(:rows="props.rows"
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import type { Ref } from 'vue'
 import { useStore } from '@/stores/store'
 
@@ -40,6 +40,12 @@ const props = defineProps<{
 	rows: String[]
 	level: number
 }>()
+
+const levelCheck = computed(() => {
+	if (props.level && props.level < 3) {
+		return true
+	} else return false
+})
 
 const columns: Column[] = [
 	{ name: 'label', label: 'Подкатегория', field: 'label', sortable: true, align: 'left' },
