@@ -1,5 +1,5 @@
 <template lang="pug">
-q-expansion-item(v-model="rec")
+q-expansion-item(v-model="mystore.recordPanel")
 	template(v-slot:header)
 		q-item-section(avatar).line
 			q-avatar(icon="mdi-record-circle-outline" flat)
@@ -12,7 +12,10 @@ q-expansion-item(v-model="rec")
 			:selected-rows-label="getSelectedString"
 			rows-per-page-label="Записей на странице"
 			:filter="filter"
+			:loading="mystore.loading"
 			:rows-per-page-options='shownRows').table
+			template(v-slot:loading)
+				q-inner-loading(showing color="primary" size="100px")
 			template(v-slot:top="props")
 				q-btn(unelevated color="grey" size="sm" label="Скачать одним архивом")
 				q-space
@@ -48,7 +51,7 @@ Teleport(to="#speech")
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+import { ref, watch, watchEffect } from 'vue'
 import type { Ref } from 'vue'
 import { records } from '@/stores/operators'
 import { useStore } from '@/stores/store'
@@ -90,14 +93,13 @@ const togg = () => {
 
 const filter = ref('')
 const mystore = useStore()
-const rec = ref(false)
 
 const selected: Ref<number | null> = ref(null)
 
-watch(rec, (value, oldvalue) => {
-	if (value === false) {
+watchEffect(() => {
+	if (mystore.recordPanel == false) {
 		selected.value = null
-		mystore.speechDrawer = false
+		mystore.closeSpeechDrawer()
 	}
 })
 

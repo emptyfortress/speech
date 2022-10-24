@@ -1,5 +1,5 @@
 <template lang="pug">
-q-expansion-item(v-model="rec")
+q-expansion-item(v-model="mystore.recordPanel")
 	template(v-slot:header)
 		q-item-section(avatar).line
 			q-avatar(icon="mdi-record-circle-outline" flat)
@@ -54,7 +54,7 @@ br
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import type { Ref } from 'vue'
 import { records } from '@/stores/operators'
 import { useStore } from '@/stores/store'
@@ -127,6 +127,13 @@ const select = (e: Row) => {
 		mystore.setRecord(e.group)
 	}
 }
+
+watchEffect(() => {
+	if (mystore.recordPanel == false) {
+		selected.value = null
+		mystore.closeSpeechDrawer()
+	}
+})
 </script>
 
 <style scoped lang="scss">

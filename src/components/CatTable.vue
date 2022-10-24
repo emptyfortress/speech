@@ -74,13 +74,12 @@ const mystore = useStore()
 const selected: Ref<number | null> = ref(null)
 
 const select = (e: Row) => {
-	if (selected.value === null) {
-		selected.value = e.id
-	} else if (selected.value === e.id) {
-		selected.value = null
-	} else {
-		selected.value = e.id
+	if (selected.value === e.id) {
+		return
 	}
+	selected.value = e.id
+	mystore.recordPanel = true
+	mystore.setLoading()
 }
 </script>
 
