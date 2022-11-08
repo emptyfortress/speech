@@ -5,6 +5,7 @@ q-expansion-item(v-model="treepanel")
 			q-avatar(icon="mdi-file-tree" flat)
 		q-item-section
 			.zag Дерево категорий
+			p ticked: {{ ticked }}; selected: {{ selected }}
 
 	q-splitter(v-model="splitterModel" style="height: 450px;")
 		template(v-slot:before)
@@ -26,6 +27,8 @@ q-expansion-item(v-model="treepanel")
 							no-selection-unset
 							v-model:selected="selected"
 							v-model:expanded="expanded"
+							v-model:ticked="ticked"
+							tick-strategy="leaf-filtered"
 							:filter="filter").cat
 							template(v-slot:default-header="prop")
 								.nod
@@ -45,6 +48,7 @@ import PodcatTable from '@/components/PodcatTable.vue'
 
 const cat = useCat()
 const selected = ref('100')
+const ticked = ref([])
 const expanded: Ref<string[]> = ref(['0', '1'])
 
 const splitterModel = ref(30)
