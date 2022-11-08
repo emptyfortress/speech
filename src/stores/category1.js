@@ -538,15 +538,17 @@ export const useCat = defineStore({
 			},
 		],
 		catselect: '1',
+		ticked: [],
+		selectedPodcategories: [],
 	}),
 	getters: {
-		rowNum() {
-			return this.getSubCat.length
-		},
-		getSubCat() {
-			let item = this.cat[0].children.filter((e) => e.label === this.catselect)
-			return item[0].children
-		},
+		// rowNum() {
+		// 	return this.getSubCat.length
+		// },
+		// getSubCat() {
+		// 	let item = this.cat[0].children.filter((e) => e.label === this.catselect)
+		// 	return item[0].children
+		// },
 		getItem() {
 			let item = getNodeFromTree(this.cat[0], this.catselect)
 			return item
@@ -559,6 +561,15 @@ export const useCat = defineStore({
 			let item = getNodeFromTree(this.cat[0], this.catselect)
 			return item.children.map((a) => a.label)
 		},
+		getTickedRows() {
+			let rows = []
+			if (this.ticked.length > 0) {
+				this.ticked.forEach((item) => {
+					rows.push(getNodeFromTree(this.cat[0], item))
+				})
+			}
+			return rows
+		},
 	},
 	actions: {
 		killNode(id) {
@@ -569,6 +580,9 @@ export const useCat = defineStore({
 		},
 		setCatselect(payload) {
 			this.catselect = payload
+		},
+		setTicked(payload) {
+			this.ticked = [...payload]
 		},
 	},
 })

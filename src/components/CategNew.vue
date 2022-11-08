@@ -5,7 +5,6 @@ q-expansion-item(v-model="treepanel")
 			q-avatar(icon="mdi-file-tree" flat)
 		q-item-section
 			.zag Дерево категорий
-			p ticked: {{ ticked }}; selected: {{ selected }}
 
 	q-splitter(v-model="splitterModel" style="height: 450px;")
 		template(v-slot:before)
@@ -23,9 +22,6 @@ q-expansion-item(v-model="treepanel")
 							ref="tree"
 							node-key="id"
 							no-results-label="Ничего нет"
-							selected-color="primary"
-							no-selection-unset
-							v-model:selected="selected"
 							v-model:expanded="expanded"
 							v-model:ticked="ticked"
 							tick-strategy="leaf-filtered"
@@ -67,6 +63,7 @@ const expandAll = () => {
 }
 watchEffect(() => {
 	cat.setCatselect(selected.value)
+	cat.setTicked(ticked.value)
 })
 
 onMounted(() => {

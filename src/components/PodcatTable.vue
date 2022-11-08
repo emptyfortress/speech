@@ -1,6 +1,6 @@
 <template lang="pug">
 .myrow
-	.text-body1 {{ props.label }}
+	.text-body1 Подкатегории: {{ cat.getTickedRows.length }}. Выбрано: {{ cat.selectedPodcategories.length}}
 	div
 		label(@click="tabl = false") Граф
 		q-toggle(v-model="tabl" dense size="xs")
@@ -10,7 +10,7 @@ transition(name="fade")
 	component(:is="NotPodcat" v-if="levelCheck").full-width
 	.full-width(v-else)
 		transition(name="slide-bottom")
-			component(:is="CatTable" v-if="tabl" :rows="cat.getItemChildren" :level="getLevel").full-width
+			component(:is="CatTable" v-if="tabl" :rows="cat.getTickedRows" :level="getLevel").full-width
 			.full-width(v-else)
 				component(:is="PodcatChart")
 </template>

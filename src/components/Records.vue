@@ -17,7 +17,8 @@ q-expansion-item(v-model="mystore.recordPanel")
 			template(v-slot:loading)
 				q-inner-loading(showing color="primary" size="100px")
 			template(v-slot:top="props")
-				q-btn(unelevated color="grey" size="sm" label="Скачать одним архивом")
+				q-btn(v-if="!props.tags" unelevated color="grey" size="sm" label="Скачать одним архивом")
+				q-chip(v-for="chip in cat.selectedPodcategories") {{ chip.label }}
 				q-space
 				q-input(dense debounce="300" color="primary" v-model="filter" clearable)
 					template(v-slot:prepend)
@@ -55,6 +56,7 @@ import { ref, watch, watchEffect } from 'vue'
 import type { Ref } from 'vue'
 import { records } from '@/stores/operators'
 import { useStore } from '@/stores/store'
+import { useCat } from '@/stores/category1'
 
 interface RecordColumn {
 	name: string
@@ -82,6 +84,7 @@ interface Row {
 	expand: boolean
 }
 
+const cat = useCat()
 const table: any = ref(null)
 const shownRows = ref([10, 20, 50])
 const togg = () => {

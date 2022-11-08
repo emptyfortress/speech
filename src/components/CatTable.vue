@@ -5,40 +5,25 @@ q-table(:rows="props.rows"
 	flat
 	binary-state-sort
 	hide-bottom
+	selection="multiple"
+	v-model:selected="cat.selectedPodcategories"
 	:rows-per-page-options="[0]"
+	color="primary"
 	).stikytable
 	template(v-slot:top-row v-if="props.rows.length == 0")
 		q-td(colspan="5").text-center Категория не настроена.
-	template(v-slot:body-selection)
-	template(v-slot:body="props")
-		q-tr(:props="props" @click="select(props.row)" :class="{ selected : props.row.id === selected }")
-			q-td(key="label" :props="props") {{ props.row.label }}
-			q-td(key="call" :props="props") {{ props.row.call }}
-			q-td(key="ant" :props="props") {{ props.row.ant }} мин.
-			q-td(key="loud" :props="props") {{ props.row.loud }} %
-			q-td(key="interrupt" :props="props") {{ props.row.interrupt }} %
 
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import type { Ref } from 'vue'
-import { useStore } from '@/stores/store'
-
-interface Row {
-	id: number
-	date: string
-	group: string
-	record: string
-	operator: string
-	client: string
-	expand: boolean
-}
+import { useCat } from '@/stores/category1'
 
 const props = defineProps<{
 	rows: String[]
 	level: number
 }>()
+
+const cat = useCat()
 
 const columns: Column[] = [
 	{ name: 'label', label: 'Подкатегория', field: 'label', sortable: true, align: 'left' },
@@ -69,18 +54,6 @@ const columns: Column[] = [
 		format: (val) => `${val}%`,
 	},
 ]
-
-const mystore = useStore()
-const selected: Ref<number | null> = ref(null)
-
-const select = (e: Row) => {
-	if (selected.value === e.id) {
-		return
-	}
-	selected.value = e.id
-	mystore.recordPanel = true
-	mystore.setLoading()
-}
 </script>
 
 <style scoped lang="scss">
