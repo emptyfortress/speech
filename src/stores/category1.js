@@ -570,6 +570,9 @@ export const useCat = defineStore({
 			}
 			return rows
 		},
+		getTags() {
+			return this.selectedPodcategories.map((item) => item.label)
+		},
 	},
 	actions: {
 		killNode(id) {

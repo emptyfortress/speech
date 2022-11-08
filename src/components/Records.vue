@@ -18,7 +18,7 @@ q-expansion-item(v-model="mystore.recordPanel")
 				q-inner-loading(showing color="primary" size="100px")
 			template(v-slot:top="props")
 				q-btn(unelevated color="grey" size="sm" label="Скачать одним архивом")
-				q-chip(v-for="chip in cat.selectedPodcategories") {{ chip.label }}
+				q-chip(v-for="chip in cat.getTags") {{ chip }}
 				q-space
 				q-input(dense debounce="300" color="primary" v-model="filter" clearable)
 					template(v-slot:prepend)
