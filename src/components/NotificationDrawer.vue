@@ -40,7 +40,11 @@ q-drawer(v-model="mystore.notificationDrawer" overlay side="right" :width="300" 
 				q-item-label.normal {{item.channel}}
 			.mybt
 				q-btn(round color="white" text-color="black" icon="mdi-check" size="sm" @click.stop="read(item)").q-mr-xs
-				q-btn(round color="white" text-color="black" icon="mdi-trash-can-outline" size="sm" @click.stop="remove(item)")
+				q-btn(round color="white" text-color="black" icon="mdi-trash-can-outline" size="sm" @click.stop="")
+					q-menu
+						q-list
+							q-item(clickable @click.stop="remove(item)" v-close-popup).pink
+								q-item-section Удалить
 	.text-body1.text-weight-bold.q-mt-md.row.justify-between
 		div Остальные
 		div.normal ({{olditems.length}})
