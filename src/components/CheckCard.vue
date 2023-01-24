@@ -66,7 +66,7 @@ import WordHighlighter from 'vue-word-highlighter'
 
 const splitterModel = ref(65)
 const hei = computed(() => {
-	return 'height: ' + (window.innerHeight - 105) + 'px;'
+	return 'height: ' + (window.innerHeight - 205) + 'px;'
 })
 const firstItem = ref(true)
 
@@ -137,7 +137,7 @@ const kill = (e: Logic) => {
 .list {
 	padding: 0.5rem;
 	margin-right: 0.5rem;
-	height: calc(100vh - 105px);
+	height: calc(100vh - 205px);
 	font-size: 0.9rem;
 }
 .card {
