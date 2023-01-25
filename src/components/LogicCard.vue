@@ -16,7 +16,11 @@
 			Puzzle
 
 			.row.items-center.justify-between.q-mt-xl
-				q-btn(flat icon="mdi-trash-can-outline" label="Удалить запрос" color="primary" @click="mystore.deleteLogic")
+				q-btn(flat icon="mdi-trash-can-outline" label="Удалить запрос" color="primary")
+					q-menu(anchor="bottom right" self="top right")
+						q-list
+							q-item(clickable @click="mystore.deleteLogic" v-close-popup).pink
+								q-item-section Удалить
 				div
 					q-btn(flat icon="mdi-share-variant" label="Поделиться" color="primary" @click="dialog = !dialog")
 					q-btn(unelevated color="primary" icon="mdi-content-save-outline" label="Сохранить" @click="save")
