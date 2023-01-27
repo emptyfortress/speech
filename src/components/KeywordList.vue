@@ -27,12 +27,16 @@ q-list(dense)
 					label
 						q-checkbox(v-model="selection" size="xs" dense :val="element.label").q-mr-sm
 						component(:is="SvgIcon" name="vocabulary" v-if="element.voc").voc
-						|{{element.label}}
+						WordHighlighter(:query="filter") {{ element.label }}
 
 				q-item-section(side v-if="!editMode")
 					.row
 						q-icon(name="mdi-pencil" size="xs" @click="edit(element)" v-if="element.voc").q-mr-sm.hov
-						q-icon(name="mdi-trash-can-outline" size="xs" @click="remove(element)").hov
+						q-icon(name="mdi-trash-can-outline" size="xs" @click="").hov
+							q-menu
+								q-list
+									q-item(clickable @click="remove(element)" v-close-popup).pink
+										q-item-section Удалить
 
 	template(v-if="filteredItems.length === 0")
 		.notfound
@@ -60,6 +64,7 @@ import type { Ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { words } from '@/stores/list'
 import SvgIcon from '@/components/SvgIcon.vue'
+import WordHighlighter from 'vue-word-highlighter'
 
 interface Keyword {
 	key?: string
@@ -268,8 +273,6 @@ const save = () => {
 }
 .q-item__section--avatar {
 	padding-right: 0;
-}
-.item {
 }
 
 .sortable-ghost,

@@ -151,7 +151,7 @@ span.found {
 }
 .spli .q-splitter__separator {
 	width: 2px;
-	background: #e0e2d9;
+	background: #ccc;
 }
 
 .q-splitter--vertical > .q-splitter__separator:hover,
@@ -226,4 +226,24 @@ span.found {
 .del .q-tree__icon,
 .q-tree__node-header-content .q-icon {
 	font-size: 13px;
+}
+
+body.desktop .nohov .q-focus-helper {
+	transition: none;
+}
+
+.stikytable {
+	height: 365px;
+	thead tr th {
+		position: sticky;
+		z-index: 1;
+		background: #fff;
+	}
+	thead tr:first-child th {
+		top: 0;
+	}
+}
+.pink {
+	background: pink;
+	color: darkred;
 }

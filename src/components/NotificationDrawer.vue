@@ -2,6 +2,7 @@
 q-drawer(v-model="mystore.notificationDrawer" overlay side="right" :width="300" ).rd.noti
 	.text-h6.row.justify-between.items-center
 		span(@click="$router.push('/notifications')").cursor-pointer.text-primary Уведомления
+
 		q-btn(round flat icon="mdi-dots-horizontal")
 			q-menu(transition-show="jump-down" transition-hide="jump-up")
 				q-list
@@ -17,6 +18,9 @@ q-drawer(v-model="mystore.notificationDrawer" overlay side="right" :width="300" 
 						q-item-section(avatar)
 							q-icon(name="mdi-cog-outline")
 						q-item-section Настройки уведомлений
+
+		q-btn(unelevated round icon="mdi-close" color="primary" @click="mystore.notificationDrawer = false" size="sm") 
+
 	.row.justify-between.items-center
 		div
 			q-chip(clickable :label="chip.label" v-for="chip in chips" :key="chip.id" :class="{'selected' : chip.selected}" @click="select(chip)")
@@ -36,7 +40,11 @@ q-drawer(v-model="mystore.notificationDrawer" overlay side="right" :width="300" 
 				q-item-label.normal {{item.channel}}
 			.mybt
 				q-btn(round color="white" text-color="black" icon="mdi-check" size="sm" @click.stop="read(item)").q-mr-xs
-				q-btn(round color="white" text-color="black" icon="mdi-trash-can-outline" size="sm" @click.stop="remove(item)")
+				q-btn(round color="white" text-color="black" icon="mdi-trash-can-outline" size="sm" @click.stop="")
+					q-menu
+						q-list
+							q-item(clickable @click.stop="remove(item)" v-close-popup).pink
+								q-item-section Удалить
 	.text-body1.text-weight-bold.q-mt-md.row.justify-between
 		div Остальные
 		div.normal ({{olditems.length}})

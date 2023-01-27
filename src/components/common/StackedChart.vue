@@ -9,7 +9,7 @@ q-card(:class="{'full' : isFullscreen}")
 		q-btn(flat round dense :icon="isFullscreen ? 'fullscreen_exit' : 'fullscreen'" @click="togg")
 	transition(name="slide-bottom" v-if="!isFullscreen")
 		component(:is="VueApexCharts" type="bar" height="235" :options="options" :series="series" v-if="tabl === false").graph
-		q-table( v-else
+		q-table(v-else
 			:columns="columns"
 			dense
 			:rows="bigData"

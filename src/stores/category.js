@@ -182,17 +182,18 @@ export const useCategory = defineStore({
 			this.categories = payload
 		},
 		addCategory(payload, node) {
-			if (node === 'Все категории') {
-				this.categories.push({ id: this.categories.length, label: payload, childs: [] })
-			} else {
-				const temp = this.categories.find((e) => e.label === node)
-				const index = this.categories.indexOf(temp)
-				this.categories[index].children.push({
-					id: this.categories.length,
-					label: payload,
-					childs: [],
-				})
-			}
+			const index = this.categories.indexOf(node)
+			console.log(index)
+			// const temp = this.categories.find((e) => e.label === node.label)
+			// const index = this.categories.indexOf(temp)
+			// if (!('children' in this.categories[index])) {
+			// 	console.log('trooo')
+			// }
+			// this.categories[index].children.push({
+			// 	id: this.categories.length,
+			// 	label: payload,
+			// 	childs: [],
+			// })
 		},
 	},
 })

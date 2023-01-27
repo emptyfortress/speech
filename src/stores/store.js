@@ -20,10 +20,18 @@ export const useStore = defineStore({
 		integral: false,
 		record: 'группа 1',
 		wide: false,
+		recordPanel: false,
+		loading: false,
 	}),
 	getters: {},
 
 	actions: {
+		setLoading() {
+			this.loading = true
+			setTimeout(() => {
+				this.loading = false
+			}, 2000)
+		},
 		setRecord(payload) {
 			this.record = payload
 		},

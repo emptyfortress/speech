@@ -1,7 +1,7 @@
 <template lang="pug">
 q-dialog(v-model="props.dialog" persistent :maximized="props.maximized" transition-show="slide-up" transition-hide="slide-down")
 	.cnt
-		.top Добавляйте критерии и настраивайте условия запросов. Определите их порядок перетаскиванием.
+		.top Добавляйте критерии и настраивайте условия запросов. Используйте контекстное меню, чтобы определить их порядок.
 		.zg
 			q-icon(name="mdi-android-studio" size="26px")
 			span Конструктор запросов

@@ -2,81 +2,87 @@
 q-splitter(v-model="split2" :limits="[30, 80]" :style="hei")
 	template(v-slot:before)
 		.related
-			.text-h6 {{props.selected}}
-			q-tab-panels(v-model="selected" animated transition-prev="jump-up" transition-next="jump-up" )
-				template(v-for="(item, index) in list" :key="item.id")
-					q-tab-panel(:name="item.label")
-						component(:is="draggable" class="list-group" :list="item.childs" group="subcat" itemKey="id")
-							template(#header)
-								div
-									.list
-										.podzag Подкатегория
-										.podzag Словарь
-									.empty(v-if="item.childs?.length === 0") Раздел не настроен.
-							template(#item="{ element }")
-								.list.item
-									div
-										|{{element.name}}
-										q-popup-edit(v-model="element.name" auto-save v-slot="scope").border-primary
-											q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
-									div
-										component(:is="SvgIcon" name="vocabulary").small.q-mr-sm
-										|{{element.label}}
-									q-icon(name="mdi-close" size="xs" @click="killCat(index, element)").del
+			.my-h6
+				q-breadcrumbs
+					q-breadcrumbs-el(v-for="bread in props.selectedItem.breads" :label="bread")
+					q-breadcrumbs-el(:label="props.selectedItem.label")
+			q-list().q-mt-md
+				q-item(clickable dense v-for="(item, index) in props.selectedItem.children" :key="item.id" @click="select(item.id)").nohov
+					q-item-section(avatar)
+						q-icon(name="mdi-menu-right" size="sm")
+					q-item-section
+						q-item-label
+							|{{item.label}}
+						q-popup-edit(v-model="item.label" auto-save v-slot="scope" :ref="(el: any) => {editNode[index] = el}" )
+							q-input(v-model="scope.value" dense autofocus counter @keyup.enter="scope.set")
+					q-item-section(side).hove
+						q-btn(round flat dense icon="mdi-pencil" size="11px" @click.stop="editItem(index)")
+						q-btn(round flat dense icon="mdi-trash-can-outline" size="11px" @click.stop="killItem(item)")
+				q-separator.q-my-sm
 
-			q-btn(v-morph:btn1:categ:200.resize="morphGroupModel1" @click="nextMorph1" round color="primary" icon="mdi-plus" size="md").fab1
-			q-card(v-morph:card2:categ:200.resize="morphGroupModel1").ccc
-				.text-subtitile1 Новая подкатегория
-				q-input(v-model="newsubcat" dense outlined bg-color="white" autofocus)
-				.row.justify-between.q-mt-sm
-					q-btn(flat label="Отмена" @click="nextMorph1")
-					q-btn(flat label="ОК" @click="nextMorph1")
+				q-item(clickable v-if="props.selectedItem.level < 3" v-click-away="addModeOff")
+					q-item-section(avatar)
+						q-icon(name="mdi-plus-circle" color="primary" size="sm" :class="{'rot' : addMode}" @click.stop="addMode = !addMode")
+					q-item-section
+						q-item-label(v-if="!addMode" @click.stop="addMode = !addMode") Добавить
+						.inlineAdd(v-else)
+							q-input(autofocus v-model="newItem" dense ref="addInput" @keyup.enter="submit").smallinput
+							q-btn(round unelevated color="positive" icon="mdi-check" dense size="sm" @click.stop="addItem" :disable="newItem.length < 3")
+
+
+			q-card(v-if="props.selectedItem.level === 3").sub
+				component(:is="draggable" class="list-group" :list="props.selectedItem.childs" group="subcat" itemKey="id")
+					template(#header)
+						div
+							.list
+								.podzag Словарь, слово, логический запрос
+							.empty(v-if="props.selectedItem.childs?.length === 0") Раздел не настроен.
+					template(#item="{ element, index }")
+						.list.item
+							component(:is="SvgIcon" name="vocabulary" v-if="element.voc").small.q-mr-sm
+							q-icon(name="mdi-toy-brick-search-outline" v-if="!element.score" size="18px").q-mr-sm
+							|{{element.label}}
+							q-icon(name="mdi-trash-can-outline" size="xs" @click="killVoc(index)").del
 
 	template(v-slot:after)
 		.right
 			q-tabs(v-model="tabs" inline-label indicator-color="primary" no-caps dense align="left")
 				q-tab(name="Voc")
-					SvgIcon(name="vocabulary").q-mr-sm
+					component(:is="SvgIcon" name="vocabulary").vocicon
 					|Словари
-				q-tab(name="Rec" icon="mdi-toy-brick-search-outline")
+				q-tab(name="Rec")
+					q-icon(name="mdi-toy-brick-search-outline" size="20px")
 					span.q-mx-sm Запросы
-					q-badge(color="orange" label="New!")
+					q-badge(color="green" label="New!")
 			q-tab-panels(v-model="tabs" animated).cool
 				q-tab-panel(name="Voc")
 					q-scroll-area(:style="hei1")
 						component(:is="KeywordList")
 				q-tab-panel(name="Rec")
-					.row.items-center
-						img(src="@/assets/img/man.svg" v-if="cli").q-mr-md
-						img(src="@/assets/img/man1.svg" v-else).q-mr-md
-						q-btn(unelevated label="Когда?" color="primary" @click.once="show" v-if="cli")
+					q-scroll-area(:style="hei1")
+						component(:is="LogicList1")
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import draggable from 'vuedraggable'
-import { useCategory } from '@/stores/category'
+import { useCat } from '@/stores/category1'
 import SvgIcon from '@/components/SvgIcon.vue'
 import KeywordList from '@/components/KeywordList.vue'
+import LogicList1 from '@/components/LogicList1.vue'
 import { useQuasar } from 'quasar'
-import { getMembers } from '@/utils/utils'
+import { uid } from 'quasar'
+import type { Ref } from 'vue'
 
-const props = defineProps({
-	selected: {
-		type: String,
-		default: 'Категория',
-	},
-})
+const props = defineProps<{
+	selectedItem: Category
+}>()
 
-const cat = useCategory()
+const emit = defineEmits(['select'])
+
+const cat = useCat()
 const $q = useQuasar()
 const split2 = ref(60)
-
-const list = computed(() => {
-	return getMembers(cat.categories)
-})
-
-// const list = cat.catList
 
 const tabs = ref('Voc')
 const cli = ref(true)
@@ -94,60 +100,61 @@ const show = () => {
 	})
 	cli.value = !cli.value
 }
-
-const undo = (i: number, e: any) => {
-	list.value[i].childs!.push(e)
+const select = (e: string) => {
+	emit('select', e)
 }
 
-const killCat = (i: number, e: any) => {
-	let ind = list.value[i].childs!.indexOf(e)
-	list.value[i].childs!.splice(ind, 1)
-	let message = e.label + ' - удалено.'
+const addMode = ref(false)
+const newItem = ref('')
+const addInput = ref()
+
+const addItem = () => {
+	const current = props.selectedItem
+	let temp = {
+		id: uid(),
+		label: newItem.value,
+		level: current.level + 1,
+		breads: current.breads,
+		children: [],
+		childs: [],
+	}
+	temp.breads?.push(current.label)
+	cat.addCategory(temp, props.selectedItem.id)
+	newItem.value = ''
+	addInput.value.focus()
+}
+
+const submit = () => {
+	if (newItem.value.length > 2) {
+		addItem()
+	}
+}
+
+const addModeOff = () => {
+	addMode.value = false
+}
+
+const killItem = (e: Category) => {
+	cat.killNode(e.id)
 	$q.notify({
-		message: message,
+		message: `${e.label} - удалено`,
 		color: 'negative',
-		actions: [
-			{
-				label: 'Вернуть',
-				color: 'white',
-				handler: () => undo(i, e),
-			},
-		],
 	})
 }
-
-const morphGroupModel1 = ref('btn1')
-
-const nextMorphStep1: any = {
-	btn1: 'card2',
-	card2: 'btn1',
+const killVoc = (e: number) => {
+	props.selectedItem.childs?.splice(e, 1)
 }
 
-const newsubcat = ref('')
-const nextMorph1 = () => {
-	if (newsubcat.value.length > 2) {
-		let current = list.value.find((e) => e.label === props.selected)
-		let newitem = {
-			id: list.value.length,
-			name: newsubcat.value,
-			label: '',
-			typ: 1,
-		}
-		current?.childs?.push(newitem)
-		newsubcat.value = ''
-	}
+const editNode: Ref<any[]> = ref([])
 
-	morphGroupModel1.value = nextMorphStep1[morphGroupModel1.value]
+const editItem = (e: number) => {
+	editNode.value[e].show()
 }
 </script>
 
 <style scoped lang="scss">
 @import '@/assets/styles/myvariables.scss';
 
-.q-tab-panels {
-	border-radius: $radius-md;
-	box-shadow: $card-shadow;
-}
 .right {
 	padding-left: 0.5rem;
 }
@@ -156,22 +163,17 @@ const nextMorph1 = () => {
 	box-shadow: none;
 	margin-top: 0;
 }
-.small {
-	font-size: 0.7rem;
-}
 .podzag {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	padding-left: 1.2rem;
 	font-size: 0.75rem;
 	letter-spacing: 1px;
 	color: grey;
 	border-bottom: 1px solid #ccc;
 }
 .list {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	column-gap: 2rem;
+	// display: grid;
+	// grid-template-columns: 1fr 1fr;
+	// column-gap: 2rem;
 	position: relative;
 	&.item {
 		padding: 0.5rem 1rem;
@@ -204,9 +206,38 @@ const nextMorph1 = () => {
 	margin-top: 0.5rem;
 }
 .related {
-	position: relative;
+	// position: relative;
 	margin: 0 0.5rem;
-	height: 100%;
+	// height: 100%;
+}
+.sub {
+	padding: 1rem;
+}
+.grid {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	// flex-wrap: wrap;
+	& > div {
+		font-size: 0.9rem;
+		padding: 0.5rem 1rem;
+		cursor: pointer;
+		border: 1px solid transparent;
+		&:hover {
+			border: 1px solid #cdcdcd;
+		}
+	}
+}
+.nohov {
+	.hove {
+		display: none;
+	}
+	&:hover {
+		.hove {
+			display: block;
+		}
+	}
 }
 .fab1 {
 	position: absolute;
@@ -223,11 +254,26 @@ const nextMorph1 = () => {
 	width: 250px;
 	z-index: 10;
 	border-bottom-left-radius: 1.5rem;
-	padding: 1rem;
+	.sub {
+		padding: 1rem;
+	}
 }
-.test {
-	width: 100px;
-	height: 100px;
-	background: pink;
+.inlineAdd {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.smallinput {
+	margin-top: -9px;
+}
+.my-h6 {
+	font-size: 1.1rem;
+}
+.small {
+	font-size: 0.7rem;
+}
+.vocicon {
+	font-size: 13px;
+	margin-right: 0.5rem;
 }
 </style>

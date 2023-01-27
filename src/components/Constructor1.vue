@@ -1,7 +1,7 @@
 <template lang="pug">
 q-dialog(v-model="props.dialog" persistent :maximized="props.maximized" transition-show="slide-up" transition-hide="slide-down")
 	.cnt
-		.top Создавайте чеклисты, комбинируя логические запросы.
+		.top Создавайте чеклисты, комбинируя логические запросы...
 		.zg
 			q-icon(name="mdi-checkbox-multiple-outline" size="26px")
 			span Конструктор чеклистов
@@ -28,8 +28,9 @@ const props = defineProps({
 })
 
 const splitterModel = ref(25)
+
 const hei = computed(() => {
-	return 'height: ' + (window.innerHeight - 105) + 'px;'
+	return 'height: ' + (window.innerHeight - 205) + 'px;'
 })
 
 const commentList = ref(false)
@@ -43,7 +44,12 @@ const split = (val: number) => {
 <style scoped lang="scss">
 @import '@/assets/styles/myvariables.scss';
 
+.q-dialog__inner--minimized > div {
+	max-width: initial;
+	height: calc(100vh - 40px);
+}
 .cnt {
+	width: 70%;
 	background: moz-linear-gradient(top, #d8e3f1 0%, #f4e8f4 52.6%, #fdf5e5 100%);
 	background: webkit-linear-gradient(top, #d8e3f1 0%, #f4e8f4 52.6%, #fdf5e5 100%);
 	background: linear-gradient(180deg, #d8e3f1 0%, #f4e8f4 52.6%, #fdf5e5 100%);
@@ -69,6 +75,5 @@ const split = (val: number) => {
 	padding: 2px 2rem;
 	font-size: 1rem;
 	text-align: center;
-	// color: white;
 }
 </style>

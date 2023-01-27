@@ -1,5 +1,7 @@
 <template lang="pug">
 q-drawer(v-model="mystore.keyDrawer" overlay side="right" :width="300" ).rd
+	.bt
+		q-btn(unelevated round icon="mdi-close" color="primary" @click="mystore.keyDrawer = false" size="sm") 
 	component(:is="KeywordList")
 </template>
 
@@ -11,8 +13,15 @@ const mystore = useStore()
 </script>
 
 <style scoped lang="scss">
-//@import '@/assets/css/colors.scss';
 .date {
 	margin-top: 0;
+}
+.rd {
+	position: relative;
+}
+.bt {
+	position: absolute;
+	right: 1.2rem;
+	top: 0.8rem;
 }
 </style>

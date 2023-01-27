@@ -34,10 +34,7 @@ q-table(:rows="rows"
 			q-td(@click.stop="showDialog2").graph
 				component(:is="VueApexCharts" type="donut" height="35" width="35" :options="sparkDonut" :series="props.row.donut" )
 
-q-dialog(v-model="bigTable")
-	q-card(style="width: 1000px; max-width: 80vw;")
-		q-btn(round color="negative" icon="mdi-close" @click="bigTable = false").close
-		component(:is="Podcat" :categoryName="categoryName")
+component(:is="DialogPodcat" :show="bigTable" :category="categoryName" @close="bigTable = false")
 
 q-dialog(v-model="dialog1")
 	q-card(style="width: 900px; max-width: 80vw;")
@@ -58,7 +55,7 @@ import type { Ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 import { chartTableAreaBig, seriesTable1, chartTableDonutBig, seriesTable4 } from '@/stores/charts1'
 import { useCategory } from '@/stores/category'
-import Podcat from '@/components/Podcat.vue'
+import DialogPodcat from '@/components/common/DialogPodcat.vue'
 
 const dialog1 = ref(false)
 const dialog2 = ref(false)

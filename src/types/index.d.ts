@@ -45,9 +45,10 @@ interface Column {
 }
 
 interface Podcategory {
-	id: number
+	id: string
 	label: string
 	typ: number
+	name?: string
 }
 
 interface RowCategory {
@@ -59,10 +60,31 @@ interface RowCategory {
 	interrupt?: string
 	dynamics?: any
 	volume?: any
+	donut?: number[]
+	spark?: Array
 	selected?: boolean
 	classname?: string
 	children?: RowCategory[]
 	childs?: Podcategory[]
+}
+
+interface Category {
+	id: string
+	label: string
+	level: number
+	breads?: string[]
+	typ?: number
+	header?: string
+	childs?: Podcategory[]
+	children?: Category[]
+}
+
+interface Request {
+	id: string
+	label: string
+	typ: number
+	header?: string
+	children?: Request[] | null
 }
 
 interface RowNotific {

@@ -30,7 +30,7 @@ q-page(padding).rel
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useStore } from '@/stores/store'
 import { useCheck } from '@/stores/check'
 import Chiplist from '@/components/common/Chiplist.vue'
@@ -45,7 +45,7 @@ const mystore = useStore()
 const mycheck = useCheck()
 const dialog1 = ref(false)
 const chips = mycheck.allCheck.filter((e) => e.star)
-const maximizedToggle = ref(true)
+const maximizedToggle = ref(false)
 
 const toggle = () => {
 	mystore.loading = true

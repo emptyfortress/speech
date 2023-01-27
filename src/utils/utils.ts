@@ -1,3 +1,5 @@
+import { uid } from 'quasar'
+
 export interface MyColumns {
 	name: string
 	label: string
@@ -41,4 +43,51 @@ const getMembers = (members: RowCategory[]): RowCategory[] => {
 		.concat(children.length ? getMembers(children) : children)
 }
 
-export { randomArray, randomNumber, getMembers }
+function getNodeFromTree(node: Category, nodeId: any): Category | null {
+	if (node.id == nodeId) {
+		return node
+	} else if (node.children != null) {
+		var result = null
+		for (let i = 0; result == null && i < node.children.length; i++) {
+			result = getNodeFromTree(node.children[i], nodeId)
+		}
+		return result
+	}
+	return null
+}
+
+function deleteNodeFromTree<T extends { id: string; children: T[] }>(node: T, nodeId: string) {
+	if (node.children != null) {
+		for (let i = 0; i < node.children.length; i++) {
+			let filtered = node.children.filter((f) => f.id == nodeId)
+			if (filtered && filtered.length > 0) {
+				node.children = node.children.filter((f) => f.id != nodeId)
+				return
+			}
+			deleteNodeFromTree(node.children[i], nodeId)
+		}
+	}
+}
+
+function insertNodeIntoTree<T extends { id: string; children: T[] }>(
+	node: T,
+	nodeId: string,
+	newNode: T
+) {
+	if (node.id == nodeId) {
+		node.children?.push(newNode)
+	} else if (node.children != null) {
+		for (let i = 0; i < node.children.length; i++) {
+			insertNodeIntoTree(node.children[i], nodeId, newNode)
+		}
+	}
+}
+
+export {
+	randomArray,
+	randomNumber,
+	getMembers,
+	getNodeFromTree,
+	deleteNodeFromTree,
+	insertNodeIntoTree,
+}

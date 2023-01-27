@@ -2,6 +2,7 @@
 import { ref, computed, watch } from 'vue'
 import WordHighlighter from 'vue-word-highlighter'
 import { useCheck } from '@/stores/check'
+
 const props = defineProps({
 	commentList: { type: Boolean, default: false },
 })
@@ -115,7 +116,7 @@ q-scroll-area.list
 .list {
 	padding: 0.5rem;
 	margin-right: 0.5rem;
-	height: calc(100vh - 105px);
+	height: calc(100vh - 205px);
 }
 .selected {
 	color: white;
