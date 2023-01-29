@@ -5,7 +5,7 @@
 	q-card.card.shadow-5
 		.logo
 			q-avatar
-				img(src="@/assets/img/user0.svg")
+				img(src="@/assets/img/user1.svg")
 		.he Модуль речевой аналитики ANALYZE
 		q-card-section
 			form

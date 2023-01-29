@@ -57,8 +57,8 @@ template(v-if="isLogged")
 				q-btn(dense flat round icon="mdi-bell-outline" @click="mystore.toggleNotificationDrawer")
 					q-badge(floating rounded color="red") 3
 				q-btn(dense round unelevated).q-mx-md
-					q-avatar(color="blue" size="30px")
-						img(src="@/assets/img/user0.svg")
+					q-avatar(size="30px")
+						img(src="@/assets/img/user1.svg")
 					q-menu(transition-show="jump-down" transition-hide="jump-up")
 						q-list
 							q-item(clickable v-close-popup @click="$router.push('/profile')")

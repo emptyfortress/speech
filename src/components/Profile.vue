@@ -4,7 +4,7 @@ q-page(padding)
 		.huge
 			.ava
 				.q-avatar
-					img(src="@/assets/img/user0.svg")
+					img(src="@/assets/img/user1.svg")
 				div
 					.text-weight-bold Голомудько
 					.name Разубай Буранович
@@ -131,8 +131,6 @@ onMounted(() => {
 	.q-avatar {
 		width: 100px;
 		height: 100px;
-		background: $blue;
-		border: 2px solid white;
 	}
 }
 .mygrid {
