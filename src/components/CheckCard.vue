@@ -20,7 +20,7 @@ q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei")
 						.input
 							.lab Вес:
 							input(value="15")
-						q-btn(flat round icon="mdi-arrow-u-down-right" size="12px" @click="edit(element)")
+						q-btn(flat round icon="mdi-pencil" size="12px" @click="edit(element)")
 						q-btn(flat round icon="mdi-trash-can-outline" size="12px" @click="kill(element)")
 			q-card-actions.q-mt-xl
 				q-btn(flat icon="mdi-trash-can-outline" label="Удалить чеклист" color="primary" @click="mycheck.deleteCheckList")

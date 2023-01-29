@@ -44,8 +44,20 @@ export const useCheck = defineStore({
 			{
 				id: 0,
 				list: [
-					{ id: 0, label: 'Приветствие' },
-					{ id: 1, label: 'Прощание' },
+					{
+						id: 1,
+						comment: 'Оператор здоровается с клиентом',
+						star: true,
+						selected: false,
+						label: 'Приветствие',
+					},
+					{
+						id: 2,
+						comment: 'Оператор прощается с клиентом',
+						star: true,
+						selected: false,
+						label: 'Прощание',
+					},
 				],
 			},
 			{ id: 1, list: [] },
