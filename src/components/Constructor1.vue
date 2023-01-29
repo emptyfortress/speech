@@ -49,7 +49,6 @@ const split = (val: number) => {
 	height: calc(100vh - 40px);
 }
 .cnt {
-	width: 70%;
 	background: moz-linear-gradient(top, #d8e3f1 0%, #f4e8f4 52.6%, #fdf5e5 100%);
 	background: webkit-linear-gradient(top, #d8e3f1 0%, #f4e8f4 52.6%, #fdf5e5 100%);
 	background: linear-gradient(180deg, #d8e3f1 0%, #f4e8f4 52.6%, #fdf5e5 100%);

@@ -45,7 +45,7 @@ const mystore = useStore()
 const mycheck = useCheck()
 const dialog1 = ref(false)
 const chips = mycheck.allCheck.filter((e) => e.star)
-const maximizedToggle = ref(false)
+const maximizedToggle = ref(true)
 
 const toggle = () => {
 	mystore.loading = true
