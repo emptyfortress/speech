@@ -1,8 +1,38 @@
 <script setup lang="ts">
 import { useLogic } from '@/stores/logic'
+import { useCheck } from '@/stores/check'
+import { useQuasar } from 'quasar'
 import Puzzle from '@/components/Puzzle.vue'
 
 const logic = useLogic()
+const check = useCheck()
+
+const update = () => {
+	const zag = document.getElementById('zg1')
+	const text = zag!.innerHTML
+	logic.currentLogic.label = text
+	// const index = check.allList[0].list.findIndex((item) => item.label === logic.currentLogic.label)
+	// check.allList[0].list[index].label = text
+}
+const updatecomment = () => {
+	const comm = document.getElementById('comment1')
+	const text = comm!.innerHTML
+	logic.currentLogic.comment = text
+	// const index = logic.allLogic.findIndex((item) => item.selected)
+	// logic.allLogic[index].comment = text
+}
+
+const $q = useQuasar()
+
+const save = () => {
+	logic.inception = false
+	$q.notify({
+		icon: undefined,
+		message: 'Сохранено',
+		color: 'positive',
+		position: 'top-right',
+	})
+}
 </script>
 
 <template lang="pug">
@@ -10,12 +40,12 @@ q-dialog(v-model="logic.inception")
 	q-card
 		q-card-section.row.items-baseline.q-pb-none
 			q-space
-			#zg(contenteditable @blur="update") {{ logic.currentLogic.label }}
+			#zg1(contenteditable @blur="update") {{ logic.currentLogic.label }}
 			q-space
 			q-btn(icon="mdi-close" flat round dense v-close-popup)
 
 		q-card-section 
-			#comment(contenteditable @blur="updatecomment") {{logic.currentLogic.comment}}
+			#comment1(contenteditable @blur="updatecomment") {{logic.currentLogic.comment}}
 
 		q-card-section
 			component(:is="Puzzle")
@@ -32,7 +62,7 @@ q-dialog(v-model="logic.inception")
 .q-dialog__inner--minimized > div {
 	min-width: 70%;
 }
-#zg {
+#zg1 {
 	font-size: 1rem;
 	text-transform: uppercase;
 	font-weight: 600;
@@ -47,7 +77,7 @@ q-dialog(v-model="logic.inception")
 		background: $bgSelection;
 	}
 }
-#comment {
+#comment1 {
 	font-size: 0.9rem;
 	margin-top: 1rem;
 	padding: 0.5rem;
