@@ -20,6 +20,7 @@ q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei")
 						.input
 							.lab Вес:
 							input(value="15")
+						q-btn(flat round icon="mdi-arrow-u-down-right" size="12px" @click="edit(element)")
 						q-btn(flat round icon="mdi-trash-can-outline" size="12px" @click="kill(element)")
 			q-card-actions.q-mt-xl
 				q-btn(flat icon="mdi-trash-can-outline" label="Удалить чеклист" color="primary" @click="mycheck.deleteCheckList")
@@ -115,6 +116,10 @@ const kill = (e: Logic) => {
 	let index = itemIndex(e)
 	list1.value.splice(index, 1)
 }
+const edit = (e: Logic) => {
+	mylogic.showInception()
+	mylogic.currentLogic = e
+}
 </script>
 
 <style scoped lang="scss">
@@ -196,8 +201,8 @@ const kill = (e: Logic) => {
 	min-height: 50px;
 	margin-bottom: 0.5rem;
 	display: grid;
-	grid-template-columns: 1fr 90px auto;
-	gap: 1rem;
+	grid-template-columns: 1fr 90px auto auto;
+	gap: 0.5rem;
 	align-items: center;
 }
 .input {

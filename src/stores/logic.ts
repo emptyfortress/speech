@@ -11,6 +11,8 @@ interface Logic {
 export const useLogic = defineStore({
 	id: 'logic',
 	state: () => ({
+		inception: false,
+		currentLogic: {} as Logic,
 		allLogic: [
 			{
 				id: 0,
@@ -159,6 +161,9 @@ export const useLogic = defineStore({
 	},
 
 	actions: {
+		showInception() {
+			this.inception = true
+		},
 		duble() {
 			const active = this.activeLogic
 			const activeList = this.allList.find((e) => e.id === active.id)

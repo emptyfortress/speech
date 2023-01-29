@@ -27,6 +27,7 @@ q-page(padding).rel
 		component(:is="VehaRecord")
 
 		component(:is="Constructor1" :dialog="dialog1" :maximized="maximizedToggle")
+		component(:is="WindowConstructor")
 </template>
 
 <script setup lang="ts">
@@ -40,6 +41,7 @@ import VehaStat from '@/components/VehaStat.vue'
 import OperStat from '@/components/OperStat.vue'
 import VehaRecord from '@/components/VehaRecord.vue'
 import Constructor1 from '@/components/Constructor1.vue'
+import WindowConstructor from '@/components/WindowConstructor.vue'
 
 const mystore = useStore()
 const mycheck = useCheck()
@@ -64,6 +66,4 @@ const openDialog = () => {
 }
 </script>
 
-<style scoped lang="scss">
-//@import '@/assets/css/colors.scss';
-</style>
+<style scoped lang="scss"></style>
