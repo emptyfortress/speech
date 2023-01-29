@@ -41,6 +41,7 @@ const records = [
 		id: 0,
 		date: '2022-04-25 18:11',
 		group: 'группа 1',
+		categ: 'Продажи',
 		record: 'Urna condimentum <span class="found">претензия</span> mattis pellentesque id.',
 		operator: 'Екатерина',
 		client: 'Григорий',
@@ -50,6 +51,7 @@ const records = [
 		id: 1,
 		date: '2022-04-25 18:10',
 		group: 'группа 2',
+		categ: 'Оплата',
 		record:
 			'Arcu felis, bibendum  <span class="found">претензия</span> ut tristique et, egestas quis? Nisl suscipit adipiscing.',
 		operator: 'Елена',
@@ -60,6 +62,7 @@ const records = [
 		id: 2,
 		date: '2022-04-24 18:09',
 		group: 'группа 3',
+		categ: 'Сервис',
 		record:
 			'Ut placerat orci  <span class="found">претензия</span> nulla pellentesque dignissim enim, sit?',
 		operator: 'Ксения',
@@ -70,6 +73,7 @@ const records = [
 		id: 3,
 		date: '2022-04-24 18:09',
 		group: 'группа 1',
+		categ: 'Продажи',
 		record:
 			'In nibh mauris, cursus mattis  <span class="found">претензия</span> molestie a, iaculis.',
 		operator: 'Ирина',
@@ -80,6 +84,7 @@ const records = [
 		id: 4,
 		date: '2022-04-24 18:08',
 		group: 'группа 2',
+		categ: 'Сервис',
 		record:
 			'Id neque aliquam vestibulum  <span class="found">претензия</span> morbi blandit cursus risus?',
 		operator: 'Ева',
@@ -90,6 +95,7 @@ const records = [
 		id: 5,
 		date: '2022-04-24 16:44',
 		group: 'группа 3',
+		categ: 'Сервис',
 		record:
 			'Amet, porttitor eget dolor morbi non  <span class="found">претензия</span> arcu risus!',
 		operator: 'Дарья',
@@ -100,6 +106,7 @@ const records = [
 		id: 6,
 		date: '2022-04-24 16:43',
 		group: 'группа 1',
+		categ: 'Продажи',
 		record:
 			'Varius duis  <span class="found">претензия</span> at consectetur lorem donec massa sapien.',
 		operator: 'Кира',
@@ -110,6 +117,7 @@ const records = [
 		id: 7,
 		date: '2022-04-24 16:08',
 		group: 'группа 2',
+		categ: 'Оплата',
 		record:
 			'Morbi tincidunt ornare  <span class="found">претензия</span> massa, eget egestas purus viverra.',
 		operator: 'Елизавета',
@@ -120,6 +128,7 @@ const records = [
 		id: 8,
 		date: '2022-04-24 16:07',
 		group: 'группа 3',
+		categ: 'Продажи',
 		record:
 			'Egestas  <span class="found">претензия</span> integer eget aliquet nibh praesent tristique magna?',
 		operator: 'Ульяна',
@@ -130,6 +139,7 @@ const records = [
 		id: 9,
 		date: '2022-04-24 16:06',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Lacus, viverra  <span class="found">претензия</span> vitae congue eu, consequat ac felis?',
 		operator: 'Татьяна',
@@ -140,6 +150,7 @@ const records = [
 		id: 10,
 		date: '2022-04-23 16:05',
 		group: 'группа 2',
+		categ: 'Оплата',
 		record:
 			'Nec tincidunt praesent  <span class="found">претензия</span> semper feugiat nibh sed pulvinar.',
 		operator: 'Юлия',
@@ -150,6 +161,7 @@ const records = [
 		id: 11,
 		date: '2022-04-15 20:49',
 		group: 'группа 3',
+		categ: 'Продажи',
 		record:
 			'Vitae  <span class="found">претензия</span> turpis massa sed elementum tempus egestas sed!',
 		operator: 'Софья',
@@ -160,6 +172,7 @@ const records = [
 		id: 12,
 		date: '2022-04-15 20:48',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Pulvinar mattis nunc, sed  <span class="found">претензия</span> blandit libero volutpat sed.',
 		operator: 'Алина',
@@ -170,6 +183,7 @@ const records = [
 		id: 13,
 		date: '2022-04-15 20:47',
 		group: 'группа 2',
+		categ: 'Продажи',
 		record: 'Enim, sed faucibus  <span class="found">претензия</span> turpis in eu mi bibendum.',
 		operator: 'Злата',
 		client: 'Матвей',
@@ -179,6 +193,7 @@ const records = [
 		id: 14,
 		date: '2022-04-15 20:46',
 		group: 'группа 2',
+		categ: 'Оплата',
 		record:
 			'Faucibus turpis in  <span class="found">претензия</span> eu mi bibendum neque egestas.',
 		operator: 'Милана',
@@ -189,6 +204,7 @@ const records = [
 		id: 15,
 		date: '2022-04-15 20:45',
 		group: 'группа 3',
+		categ: 'Оплата',
 		record:
 			'Dictum varius  <span class="found">претензия</span> duis at consectetur lorem donec massa.',
 		operator: 'Ольга',
@@ -199,6 +215,7 @@ const records = [
 		id: 16,
 		date: '2022-04-15 20:44',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record: 'Vel eros donec ac odio  <span class="found">претензия</span> tempor orci dapibus?',
 		operator: 'Светлана',
 		client: 'Алексей',
@@ -208,6 +225,7 @@ const records = [
 		id: 17,
 		date: '2022-04-11 17:55',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Sem fringilla ut morbi tincidunt  <span class="found">претензия</span> augue interdum velit?',
 		operator: 'Ярослава',
@@ -218,6 +236,7 @@ const records = [
 		id: 18,
 		date: '2022-04-11 17:54',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record: 'Purus, in mollis  <span class="found">претензия</span> nunc sed id semper risus!',
 		operator: 'Яна',
 		client: 'Артемий',
@@ -227,6 +246,7 @@ const records = [
 		id: 19,
 		date: '2022-04-11 17:53',
 		group: 'группа 1',
+		categ: 'Продажи',
 		record: 'Senectus  <span class="found">претензия</span> et netus et malesuada fames ac turpis.',
 		operator: 'Кристина',
 		client: 'Виктор',
@@ -236,6 +256,7 @@ const records = [
 		id: 20,
 		date: '2022-04-10 17:53',
 		group: 'группа 1',
+		categ: 'Оплата',
 		record:
 			'Scelerisque  <span class="found">претензия</span> mauris pellentesque pulvinar pellentesque habitant morbi tristique.',
 		operator: 'Алиса',
@@ -246,6 +267,7 @@ const records = [
 		id: 21,
 		date: '2022-03-24 18:11',
 		group: 'группа 1',
+		categ: 'Продажи',
 		record:
 			'A,  <span class="found">претензия</span> condimentum vitae sapien pellentesque habitant morbi tristique.',
 		operator: 'Маргарита',
@@ -256,6 +278,7 @@ const records = [
 		id: 22,
 		date: '2022-03-24 18:10',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Dignissim convallis aenean et  <span class="found">претензия</span> tortor at risus viverra!',
 		operator: 'Таисия',
@@ -266,6 +289,7 @@ const records = [
 		id: 23,
 		date: '2022-03-24 18:09',
 		group: 'группа 1',
+		categ: 'Оплата',
 		record: 'At varius vel, pharetra vel  <span class="found">претензия</span> turpis nunc eget!',
 		operator: 'Тамара',
 		client: 'Егор',
@@ -275,6 +299,7 @@ const records = [
 		id: 24,
 		date: '2022-03-24 18:09',
 		group: 'группа 1',
+		categ: 'Продажи',
 		record:
 			'Et molestie ac,  <span class="found">претензия</span> feugiat sed lectus vestibulum mattis?',
 		operator: 'Эмилия',
@@ -285,6 +310,7 @@ const records = [
 		id: 25,
 		date: '2022-03-24 18:08',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Vitae justo eget  <span class="found">претензия</span> magna fermentum iaculis eu non?',
 		operator: 'Диана',
@@ -295,6 +321,7 @@ const records = [
 		id: 26,
 		date: '2022-03-24 16:44',
 		group: 'группа 1',
+		categ: 'Оплата',
 		record:
 			'Et tortor consequat id  <span class="found">претензия</span> porta nibh venenatis cras.',
 		operator: 'Анфиса',
@@ -305,6 +332,7 @@ const records = [
 		id: 27,
 		date: '2022-03-24 16:43',
 		group: 'группа 1',
+		categ: 'Оплата',
 		record:
 			'Turpis egestas integer  <span class="found">претензия</span> eget aliquet nibh praesent tristique!',
 		operator: 'Аделина',
@@ -315,6 +343,7 @@ const records = [
 		id: 28,
 		date: '2022-03-24 16:08',
 		group: 'группа 1',
+		categ: 'Продажи',
 		record:
 			'Tellus at urna  <span class="found">претензия</span> condimentum mattis pellentesque id nibh?',
 		operator: 'Евдокия',
@@ -325,6 +354,7 @@ const records = [
 		id: 29,
 		date: '2022-03-24 16:07',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Hac habitasse  <span class="found">претензия</span> platea dictumst quisque sagittis, purus sit.',
 		operator: 'Зоя',
@@ -335,6 +365,7 @@ const records = [
 		id: 30,
 		date: '2022-03-23 16:06',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Sit amet est placerat in  <span class="found">претензия</span> egestas erat imperdiet.',
 		operator: 'Ираида',
@@ -345,6 +376,7 @@ const records = [
 		id: 31,
 		date: '2022-03-23 16:05',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Viverra maecenas accumsan, lacus vel  <span class="found">претензия</span> facilisis volutpat, est?',
 		operator: 'Наталья',
@@ -355,6 +387,7 @@ const records = [
 		id: 32,
 		date: '2022-03-15 20:49',
 		group: 'группа 1',
+		categ: 'Оплата',
 		record:
 			'Varius morbi enim  <span class="found">претензия</span> nunc, faucibus a pellentesque sit!',
 		operator: 'Пелагея',
@@ -365,6 +398,7 @@ const records = [
 		id: 33,
 		date: '2022-03-15 20:48',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Ac tincidunt vitae,  <span class="found">претензия</span> semper quis lectus nulla at.',
 		operator: 'Сабина',
@@ -375,6 +409,7 @@ const records = [
 		id: 34,
 		date: '2022-03-15 20:47',
 		group: 'группа 1',
+		categ: 'Продажи',
 		record: 'Eu ultrices vitae, auctor eu  <span class="found">претензия</span> augue ut lectus!',
 		operator: 'Антонина',
 		client: 'Степан',
@@ -384,6 +419,7 @@ const records = [
 		id: 35,
 		date: '2022-03-15 20:46',
 		group: 'группа 1',
+		categ: 'Оплата',
 		record:
 			'Morbi tristique  <span class="found">претензия</span> senectus et netus et malesuada fames?',
 		operator: 'Екатерина',
@@ -394,6 +430,7 @@ const records = [
 		id: 36,
 		date: '2022-03-14 20:45',
 		group: 'группа 1',
+		categ: 'Продажи',
 		record: 'Orci, a scelerisque purus semper  <span class="found">претензия</span> eget duis at.',
 		operator: 'Елена',
 		client: 'Тимофей',
@@ -403,6 +440,7 @@ const records = [
 		id: 37,
 		date: '2022-03-14 20:44',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Convallis convallis tellus, id  <span class="found">претензия</span> interdum velit laoreet id!',
 		operator: 'Ксения',
@@ -413,6 +451,7 @@ const records = [
 		id: 38,
 		date: '2022-03-11 17:55',
 		group: 'группа 1',
+		categ: 'Оплата',
 		record:
 			'Quis viverra nibh  <span class="found">претензия</span> cras pulvinar mattis nunc, sed!',
 		operator: 'Ирина',
@@ -423,6 +462,7 @@ const records = [
 		id: 39,
 		date: '2022-03-11 17:54',
 		group: 'группа 1',
+		categ: 'Оплата',
 		record: 'Id eu nisl  <span class="found">претензия</span> nunc mi ipsum, faucibus vitae.',
 		operator: 'Ева',
 		client: 'Егор',
@@ -432,6 +472,7 @@ const records = [
 		id: 40,
 		date: '2022-03-11 17:53',
 		group: 'группа 1',
+		categ: 'Продажи',
 		record: 'Nam  <span class="found">претензия</span> aliquam sem et tortor consequat id porta.',
 		operator: 'Дарья',
 		client: 'Сергей',
@@ -441,6 +482,7 @@ const records = [
 		id: 41,
 		date: '2022-03-10 17:53',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Amet  <span class="found">претензия</span> commodo nulla facilisi nullam vehicula ipsum a!',
 		operator: 'Кира',
@@ -451,6 +493,7 @@ const records = [
 		id: 42,
 		date: '2022-02-24 18:11',
 		group: 'группа 1',
+		categ: 'Продажи',
 		record:
 			'Dui vivamus arcu felis, bibendum  <span class="found">претензия</span> ut tristique et.',
 		operator: 'Елизавета',
@@ -461,6 +504,7 @@ const records = [
 		id: 43,
 		date: '2022-02-24 18:10',
 		group: 'группа 1',
+		categ: 'Оплата',
 		record:
 			'Erat pellentesque  <span class="found">претензия</span> adipiscing commodo elit, at imperdiet dui.',
 		operator: 'Ульяна',
@@ -471,6 +515,7 @@ const records = [
 		id: 44,
 		date: '2022-02-24 18:09',
 		group: 'группа 1',
+		categ: 'Продажи',
 		record:
 			'Amet commodo  <span class="found">претензия</span> nulla facilisi nullam vehicula ipsum a?',
 		operator: 'Татьяна',
@@ -481,6 +526,7 @@ const records = [
 		id: 45,
 		date: '2022-02-24 18:09',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record: 'Sed  <span class="found">претензия</span> euismod nisi porta lorem mollis aliquam ut.',
 		operator: 'Юлия',
 		client: 'Артём',
@@ -490,6 +536,7 @@ const records = [
 		id: 46,
 		date: '2022-02-24 18:08',
 		group: 'группа 1',
+		categ: 'Оплата',
 		record:
 			'Integer  <span class="found">претензия</span> eget aliquet nibh praesent tristique magna sit!',
 		operator: 'Софья',
@@ -500,6 +547,7 @@ const records = [
 		id: 47,
 		date: '2022-02-24 16:44',
 		group: 'группа 1',
+		categ: 'Продажи',
 		record:
 			'Donec adipiscing  <span class="found">претензия</span> tristique risus nec feugiat in fermentum.',
 		operator: 'Алина',
@@ -510,6 +558,7 @@ const records = [
 		id: 48,
 		date: '2022-02-24 16:43',
 		group: 'группа 1',
+		categ: 'Оплата',
 		record:
 			'Condimentum lacinia quis  <span class="found">претензия</span> vel eros donec ac odio!',
 		operator: 'Злата',
@@ -520,6 +569,7 @@ const records = [
 		id: 49,
 		date: '2022-02-24 16:08',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Est ante in nibh mauris,  <span class="found">претензия</span> cursus mattis molestie.',
 		operator: 'Милана',
@@ -530,6 +580,7 @@ const records = [
 		id: 50,
 		date: '2022-02-24 16:07',
 		group: 'группа 1',
+		categ: 'Продажи',
 		record:
 			'Faucibus vitae  <span class="found">претензия</span> aliquet nec, ullamcorper sit amet risus!',
 		operator: 'Ольга',
@@ -540,6 +591,7 @@ const records = [
 		id: 51,
 		date: '2022-02-24 16:06',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Morbi tincidunt  <span class="found">претензия</span> ornare massa, eget egestas purus viverra.',
 		operator: 'Светлана',
@@ -550,6 +602,7 @@ const records = [
 		id: 52,
 		date: '2022-02-23 16:05',
 		group: 'группа 1',
+		categ: 'Оплата',
 		record:
 			'Mollis aliquam  <span class="found">претензия</span> ut porttitor leo a diam sollicitudin.',
 		operator: 'Ярослава',
@@ -560,6 +613,7 @@ const records = [
 		id: 53,
 		date: '2022-02-15 20:49',
 		group: 'группа 1',
+		categ: 'Оплата',
 		record: 'Et tortor  <span class="found">претензия</span> at risus viverra adipiscing at in.',
 		operator: 'Яна',
 		client: 'Владислав',
@@ -569,6 +623,7 @@ const records = [
 		id: 54,
 		date: '2022-02-15 20:48',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record: 'Volutpat  <span class="found">претензия</span> sed cras ornare arcu dui vivamus arcu?',
 		operator: 'Кристина',
 		client: 'Никита',
@@ -578,6 +633,7 @@ const records = [
 		id: 55,
 		date: '2022-02-15 20:47',
 		group: 'группа 1',
+		categ: 'Продажи',
 		record:
 			'Praesent semper  <span class="found">претензия</span> feugiat nibh sed pulvinar proin gravida.',
 		operator: 'Алиса',
@@ -588,6 +644,7 @@ const records = [
 		id: 56,
 		date: '2022-02-15 20:46',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Cursus in hac  <span class="found">претензия</span> habitasse platea dictumst quisque sagittis.',
 		operator: 'Маргарита',
@@ -598,6 +655,7 @@ const records = [
 		id: 57,
 		date: '2022-02-15 20:45',
 		group: 'группа 1',
+		categ: 'Оплата',
 		record:
 			'Quis lectus nulla at volutpat diam ut  <span class="found">претензия</span> venenatis.',
 		operator: 'Таисия',
@@ -608,6 +666,7 @@ const records = [
 		id: 58,
 		date: '2022-02-15 20:44',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Nulla malesuada pellentesque  <span class="found">претензия</span> elit eget gravida cum sociis.',
 		operator: 'Тамара',
@@ -618,6 +677,7 @@ const records = [
 		id: 59,
 		date: '2022-02-11 17:55',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Facilisi  <span class="found">претензия</span> nullam vehicula ipsum a arcu cursus vitae!',
 		operator: 'Эмилия',
@@ -628,6 +688,7 @@ const records = [
 		id: 60,
 		date: '2022-02-11 17:54',
 		group: 'группа 1',
+		categ: 'Оплата',
 		record:
 			'Turpis massa  <span class="found">претензия</span> sed elementum tempus egestas sed sed.',
 		operator: 'Диана',
@@ -638,6 +699,7 @@ const records = [
 		id: 61,
 		date: '2022-02-11 17:53',
 		group: 'группа 1',
+		categ: 'Оплата',
 		record:
 			'Suspendisse sed nisi  <span class="found">претензия</span> lacus, sed viverra tellus in?',
 		operator: 'Анфиса',
@@ -648,6 +710,7 @@ const records = [
 		id: 62,
 		date: '2022-02-11 17:53',
 		group: 'группа 1',
+		categ: 'Сервис',
 		record:
 			'Sed pulvinar proin  <span class="found">претензия</span> gravida hendrerit lectus a molestie.',
 		operator: 'Аделина',

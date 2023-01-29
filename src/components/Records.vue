@@ -31,6 +31,7 @@ q-expansion-item(v-model="mystore.recordPanel")
 					q-td(key="operator") {{props.row.operator}}
 					q-td(key="client") {{props.row.client}}
 					q-td(key="group") {{props.row.group}}
+					q-td(key="categ") {{props.row.categ}}
 					q-td(key="record" v-html="props.row.record")
 					q-btn(flat round color="primary" icon="mdi-download" size="sm" @click.stop="$q.notify({message: 'Запись скачана', icon: 'mdi-check'} )").dd
 					.myplayer(v-if="selected === props.row.id")
@@ -57,28 +58,14 @@ import type { Ref } from 'vue'
 import { records } from '@/stores/operators'
 import { useStore } from '@/stores/store'
 import { useCat } from '@/stores/category1'
-
-interface RecordColumn {
-	name: string
-	label: string
-	field: string | ((row: any) => any)
-	required?: boolean
-	align?: 'left' | 'right' | 'center'
-	sortable?: boolean
-	sort?: (a: any, b: any, rowA: any, rowB: any) => number
-	sortOrder?: 'ad' | 'da'
-	format?: (val: any, row: any) => any
-	style?: string | ((row: any) => string)
-	classes?: string | ((row: any) => string)
-	headerStyle?: string
-	headerClasses?: string
-}
+import type { QTableProps } from 'quasar'
 
 interface Row {
 	id: number
 	date: string
 	group: string
 	record: string
+	categ?: string
 	operator: string
 	client: string
 	expand: boolean
@@ -127,11 +114,12 @@ const getSelectedString = (e: number) => {
 
 const sound = ref(50)
 
-const columns: RecordColumn[] = [
+const columns: QTableProps['columns'] = [
 	{ name: 'date', label: 'Дата, время', align: 'left', field: 'date', sortable: true },
 	{ name: 'operator', label: 'Оператор', align: 'left', field: 'operator', sortable: true },
 	{ name: 'client', label: 'Клиент', align: 'left', field: 'client', sortable: true },
 	{ name: 'group', label: 'Группа', align: 'left', field: 'group', sortable: true },
+	{ name: 'categ', label: 'Категория', align: 'left', field: 'categ', sortable: true },
 	{ name: 'record', label: 'Контекст', align: 'left', field: 'record', sortable: false },
 ]
 </script>
@@ -147,7 +135,7 @@ const columns: RecordColumn[] = [
 		position: absolute;
 		top: 50%;
 		right: 1rem;
-		transform: translateY(-50%);
+		transform: translateY();
 		visibility: hidden;
 	}
 	&:hover {
