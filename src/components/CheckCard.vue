@@ -22,7 +22,7 @@ q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei")
 							input(value="15")
 						q-btn(flat round icon="mdi-pencil" size="12px" @click="edit(element)")
 						q-btn(flat round icon="mdi-trash-can-outline" size="12px" @click="kill(element)")
-			.place(@click="addNew") Добавить веху
+			.place(@click="addNew") Кликните, чтобы добавить веху.<br /> Или перетащите логический запрос в очередь вверху.
 			q-card-actions.q-mt-xl
 				q-btn(flat icon="mdi-trash-can-outline" label="Удалить чеклист" color="primary" @click="mycheck.deleteCheckList")
 				q-space
@@ -160,7 +160,7 @@ const addNew = () => {
 	min-height: 200px;
 	padding-top: 0;
 	.place {
-		margin-top: 2rem;
+		margin-top: 1rem;
 		color: #999;
 		width: 100%;
 		border: 2px solid $bgLight;

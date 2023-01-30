@@ -50,7 +50,7 @@ q-dialog(v-model="logic.inception")
 			q-space
 			q-btn(icon="mdi-close" flat round dense v-close-popup)
 
-		q-card-section 
+		.q-mt-sm.q-mx-lg
 			#comment1(contenteditable @blur="updatecomment") {{logic.currentLogic.comment}}
 
 		q-card-section
