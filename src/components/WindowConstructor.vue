@@ -26,6 +26,12 @@ const $q = useQuasar()
 
 const save = () => {
 	logic.inception = false
+	const tmp = {} as Logic
+	tmp.label = logic.currentLogic.label
+	tmp.comment = logic.currentLogic.comment
+	tmp.star = false
+	tmp.selected = false
+	check.addNewCheckList(tmp)
 	$q.notify({
 		icon: undefined,
 		message: 'Сохранено',

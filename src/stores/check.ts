@@ -77,6 +77,9 @@ export const useCheck = defineStore({
 			this.allCheck.splice(index, 1)
 			this.allCheck[0].selected = true
 		},
+		addNewCheckList(tmp: Logic) {
+			this.allList[0].list.push(tmp)
+		},
 		addCheckList() {
 			this.allCheck.map((e) => (e.selected = false))
 			const item = {} as Logic

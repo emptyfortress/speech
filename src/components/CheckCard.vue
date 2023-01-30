@@ -22,6 +22,7 @@ q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei")
 							input(value="15")
 						q-btn(flat round icon="mdi-pencil" size="12px" @click="edit(element)")
 						q-btn(flat round icon="mdi-trash-can-outline" size="12px" @click="kill(element)")
+			.place(@click="addNew") Добавить веху
 			q-card-actions.q-mt-xl
 				q-btn(flat icon="mdi-trash-can-outline" label="Удалить чеклист" color="primary" @click="mycheck.deleteCheckList")
 				q-space
@@ -120,17 +121,21 @@ const edit = (e: Logic) => {
 	mylogic.showInception()
 	mylogic.currentLogic = e
 }
+
+const addNew = () => {
+	mylogic.showInception()
+	mylogic.currentLogic = {
+		id: 9,
+		label: 'Новая веха',
+		selected: false,
+		comment: 'Это комментарий',
+		star: false,
+	}
+}
 </script>
 
 <style scoped lang="scss">
 @import '@/assets/styles/myvariables.scss';
-.card {
-	margin-top: 1rem;
-	margin-left: 0.5rem;
-	margin-right: 0.5rem;
-	background: #fff;
-	padding: 1rem;
-}
 .quick .q-field--dense .q-field__control,
 .q-field--dense .q-field__marginal {
 	height: 28px !important;
@@ -145,13 +150,30 @@ const edit = (e: Logic) => {
 	height: calc(100vh - 205px);
 	font-size: 0.9rem;
 }
+
 .card {
-	margin-right: 0.5rem;
 	margin-top: 1rem;
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+	background: #fff;
+	padding: 1rem;
 	min-height: 200px;
-	// padding: 1rem;
 	padding-top: 0;
+	.place {
+		margin-top: 2rem;
+		color: #999;
+		width: 100%;
+		border: 2px solid $bgLight;
+		border-radius: 6px;
+		background: $bgLight;
+		text-align: center;
+		padding: 0.5rem;
+		&:hover {
+			border: 2px dotted #aaa;
+		}
+	}
 }
+
 #zg {
 	font-size: 1rem;
 	text-transform: uppercase;
