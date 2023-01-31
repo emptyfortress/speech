@@ -21,10 +21,19 @@ q-splitter(v-model="splitterModel" :limits="[0, 100]" :style="hei")
 							.lab Вес:
 							input(value="15")
 						q-btn(flat round icon="mdi-pencil" size="12px" @click="edit(element)")
-						q-btn(flat round icon="mdi-trash-can-outline" size="12px" @click="kill(element)")
+						q-btn(flat round icon="mdi-trash-can-outline" size="12px")
+							q-menu(anchor="bottom right" self="top right")
+								q-list
+									q-item(clickable v-close-popup @click="kill(element)").pink
+										q-item-section Удалить
+
 			.place(@click="addNew") Кликните, чтобы добавить веху.<br /> Или перетащите логический запрос в очередь вверху.
 			q-card-actions.q-mt-xl
-				q-btn(flat icon="mdi-trash-can-outline" label="Удалить чеклист" color="primary" @click="mycheck.deleteCheckList")
+				q-btn(flat icon="mdi-trash-can-outline" label="Удалить чеклист" color="primary")
+					q-menu(anchor="bottom right" self="top right")
+						q-list
+							q-item(clickable v-close-popup  @click="mycheck.deleteCheckList").pink
+								q-item-section Удалить
 				q-space
 				q-btn(flat icon="mdi-share-variant" label="Поделиться" color="primary" )
 				q-btn(unelevated color="primary" icon="mdi-content-save-outline" label="Сохранить" )
