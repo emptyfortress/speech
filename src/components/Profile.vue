@@ -37,19 +37,29 @@ q-page(padding)
 				q-card-actions(v-if="edit")
 					q-btn(flat color="primary" @click="edit = false") Отмена
 					q-btn(unelevated color="primary" @click="edit = false") Сохранить
+
 			q-tab-panel(name="setup")
-				.mygrid1
-					template(v-for="item in prava" :key="item.id")
-						.label {{item.label}}:
-						.value {{item.value}}
+				.mygrid
+					.label Уровень доступа:
+					q-select(outlined dense v-model="level" :options="commonOption")
+					q-separator
+					.label Разрешенные для анализа операторы:
+					q-select(outlined dense v-model="all" :options="commonOption")
+					.label Разрешенные для анализа регионы:
+					q-select(outlined dense v-model="all" :options="commonOption")
+					.label Разрешенные для анализа группы:
+					q-select(outlined dense v-model="all" :options="commonOption")
+					.label Разрешенные для анализа клиенты:
+					q-select(outlined dense v-model="all" :options="commonOption")
+
+
+				q-separator.q-my-md
+				q-card-actions()
+					q-btn(flat color="primary") Отмена
+					q-btn(unelevated color="primary") Сохранить
+
 			q-tab-panel(name="notific")
-				q-list(separator)
-					q-item(clickable v-for="n in 7" :key="n")
-						q-item-section
-							q-item-label Настройка {{n}}
-							q-item-label(overline) дескрипшн настройки
-						q-item-section(side)
-							q-checkbox(v-model="check[n]")
+				NotificSetup
 				q-card-actions()
 					q-btn(flat color="primary") Отмена
 					q-btn(unelevated color="primary") Сохранить
@@ -72,22 +82,16 @@ q-page(padding)
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
+import NotificSetup from '@/components/NotificSetup.vue'
 
-const tab = ref('info')
+const tab = ref('notific')
 const mail = ref('admin@admin.ru')
 const old = ref('')
 const inf = ref(true)
 const edit = ref(false)
-const prava = [
-	{ id: 1, label: 'Регионы', value: 'Северо-Западный, Центральный, Сибирский' },
-	{ id: 2, label: 'Группы операторов', value: 'Группа 1, Подготовительная группа' },
-	{
-		id: 3,
-		label: 'Операторы',
-		value:
-			'Екатерина, Елена, Ксения, Ирина, Ева, Дарья, Кира, Елизавета, Ульяна, Татьяна, Юлия, Софья, Алина, Злата, Милана, Ольга, Светлана, Ярослава, Яна, Кристина, Алиса, Маргарита, Таисия, Тамара, Эмилия, Диана, Анфиса, Аделина, Евдокия, Зоя, Ираида, Наталья, Пелагея, Сабина, Антонина',
-	},
-]
+const level = ref('администратор')
+const commonOption = ref(['Option 1', 'Option 2', 'Option 3', 'Option 4'])
+const all = ref('Все')
 const items = reactive([
 	{ id: 1, label: 'Логин', value: 'razubai' },
 	{ id: 2, label: 'Почта', value: 'razubai@mail.ru' },
@@ -143,6 +147,9 @@ onMounted(() => {
 	gap: 1rem;
 	grid-column-gap: 2rem;
 	align-items: center;
+	.q-separator {
+		grid-column: 1/-1;
+	}
 }
 .mygrid1 {
 	display: grid;
