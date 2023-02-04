@@ -55,6 +55,8 @@ q-page(padding)
 					q-btn(unelevated color="primary") Сохранить
 			q-tab-panel(name="login")
 				.mygrid
+					.label Email:
+					q-input(outlined dense v-model="mail")
 					.label Текущий пароль:
 					q-input(outlined dense v-model="old")
 					.label Новый пароль:
@@ -72,6 +74,7 @@ q-page(padding)
 import { ref, reactive, onMounted } from 'vue'
 
 const tab = ref('info')
+const mail = ref('admin@admin.ru')
 const old = ref('')
 const inf = ref(true)
 const edit = ref(false)
