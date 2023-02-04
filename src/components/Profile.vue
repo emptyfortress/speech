@@ -68,11 +68,11 @@ q-page(padding)
 					.label Email:
 					q-input(outlined dense v-model="mail")
 					.label Текущий пароль:
-					q-input(outlined dense v-model="old")
+					q-input(outlined dense v-model="old" type="password")
 					.label Новый пароль:
-					q-input(outlined dense v-model="old")
+					q-input(outlined dense v-model="old" type="password")
 					.label Подтвердите пароль:
-					q-input(outlined dense v-model="old")
+					q-input(outlined dense v-model="old" type="password")
 				q-separator.q-mt-lg
 				q-card-actions()
 					q-btn(flat color="primary") Отмена
@@ -84,7 +84,7 @@ q-page(padding)
 import { ref, reactive, onMounted } from 'vue'
 import NotificSetup from '@/components/NotificSetup.vue'
 
-const tab = ref('notific')
+const tab = ref('info')
 const mail = ref('admin@admin.ru')
 const old = ref('')
 const inf = ref(true)
