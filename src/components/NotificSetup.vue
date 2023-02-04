@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { QTableProps } from 'quasar'
 
-const cols = [
+const cols: QTableProps['columns'] = [
 	{ name: 'keys', label: 'Ключевые слова', field: 'keys', sortable: true, align: 'left' },
 	{ name: 'canal', label: 'Канал', field: 'canal', sortable: true, align: 'right' },
 	{ name: 'actions', label: '', field: 'actions', sortable: false, align: 'right' },
