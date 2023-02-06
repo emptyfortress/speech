@@ -10,7 +10,7 @@ const stringOptions = words
 const options = ref(stringOptions)
 
 const cols: QTableProps['columns'] = [
-	{ name: 'keys', label: 'Ключевые слова', field: 'keys', sortable: true, align: 'left' },
+	{ name: 'keys', label: 'Ключевое слово / словарь', field: 'keys', sortable: true, align: 'left' },
 	{ name: 'canal', label: 'Канал', field: 'canal', sortable: true, align: 'right' },
 	{ name: 'actions', label: '', field: 'actions', sortable: false, align: 'right' },
 ]
@@ -20,14 +20,14 @@ const rows = ref([
 	{ id: 1, keys: 'Добрый вечер', canal: 'Все', voc: false },
 ])
 const inf = ref(true)
-// const options = ['Все', 'Клиент', 'Оператор']
+const canal = ['Все', 'Клиент', 'Оператор']
 
 const remove = (id: number) => {
 	const ind = rows.value.findIndex((item) => item.id === id)
 	rows.value.splice(ind, 1)
 }
 
-const filterFn = (val, update, abort) => {
+const filterFn = (val: string, update: any) => {
 	update(() => {
 		if (val === '') {
 			options.value = stringOptions
@@ -38,11 +38,27 @@ const filterFn = (val, update, abort) => {
 	})
 }
 
+const newKey = ref('')
 const menu = ref(false)
-const changeWord = (e, a, b) => {
+const menu1 = ref(false)
+
+const changeWord = (e: any, a: string, b: boolean) => {
 	e.keys = a
 	e.voc = b
 	menu.value = false
+}
+
+const addWord = (a: string, b: boolean) => {
+	const item = {
+		id: rows.value.length + 1,
+		keys: a,
+		voc: b,
+		canal: 'Все',
+	}
+	rows.value.push(item)
+	menu1.value = false
+	menu.value = false
+	newKey.value = ''
 }
 </script>
 
@@ -61,7 +77,6 @@ q-table(:columns="cols" :rows="rows" flat row-key="id")
 					q-select(outlined v-model="props.row.keys"
 						clearable
 						use-input
-						autofocus
 						input-debounce="0"
 						label="Ключевое слово, словарь"
 						:options="options"
@@ -81,13 +96,40 @@ q-table(:columns="cols" :rows="rows" flat row-key="id")
 			q-td(key="canal" :props="props")
 				|{{ props.row.canal }}
 				q-popup-edit(v-model="props.row.canal" auto-save v-slot="scope").border-primary
-					q-select(v-model="scope.value" dense autofocus @keyup.enter="scope.set" :options="options")
+					q-select(v-model="scope.value" dense autofocus @keyup.enter="scope.set" :options="canal")
 			q-td(key="actions" :props="props")
 				q-btn(dense size="sm" flat round icon="mdi-trash-can-outline").hid
 					q-menu
 						q-list
 							q-item(clickable v-close-popup @click="remove(props.row.id)").pink
 								q-item-section Удалить
+	template(v-slot:bottom-row)
+		q-tr
+			q-td
+				q-btn(flat icon="mdi-plus-circle-outline" size="sm" label="Добавить" color="primary" @click="menu1 = true") 
+				q-menu(anchor="top left" self="top left" v-if="menu1" )
+					q-select(outlined v-model="newKey"
+						clearable
+						use-input
+						input-debounce="0"
+						label="Ключевое слово, словарь"
+						:options="options"
+						@filter="filterFn"
+						behavior="menu").men
+
+							template(v-slot:option="scope")
+								q-item(clickable v-bind="scope.itemProps" @click="addWord(scope.opt.label, scope.opt.voc)")
+									q-item-section(side v-if="scope.opt.voc")
+										component(:is="SvgIcon" name="vocabulary").lib
+									q-item-section
+										q-item-label {{scope.opt.label}}
+							template(v-slot:no-option)
+								q-item(clickable)
+									q-item-section.text-grey No results
+			q-td
+			q-td
+		
+		
 
 </template>
 
