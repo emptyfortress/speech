@@ -38,9 +38,11 @@ const filterFn = (val, update, abort) => {
 	})
 }
 
+const menu = ref(false)
 const changeWord = (e, a, b) => {
 	e.keys = a
 	e.voc = b
+	menu.value = false
 }
 </script>
 
@@ -50,11 +52,12 @@ const changeWord = (e, a, b) => {
 q-table(:columns="cols" :rows="rows" flat row-key="id")
 	template(v-slot:body="props")
 		q-tr(:props="props")
-			q-td(key="keys" :props="props")
-				component(:is="SvgIcon" name="vocabulary" v-if="props.row.voc").lib
-				|{{ props.row.keys }}
+			q-td(key="keys" :props="props" )
+				div(@click="menu = true")
+					component(:is="SvgIcon" name="vocabulary" v-if="props.row.voc").lib
+					|{{ props.row.keys }}
 
-				q-menu(anchor="top left" self="top left")
+				q-menu(anchor="top left" self="top left" v-if="menu" )
 					q-select(outlined v-model="props.row.keys"
 						clearable
 						use-input
