@@ -14,12 +14,10 @@ const cols: QTableProps['columns'] = [
 	{ name: 'canal', label: 'Канал', field: 'canal', sortable: true, align: 'right' },
 	{ name: 'actions', label: '', field: 'actions', sortable: false, align: 'right' },
 ]
+
 const rows = ref([
-	{ id: 0, keys: 'Приветствие', canal: 'Все' },
-	{ id: 1, keys: 'Слово 2', canal: 'Все' },
-	{ id: 2, keys: 'Слово 3', canal: 'Все' },
-	{ id: 3, keys: 'Слово 4', canal: 'Все' },
-	{ id: 4, keys: 'Слово 5', canal: 'Все' },
+	{ id: 0, keys: 'Здравствуйте', canal: 'Все', voc: false },
+	{ id: 1, keys: 'Добрый вечер', canal: 'Все', voc: false },
 ])
 const inf = ref(true)
 // const options = ['Все', 'Клиент', 'Оператор']
@@ -39,8 +37,10 @@ const filterFn = (val, update, abort) => {
 		}
 	})
 }
-const changeWord = (e, a) => {
-	e = a.opt.label
+
+const changeWord = (e, a, b) => {
+	e.keys = a
+	e.voc = b
 }
 </script>
 
@@ -51,11 +51,11 @@ q-table(:columns="cols" :rows="rows" flat row-key="id")
 	template(v-slot:body="props")
 		q-tr(:props="props")
 			q-td(key="keys" :props="props")
+				component(:is="SvgIcon" name="vocabulary" v-if="props.row.voc").lib
 				|{{ props.row.keys }}
 
-				q-popup-edit(v-model="props.row.keys" v-slot="scope")
-					q-select(outlined v-model="scope.value"
-						dense
+				q-menu(anchor="top left" self="top left")
+					q-select(outlined v-model="props.row.keys"
 						clearable
 						use-input
 						autofocus
@@ -63,18 +63,17 @@ q-table(:columns="cols" :rows="rows" flat row-key="id")
 						label="Ключевое слово, словарь"
 						:options="options"
 						@filter="filterFn"
-						@keyup.enter="scope.set"
 						behavior="menu").men
 
-						template(v-slot:option="scope")
-							q-item(clickable v-bind="scope.itemProps" @click="changeWord(props.row.keys, scope.itemProps)")
-								q-item-section(side v-if="scope.opt.voc")
-									component(:is="SvgIcon" name="vocabulary").lib
-								q-item-section
-									q-item-label {{scope.opt.label}}
-						template(v-slot:no-option)
-							q-item(clickable)
-								q-item-section.text-grey No results
+							template(v-slot:option="scope")
+								q-item(clickable v-bind="scope.itemProps" @click="changeWord(props.row, scope.opt.label, scope.opt.voc)")
+									q-item-section(side v-if="scope.opt.voc")
+										component(:is="SvgIcon" name="vocabulary").lib
+									q-item-section
+										q-item-label {{scope.opt.label}}
+							template(v-slot:no-option)
+								q-item(clickable)
+									q-item-section.text-grey No results
 		
 			q-td(key="canal" :props="props")
 				|{{ props.row.canal }}
@@ -119,5 +118,6 @@ tr {
 }
 .lib {
 	font-size: 0.8rem;
+	margin-right: 0.5rem;
 }
 </style>
