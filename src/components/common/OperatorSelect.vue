@@ -18,7 +18,6 @@ const selectedOperators = ref([])
 			input-debounce="0"
 			label="Оператор"
 			:options="operators"
-			@filter="filterFn"
 			behavior="menu").men
 
 				template(v-slot:option="scope")
