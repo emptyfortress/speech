@@ -41,22 +41,17 @@ q-page(padding)
 			q-tab-panel(name="setup")
 				.mygrid
 					.label Уровень доступа:
-					q-select(outlined dense v-model="level" :options="commonOption")
+					.label Администратор
 					q-separator
 					.label Разрешенные для анализа операторы:
-					q-select(outlined dense v-model="all" :options="commonOption")
+					.label Все
+
 					.label Разрешенные для анализа регионы:
-					q-select(outlined dense v-model="all" :options="commonOption")
+					.label Все
 					.label Разрешенные для анализа группы:
-					q-select(outlined dense v-model="all" :options="commonOption")
+					.label Все
 					.label Разрешенные для анализа клиенты:
-					q-select(outlined dense v-model="all" :options="commonOption")
-
-
-				q-separator.q-my-md
-				q-card-actions()
-					q-btn(flat color="primary") Отмена
-					q-btn(unelevated color="primary") Сохранить
+					.label Все
 
 			q-tab-panel(name="notific")
 				NotificSetup
@@ -66,13 +61,13 @@ q-page(padding)
 			q-tab-panel(name="login")
 				.mygrid
 					.label Email:
-					q-input(outlined dense v-model="mail")
+					q-input(outlined dense v-model="mail").twenty
 					.label Текущий пароль:
-					q-input(outlined dense v-model="old" type="password")
+					q-input(outlined dense v-model="old" type="password").twenty
 					.label Новый пароль:
-					q-input(outlined dense v-model="old" type="password")
+					q-input(outlined dense v-model="old" type="password").twenty
 					.label Подтвердите пароль:
-					q-input(outlined dense v-model="old" type="password")
+					q-input(outlined dense v-model="old" type="password").twenty
 				q-separator.q-mt-lg
 				q-card-actions()
 					q-btn(flat color="primary") Отмена
@@ -84,7 +79,7 @@ q-page(padding)
 import { ref, reactive, onMounted } from 'vue'
 import NotificSetup from '@/components/NotificSetup.vue'
 
-const tab = ref('notific')
+const tab = ref('setup')
 const mail = ref('admin@admin.ru')
 const old = ref('')
 const inf = ref(true)
@@ -142,13 +137,16 @@ onMounted(() => {
 }
 .mygrid {
 	display: grid;
-	grid-template-columns: auto 200px;
+	grid-template-columns: auto 1fr;
 	justify-content: start;
 	gap: 1rem;
 	grid-column-gap: 2rem;
 	align-items: center;
 	.q-separator {
 		grid-column: 1/-1;
+	}
+	.twenty {
+		width: 300px;
 	}
 }
 .mygrid1 {

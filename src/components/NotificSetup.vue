@@ -128,9 +128,6 @@ q-table(:columns="cols" :rows="rows" flat row-key="id")
 									q-item-section.text-grey No results
 			q-td
 			q-td
-		
-		
-
 </template>
 
 <style scoped lang="scss">
